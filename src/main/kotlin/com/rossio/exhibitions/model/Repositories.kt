@@ -7,3 +7,11 @@ interface ExhibitionsRepository : JpaRepository<ExhibitionDAO, Long>
 interface ExhibitionItemsRepository : JpaRepository<ExhibitionItemDAO, Long>
 
 interface UserRepository : JpaRepository<UserDAO, Long>
+
+interface EditorRepository : JpaRepository<EditorDAO, Long>
+
+interface CollaboratorRepository : JpaRepository<CollaboratorDAO, Long>
+
+interface AdminRepository : JpaRepository<AdminDAO, Long>
+
+interface DigitalResourceRepository : JpaRepository<DigitalResourceDAO, Long>
