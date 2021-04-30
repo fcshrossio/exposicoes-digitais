@@ -1,13 +1,21 @@
 package com.rossio.exhibitions.controller
 
 import com.rossio.exhibitions.dto.*
+import com.rossio.exhibitions.dto.ExhibitionDTO
 import com.rossio.exhibitions.exception.NotFoundException
-import com.rossio.exhibitions.model.*
+import com.rossio.exhibitions.model.CollaboratorDAO
+import com.rossio.exhibitions.model.ExhibitionDAO
+import com.rossio.exhibitions.model.MapItemDAO
+import com.rossio.exhibitions.model.TextItemDAO
+import com.rossio.exhibitions.model.ExhibitionItemDAO
+import com.rossio.exhibitions.model.IntroductionItemDAO
+import com.rossio.exhibitions.model.AboutItemDAO
 import com.rossio.exhibitions.service.DigitalResourceService
 import com.rossio.exhibitions.service.EditorService
 import com.rossio.exhibitions.service.ExhibitionService
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.web.bind.annotation.*
+
 
 @RestController
 @RequestMapping("exhibition")

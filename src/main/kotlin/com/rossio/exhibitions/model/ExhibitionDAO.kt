@@ -3,6 +3,10 @@ package com.rossio.exhibitions.model
 import com.rossio.exhibitions.dto.ExhibitionDTO
 import java.util.*
 import javax.persistence.*
+import com.rossio.exhibitions.model.EditorDAO
+import com.rossio.exhibitions.model.DigitalResourceDAO
+import com.rossio.exhibitions.model.IntroductionItemDAO
+import com.rossio.exhibitions.model.CollaboratorDAO
 
 @Entity
 data class ExhibitionDAO(

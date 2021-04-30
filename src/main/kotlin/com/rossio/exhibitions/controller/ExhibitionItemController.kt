@@ -1,8 +1,15 @@
 package com.rossio.exhibitions.controller
 
 import com.rossio.exhibitions.dto.*
+import com.rossio.exhibitions.dto.IntroductionItemDTO
+import com.rossio.exhibitions.dto.MapItemDTO
+import com.rossio.exhibitions.dto.TextItemDTO
 import com.rossio.exhibitions.exception.NotFoundException
 import com.rossio.exhibitions.model.*
+import com.rossio.exhibitions.model.MapItemDAO
+import com.rossio.exhibitions.model.IntroductionItemDAO
+import com.rossio.exhibitions.model.AboutItemDAO
+
 
 import com.rossio.exhibitions.service.ExhibitionItemService
 import io.swagger.v3.oas.annotations.Operation
@@ -30,7 +37,8 @@ class ExhibitionItemController(
 
     @Operation(summary = "Edit One Exhibition Item ")
     @PutMapping("/{id}")
-    fun editExhibitionItem(@RequestParam id: Long) : ExhibitionItemDTO = IntroductionItemDTO()
+    fun editExhibitionItem(@RequestParam id: Long) : ExhibitionItemDTO =
+        IntroductionItemDTO()
     //TODO edit items
 
     @Operation(summary = "Remove One Exhibition Item ")
@@ -44,7 +52,7 @@ class ExhibitionItemController(
             is IntroductionItemDAO -> IntroductionItemDTO(item)
             is TextItemDAO -> TextItemDTO(item)
             is MapItemDAO ->  MapItemDTO(item)
-            is AboutItemDAO ->  AboutItemDTO(item)
+            is AboutItemDAO -> com.rossio.exhibitions.dto.AboutItemDTO(item)
             else -> throw NotFoundException("") //TODO exception
         }
 
@@ -52,9 +60,9 @@ class ExhibitionItemController(
     fun mapItemDTOtoDAO(item: ExhibitionItemDTO) : ExhibitionItemDAO =
 
         when (item) {
-            is IntroductionItemDTO ->  IntroductionItemDAO(item)
-            is TextItemDTO ->  TextItemDAO(item)
-            is MapItemDTO ->  MapItemDAO(item)
+            is IntroductionItemDTO -> com.rossio.exhibitions.model.IntroductionItemDAO(item)
+            is TextItemDTO -> com.rossio.exhibitions.model.TextItemDAO(item)
+            is MapItemDTO -> com.rossio.exhibitions.model.MapItemDAO(item)
             is AboutItemDTO ->  AboutItemDAO(item)
             else -> throw NotFoundException("") //TODO exception
         }

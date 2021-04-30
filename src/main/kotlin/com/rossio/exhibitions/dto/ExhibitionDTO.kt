@@ -1,5 +1,8 @@
 package com.rossio.exhibitions.dto
 
+import com.rossio.exhibitions.dto.UserDTO
+import com.rossio.exhibitions.dto.DigitalResourceDTO
+import com.rossio.exhibitions.dto.IntroductionItemDTO
 import com.rossio.exhibitions.model.ExhibitionDAO
 import com.rossio.exhibitions.model.Keywords
 import com.rossio.exhibitions.model.Status
