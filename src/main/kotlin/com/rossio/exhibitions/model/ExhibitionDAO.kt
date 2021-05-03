@@ -7,6 +7,7 @@ import com.rossio.exhibitions.model.EditorDAO
 import com.rossio.exhibitions.model.DigitalResourceDAO
 import com.rossio.exhibitions.model.IntroductionItemDAO
 import com.rossio.exhibitions.model.CollaboratorDAO
+import org.hibernate.mapping.Collection
 
 @Entity
 data class ExhibitionDAO(
@@ -16,7 +17,7 @@ data class ExhibitionDAO(
     @ManyToOne
     @JoinColumn
     var editor : EditorDAO,
-    @OneToMany
+    @OneToMany(mappedBy = "exhibition")
     var items : MutableList<ExhibitionItemDAO>,
     var title: String,
     var subtitle: String,
@@ -28,12 +29,14 @@ data class ExhibitionDAO(
     var creationDate: Date,
     @Enumerated(EnumType.STRING)
     var status : Status,
+    @ElementCollection
+    @CollectionTable
     @Enumerated(EnumType.STRING)
-    var keywords: Keywords,
+    var keywords: MutableList<Keywords>,
     @OneToMany
     var digitalResources: List<DigitalResourceDAO>
 ) {
-    constructor() : this(0, EditorDAO(), mutableListOf(),"","", DigitalResourceDAO(), mutableListOf(), Date(0), Status.PRIVATE, Keywords.Teste1, emptyList())
+    constructor() : this(0, EditorDAO(), mutableListOf(),"","", DigitalResourceDAO(), mutableListOf(), Date(0), Status.PRIVATE, mutableListOf(), emptyList())
 
     constructor(exhibition : ExhibitionDTO, editor: EditorDAO, cover: DigitalResourceDAO ) : this(
         exhibition.id,
@@ -79,10 +82,47 @@ data class ExhibitionDAO(
         }
     }
 
+    fun addKeyword(keyword: Keywords)
+    {
+        if(!keywords.contains(keyword))
+        {
+            keywords.add(keyword)
+        }
+    }
+
+    fun removeKeyword(keyword: Keywords)
+    {
+        if(keywords.contains(keyword))
+        {
+            keywords.remove(keyword)
+        }
+    }
+
+    fun changeStatus(status: Status)
+    {
+        this.status = status
+    }
+
+
+
     fun addExhibitionItem(itemDAO: ExhibitionItemDAO)
     {
         if(!items.contains(itemDAO))
-            items.add(itemDAO)
+        {
+            if(itemDAO is IntroductionItemDAO)
+            {
+                if(items.isEmpty() || !items.any { it is IntroductionItemDAO })
+                {
+                    items.add(itemDAO)
+                }
+            }
+            else
+            {
+                items.add(itemDAO)
+            }
+
+        }
+
     }
 
 

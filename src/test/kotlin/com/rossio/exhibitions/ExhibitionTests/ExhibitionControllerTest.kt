@@ -57,11 +57,11 @@ class ExhibitionControllerTest {
         var dia = Date(0);
 
         val exhibitionDTO1 = ExhibitionDTO(1L, editorDTO, emptyList(),"","", DigitalResourceDTO(), emptyList(),dia,
-            Status.PRIVATE,Keywords.Teste1,
+            Status.PRIVATE, mutableListOf(),
             emptyList())
 
         val exhibitionDTO2 = ExhibitionDTO(2L, editorDTO, emptyList(),"","", DigitalResourceDTO(), emptyList(),dia,Status.PRIVATE,
-            Keywords.Teste1,
+            mutableListOf(),
             emptyList())
 
         val exhibitionDTOList = listOf(exhibitionDTO1, exhibitionDTO2)
@@ -129,7 +129,7 @@ class ExhibitionControllerTest {
             emptyList(),
             dia,
             Status.PRIVATE,
-            Keywords.Teste1,
+            mutableListOf(),
             emptyList()
         )
 

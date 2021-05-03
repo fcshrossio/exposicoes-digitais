@@ -3,15 +3,10 @@ package com.rossio.exhibitions.controller
 import com.rossio.exhibitions.dto.*
 import com.rossio.exhibitions.dto.ExhibitionDTO
 import com.rossio.exhibitions.exception.NotFoundException
-import com.rossio.exhibitions.model.CollaboratorDAO
-import com.rossio.exhibitions.model.ExhibitionDAO
-import com.rossio.exhibitions.model.MapItemDAO
-import com.rossio.exhibitions.model.TextItemDAO
-import com.rossio.exhibitions.model.ExhibitionItemDAO
-import com.rossio.exhibitions.model.IntroductionItemDAO
-import com.rossio.exhibitions.model.AboutItemDAO
+import com.rossio.exhibitions.model.*
 import com.rossio.exhibitions.service.DigitalResourceService
 import com.rossio.exhibitions.service.EditorService
+import com.rossio.exhibitions.service.ExhibitionItemService
 import com.rossio.exhibitions.service.ExhibitionService
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.web.bind.annotation.*
@@ -22,7 +17,8 @@ import org.springframework.web.bind.annotation.*
 class ExhibitionController(
     val exhibitionService: ExhibitionService,
     val digitalResourceService: DigitalResourceService,
-    val editorService: EditorService
+    val editorService: EditorService,
+    val exhibitionItemService: ExhibitionItemService
 ) {
 
 
@@ -70,21 +66,37 @@ class ExhibitionController(
     @Operation(summary = "Add Exhibition Item to Exhibition ")
     @PostMapping("/{id}/additem")
     fun addItemExhibition(@PathVariable id: Long,@RequestBody item : ExhibitionItemDTO) =
-        exhibitionService.addExhibitionItem(id, mapItemDTOtoDAO(item))
-
+        exhibitionItemService.createOneExhibitionItem(mapItemDTOtoDAO(item,exhibitionService.getOneExhibition(id)))
 
     @Operation(summary = "Show Recent Exhibitions")
-    @GetMapping("/collaborator")
+    @GetMapping("/recent")
     fun recentExhibitions() : List<ExhibitionDTO> =
-        exhibitionService.getAllExhibitions().map { ExhibitionDTO(it) }
+        exhibitionService.recentExhibitions().map { ExhibitionDTO(it) }
 
-    fun mapItemDTOtoDAO(item: ExhibitionItemDTO) : ExhibitionItemDAO =
+    @Operation(summary = "Add Keyword to Exhibition")
+    @GetMapping("/{id}/keywords")
+    fun addKeyword(@PathVariable id: Long,@RequestParam value : Keywords) =
+        exhibitionService.addKeyword(id, value)
+        //TODO KEYWORD ROUTE FUNCTION
+
+    @Operation(summary = "Remove Keyword to Exhibition")
+    @DeleteMapping("/{id}/keywords")
+    fun removeKeyword(@PathVariable id: Long,@RequestParam value : Keywords) =
+        exhibitionService.removeKeyword(id, value)
+    //TODO KEYWORD ROUTE FUNCTION
+
+    @Operation(summary = "Change Status")
+    @PutMapping("/{id}/status")
+    fun changeStatus(@PathVariable id: Long,@RequestParam value : Status) =
+        exhibitionService.changeStatus(id, value)
+
+    fun mapItemDTOtoDAO(item: ExhibitionItemDTO,exhibition: ExhibitionDAO) : ExhibitionItemDAO =
 
         when (item) {
-            is IntroductionItemDTO ->  IntroductionItemDAO(item)
-            is TextItemDTO ->  TextItemDAO(item)
-            is MapItemDTO ->  MapItemDAO(item)
-            is AboutItemDTO ->  AboutItemDAO(item)
+            is IntroductionItemDTO ->  IntroductionItemDAO(item,exhibition)
+            is TextItemDTO ->  TextItemDAO(item,exhibition)
+            is MapItemDTO ->  MapItemDAO(item,exhibition)
+            is AboutItemDTO ->  AboutItemDAO(item,exhibition)
             else -> throw NotFoundException("") //TODO exception
         }
 

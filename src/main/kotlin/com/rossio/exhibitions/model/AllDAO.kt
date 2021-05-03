@@ -1,11 +1,8 @@
 package com.rossio.exhibitions.model
 
 import com.rossio.exhibitions.dto.DigitalResourceDTO
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.MappedSuperclass
-
+import com.rossio.exhibitions.dto.MarkerDTO
+import javax.persistence.*
 
 
 @Entity
@@ -19,9 +16,6 @@ data class DigitalResourceDAO(
 
     constructor(resource: DigitalResourceDTO) : this(resource.id, resource.name)
 }
-
-
-
 
 
 

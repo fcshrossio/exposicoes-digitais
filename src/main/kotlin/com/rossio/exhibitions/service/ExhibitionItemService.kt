@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class ExhibitionItemService(
-    val exhibitionItemsRepository : ExhibitionItemsRepository
+    val exhibitionItemsRepository : ExhibitionItemsRepository,
+    val markersRepository: MarkersRepository
 ) {
     fun getAllExhibitionItems(): List<ExhibitionItemDAO> =
         exhibitionItemsRepository.findAll()
@@ -21,4 +22,20 @@ class ExhibitionItemService(
 
     fun deleteOneExhibitionItem(id: Long)  =
         exhibitionItemsRepository.delete(getOneExhibitionItem(id))
+
+    fun createMarker(markerDAO: MarkerDAO) : MarkerDAO =
+        markersRepository.save(markerDAO)
+
+    fun addMarker(itemId: Long, markerDAO: MarkerDAO) {
+     var item = getOneExhibitionItem(itemId)
+        if (item is MapItemDAO){
+            item.addMarker(createMarker(markerDAO))
+            exhibitionItemsRepository.save(item)
+        }
+        else
+        {
+
+        }
+
+    }
 }

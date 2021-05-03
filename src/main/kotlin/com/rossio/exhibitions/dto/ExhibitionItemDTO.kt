@@ -53,13 +53,15 @@ data class TextItemDTO(
 data class MapItemDTO(
     override val id: Long,
     override val position: Long,
-    val text: String
+    val text: String,
+    val markers : List<MarkerDTO>
 
 ) : ExhibitionItemDTO(id, position) {
 
-    constructor(item: MapItemDAO) : this(item.id,item.position,item.text)
+    constructor(item: MapItemDAO) : this(item.id,item.position,item.text,
+        item.markers.map { MarkerDTO(it) } )
 
-    constructor() : this(0,0, "")
+    constructor() : this(0,0, "", emptyList())
 
 }
 

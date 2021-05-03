@@ -5,3 +5,6 @@ import org.springframework.web.bind.annotation.ResponseStatus
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
 class NotFoundException(message: String) : RuntimeException(message)
+
+@ResponseStatus(HttpStatus.CONFLICT)
+class IntroductionAlreadyPresent() : RuntimeException("This Exhibition Already Contains One Introduction")

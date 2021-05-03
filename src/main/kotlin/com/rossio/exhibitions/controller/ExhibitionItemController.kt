@@ -12,13 +12,15 @@ import com.rossio.exhibitions.model.AboutItemDAO
 
 
 import com.rossio.exhibitions.service.ExhibitionItemService
+import com.rossio.exhibitions.service.ExhibitionService
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("item")
 class ExhibitionItemController(
-    val exhibitionItemService: ExhibitionItemService
+    val exhibitionItemService: ExhibitionItemService,
+    val exhibitionService: ExhibitionService
 ) {
 
     @Operation(summary = "Get List of All Exhibition Items ")
@@ -31,10 +33,13 @@ class ExhibitionItemController(
     fun getOneExhibitionItem(@PathVariable id:Long ) : ExhibitionItemDTO =
         mapItemDAOtoDTO(exhibitionItemService.getOneExhibitionItem(id))
 
+    /**
     @Operation(summary = "Create One Exhibition Item ")
     @PostMapping("")
-    fun createExhibitionItem(@RequestBody itemDTO: ExhibitionItemDTO) : ExhibitionItemDTO = mapItemDAOtoDTO(exhibitionItemService.createOneExhibitionItem(mapItemDTOtoDAO(itemDTO)))
+    fun createExhibitionItem(@RequestBody itemDTO: ExhibitionItemDTO) : ExhibitionItemDTO =
+        mapItemDAOtoDTO(exhibitionItemService.createOneExhibitionItem(mapItemDTOtoDAO(itemDTO)))
 
+    **/
     @Operation(summary = "Edit One Exhibition Item ")
     @PutMapping("/{id}")
     fun editExhibitionItem(@RequestParam id: Long) : ExhibitionItemDTO =
@@ -44,6 +49,14 @@ class ExhibitionItemController(
     @Operation(summary = "Remove One Exhibition Item ")
     @DeleteMapping("/{id}")
     fun deleteExhibitionItem(@PathVariable id: Long) = exhibitionItemService.deleteOneExhibitionItem(id)
+
+    @Operation(summary = "Create Map Marker ")
+    @PostMapping("/addmarker/{itemId}")
+    fun createMarker(@PathVariable itemId: Long, @RequestBody markerDTO: MarkerDTO){
+        var item = exhibitionItemService.getOneExhibitionItem(itemId)
+        if(item is MapItemDAO)
+            exhibitionItemService.addMarker(itemId, MarkerDAO(markerDTO,item))
+    }
 
 
     fun mapItemDAOtoDTO(item: ExhibitionItemDAO) : ExhibitionItemDTO =
@@ -57,15 +70,14 @@ class ExhibitionItemController(
         }
 
 
-    fun mapItemDTOtoDAO(item: ExhibitionItemDTO) : ExhibitionItemDAO =
+    fun mapItemDTOtoDAO(item: ExhibitionItemDTO,exhibition: ExhibitionDAO) : ExhibitionItemDAO =
 
         when (item) {
-            is IntroductionItemDTO -> com.rossio.exhibitions.model.IntroductionItemDAO(item)
-            is TextItemDTO -> com.rossio.exhibitions.model.TextItemDAO(item)
-            is MapItemDTO -> com.rossio.exhibitions.model.MapItemDAO(item)
-            is AboutItemDTO ->  AboutItemDAO(item)
+            is IntroductionItemDTO ->  IntroductionItemDAO(item,exhibition)
+            is TextItemDTO -> com.rossio.exhibitions.model.TextItemDAO(item, exhibition)
+            is MapItemDTO ->  MapItemDAO(item,exhibition)
+            is AboutItemDTO ->  AboutItemDAO(item,exhibition)
             else -> throw NotFoundException("") //TODO exception
         }
-
 
 }

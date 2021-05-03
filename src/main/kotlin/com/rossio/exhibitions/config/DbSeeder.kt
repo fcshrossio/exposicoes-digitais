@@ -1,5 +1,6 @@
 package com.rossio.exhibitions.config
 
+import com.rossio.exhibitions.controller.ExhibitionController
 import com.rossio.exhibitions.dto.DigitalResourceDTO
 import com.rossio.exhibitions.dto.ExhibitionDTO
 import com.rossio.exhibitions.dto.UserDTO
@@ -15,7 +16,8 @@ class DbSeeder (
     val exhibitionItemService: ExhibitionItemService,
     val editorService: EditorService,
     val collaboratorService: CollaboratorService,
-    val digitalResourceService: DigitalResourceService
+    val digitalResourceService: DigitalResourceService,
+    val exhibitionController: ExhibitionController
 ) : CommandLineRunner {
     val runSeeder = true
 
@@ -48,12 +50,12 @@ class DbSeeder (
 
         var dia = Date(0);
 
-        val exhibitionDTO1 = ExhibitionDTO(1L, editorDTO, emptyList(),"","", digital, emptyList(),dia,
-            Status.PRIVATE,Keywords.Teste1,
+        val exhibitionDTO1 = ExhibitionDTO(0, editorDTO, emptyList(),"","", digital, emptyList(),dia,
+            Status.PRIVATE, mutableListOf(),
             emptyList())
 
-        val exhibitionDTO2 = ExhibitionDTO(2L, editorDTO, emptyList(),"","", digital, emptyList(),dia,Status.PRIVATE,
-            Keywords.Teste1,
+        val exhibitionDTO2 = ExhibitionDTO(0, editorDTO, emptyList(),"","", digital, emptyList(),dia,Status.PRIVATE,
+            mutableListOf(),
             emptyList())
 
         val exhibitionDTOList = listOf(exhibitionDTO1, exhibitionDTO2)
@@ -63,6 +65,7 @@ class DbSeeder (
         val exhibitionDAO2 = ExhibitionDAO(exhibitionDTO2)
 
         //exhibitionService.createExhibition(exhibitionDAO1)
+        //exhibitionController.createExhibition(exhibitionDTO1)
 
         val exhibitionDAOList = listOf(exhibitionDAO1, exhibitionDAO2)
 

@@ -18,11 +18,11 @@ data class ExhibitionDTO(
     val collaborators: List<UserDTO>,
     val creationDate: Date,
     val status: Status,
-    val keywords: Keywords,
+    val keywords: MutableList<Keywords>,
     val digitalResources: List<DigitalResourceDTO>
 )
 {
-    constructor() : this(0,UserDTO(), emptyList(),"" , "", DigitalResourceDTO(), emptyList(), Date(0), Status.PRIVATE, Keywords.Teste1, emptyList())
+    constructor() : this(0,UserDTO(), emptyList(),"" , "", DigitalResourceDTO(), emptyList(), Date(0), Status.PRIVATE, mutableListOf(), emptyList())
 
     constructor(exhibition : ExhibitionDAO) : this(
         exhibition.id,
