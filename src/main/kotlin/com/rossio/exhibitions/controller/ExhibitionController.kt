@@ -65,8 +65,8 @@ class ExhibitionController(
 
     @Operation(summary = "Add Exhibition Item to Exhibition ")
     @PostMapping("/{id}/additem")
-    fun addItemExhibition(@PathVariable id: Long,@RequestBody item : ExhibitionItemDTO) =
-        exhibitionItemService.createOneExhibitionItem(mapItemDTOtoDAO(item,exhibitionService.getOneExhibition(id)))
+    fun addItemExhibition(@PathVariable id: Long,@RequestBody item : ExhibitionItemDTO) : ExhibitionItemDTO =
+        mapItemDAOtoDTO(exhibitionItemService.createOneExhibitionItem(mapItemDTOtoDAO(item,exhibitionService.getOneExhibition(id))))
 
     @Operation(summary = "Show Recent Exhibitions")
     @GetMapping("/recent")
@@ -97,6 +97,16 @@ class ExhibitionController(
             is TextItemDTO ->  TextItemDAO(item,exhibition)
             is MapItemDTO ->  MapItemDAO(item,exhibition)
             is AboutItemDTO ->  AboutItemDAO(item,exhibition)
+            else -> throw NotFoundException("") //TODO exception
+        }
+
+    fun mapItemDAOtoDTO(item: ExhibitionItemDAO) : ExhibitionItemDTO =
+
+        when (item) {
+            is IntroductionItemDAO -> IntroductionItemDTO(item)
+            is TextItemDAO -> TextItemDTO(item)
+            is MapItemDAO ->  MapItemDTO(item)
+            is AboutItemDAO -> AboutItemDTO(item)
             else -> throw NotFoundException("") //TODO exception
         }
 

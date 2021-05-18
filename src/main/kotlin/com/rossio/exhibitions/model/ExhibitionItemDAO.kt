@@ -1,10 +1,7 @@
 package com.rossio.exhibitions.model
 
+import com.rossio.exhibitions.dto.*
 import com.rossio.exhibitions.model.ExhibitionDAO
-import com.rossio.exhibitions.dto.AboutItemDTO
-import com.rossio.exhibitions.dto.IntroductionItemDTO
-import com.rossio.exhibitions.dto.MapItemDTO
-import com.rossio.exhibitions.dto.TextItemDTO
 import javax.persistence.*
 
 @Entity
@@ -50,12 +47,22 @@ data class TextItemDAO(
     @ManyToOne
     @JoinColumn(name = "exhibition_id",referencedColumnName="id")
     override var exhibition: ExhibitionDAO,
-    var text: String
+    var text: String,
+    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
+    var subTextItems : MutableList<SubTextDAO>
 
 ) : ExhibitionItemDAO(id, position, exhibition) {
 
-    constructor(item: TextItemDTO, exhibition: ExhibitionDAO) : this(item.id,item.position, exhibition, item.text)
-    constructor() : this(0,0,ExhibitionDAO(),"")
+    constructor(item: TextItemDTO, exhibition: ExhibitionDAO) : this(item.id,item.position, exhibition, item.text, mutableListOf())
+    constructor() : this(0,0,ExhibitionDAO(),"", mutableListOf())
+
+    fun addSubText(subTextDAO: SubTextDAO) {
+        subTextItems.add(subTextDAO)
+    }
+
+    fun removeSubText(subTextDAO: SubTextDAO) {
+        subTextItems.remove(subTextDAO)
+    }
 }
 
 @Entity
@@ -67,7 +74,7 @@ data class MapItemDAO(
     @JoinColumn(name = "exhibition_id",referencedColumnName="id")
     override var exhibition: ExhibitionDAO,
     var text: String,
-    @OneToMany
+    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
     var markers : MutableList<MarkerDAO>
 
 ) : ExhibitionItemDAO(id,  position, exhibition) {
@@ -79,6 +86,10 @@ data class MapItemDAO(
     fun addMarker(markerDAO: MarkerDAO) {
         markers.add(markerDAO)
     }
+
+    fun removeMarker(markerDAO: MarkerDAO) {
+        markers.remove(markerDAO)
+    }
 }
 
 @Entity
@@ -89,11 +100,22 @@ data class AboutItemDAO(
     @ManyToOne
     @JoinColumn(name = "exhibition_id",referencedColumnName="id")
     override var exhibition: ExhibitionDAO,
-    var text: String
+    var text: String,
+    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
+    var subItems : MutableList<SubAboutDAO>
 
 ) : ExhibitionItemDAO(id, position, exhibition) {
 
-    constructor(item: AboutItemDTO, exhibition: ExhibitionDAO) : this(item.id,item.position, exhibition, item.text)
-    constructor() : this(0,0,ExhibitionDAO(),"")
+    constructor(item: AboutItemDTO, exhibition: ExhibitionDAO) : this(item.id,item.position, exhibition, item.text, mutableListOf())
+    constructor() : this(0,0,ExhibitionDAO(),"", mutableListOf())
+
+    fun addSubAbout(subAboutDAO: SubAboutDAO) {
+        subItems.add(subAboutDAO)
+    }
+
+    fun removeSubAbout(subAboutDAO: SubAboutDAO) {
+        subItems.remove(subAboutDAO)
+    }
+
 }
 

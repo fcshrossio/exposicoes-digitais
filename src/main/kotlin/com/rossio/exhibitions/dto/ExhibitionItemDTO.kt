@@ -2,10 +2,7 @@ package com.rossio.exhibitions.dto
 
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
-import com.rossio.exhibitions.model.AboutItemDAO
-import com.rossio.exhibitions.model.IntroductionItemDAO
-import com.rossio.exhibitions.model.MapItemDAO
-import com.rossio.exhibitions.model.TextItemDAO
+import com.rossio.exhibitions.model.*
 
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "itemType", visible = true
@@ -40,13 +37,14 @@ data class IntroductionItemDTO(
 data class TextItemDTO(
     override val id: Long,
     override val position: Long,
-    val text: String
+    val text: String,
+    val subItems: List<SubTextItemDTO>
 
 ) : ExhibitionItemDTO(id, position) {
 
-    constructor(item: TextItemDAO) : this(item.id,item.position,item.text)
+    constructor(item: TextItemDAO) : this(item.id,item.position,item.text,item.subTextItems.map { SubTextItemDTO(it)})
 
-    constructor() : this(0,0, "")
+    constructor() : this(0,0, "", emptyList())
 
 }
 
@@ -68,12 +66,14 @@ data class MapItemDTO(
 data class AboutItemDTO(
     override val id: Long,
     override val position: Long,
-    val text: String
+    val text: String,
+    val subItems : List<SubAboutItemDTO>
 
 ) : ExhibitionItemDTO(id, position) {
 
-    constructor(item: AboutItemDAO) : this(item.id,item.position,item.text)
+    constructor(item: AboutItemDAO) : this(item.id,item.position,item.text, item.subItems.map { SubAboutItemDTO( it) })
 
-    constructor() : this(0,0, "")
+    constructor() : this(0,0, "", emptyList())
 
 }
+

@@ -3,9 +3,8 @@ package com.rossio.exhibitions.dto
 import com.rossio.exhibitions.dto.UserDTO
 import com.rossio.exhibitions.dto.DigitalResourceDTO
 import com.rossio.exhibitions.dto.IntroductionItemDTO
-import com.rossio.exhibitions.model.ExhibitionDAO
-import com.rossio.exhibitions.model.Keywords
-import com.rossio.exhibitions.model.Status
+import com.rossio.exhibitions.exception.NotFoundException
+import com.rossio.exhibitions.model.*
 import java.util.*
 
 data class ExhibitionDTO(
@@ -27,7 +26,7 @@ data class ExhibitionDTO(
     constructor(exhibition : ExhibitionDAO) : this(
         exhibition.id,
         UserDTO(exhibition.editor),
-        exhibition.items.map { IntroductionItemDTO() },
+        exhibition.items.map { mapItemDAOtoDTO(it) },
         exhibition.title,
         exhibition.subtitle,
         DigitalResourceDTO(),
@@ -40,3 +39,13 @@ data class ExhibitionDTO(
 
 
 }
+
+fun mapItemDAOtoDTO(item: ExhibitionItemDAO) : ExhibitionItemDTO =
+
+    when (item) {
+        is IntroductionItemDAO -> IntroductionItemDTO(item)
+        is TextItemDAO -> TextItemDTO(item)
+        is MapItemDAO ->  MapItemDTO(item)
+        is AboutItemDAO -> AboutItemDTO(item)
+        else -> throw NotFoundException("") //TODO exception
+    }
