@@ -19,7 +19,7 @@ class DbSeeder (
     val digitalResourceService: DigitalResourceService,
     val exhibitionController: ExhibitionController
 ) : CommandLineRunner {
-    val runSeeder = true
+    val runSeeder = false
 
     override fun run(vararg args: String?) {
         if (!runSeeder) {

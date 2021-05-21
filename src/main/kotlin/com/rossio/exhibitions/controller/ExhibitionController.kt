@@ -31,6 +31,7 @@ class ExhibitionController(
     @GetMapping("/{id}")
     fun getOneExhibition(@PathVariable id: Long) : ExhibitionDTO = ExhibitionDTO(exhibitionService.getOneExhibition(id))
 
+
     @Operation(summary = "Create a new Exhibition ")
     @PostMapping("")
     fun createExhibition(@RequestBody exhibition: ExhibitionDTO) : ExhibitionDTO =
@@ -43,6 +44,8 @@ class ExhibitionController(
                     )
             )
         )
+
+
 
     @Operation(summary = "Edit a Exhibition")
     @PutMapping("/{id}")

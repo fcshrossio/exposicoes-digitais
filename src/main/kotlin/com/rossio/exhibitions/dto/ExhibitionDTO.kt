@@ -29,12 +29,12 @@ data class ExhibitionDTO(
         exhibition.items.map { mapItemDAOtoDTO(it) },
         exhibition.title,
         exhibition.subtitle,
-        DigitalResourceDTO(),
+        DigitalResourceDTO(exhibition.cover),
         exhibition.collaborators.map { UserDTO(it) },
         exhibition.creationDate,
         exhibition.status,
         exhibition.keywords,
-        exhibition.digitalResources.map { DigitalResourceDTO() }
+        exhibition.digitalResources.map { DigitalResourceDTO(it) }
     )
 
 

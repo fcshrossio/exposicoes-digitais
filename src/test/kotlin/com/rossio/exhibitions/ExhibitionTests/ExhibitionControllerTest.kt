@@ -3,10 +3,6 @@ package com.rossio.exhibitions.ExhibitionTests
 import com.rossio.exhibitions.dto.DigitalResourceDTO
 import com.rossio.exhibitions.dto.ExhibitionDTO
 import com.rossio.exhibitions.dto.UserDTO
-import com.rossio.exhibitions.model.ExhibitionDAO
-import com.rossio.exhibitions.model.Keywords
-import com.rossio.exhibitions.model.Status
-import com.rossio.exhibitions.model.UserDAO
 import com.rossio.exhibitions.service.ExhibitionService
 import org.hamcrest.Matchers.hasSize
 import org.junit.jupiter.api.Test
@@ -22,10 +18,15 @@ import java.util.*
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.rossio.exhibitions.exception.NotFoundException
+import com.rossio.exhibitions.model.*
+import com.rossio.exhibitions.service.DigitalResourceService
+import com.rossio.exhibitions.service.EditorService
+import junit.framework.Assert.assertEquals
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.equalTo
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import org.springframework.transaction.annotation.Transactional
 
 
 @SpringBootTest
@@ -38,29 +39,38 @@ class ExhibitionControllerTest {
     @MockBean
     lateinit var exhibitionService: ExhibitionService
 
+    @MockBean
+    lateinit var editorService: EditorService
+
+    @MockBean
+    lateinit var digitalResourceService: DigitalResourceService
+
 
 
     companion object {
 
         var url = "/exhibition"
 
+        var uuid: Long = 0L;
+
         val mapper = jacksonObjectMapper()
 
-        var editorDTO = UserDTO(0,"Henrique Raposo")
+        var editorDAO = EditorDAO(uuid++,"Henrique Raposo")
 
-        var editorDAO = UserDAO(0,"Henrique Raposo")
 
-        var digital = DigitalResourceDTO(0,"NOME")
+        var editorDTO = UserDTO(editorDAO)
 
-        //val digitalDAO = DigitalResourceDAO(digital)
+        var digitalDAO = DigitalResourceDAO(uuid++,"NOME")
+
+        val digitalDTO = DigitalResourceDTO(digitalDAO)
 
         var dia = Date(0);
 
-        val exhibitionDTO1 = ExhibitionDTO(1L, editorDTO, emptyList(),"","", DigitalResourceDTO(), emptyList(),dia,
+        val exhibitionDTO1 = ExhibitionDTO(uuid++, editorDTO, emptyList(),"titulo","subtitulo", digitalDTO, emptyList(),dia,
             Status.PRIVATE, mutableListOf(),
             emptyList())
 
-        val exhibitionDTO2 = ExhibitionDTO(2L, editorDTO, emptyList(),"","", DigitalResourceDTO(), emptyList(),dia,Status.PRIVATE,
+        val exhibitionDTO2 = ExhibitionDTO(uuid++, editorDTO, emptyList(),"titulo2","suntitulo2", DigitalResourceDTO(), emptyList(),dia,Status.PRIVATE,
             mutableListOf(),
             emptyList())
 
@@ -80,7 +90,7 @@ class ExhibitionControllerTest {
         Mockito.`when`(exhibitionService.getAllExhibitions()).thenReturn(exhibitionDAOList)
 
         val result = mvc.perform(MockMvcRequestBuilders.get(url))
-            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(status().isOk())
             .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize<Any>(exhibitionDTOList.size)))
             .andReturn()
 
@@ -93,9 +103,9 @@ class ExhibitionControllerTest {
 
     @Test
     fun `Test get one exhibition`() {
-        Mockito.`when`(exhibitionService.getOneExhibition(1L)).thenReturn(exhibitionDAO1)
+        Mockito.`when`(exhibitionService.getOneExhibition(exhibitionDTO1.id)).thenReturn(exhibitionDAO1)
 
-        val result = mvc.perform(MockMvcRequestBuilders.get("$url/1"))
+        val result = mvc.perform(MockMvcRequestBuilders.get("$url/" + exhibitionDTO1.id))
             .andExpect(status().isOk())
             .andReturn()
 
@@ -116,33 +126,37 @@ class ExhibitionControllerTest {
 
     fun <T>nonNullAny(t:Class<T>):T = Mockito.any(t)
 
+    @Transactional
     @Test
     fun `Test add one exhibition`() {
 
-        val newExhibitionDTO = ExhibitionDTO(
-            3L,
-            editorDTO,
-            emptyList(),
-            "Título",
-            "SubTítulo",
-            digital,
-            emptyList(),
-            dia,
-            Status.PRIVATE,
-            mutableListOf(),
-            emptyList()
-        )
+
+
+        val newExhibitionDTO = ExhibitionDTO(uuid++, editorDTO, emptyList(),"titulo","subtitulo", digitalDTO, emptyList(),dia,
+            Status.PRIVATE, mutableListOf(),
+            emptyList())
+
 
         val newExhibitionDAO = ExhibitionDAO(newExhibitionDTO)
 
-        val appJson = mapper.writeValueAsString(newExhibitionDTO)
+        val exhibitionJson = mapper.writeValueAsString(newExhibitionDTO)
 
-        Mockito.`when`(exhibitionService.createExhibition(nonNullAny(ExhibitionDAO::class.java))).thenReturn(newExhibitionDAO)
+        Mockito.`when`(exhibitionService.createExhibition(nonNullAny(ExhibitionDAO::class.java))).thenReturn( newExhibitionDAO )
 
-        val result = mvc.perform(MockMvcRequestBuilders.post(url).contentType(MediaType.APPLICATION_JSON)
-            .content(appJson))
+        Mockito.`when`(editorService.getOneEditor(exhibitionDTO1.editor.id)).thenReturn(editorDAO)
+
+        Mockito.`when`(digitalResourceService.getOneDigitalResource(exhibitionDTO1.cover.id)).thenReturn(digitalDAO)
+
+        Mockito.`when`(exhibitionService.getOneExhibition(exhibitionDTO1.id)).thenReturn(exhibitionDAO1)
+        val result = mvc.perform(MockMvcRequestBuilders.post(url)
+            .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
+            .content(exhibitionJson))
             .andExpect(status().isOk)
+            .andReturn()
 
+        val responseString = result.response.contentAsString
+        val responseDTO = mapper.readValue<ExhibitionDTO>(responseString)
+        assertEquals(responseDTO, newExhibitionDTO)
 
 
     }
@@ -150,6 +164,7 @@ class ExhibitionControllerTest {
 
     @Test
     fun `Test add one invalid`() {
+        //TODO
         Mockito.`when`(exhibitionService.getAllExhibitions()).thenReturn(emptyList())
 
         mvc.perform(MockMvcRequestBuilders.get(url))
@@ -158,6 +173,7 @@ class ExhibitionControllerTest {
 
     @Test
     fun `Test edit one exhibition`() {
+        //TODO
         Mockito.`when`(exhibitionService.getAllExhibitions()).thenReturn(emptyList())
 
         mvc.perform(MockMvcRequestBuilders.get(url))
@@ -166,6 +182,7 @@ class ExhibitionControllerTest {
 
     @Test
     fun `Test delete exhibition`() {
+        //TODO
         Mockito.`when`(exhibitionService.getAllExhibitions()).thenReturn(emptyList())
 
         mvc.perform(MockMvcRequestBuilders.get(url))
@@ -174,6 +191,7 @@ class ExhibitionControllerTest {
 
     @Test
     fun `Test add collaborator`() {
+        //TODO
         Mockito.`when`(exhibitionService.getAllExhibitions()).thenReturn(emptyList())
 
         mvc.perform(MockMvcRequestBuilders.get(url))
@@ -182,6 +200,7 @@ class ExhibitionControllerTest {
 
     @Test
     fun `Test remove one collaborator`() {
+        //TODO
         Mockito.`when`(exhibitionService.getAllExhibitions()).thenReturn(emptyList())
 
         mvc.perform(MockMvcRequestBuilders.get(url))
