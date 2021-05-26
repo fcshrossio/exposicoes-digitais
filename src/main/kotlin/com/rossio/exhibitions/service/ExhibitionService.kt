@@ -23,17 +23,26 @@ class ExhibitionService(
     fun deleteExhibition(id: Long) =
         exhibitionsRepository.delete(getOneExhibition(id))
 
-    fun addCollaborator(exhibitionId: Long, collaborator: CollaboratorDAO) =
-        getOneExhibition(exhibitionId).let { it.addCollaborator(collaborator); exhibitionsRepository.save(it)}
+    fun addCollaborator(exhibition: ExhibitionDAO, collaborator: CollaboratorDAO) {
+        exhibition.addCollaborator(collaborator)
+        exhibitionsRepository.save(exhibition)
+    }
 
-    fun removeCollaborator(exhibitionId: Long, collaborator: CollaboratorDAO) =
-        getOneExhibition(exhibitionId).let { it.removeCollaborator(collaborator); exhibitionsRepository.save(it)}
+    fun removeCollaborator(exhibition: ExhibitionDAO, collaborator: CollaboratorDAO) {
+        exhibition.removeCollaborator(collaborator)
+        exhibitionsRepository.save(exhibition)
+    }
 
-    fun addKeyword(exhibitionId: Long, keyword: Keywords) =
-        getOneExhibition(exhibitionId).let { it.addKeyword(keyword); exhibitionsRepository.save(it)}
+    fun addKeyword(exhibition: ExhibitionDAO, keyword: Keywords) {
+        exhibition.addKeyword(keyword)
+        exhibitionsRepository.save(exhibition)
+    }
 
-    fun removeKeyword(exhibitionId: Long, keyword: Keywords) =
-        getOneExhibition(exhibitionId).let { it.removeKeyword(keyword); exhibitionsRepository.save(it)}
+    fun removeKeyword(exhibition: ExhibitionDAO, keyword: Keywords) {
+        exhibition.removeKeyword(keyword)
+        exhibitionsRepository.save(exhibition)
+    }
+
 
     fun changeStatus(exhibitionId: Long, status: Status) =
         getOneExhibition(exhibitionId).let { it.changeStatus(status); exhibitionsRepository.save(it)}

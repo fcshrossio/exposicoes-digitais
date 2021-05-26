@@ -4,10 +4,7 @@ import com.rossio.exhibitions.dto.*
 import com.rossio.exhibitions.dto.ExhibitionDTO
 import com.rossio.exhibitions.exception.NotFoundException
 import com.rossio.exhibitions.model.*
-import com.rossio.exhibitions.service.DigitalResourceService
-import com.rossio.exhibitions.service.EditorService
-import com.rossio.exhibitions.service.ExhibitionItemService
-import com.rossio.exhibitions.service.ExhibitionService
+import com.rossio.exhibitions.service.*
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.web.bind.annotation.*
 
@@ -18,6 +15,7 @@ class ExhibitionController(
     val exhibitionService: ExhibitionService,
     val digitalResourceService: DigitalResourceService,
     val editorService: EditorService,
+    val collaboratorService : CollaboratorService,
     val exhibitionItemService: ExhibitionItemService
 ) {
 
@@ -59,12 +57,12 @@ class ExhibitionController(
     @Operation(summary = "Add a Collaborator to Exhibition ")
     @PostMapping("/{id}/collaborator")
     fun addCollaboratorExhibition(@PathVariable id: Long,@RequestBody collaborator: UserDTO) =
-        exhibitionService.addCollaborator(id, CollaboratorDAO(collaborator))
+        exhibitionService.addCollaborator(exhibitionService.getOneExhibition(id), collaboratorService.getOneCollaborator(collaborator.id))
 
     @Operation(summary = "Remove a Collaborator to Exhibition ")
     @DeleteMapping("/{id}/collaborator")
     fun removeCollaboratorExhibition(@PathVariable id: Long,@RequestBody collaborator: UserDTO) =
-        exhibitionService.removeCollaborator(id, CollaboratorDAO(collaborator))
+        exhibitionService.removeCollaborator(exhibitionService.getOneExhibition(id), CollaboratorDAO(collaborator))
 
     @Operation(summary = "Add Exhibition Item to Exhibition ")
     @PostMapping("/{id}/additem")
@@ -79,13 +77,13 @@ class ExhibitionController(
     @Operation(summary = "Add Keyword to Exhibition")
     @GetMapping("/{id}/keywords")
     fun addKeyword(@PathVariable id: Long,@RequestParam value : Keywords) =
-        exhibitionService.addKeyword(id, value)
+        exhibitionService.addKeyword(exhibitionService.getOneExhibition(id), value)
         //TODO KEYWORD ROUTE FUNCTION
 
     @Operation(summary = "Remove Keyword to Exhibition")
     @DeleteMapping("/{id}/keywords")
     fun removeKeyword(@PathVariable id: Long,@RequestParam value : Keywords) =
-        exhibitionService.removeKeyword(id, value)
+        exhibitionService.removeKeyword(exhibitionService.getOneExhibition(id), value)
     //TODO KEYWORD ROUTE FUNCTION
 
     @Operation(summary = "Change Status")
