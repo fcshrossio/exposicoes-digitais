@@ -4,6 +4,7 @@ import com.rossio.exhibitions.controller.ExhibitionController
 import com.rossio.exhibitions.dto.DigitalResourceDTO
 import com.rossio.exhibitions.dto.ExhibitionDTO
 import com.rossio.exhibitions.dto.UserDTO
+import com.rossio.exhibitions.enums.Status
 import com.rossio.exhibitions.model.*
 import com.rossio.exhibitions.service.*
 import org.springframework.boot.CommandLineRunner

@@ -2,7 +2,9 @@ package com.rossio.exhibitions.controller
 
 import com.rossio.exhibitions.dto.*
 import com.rossio.exhibitions.dto.ExhibitionDTO
-import com.rossio.exhibitions.exception.NotFoundException
+import com.rossio.exhibitions.enums.Keywords
+import com.rossio.exhibitions.enums.Status
+import com.rossio.exhibitions.mapItemDTOtoDAO
 import com.rossio.exhibitions.model.*
 import com.rossio.exhibitions.service.*
 import io.swagger.v3.oas.annotations.Operation
@@ -32,7 +34,7 @@ class ExhibitionController(
 
     @Operation(summary = "Create a new Exhibition ")
     @PostMapping("")
-    fun createExhibition(@RequestBody exhibition: ExhibitionDTO) : ExhibitionDTO =
+    fun createExhibition(@RequestBody exhibition: ExhibitionDTO)  =
         ExhibitionDTO(
             exhibitionService.createExhibition(
                 ExhibitionDAO(
@@ -47,12 +49,15 @@ class ExhibitionController(
 
     @Operation(summary = "Edit a Exhibition")
     @PutMapping("/{id}")
-    fun editExhibition() : ExhibitionDTO = ExhibitionDTO()
+    fun editExhibition(@RequestBody exhibitionDetails: ExhibitionDetailsDTO, @PathVariable id: Long) : ExhibitionDTO =
+        ExhibitionDTO(exhibitionService.editExhibitionDetails(exhibitionDetails, exhibitionService.getOneExhibition(id)))
+
+    //TODO EDIT EXHIBITION
 
     @Operation(summary = "Delete a Exhibition")
     @DeleteMapping("/{id}")
     fun deleteExhibition(@PathVariable id: Long) =
-        exhibitionService.deleteExhibition(id)
+        exhibitionService.deleteExhibition(exhibitionService.getOneExhibition(id))
 
     @Operation(summary = "Add a Collaborator to Exhibition ")
     @PostMapping("/{id}/collaborator")
@@ -89,27 +94,9 @@ class ExhibitionController(
     @Operation(summary = "Change Status")
     @PutMapping("/{id}/status")
     fun changeStatus(@PathVariable id: Long,@RequestParam value : Status) =
-        exhibitionService.changeStatus(id, value)
+        exhibitionService.changeStatus(exhibitionService.getOneExhibition(id), value)
 
-    fun mapItemDTOtoDAO(item: ExhibitionItemDTO,exhibition: ExhibitionDAO) : ExhibitionItemDAO =
 
-        when (item) {
-            is IntroductionItemDTO ->  IntroductionItemDAO(item,exhibition)
-            is TextItemDTO ->  TextItemDAO(item,exhibition)
-            is MapItemDTO ->  MapItemDAO(item,exhibition)
-            is AboutItemDTO ->  AboutItemDAO(item,exhibition)
-            else -> throw NotFoundException("") //TODO exception
-        }
-
-    fun mapItemDAOtoDTO(item: ExhibitionItemDAO) : ExhibitionItemDTO =
-
-        when (item) {
-            is IntroductionItemDAO -> IntroductionItemDTO(item)
-            is TextItemDAO -> TextItemDTO(item)
-            is MapItemDAO ->  MapItemDTO(item)
-            is AboutItemDAO -> AboutItemDTO(item)
-            else -> throw NotFoundException("") //TODO exception
-        }
 
 
 }

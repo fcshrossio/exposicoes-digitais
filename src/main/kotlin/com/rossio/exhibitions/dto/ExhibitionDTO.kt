@@ -3,6 +3,8 @@ package com.rossio.exhibitions.dto
 import com.rossio.exhibitions.dto.UserDTO
 import com.rossio.exhibitions.dto.DigitalResourceDTO
 import com.rossio.exhibitions.dto.IntroductionItemDTO
+import com.rossio.exhibitions.enums.Keywords
+import com.rossio.exhibitions.enums.Status
 import com.rossio.exhibitions.exception.NotFoundException
 import com.rossio.exhibitions.model.*
 import java.util.*
@@ -39,6 +41,13 @@ data class ExhibitionDTO(
 
 
 }
+
+data class ExhibitionDetailsDTO(
+    val exhibitionId: Long,
+    val title: String,
+    val subtitle: String
+)
+
 
 fun mapItemDAOtoDTO(item: ExhibitionItemDAO) : ExhibitionItemDTO =
 

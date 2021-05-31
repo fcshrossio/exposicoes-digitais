@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.rossio.exhibitions.dto.DigitalResourceDTO
 import com.rossio.exhibitions.dto.ExhibitionDTO
+import com.rossio.exhibitions.enums.Keywords
+import com.rossio.exhibitions.enums.Status
 import com.rossio.exhibitions.model.*
 import com.rossio.exhibitions.service.ExhibitionService
 import org.hamcrest.MatcherAssert.assertThat
@@ -59,6 +61,7 @@ class ExhibitionServiceTest {
 
         val exhibitionDAOList = listOf(exhibitionDAO1, exhibitionDAO2)
 
+        var collaboratorDAO = CollaboratorDAO(uid++, "Colaborador Raposo", emptyList())
     }
 
     @Test
@@ -92,12 +95,22 @@ class ExhibitionServiceTest {
 
     @Test
     fun `delete Exhition`() {
-        //TODO DELETE TEST
+        Mockito.`when`(exhibitionsRepository.delete(Mockito.any(ExhibitionDAO::class.java)))
+            .then {
+                val exhibitionDAO:ExhibitionDAO = it.getArgument(0)
+                assertEquals(exhibitionDAO.title, exhibitionDAO2.title)
+                assertEquals(exhibitionDAO.subtitle, exhibitionDAO2.subtitle)
+                assertEquals(exhibitionDAO.status, exhibitionDAO2.status)
+                //TODO COMPARE MORE ITEMS
+                exhibitionDAO
+            }
+
+        exhibitionService.deleteExhibition(exhibitionDAO2)
     }
 
     @Test
     fun `add collaborator to exhibition`() {
-        var collaboratorDAO = CollaboratorDAO(uid++, "Colaborador Raposo", emptyList())
+
 
         Mockito.`when`(exhibitionsRepository.save(Mockito.any(ExhibitionDAO::class.java)))
             .then {
@@ -116,7 +129,7 @@ class ExhibitionServiceTest {
 
     @Test
     fun `remove collaborator from exhibition`() {
-        var collaboratorDAO = CollaboratorDAO(uid++, "Colaborador Raposo", mutableListOf(exhibitionDAO1))
+        //var collaboratorDAO = CollaboratorDAO(uid++, "Colaborador Raposo", mutableListOf(exhibitionDAO1))
 
         var list: MutableList<CollaboratorDAO> = mutableListOf()
 
@@ -145,6 +158,7 @@ class ExhibitionServiceTest {
                 assertEquals(exhibitionDAO.subtitle, exhibitionDAO1.subtitle)
                 assertEquals(exhibitionDAO.status, exhibitionDAO1.status)
                 //TODO COMPARE MORE ITEMS
+                assertEquals(exhibitionDAO.keywords, mutableListOf(keyword))
                 exhibitionDAO
             }
 
@@ -155,6 +169,8 @@ class ExhibitionServiceTest {
     fun `remove keyword from Exhibition`() {
         var keyword = Keywords.Teste1
 
+        var keywordList:MutableList<Keywords> = mutableListOf()
+
         Mockito.`when`(exhibitionsRepository.save(Mockito.any(ExhibitionDAO::class.java)))
             .then {
                 val exhibitionDAO:ExhibitionDAO = it.getArgument(0)
@@ -162,6 +178,7 @@ class ExhibitionServiceTest {
                 assertEquals(exhibitionDAO.subtitle, exhibitionDAO1.subtitle)
                 assertEquals(exhibitionDAO.status, exhibitionDAO1.status)
                 //TODO COMPARE MORE ITEMS
+                assertEquals(exhibitionDAO.keywords, keywordList)
                 exhibitionDAO
             }
 
@@ -170,12 +187,28 @@ class ExhibitionServiceTest {
 
     @Test
     fun `change Exhibition Status`() {
+        var status = Status.PUBLIC
+
+        Mockito.`when`(exhibitionsRepository.save(Mockito.any(ExhibitionDAO::class.java)))
+            .then {
+                val exhibitionDAO:ExhibitionDAO = it.getArgument(0)
+                assertEquals(exhibitionDAO.title, exhibitionDAO1.title)
+                assertEquals(exhibitionDAO.subtitle, exhibitionDAO1.subtitle)
+                assertEquals(exhibitionDAO.status, exhibitionDAO1.status)
+                assertEquals(exhibitionDAO.keywords, status)
+                exhibitionDAO
+            }
+
+        exhibitionService.changeStatus(exhibitionDAO1,status)
 
     }
 
     @Test
     fun `get recent Exhibitions`() {
+        Mockito.`when`(exhibitionsRepository.findAll()).thenReturn(exhibitionDAOList)
 
+        assertThat(exhibitionService.getAllExhibitions(), equalTo(exhibitionDAOList))
+        //TODO CHECK DATE
     }
 
 

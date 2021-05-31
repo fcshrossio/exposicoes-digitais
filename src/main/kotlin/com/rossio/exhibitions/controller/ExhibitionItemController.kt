@@ -1,14 +1,10 @@
 package com.rossio.exhibitions.controller
 
 import com.rossio.exhibitions.dto.*
-import com.rossio.exhibitions.dto.IntroductionItemDTO
-import com.rossio.exhibitions.dto.MapItemDTO
-import com.rossio.exhibitions.dto.TextItemDTO
-import com.rossio.exhibitions.exception.NotFoundException
 import com.rossio.exhibitions.exception.WrongTypeException
+import com.rossio.exhibitions.mapItemDTOtoDAO
 import com.rossio.exhibitions.model.*
 import com.rossio.exhibitions.model.MapItemDAO
-import com.rossio.exhibitions.model.IntroductionItemDAO
 import com.rossio.exhibitions.model.AboutItemDAO
 
 
@@ -36,18 +32,22 @@ class ExhibitionItemController(
     fun getOneExhibitionItem(@PathVariable id:Long ) : ExhibitionItemDTO =
         mapItemDAOtoDTO(exhibitionItemService.getOneExhibitionItem(id))
 
-    /**
-    @Operation(summary = "Create One Exhibition Item ")
-    @PostMapping("")
-    fun createExhibitionItem(@RequestBody itemDTO: ExhibitionItemDTO) : ExhibitionItemDTO =
-        mapItemDAOtoDTO(exhibitionItemService.createOneExhibitionItem(mapItemDTOtoDAO(itemDTO)))
-
-    **/
     @Operation(summary = "Edit One Exhibition Item ")
     @PutMapping("/{id}")
-    fun editExhibitionItem(@RequestParam id: Long) : ExhibitionItemDTO =
-        IntroductionItemDTO()
-    //TODO edit items
+    fun editExhibitionItem(@PathVariable id: Long, @RequestBody item: ExhibitionItemDTO) : ExhibitionItemDTO =
+        mapItemDAOtoDTO(
+            exhibitionItemService.editOneExhibitionItem(
+                exhibitionItemService.getOneExhibitionItem(id),
+                mapItemDTOtoDAO(item,exhibitionService.getOneExhibition(item.exhibitionId))
+            )
+        )
+
+
+    @Operation(summary = "Post One Exhibition Item ")
+    @PostMapping("")
+    fun addExhibitionItem(@RequestBody item: ExhibitionItemDTO) =
+        mapItemDAOtoDTO(exhibitionItemService.createOneExhibitionItem(mapItemDTOtoDAO(item,exhibitionService.getOneExhibition(item.exhibitionId))))
+
 
     @Operation(summary = "Remove One Exhibition Item ")
     @DeleteMapping("/{id}")
@@ -61,7 +61,7 @@ class ExhibitionItemController(
     @Operation(summary = "Create Map Marker ")
     @PostMapping("/{itemId}/addmarker")
     fun createMarker(@PathVariable itemId: Long, @RequestBody markerDTO: MarkerDTO){
-        var item = exhibitionItemService.getOneExhibitionItem(itemId)
+        val item = exhibitionItemService.getOneExhibitionItem(itemId)
         if(item is MapItemDAO)
             exhibitionItemService.addMarker(itemId, MarkerDAO(markerDTO,item))
         else
@@ -83,7 +83,7 @@ class ExhibitionItemController(
     @Operation(summary = "Create Sub About Items")
     @PostMapping("/{itemId}/addsubabout")
     fun createSubAbout(@PathVariable itemId: Long, @RequestBody subAboutItemDTO: SubAboutItemDTO){
-        var item = exhibitionItemService.getOneExhibitionItem(itemId)
+        val item = exhibitionItemService.getOneExhibitionItem(itemId)
         if(item is AboutItemDAO)
             exhibitionItemService.addSubAbout(itemId, SubAboutDAO(subAboutItemDTO,item))
         else
@@ -105,7 +105,7 @@ class ExhibitionItemController(
     @Operation(summary = "Create Sub Text Items")
     @PostMapping("/{itemId}/addsubtext")
     fun createSubText(@PathVariable itemId: Long, @RequestBody subTextItemDTO: SubTextItemDTO) {
-        var item = exhibitionItemService.getOneExhibitionItem(itemId)
+        val item = exhibitionItemService.getOneExhibitionItem(itemId)
         if(item is TextItemDAO)
             exhibitionItemService.addSubText(itemId,SubTextDAO(subTextItemDTO,item))
         else
@@ -117,26 +117,5 @@ class ExhibitionItemController(
     fun deleteSubTextItem(@PathVariable itemId: Long) =
         exhibitionItemService.removeSubText(exhibitionSubItemService.getOneSubTextItem(itemId))
 
-
-    fun mapItemDAOtoDTO(item: ExhibitionItemDAO) : ExhibitionItemDTO =
-
-        when (item) {
-            is IntroductionItemDAO -> IntroductionItemDTO(item)
-            is TextItemDAO -> TextItemDTO(item)
-            is MapItemDAO ->  MapItemDTO(item)
-            is AboutItemDAO -> AboutItemDTO(item)
-            else -> throw NotFoundException("") //TODO exception
-        }
-
-
-    fun mapItemDTOtoDAO(item: ExhibitionItemDTO,exhibition: ExhibitionDAO) : ExhibitionItemDAO =
-
-        when (item) {
-            is IntroductionItemDTO ->  IntroductionItemDAO(item,exhibition)
-            is TextItemDTO -> com.rossio.exhibitions.model.TextItemDAO(item, exhibition)
-            is MapItemDTO ->  MapItemDAO(item,exhibition)
-            is AboutItemDTO ->  AboutItemDAO(item,exhibition)
-            else -> throw NotFoundException("") //TODO exception
-        }
 
 }

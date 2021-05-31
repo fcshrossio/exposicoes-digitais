@@ -1,5 +1,8 @@
 package com.rossio.exhibitions.service
 
+import com.rossio.exhibitions.dto.ExhibitionDetailsDTO
+import com.rossio.exhibitions.enums.Keywords
+import com.rossio.exhibitions.enums.Status
 import com.rossio.exhibitions.exception.NotFoundException
 import com.rossio.exhibitions.model.*
 import org.springframework.data.domain.Sort
@@ -20,8 +23,15 @@ class ExhibitionService(
     fun createExhibition(exhibition: ExhibitionDAO) : ExhibitionDAO =
         exhibitionsRepository.save(exhibition)
 
-    fun deleteExhibition(id: Long) =
-        exhibitionsRepository.delete(getOneExhibition(id))
+    fun editExhibitionDetails(details: ExhibitionDetailsDTO, exhibition: ExhibitionDAO) : ExhibitionDAO =
+        if (exhibition.editDetails(details)) {
+            exhibitionsRepository.save(exhibition)
+        } else
+            exhibition
+
+
+    fun deleteExhibition(exhibition: ExhibitionDAO) =
+        exhibitionsRepository.delete(exhibition)
 
     fun addCollaborator(exhibition: ExhibitionDAO, collaborator: CollaboratorDAO) {
         exhibition.addCollaborator(collaborator)
@@ -29,24 +39,28 @@ class ExhibitionService(
     }
 
     fun removeCollaborator(exhibition: ExhibitionDAO, collaborator: CollaboratorDAO) {
-        exhibition.removeCollaborator(collaborator)
-        exhibitionsRepository.save(exhibition)
+        if(exhibition.removeCollaborator(collaborator))
+            exhibitionsRepository.save(exhibition)
     }
 
     fun addKeyword(exhibition: ExhibitionDAO, keyword: Keywords) {
-        exhibition.addKeyword(keyword)
-        exhibitionsRepository.save(exhibition)
+        if(exhibition.addKeyword(keyword))
+            exhibitionsRepository.save(exhibition)
     }
 
     fun removeKeyword(exhibition: ExhibitionDAO, keyword: Keywords) {
-        exhibition.removeKeyword(keyword)
-        exhibitionsRepository.save(exhibition)
+        if(exhibition.removeKeyword(keyword))
+            exhibitionsRepository.save(exhibition)
     }
 
 
-    fun changeStatus(exhibitionId: Long, status: Status) =
-        getOneExhibition(exhibitionId).let { it.changeStatus(status); exhibitionsRepository.save(it)}
+    fun changeStatus(exhibition: ExhibitionDAO, status: Status) {
+        if(exhibition.changeStatus(status))
+            exhibitionsRepository.save(exhibition)
+    }
+
 
     fun recentExhibitions() =
         exhibitionsRepository.findAll(Sort.by("date").descending())
+
 }

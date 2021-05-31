@@ -24,6 +24,12 @@ class ExhibitionItemService(
     fun createOneExhibitionItem(item : ExhibitionItemDAO) : ExhibitionItemDAO =
         exhibitionItemsRepository.save(item)
 
+    fun editOneExhibitionItem(item : ExhibitionItemDAO, newItem : ExhibitionItemDAO): ExhibitionItemDAO {
+        item.editItem(newItem)
+        exhibitionItemsRepository.save(item)
+        return item
+    }
+
     fun deleteOneExhibitionItem(id: Long)  =
         exhibitionItemsRepository.delete(getOneExhibitionItem(id))
 

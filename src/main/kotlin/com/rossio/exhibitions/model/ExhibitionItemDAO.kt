@@ -1,6 +1,7 @@
 package com.rossio.exhibitions.model
 
 import com.rossio.exhibitions.dto.*
+import com.rossio.exhibitions.exception.WrongTypeException
 import com.rossio.exhibitions.model.ExhibitionDAO
 import javax.persistence.*
 
@@ -18,6 +19,8 @@ abstract class ExhibitionItemDAO(
     open var exhibition : ExhibitionDAO
 ) {
     constructor() : this(0,0,ExhibitionDAO())
+
+    abstract fun editItem(item:ExhibitionItemDAO) : Boolean
 }
 
 @Entity
@@ -37,6 +40,18 @@ data class IntroductionItemDAO(
 
 
     constructor() : this(0,0,ExhibitionDAO(),"")
+
+    override fun editItem(item: ExhibitionItemDAO): Boolean {
+        if ( item is IntroductionItemDAO && item.id === this.id)
+        {
+            this.text = item.text
+        }
+        else
+        {
+            WrongTypeException("Wrong type")
+        }
+        return false
+    }
 }
 
 @Entity
@@ -62,6 +77,18 @@ data class TextItemDAO(
 
     fun removeSubText(subTextDAO: SubTextDAO) {
         subTextItems.remove(subTextDAO)
+    }
+
+    override fun editItem(item: ExhibitionItemDAO): Boolean {
+        if ( item is TextItemDAO && item.id === this.id)
+        {
+            this.text = item.text
+        }
+        else
+        {
+            WrongTypeException("Wrong type")
+        }
+        return false
     }
 }
 
@@ -90,6 +117,18 @@ data class MapItemDAO(
     fun removeMarker(markerDAO: MarkerDAO) {
         markers.remove(markerDAO)
     }
+
+    override fun editItem(item: ExhibitionItemDAO): Boolean {
+        if ( item is MapItemDAO && item.id === this.id)
+        {
+            this.text = item.text
+        }
+        else
+        {
+            WrongTypeException("Wrong type")
+        }
+        return false
+    }
 }
 
 @Entity
@@ -115,6 +154,18 @@ data class AboutItemDAO(
 
     fun removeSubAbout(subAboutDAO: SubAboutDAO) {
         subItems.remove(subAboutDAO)
+    }
+
+    override fun editItem(item: ExhibitionItemDAO): Boolean {
+        if ( item is AboutItemDAO && item.id === this.id)
+        {
+            this.text = item.text
+        }
+        else
+        {
+            WrongTypeException("Wrong type")
+        }
+        return false
     }
 
 }

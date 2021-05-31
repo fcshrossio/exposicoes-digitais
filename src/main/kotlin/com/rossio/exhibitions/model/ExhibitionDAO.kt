@@ -1,6 +1,9 @@
 package com.rossio.exhibitions.model
 
-import com.rossio.exhibitions.dto.ExhibitionDTO
+import com.rossio.exhibitions.dto.*
+import com.rossio.exhibitions.enums.Keywords
+import com.rossio.exhibitions.enums.Status
+import com.rossio.exhibitions.exception.NotFoundException
 import java.util.*
 import javax.persistence.*
 import com.rossio.exhibitions.model.EditorDAO
@@ -41,7 +44,7 @@ data class ExhibitionDAO(
     constructor(exhibition : ExhibitionDTO, editor: EditorDAO, cover: DigitalResourceDAO ) : this(
         exhibition.id,
         editor,
-        exhibition.items.map{ IntroductionItemDAO() } as MutableList<ExhibitionItemDAO>,
+        exhibition.items.map{  } as MutableList<ExhibitionItemDAO>,
         exhibition.title,
         exhibition.subtitle,
         cover,
@@ -66,41 +69,61 @@ data class ExhibitionDAO(
         exhibition.digitalResources.map { DigitalResourceDAO(it)}
         )
 
-    fun addCollaborator(collaboratorDAO: CollaboratorDAO)
+    fun addCollaborator(collaboratorDAO: CollaboratorDAO): Boolean
     {
         if(!collaborators.contains(collaboratorDAO))
         {
             collaborators.add(collaboratorDAO)
+            return true
         }
+        return false
     }
 
-    fun removeCollaborator(collaboratorDAO: CollaboratorDAO)
+    fun removeCollaborator(collaboratorDAO: CollaboratorDAO): Boolean
     {
         if(collaborators.contains(collaboratorDAO))
         {
             collaborators.remove(collaboratorDAO)
+            return true
         }
+        return false
     }
 
-    fun addKeyword(keyword: Keywords)
+    fun addKeyword(keyword: Keywords): Boolean
     {
         if(!keywords.contains(keyword))
         {
             keywords.add(keyword)
+            return true
         }
+        return false
     }
 
-    fun removeKeyword(keyword: Keywords)
+    fun removeKeyword(keyword: Keywords): Boolean
     {
         if(keywords.contains(keyword))
         {
             keywords.remove(keyword)
+            return true
         }
+        return false
     }
 
-    fun changeStatus(status: Status)
+    fun changeStatus(status: Status): Boolean
     {
         this.status = status
+        return true
+    }
+
+    fun editDetails(detailsDTO: ExhibitionDetailsDTO): Boolean
+    {
+        if(detailsDTO.exhibitionId == this.id) {
+            this.title = detailsDTO.title
+            this.subtitle = detailsDTO.subtitle
+
+            return true
+        }
+        return false
     }
 
 
@@ -124,18 +147,6 @@ data class ExhibitionDAO(
         }
 
     }
-
-
 }
 
 
-
-enum class Status {
-    PUBLIC,
-    PRIVATE
-}
-
-enum class Keywords {
-    Teste1,
-    Teste2
-}
