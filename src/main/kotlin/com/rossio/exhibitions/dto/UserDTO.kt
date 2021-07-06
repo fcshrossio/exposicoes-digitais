@@ -4,20 +4,23 @@ import com.rossio.exhibitions.model.UserDAO
 
 data class UserDTO(
     val id: Long,
-    val username: String
+    val username: String,
+    val password: String
 ){
-
-    constructor() : this(0,"")
-
-    constructor(user: UserDAO) : this(user.id,user.username)
+    constructor(user: UserDAO) : this(user.id,user.username,user.password)
 }
+
+data class UserPasswordDTO (
+    val username: String,
+    val password: String
+)
+
+
 
 data class AdminDTO(
     val id: Long,
     val username: String
 ){
-
-    constructor() : this(0,"")
 
     constructor(user: UserDAO) : this(user.id,user.username)
 }
@@ -27,8 +30,6 @@ data class EditorDTO(
     val id: Long,
     val username: String
 ){
-
-    constructor() : this(0,"")
 
     constructor(user: UserDAO) : this(user.id,user.username)
 }

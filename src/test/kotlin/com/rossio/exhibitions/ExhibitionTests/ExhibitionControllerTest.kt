@@ -59,7 +59,9 @@ class ExhibitionControllerTest {
 
         val mapper = jacksonObjectMapper()
 
-        var editorDAO = EditorDAO(uuid++, "Henrique Raposo")
+        val userDTO = UserDTO(uuid++, "Henrique Raposo","password")
+
+        var editorDAO = EditorDAO(userDTO)
 
 
         var editorDTO = UserDTO(editorDAO)

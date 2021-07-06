@@ -1,18 +1,21 @@
 package com.rossio.exhibitions.model
 
 import com.rossio.exhibitions.dto.UserDTO
+import com.rossio.exhibitions.enums.Roles
 import javax.persistence.*
 
 @Entity
-open class UserDAO(
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+abstract class UserDAO(
     @Id
     @GeneratedValue
     open val id: Long,
-    open val username: String
+    open val username: String,
+    open var password: String,
+    open val role: Roles
 ) {
-    constructor() : this(0,"")
-
-    constructor(user: UserDTO) : this(user.id,user.username)
+    constructor(user: UserDTO) : this(user.id,user.username,"",Roles.EDITOR)
+    constructor() : this(0,"","",Roles.ADMIN)
 }
 
 @Entity
@@ -20,11 +23,13 @@ open class AdminDAO(
     @Id
     @GeneratedValue
     override val id: Long,
-    override val username: String
-) : UserDAO(id, username) {
-    constructor() : this(0,"")
+    override val username: String,
+    override var password: String,
+    override val role: Roles
+) : UserDAO(id, username, password, role) {
 
-    constructor(user: UserDTO) : this(user.id,user.username)
+    constructor(user: UserDTO) : this(user.id,user.username,user.password,Roles.ADMIN)
+    constructor() : this(0,"","",Roles.ADMIN)
 }
 
 @Entity
@@ -33,10 +38,12 @@ open class EditorDAO(
     @GeneratedValue
     override val id: Long,
     override val username: String,
-) : UserDAO(id, username) {
-    constructor() : this(0,"")
+    override var password: String,
+    override val role: Roles
+) : UserDAO(id, username, password, role) {
 
-    constructor(user: UserDTO) : this(user.id,user.username)
+    constructor(user: UserDTO) : this(user.id,user.username,user.password,Roles.EDITOR)
+    constructor() : this(0,"","",Roles.EDITOR)
 }
 
 
@@ -46,10 +53,12 @@ open class CollaboratorDAO(
     @GeneratedValue
     override val id: Long,
     override val username: String,
+    override var password: String,
+    override val role: Roles,
     @OneToMany
     val collaborationList:  List<ExhibitionDAO>
-) : UserDAO(id, username) {
-    constructor() : this(0,"", emptyList())
+) : UserDAO(id, username, password, role) {
 
-    constructor(user: UserDTO) : this(user.id,user.username, emptyList())
+    constructor(user: UserDTO) : this(user.id,user.username,user.password,Roles.COLLABORATOR, emptyList())
+    constructor() : this(0,"","",Roles.COLLABORATOR, emptyList())
 }

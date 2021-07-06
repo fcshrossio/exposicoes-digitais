@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.rossio.exhibitions.dto.DigitalResourceDTO
 import com.rossio.exhibitions.dto.ExhibitionDTO
+import com.rossio.exhibitions.dto.UserDTO
 import com.rossio.exhibitions.enums.Keywords
 import com.rossio.exhibitions.enums.Status
 import com.rossio.exhibitions.model.*
@@ -35,7 +36,9 @@ class ExhibitionServiceTest {
 
         var uid:Long = 0L;
 
-        var editorDAO = EditorDAO(uid++,"Henrique Raposo")
+        val userDTO = UserDTO(uid++, "Henrique Raposo","password")
+
+        var editorDTO = userDTO
 
 
         var digitalDAO = DigitalResourceDAO(uid++,"NOME")
@@ -61,7 +64,9 @@ class ExhibitionServiceTest {
 
         val exhibitionDAOList = listOf(exhibitionDAO1, exhibitionDAO2)
 
-        var collaboratorDAO = CollaboratorDAO(uid++, "Colaborador Raposo", emptyList())
+        val userDTO4 =  UserDTO(uid++, "Colaborador Raposo","password")
+
+        var collaboratorDAO = CollaboratorDAO(userDTO4)
     }
 
     @Test

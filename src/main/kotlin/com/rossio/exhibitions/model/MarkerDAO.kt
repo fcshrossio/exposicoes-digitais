@@ -15,8 +15,6 @@ data class MarkerDAO(
     @OneToMany
     val digitalResources : List<DigitalResourceDAO>
 ) {
-    constructor() : this(0, MapItemDAO(),0,"description", emptyList())
-
     constructor(markerDTO: MarkerDTO, mapItem: MapItemDAO) : this(markerDTO.markerId,mapItem,markerDTO.coordinates,markerDTO.description, markerDTO.digitalResources.map { DigitalResourceDAO(it) })
 
 }

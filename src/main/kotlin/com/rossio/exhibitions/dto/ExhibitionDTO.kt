@@ -23,7 +23,6 @@ data class ExhibitionDTO(
     val digitalResources: List<DigitalResourceDTO>
 )
 {
-    constructor() : this(0,UserDTO(), emptyList(),"" , "", DigitalResourceDTO(), emptyList(), Date(0), Status.PRIVATE, mutableListOf(), emptyList())
 
     constructor(exhibition : ExhibitionDAO) : this(
         exhibition.id,

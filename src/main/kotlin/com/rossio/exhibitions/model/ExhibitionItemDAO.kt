@@ -18,7 +18,6 @@ abstract class ExhibitionItemDAO(
     @JoinColumn(name = "exhibition_id",referencedColumnName="id")
     open var exhibition : ExhibitionDAO
 ) {
-    constructor() : this(0,0,ExhibitionDAO())
 
     abstract fun editItem(item:ExhibitionItemDAO) : Boolean
 }
@@ -38,8 +37,6 @@ data class IntroductionItemDAO(
     constructor(item: IntroductionItemDTO, exhibition: ExhibitionDAO) : this(item.id,0, exhibition, item.text)
 
 
-
-    constructor() : this(0,0,ExhibitionDAO(),"")
 
     override fun editItem(item: ExhibitionItemDAO): Boolean {
         if ( item is IntroductionItemDAO && item.id === this.id)
@@ -69,7 +66,6 @@ data class TextItemDAO(
 ) : ExhibitionItemDAO(id, position, exhibition) {
 
     constructor(item: TextItemDTO, exhibition: ExhibitionDAO) : this(item.id,item.position, exhibition, item.text, mutableListOf())
-    constructor() : this(0,0,ExhibitionDAO(),"", mutableListOf())
 
     fun addSubText(subTextDAO: SubTextDAO) {
         subTextItems.add(subTextDAO)
@@ -108,7 +104,6 @@ data class MapItemDAO(
 
     constructor(item: MapItemDTO, exhibition: ExhibitionDAO) : this(item.id,item.position, exhibition, item.text, mutableListOf() )
 
-    constructor() : this(0,0,ExhibitionDAO(),"", mutableListOf())
 
     fun addMarker(markerDAO: MarkerDAO) {
         markers.add(markerDAO)
@@ -146,7 +141,6 @@ data class AboutItemDAO(
 ) : ExhibitionItemDAO(id, position, exhibition) {
 
     constructor(item: AboutItemDTO, exhibition: ExhibitionDAO) : this(item.id,item.position, exhibition, item.text, mutableListOf())
-    constructor() : this(0,0,ExhibitionDAO(),"", mutableListOf())
 
     fun addSubAbout(subAboutDAO: SubAboutDAO) {
         subItems.add(subAboutDAO)

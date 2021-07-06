@@ -29,7 +29,7 @@ class CollaboratorController(
 
     @Operation(summary = "Edit Collaborator")
     @PutMapping("/{id}")
-    fun editCollaborator() :  UserDTO = UserDTO(0,"USERNAME")
+    fun editCollaborator() :  UserDTO = UserDTO(0,"USERNAME","password")
 
     @Operation(summary = "Delete Collaborator")
     @DeleteMapping("/{id}")
@@ -37,5 +37,5 @@ class CollaboratorController(
 
     @Operation(summary = "Get Collaborator Exhibitions")
     @GetMapping("/{id}/exhibitions")
-    fun getCollaboratorExhibitions() : ExhibitionDTO = ExhibitionDTO()
+    fun getCollaboratorExhibitions() {}
 }

@@ -17,6 +17,10 @@ class ExhibitionService(
     fun getAllExhibitions(): List<ExhibitionDAO> =
         exhibitionsRepository.findAll()
 
+    fun getAllPublicExhibitions(): List<ExhibitionDAO> =
+        exhibitionsRepository.findAllByStatusIs(Status.PUBLIC)
+
+
     fun getOneExhibition(id : Long) : ExhibitionDAO =
         exhibitionsRepository.findById(id).orElseThrow { NotFoundException("No Exhibition with id: $id found") }
 

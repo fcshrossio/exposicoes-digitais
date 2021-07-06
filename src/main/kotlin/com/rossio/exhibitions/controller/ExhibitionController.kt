@@ -8,6 +8,7 @@ import com.rossio.exhibitions.mapItemDTOtoDAO
 import com.rossio.exhibitions.model.*
 import com.rossio.exhibitions.service.*
 import io.swagger.v3.oas.annotations.Operation
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 
 
@@ -24,8 +25,15 @@ class ExhibitionController(
 
     @Operation(summary = "Get List of All Exhibitions ")
     @GetMapping("")
+    @PreAuthorize("hasRole('ADMIN')")
     fun getAllExhibitions() : List<ExhibitionDTO> =
         exhibitionService.getAllExhibitions().map { ExhibitionDTO(it) }
+
+    @Operation(summary = "Get List of All public Exhibitions ")
+    @GetMapping("/public")
+    fun getAllPublicExhibitions() : List<ExhibitionDTO> =
+        exhibitionService.getAllPublicExhibitions().map { ExhibitionDTO(it) }
+
 
     @Operation(summary = "Get a single Exhibition ")
     @GetMapping("/{id}")

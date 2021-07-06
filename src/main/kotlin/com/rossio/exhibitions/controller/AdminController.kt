@@ -1,6 +1,7 @@
 package com.rossio.exhibitions.controller
 
 import com.rossio.exhibitions.dto.UserDTO
+import com.rossio.exhibitions.model.AdminDAO
 import com.rossio.exhibitions.model.UserDAO
 import com.rossio.exhibitions.service.AdminService
 import io.swagger.v3.oas.annotations.Operation
@@ -22,11 +23,11 @@ class AdminController(
 
     @PostMapping("Add one Collaborator")
     fun createAdmin(@RequestBody userDTO: UserDTO) :  UserDTO =
-        UserDTO(adminService.addOneAdmin(UserDAO(userDTO)))
+        UserDTO(adminService.addOneAdmin(AdminDAO(userDTO)))
 
     @Operation(summary = "Edit Collaborator")
     @PutMapping("/{id}")
-    fun editAdmin() :  UserDTO = UserDTO(0,"USERNAME")
+    fun editAdmin() :  UserDTO = UserDTO(0,"USERNAME","password")
 
     @Operation(summary = "Delete Collaborator")
     @DeleteMapping("/{id}")

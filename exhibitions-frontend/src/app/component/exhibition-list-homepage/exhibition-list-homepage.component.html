@@ -1,0 +1,9 @@
+<div class="container">
+    <h1>Lista de Exposições</h1>
+    <li *ngFor="let exhibition of exhibitions">
+        <a routerLink="/exhibition/{{exhibition.id}}">
+            <span>{{exhibition.title}}</span>
+        </a>
+        <span>{{exhibition.subtitle}}</span>
+    </li>
+</div>

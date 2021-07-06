@@ -4,10 +4,13 @@ import com.rossio.exhibitions.controller.ExhibitionController
 import com.rossio.exhibitions.dto.DigitalResourceDTO
 import com.rossio.exhibitions.dto.ExhibitionDTO
 import com.rossio.exhibitions.dto.UserDTO
+import com.rossio.exhibitions.enums.Roles
 import com.rossio.exhibitions.enums.Status
 import com.rossio.exhibitions.model.*
 import com.rossio.exhibitions.service.*
 import org.springframework.boot.CommandLineRunner
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
 import java.util.*
 
@@ -16,11 +19,12 @@ class DbSeeder (
     val exhibitionService: ExhibitionService,
     val exhibitionItemService: ExhibitionItemService,
     val editorService: EditorService,
+    val adminService: AdminService,
     val collaboratorService: CollaboratorService,
     val digitalResourceService: DigitalResourceService,
     val exhibitionController: ExhibitionController
 ) : CommandLineRunner {
-    val runSeeder = false
+    val runSeeder = true
 
     override fun run(vararg args: String?) {
         if (!runSeeder) {
@@ -28,16 +32,23 @@ class DbSeeder (
             return
         }
 
+        fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
+
+        var adminDTO = UserDTO(0,"Henrique",passwordEncoder().encode("admin"))
+
+        var AdminDAO = AdminDAO(adminDTO)
+
+        adminService.addOneAdmin(AdminDAO)
 
 
+        /**
+        var editorDTO = UserDTO(0,"Henrique Raposo","password")
 
-        var editorDTO = UserDTO(0,"Henrique Raposo")
-
-        var editorDAO = EditorDAO(0,"Henrique Raposo")
+        var editorDAO = EditorDAO(editorDTO)
 
         editorService.addOneEditor(editorDAO)
 
-        var collaboratorDTO = UserDTO(0,"Colaborador Raposo")
+        var collaboratorDTO = UserDTO(0,"Colaborador Raposo","password")
 
         var collaboratorDAO = CollaboratorDAO(collaboratorDTO)
 
@@ -71,6 +82,6 @@ class DbSeeder (
         val exhibitionDAOList = listOf(exhibitionDAO1, exhibitionDAO2)
 
         print("\n\n\t( ͡o ͜ʖ ͡o) Database Seed Completed (╯ ͠° ͟ʖ ͡°)╯┻━┻\n")
-
+        **/
     }
 }

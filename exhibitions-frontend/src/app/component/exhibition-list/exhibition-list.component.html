@@ -1,0 +1,10 @@
+<h3>Lista de Exposições</h3>
+<li *ngFor="let exhibition of exhibitions" [class.selected]="exhibition === selectedExhibition"
+    (click)="onSelect(exhibition)" >
+  <a routerLink="/dashboard/exhibition/{{exhibition.id}}">
+        <span>{{exhibition.title}}</span>
+  </a>  
+    <span>{{exhibition.subtitle}}</span>   
+    <app-item-list [exhibition] = "selectedExhibition"></app-item-list>
+</li>
+

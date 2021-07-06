@@ -29,7 +29,7 @@ class EditorController(
 
     @Operation(summary = "Edit a Editor ")
     @PutMapping("/{id}")
-    fun editEditor(@PathVariable id:Long) : UserDTO = UserDTO(0,"USERNAME")
+    fun editEditor(@PathVariable id:Long) : UserDTO = UserDTO(0,"USERNAME","password")
 
     @Operation(summary = "Delete a Editor")
     @DeleteMapping("/{id}")
@@ -37,5 +37,5 @@ class EditorController(
 
     @Operation(summary = "Get List of All Editor Exhibitions ")
     @GetMapping("/{id}/exhibitions")
-    fun getCollaboratorExhibitions(@PathVariable id:Long) : ExhibitionDTO = ExhibitionDTO()
+    fun getEditorExhibitions(@PathVariable id:Long) {}
 }

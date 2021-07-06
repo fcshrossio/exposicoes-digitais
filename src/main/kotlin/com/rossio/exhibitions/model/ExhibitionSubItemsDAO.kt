@@ -15,8 +15,6 @@ data class SubAboutDAO(
     val link: String
 
 ) {
-    constructor() : this(0,0, AboutItemDAO(),"")
-
     constructor(subitem: SubAboutItemDTO, aboutItemDAO: AboutItemDAO) : this(subitem.id, subitem.position, aboutItemDAO, subitem.link)
 
 }
@@ -34,7 +32,5 @@ data class SubTextDAO(
     @OneToMany
     val digitalResources : List<DigitalResourceDAO>
 ) {
-    constructor() : this(0,0,"", TextItemDAO(), emptyList())
-
     constructor(subitem: SubTextItemDTO, textItemDAO: TextItemDAO) : this(subitem.id, subitem.position, subitem.text, textItemDAO, subitem.digitalResources.map { DigitalResourceDAO(it) })
 }

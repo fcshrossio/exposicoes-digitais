@@ -1,25 +1,27 @@
 package com.rossio.exhibitions.service
 
 import com.rossio.exhibitions.exception.NotFoundException
+import com.rossio.exhibitions.model.AdminDAO
+import com.rossio.exhibitions.model.AdminRepository
 import com.rossio.exhibitions.model.UserDAO
 import com.rossio.exhibitions.model.UserRepository
 import org.springframework.stereotype.Service
 
 @Service
 class AdminService(
-    val userRepository: UserRepository
+    val adminRepository: AdminRepository
 ) {
 
-    fun getAllAdmins() : List<UserDAO> =
-        userRepository.findAll()
+    fun getAllAdmins() : List<AdminDAO> =
+        adminRepository.findAll()
 
     fun getOneAdmin(id: Long) =
-        userRepository.findById(id).orElseThrow { NotFoundException("No Editor with ID: $id found") }
+        adminRepository.findById(id).orElseThrow { NotFoundException("No Editor with ID: $id found") }
 
-    fun addOneAdmin(editorDAO: UserDAO) =
-        userRepository.save(editorDAO)
+    fun addOneAdmin(adminDAO: AdminDAO) =
+        adminRepository.save(adminDAO)
 
     fun deleteAdmin(id:Long) =
-        userRepository.delete(getOneAdmin(id))
+        adminRepository.delete(getOneAdmin(id))
 
 }

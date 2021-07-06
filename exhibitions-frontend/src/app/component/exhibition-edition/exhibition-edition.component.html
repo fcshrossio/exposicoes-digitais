@@ -1,0 +1,24 @@
+<div class="container-fluid" *ngIf="exhibition">
+    <h2>Exhibition Detail Edition {{ exhibition.title }}</h2>
+    <div class="row">
+        <app-item-list [exhibition] = "exhibition"></app-item-list>
+        <app-item-detail-edition  [item] = "item"></app-item-detail-edition>
+        <div class="container" *ngIf="exhibition">
+            <h2> {{ exhibition.title }}</h2>
+            <h3>{{ exhibition.subtitle }}</h3>
+            <div>
+                <span> editor:</span> {{exhibition.editor}} 
+            </div>
+            <div>
+                <span> creationDate:</span> {{exhibition.creationDate}} 
+            </div>
+            <div>
+                <span> status:</span> {{exhibition.status}} 
+            </div>
+            <div>
+                <span> keywords:</span> {{exhibition.keywords}} 
+            </div>
+        </div>
+    </div>
+
+</div>

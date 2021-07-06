@@ -1,0 +1,17 @@
+{{ model | json }}
+<div class="container">
+    <h1>Criar Nova Exposição</h1>
+    <form (ngSubmit)="onSubmit()" #exhibitionForm="ngForm">
+        <div class="form-group">
+            <label for="name">Título</label>
+            <input type="text" class="form-control" id="title" required
+                [(ngModel)] ="model.title" name="title">    
+        </div>
+        <div class="form-group">
+            <label for="name">Sub Título</label>
+            <input type="text" class="form-control" id="subtitle" required
+            [(ngModel)] ="model.subtitle" name="subtitle">        
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>

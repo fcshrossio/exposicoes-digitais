@@ -39,7 +39,6 @@ data class ExhibitionDAO(
     @OneToMany
     var digitalResources: List<DigitalResourceDAO>
 ) {
-    constructor() : this(0, EditorDAO(), mutableListOf(),"","", DigitalResourceDAO(), mutableListOf(), Date(0), Status.PRIVATE, mutableListOf(), emptyList())
 
     constructor(exhibition : ExhibitionDTO, editor: EditorDAO, cover: DigitalResourceDAO ) : this(
         exhibition.id,
@@ -58,7 +57,7 @@ data class ExhibitionDAO(
     constructor(exhibition : ExhibitionDTO) : this(
         exhibition.id,
         EditorDAO(exhibition.editor),
-        exhibition.items.map{ IntroductionItemDAO() } as MutableList<ExhibitionItemDAO>,
+        mutableListOf(),//exhibition.items.map{ IntroductionItemDAO() } as MutableList<ExhibitionItemDAO>,
         exhibition.title,
         exhibition.subtitle,
         DigitalResourceDAO(exhibition.cover),

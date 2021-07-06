@@ -1,0 +1,9 @@
+<div *ngIf="exhibition" >
+    <h3>Lista de Itens de Exposição</h3>
+    <li *ngFor="let item of items">
+        <a routerLink="/dashboard/exhibition/0/item/{{item.id}}">
+        <span>id :{{item.id}}</span>
+        <span>text : {{item.text}}</span>
+        </a>
+    </li>
+</div>

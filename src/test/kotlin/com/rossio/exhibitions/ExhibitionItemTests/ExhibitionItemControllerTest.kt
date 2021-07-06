@@ -56,8 +56,9 @@ class ExhibitionItemControllerTest {
 
         val mapper = jacksonObjectMapper()//.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 
-        var editorDAO = EditorDAO(uuid++,"Henrique Raposo")
+        var userDTO = UserDTO(uuid++,"Henrique Raposo","password")
 
+        var editorDAO = EditorDAO(userDTO)
 
         var editorDTO = UserDTO(editorDAO)
 

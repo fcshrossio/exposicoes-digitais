@@ -9,3 +9,9 @@ enum class Keywords {
     Teste1,
     Teste2
 }
+
+enum class Roles {
+    ADMIN,
+    EDITOR,
+    COLLABORATOR
+}
