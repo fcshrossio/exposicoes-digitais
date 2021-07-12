@@ -15,6 +15,17 @@ import java.util.*
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.rossio.exhibitions.ExhibitionItemTests.ExhibitionItemControllerTest
+import com.rossio.exhibitions.ExhibitionsApplicationTests.Companion.dia
+import com.rossio.exhibitions.ExhibitionsApplicationTests.Companion.digitalDAO
+import com.rossio.exhibitions.ExhibitionsApplicationTests.Companion.digitalDTO
+import com.rossio.exhibitions.ExhibitionsApplicationTests.Companion.editorDAO
+import com.rossio.exhibitions.ExhibitionsApplicationTests.Companion.editorDTO
+import com.rossio.exhibitions.ExhibitionsApplicationTests.Companion.exhibitionDAO1
+import com.rossio.exhibitions.ExhibitionsApplicationTests.Companion.exhibitionDAOList
+import com.rossio.exhibitions.ExhibitionsApplicationTests.Companion.exhibitionDTO1
+import com.rossio.exhibitions.ExhibitionsApplicationTests.Companion.exhibitionDTOList
+import com.rossio.exhibitions.ExhibitionsApplicationTests.Companion.mapper
+import com.rossio.exhibitions.ExhibitionsApplicationTests.Companion.uuid
 import com.rossio.exhibitions.dto.*
 import com.rossio.exhibitions.enums.Status
 import com.rossio.exhibitions.exception.NotFoundException
@@ -26,6 +37,7 @@ import junit.framework.Assert.assertEquals
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.equalTo
 import org.springframework.http.MediaType
+import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.transaction.annotation.Transactional
@@ -55,56 +67,13 @@ class ExhibitionControllerTest {
 
         var url = "/exhibition"
 
-        var uuid: Long = 0L;
-
-        val mapper = jacksonObjectMapper()
-
-        val userDTO = UserDTO(uuid++, "Henrique Raposo","password")
-
-        var editorDAO = EditorDAO(userDTO)
-
-
-        var editorDTO = UserDTO(editorDAO)
-
-        var digitalDAO = DigitalResourceDAO(uuid++, "NOME")
-
-        val digitalDTO = DigitalResourceDTO(digitalDAO)
-
-        var dia = Date(0);
-
-        val exhibitionDTO1 = ExhibitionDTO(
-            uuid++, editorDTO, emptyList(), "titulo", "subtitulo", digitalDTO, emptyList(), dia,
-            Status.PRIVATE, mutableListOf(),
-            emptyList()
-        )
-
-        val exhibitionDTO2 = ExhibitionDTO(
-            uuid++,
-            editorDTO,
-            emptyList(),
-            "titulo2",
-            "suntitulo2",
-            DigitalResourceDTO(),
-            emptyList(),
-            dia,
-            Status.PRIVATE,
-            mutableListOf(),
-            emptyList()
-        )
-
-        val exhibitionDTOList = listOf(exhibitionDTO1, exhibitionDTO2)
-
-        val exhibitionDAO1 = ExhibitionDAO(exhibitionDTO1)
-
-        val exhibitionDAO2 = ExhibitionDAO(exhibitionDTO2)
-
-        val exhibitionDAOList = listOf(exhibitionDAO1, exhibitionDAO2)
 
 
     }
 
     @Test
-    fun `Test get all exhibitions`() {
+    @WithMockUser(username = "admin", password = "admin", roles = ["ADMIN"])
+    fun `Test get all exhibitions(ROLE ADMIN)`() {
         Mockito.`when`(exhibitionService.getAllExhibitions()).thenReturn(exhibitionDAOList)
 
         val result = mvc.perform(MockMvcRequestBuilders.get(url))
@@ -115,6 +84,17 @@ class ExhibitionControllerTest {
         val responseString = result.response.contentAsString
         val responseDTO = mapper.readValue<List<ExhibitionDTO>>(responseString)
         assertThat(responseDTO, equalTo(exhibitionDTOList))
+
+
+    }
+
+    @Test
+    fun `Test get all exhibitions(NO ROLE)`() {
+        Mockito.`when`(exhibitionService.getAllExhibitions()).thenReturn(exhibitionDAOList)
+
+        mvc.perform(MockMvcRequestBuilders.get(url))
+            .andExpect(status().isForbidden())
+
 
 
     }
@@ -146,6 +126,7 @@ class ExhibitionControllerTest {
 
     @Transactional
     @Test
+    @WithMockUser(username = "admin", password = "admin", roles = ["ADMIN"])
     fun `Test add one exhibition`() {
 
 
@@ -156,7 +137,7 @@ class ExhibitionControllerTest {
         )
 
 
-        val newExhibitionDAO = ExhibitionDAO(newExhibitionDTO)
+        val newExhibitionDAO = ExhibitionDAO(newExhibitionDTO, editorDAO, digitalDAO)
 
         val exhibitionJson = mapper.writeValueAsString(newExhibitionDTO)
 
@@ -185,6 +166,7 @@ class ExhibitionControllerTest {
 
 
     @Test
+    @WithMockUser(username = "admin", password = "admin", roles = ["ADMIN"])
     fun `Test add one invalid`() {
         //TODO
         Mockito.`when`(exhibitionService.getAllExhibitions()).thenReturn(emptyList())
@@ -194,6 +176,7 @@ class ExhibitionControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "admin", password = "admin", roles = ["ADMIN"])
     fun `Test edit one exhibition`() {
         //TODO Complete test
         var detailsDTO = ExhibitionDetailsDTO(exhibitionDAO1.id, "novo titulo", "novo subtitulo")
@@ -222,6 +205,7 @@ class ExhibitionControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "admin", password = "admin", roles = ["ADMIN"])
     fun `Test delete exhibition`() {
         //TODO complete
         Mockito.`when`(exhibitionService.getAllExhibitions()).thenReturn(emptyList())
@@ -231,6 +215,7 @@ class ExhibitionControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "admin", password = "admin", roles = ["ADMIN"])
     fun `Test add collaborator`() {
         //TODO
         Mockito.`when`(exhibitionService.getAllExhibitions()).thenReturn(emptyList())
@@ -240,6 +225,7 @@ class ExhibitionControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "admin", password = "admin", roles = ["ADMIN"])
     fun `Test remove one collaborator`() {
         //TODO
         Mockito.`when`(exhibitionService.getAllExhibitions()).thenReturn(emptyList())
@@ -249,6 +235,7 @@ class ExhibitionControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "admin", password = "admin", roles = ["ADMIN"])
     fun `Test add one exhibition item`() {
 
         val newIntroductionItemDTO = IntroductionItemDTO(
@@ -268,8 +255,8 @@ class ExhibitionControllerTest {
         Mockito.`when`(exhibitionItemService.createOneExhibitionItem(nonNullAny(ExhibitionItemDAO::class.java)))
             .thenReturn(newExhibitionItemDAO)
 
-        Mockito.`when`(exhibitionService.getOneExhibition(ExhibitionItemControllerTest.exhibitionDTO1.id)).thenReturn(
-            ExhibitionItemControllerTest.exhibitionDAO1
+        Mockito.`when`(exhibitionService.getOneExhibition(exhibitionDTO1.id)).thenReturn(
+            exhibitionDAO1
         )
 
         val result = mvc.perform(
@@ -281,7 +268,7 @@ class ExhibitionControllerTest {
             .andReturn()
 
         val responseString = result.response.contentAsString
-        val responseDTO = ExhibitionItemControllerTest.mapper.readValue<ExhibitionItemDTO>(responseString)
+        val responseDTO = mapper.readValue<ExhibitionItemDTO>(responseString)
         assertEquals(responseDTO, newIntroductionItemDTO)
 
 

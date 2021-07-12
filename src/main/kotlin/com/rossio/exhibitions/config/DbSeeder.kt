@@ -2,17 +2,13 @@ package com.rossio.exhibitions.config
 
 import com.rossio.exhibitions.controller.ExhibitionController
 import com.rossio.exhibitions.dto.DigitalResourceDTO
-import com.rossio.exhibitions.dto.ExhibitionDTO
-import com.rossio.exhibitions.dto.UserDTO
-import com.rossio.exhibitions.enums.Roles
-import com.rossio.exhibitions.enums.Status
+import com.rossio.exhibitions.dto.UserPasswordDTO
 import com.rossio.exhibitions.model.*
 import com.rossio.exhibitions.service.*
 import org.springframework.boot.CommandLineRunner
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
-import java.util.*
 
 @Component
 class DbSeeder (
@@ -34,12 +30,29 @@ class DbSeeder (
 
         fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 
-        var adminDTO = UserDTO(0,"Henrique",passwordEncoder().encode("admin"))
+        var user1DTO = UserPasswordDTO("Henrique",passwordEncoder().encode("admin"))
 
-        var AdminDAO = AdminDAO(adminDTO)
+        var user2DTO = UserPasswordDTO("Henrique2",passwordEncoder().encode("admin"))
 
-        adminService.addOneAdmin(AdminDAO)
+        var user3DTO = UserPasswordDTO("Henrique Colaborador",passwordEncoder().encode("admin"))
 
+        var adminDAO = AdminDAO(user1DTO)
+
+        var editorDAO = EditorDAO(user2DTO)
+
+        var collaboratorDAO = CollaboratorDAO(user3DTO)
+
+        adminService.addOneAdmin(adminDAO)
+
+        editorService.addOneEditor(editorDAO)
+
+        collaboratorService.addOneCollaborator(collaboratorDAO)
+
+        var digital = DigitalResourceDTO(0,"NOME")
+
+        val digitalDAO = DigitalResourceDAO(digital)
+
+        digitalResourceService.addOneDigitalResource(digitalDAO)
 
         /**
         var editorDTO = UserDTO(0,"Henrique Raposo","password")
@@ -54,11 +67,7 @@ class DbSeeder (
 
         collaboratorService.addOneCollaborator(collaboratorDAO)
 
-        var digital = DigitalResourceDTO(0,"NOME")
 
-        val digitalDAO = DigitalResourceDAO(digital)
-
-        digitalResourceService.addOneDigitalResource(digitalDAO)
 
         var dia = Date(0);
 

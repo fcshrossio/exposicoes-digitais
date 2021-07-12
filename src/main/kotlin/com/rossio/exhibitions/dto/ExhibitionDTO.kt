@@ -11,7 +11,7 @@ import java.util.*
 
 data class ExhibitionDTO(
     val id: Long,
-    val editor: UserDTO,
+    val editor: EditorDTO,
     val items: List<ExhibitionItemDTO>,
     val title: String,
     val subtitle: String,
@@ -26,7 +26,7 @@ data class ExhibitionDTO(
 
     constructor(exhibition : ExhibitionDAO) : this(
         exhibition.id,
-        UserDTO(exhibition.editor),
+        EditorDTO(exhibition.editor),
         exhibition.items.map { mapItemDAOtoDTO(it) },
         exhibition.title,
         exhibition.subtitle,

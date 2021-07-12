@@ -31,6 +31,7 @@ class ExhibitionServiceTest {
     @MockBean
     lateinit var collaboratorRepository: CollaboratorRepository
 
+    /*
     companion object {
         val mapper = ObjectMapper().registerModule(KotlinModule())
 
@@ -221,6 +222,6 @@ class ExhibitionServiceTest {
 
 
 
-
+*/
 
 }

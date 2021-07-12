@@ -31,10 +31,13 @@ class SecurityConfig(val customUserDetailsService: CustomUserDetailsService) : W
             .roles("ADMIN")
             .and().passwordEncoder(passwordEncoder())
             .and().userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder())
+
+
     }
 
     override fun configure(http: HttpSecurity) {
-        http.csrf().disable()
+        http
+            .csrf().disable()
             .authorizeRequests()
             .antMatchers("/v2/**").permitAll()
             .antMatchers("/webjars/**").permitAll()

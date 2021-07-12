@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { mockExhibitions } from '../mock-exhibitions';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Exhibition } from '../model/exhibition';
@@ -10,14 +12,19 @@ import { Exhibition } from '../model/exhibition';
 })
 export class ExhibitionService {
 
-  private heroesUrl = 'api/heroes';  // URL to web api
+  private exhibitionsUrl = 'api/heroes';  // URL to web api
+
 
   getExhibitions(): Observable<Exhibition[]>
   {
-    const exhibitions = of(mockExhibitions)
-
-    return exhibitions
+    console.log(this.http.get<String>("/api/hello"))
+   //const exhibitions = of(mockExhibitions)
+   //return exhibitions
+   return  this.http.get<Exhibition[]>('api/exhibition/public')  .pipe(
+      catchError(this.handleError<Exhibition[]>('getexhibitions', []))
+    );
   }
+
 
   getExhibition(id: number): Observable<Exhibition> {
      const exhibition = mockExhibitions.find(h => h.id === id)!;
@@ -47,5 +54,7 @@ export class ExhibitionService {
     };
   }
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 }

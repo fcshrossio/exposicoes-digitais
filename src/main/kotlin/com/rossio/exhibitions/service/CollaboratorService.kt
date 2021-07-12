@@ -3,6 +3,7 @@ package com.rossio.exhibitions.service
 import com.rossio.exhibitions.exception.NotFoundException
 import com.rossio.exhibitions.model.CollaboratorDAO
 import com.rossio.exhibitions.model.CollaboratorRepository
+import com.rossio.exhibitions.model.ExhibitionDAO
 import com.rossio.exhibitions.model.UserDAO
 import org.springframework.stereotype.Service
 

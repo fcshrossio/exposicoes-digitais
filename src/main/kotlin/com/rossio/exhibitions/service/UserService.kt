@@ -24,8 +24,9 @@ class UserService(var users: UserRepository) {
     }
 
     fun getUserRoles(name: String): List<String> {
-        val u: UserDAO = getOneUserByName(name)
-        return emptyList()
+        val user: UserDAO = getOneUserByName(name)
+        mutableListOf(user.role.toString())
+        return mutableListOf(user.role.toString())
 
     }
 

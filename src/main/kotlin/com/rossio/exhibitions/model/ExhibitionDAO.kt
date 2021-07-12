@@ -54,6 +54,12 @@ data class ExhibitionDAO(
         exhibition.digitalResources.map { DigitalResourceDAO(it)}
     )
 
+    constructor() : this(0, EditorDAO(), mutableListOf(), "","", DigitalResourceDAO(), mutableListOf(),Date(),Status.PRIVATE,
+        mutableListOf(), mutableListOf()) {
+
+    }
+
+    /*
     constructor(exhibition : ExhibitionDTO) : this(
         exhibition.id,
         EditorDAO(exhibition.editor),
@@ -67,6 +73,8 @@ data class ExhibitionDAO(
         exhibition.keywords,
         exhibition.digitalResources.map { DigitalResourceDAO(it)}
         )
+
+     */
 
     fun addCollaborator(collaboratorDAO: CollaboratorDAO): Boolean
     {

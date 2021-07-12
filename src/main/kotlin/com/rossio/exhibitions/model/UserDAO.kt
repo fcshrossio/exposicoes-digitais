@@ -1,6 +1,8 @@
 package com.rossio.exhibitions.model
 
+import com.rossio.exhibitions.dto.EditorDTO
 import com.rossio.exhibitions.dto.UserDTO
+import com.rossio.exhibitions.dto.UserPasswordDTO
 import com.rossio.exhibitions.enums.Roles
 import javax.persistence.*
 
@@ -14,6 +16,7 @@ abstract class UserDAO(
     open var password: String,
     open val role: Roles
 ) {
+
     constructor(user: UserDTO) : this(user.id,user.username,"",Roles.EDITOR)
     constructor() : this(0,"","",Roles.ADMIN)
 }
@@ -29,6 +32,7 @@ open class AdminDAO(
 ) : UserDAO(id, username, password, role) {
 
     constructor(user: UserDTO) : this(user.id,user.username,user.password,Roles.ADMIN)
+    constructor(user: UserPasswordDTO) : this(0,user.username,user.password,Roles.ADMIN)
     constructor() : this(0,"","",Roles.ADMIN)
 }
 
@@ -43,6 +47,7 @@ open class EditorDAO(
 ) : UserDAO(id, username, password, role) {
 
     constructor(user: UserDTO) : this(user.id,user.username,user.password,Roles.EDITOR)
+    constructor(user: UserPasswordDTO) : this(0,user.username,user.password,Roles.EDITOR)
     constructor() : this(0,"","",Roles.EDITOR)
 }
 
@@ -56,9 +61,15 @@ open class CollaboratorDAO(
     override var password: String,
     override val role: Roles,
     @OneToMany
-    val collaborationList:  List<ExhibitionDAO>
+    val collaborationList:  MutableList<ExhibitionDAO>
 ) : UserDAO(id, username, password, role) {
 
-    constructor(user: UserDTO) : this(user.id,user.username,user.password,Roles.COLLABORATOR, emptyList())
-    constructor() : this(0,"","",Roles.COLLABORATOR, emptyList())
+    fun removeExhibition(exhibitionDAO: ExhibitionDAO) = {
+        if(collaborationList.contains(exhibitionDAO))
+            collaborationList.remove(exhibitionDAO)
+    }
+
+    constructor(user: UserDTO) : this(user.id,user.username,user.password,Roles.COLLABORATOR, mutableListOf())
+    constructor(user: UserPasswordDTO) : this(0,user.username,user.password,Roles.COLLABORATOR, mutableListOf())
+    constructor() : this(0,"","",Roles.COLLABORATOR,  mutableListOf())
 }

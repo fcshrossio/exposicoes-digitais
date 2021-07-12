@@ -45,8 +45,7 @@ class ExhibitionItemControllerTest {
     @MockBean
     lateinit var exhibitionService: ExhibitionService
 
-
-
+/*
 
     companion object {
 
@@ -268,4 +267,6 @@ class ExhibitionItemControllerTest {
 
     }
 
+
+ */
 }
