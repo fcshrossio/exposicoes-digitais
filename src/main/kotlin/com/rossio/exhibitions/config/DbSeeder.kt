@@ -2,13 +2,17 @@ package com.rossio.exhibitions.config
 
 import com.rossio.exhibitions.controller.ExhibitionController
 import com.rossio.exhibitions.dto.DigitalResourceDTO
+import com.rossio.exhibitions.dto.EditorDTO
+import com.rossio.exhibitions.dto.ExhibitionDTO
 import com.rossio.exhibitions.dto.UserPasswordDTO
+import com.rossio.exhibitions.enums.Status
 import com.rossio.exhibitions.model.*
 import com.rossio.exhibitions.service.*
 import org.springframework.boot.CommandLineRunner
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
+import java.util.*
 
 @Component
 class DbSeeder (
@@ -32,7 +36,7 @@ class DbSeeder (
 
         var user1DTO = UserPasswordDTO("Henrique",passwordEncoder().encode("admin"))
 
-        var user2DTO = UserPasswordDTO("Henrique2",passwordEncoder().encode("admin"))
+        var user2DTO = UserPasswordDTO("Marco",passwordEncoder().encode("admin"))
 
         var user3DTO = UserPasswordDTO("Henrique Colaborador",passwordEncoder().encode("admin"))
 
@@ -44,15 +48,32 @@ class DbSeeder (
 
         adminService.addOneAdmin(adminDAO)
 
-        editorService.addOneEditor(editorDAO)
+         editorDAO = editorService.addOneEditor(editorDAO)
+         var editorDTO = EditorDTO(editorDAO)
 
         collaboratorService.addOneCollaborator(collaboratorDAO)
 
         var digital = DigitalResourceDTO(0,"NOME")
 
-        val digitalDAO = DigitalResourceDAO(digital)
+        val digitalDAO = digitalResourceService.addOneDigitalResource(DigitalResourceDAO(digital))
 
-        digitalResourceService.addOneDigitalResource(digitalDAO)
+        digital = DigitalResourceDTO(digitalDAO)
+
+        val exhibitionDTO = ExhibitionDTO(
+        0, //id
+        editorDTO, //editor
+        mutableListOf(), //items
+        "A Festa",
+        "Uma Exposição",
+        digital, //cover
+        mutableListOf(), //collaborator list
+        Date(), // creation date
+        Status.PUBLIC, //status
+        mutableListOf(),  //list of keywords
+        mutableListOf()     //list of resources
+        )
+
+        val exhibitionDAO:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO, editorDAO, digitalDAO))
 
         /**
         var editorDTO = UserDTO(0,"Henrique Raposo","password")

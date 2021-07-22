@@ -15,6 +15,7 @@ import { ExhibitionListHomepageComponent } from './component/exhibition-list-hom
 import { ItemDetailEditionComponent } from './component/item-detail-edition/item-detail-edition.component';
 import { ItemListComponent } from './component/item-list/item-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginFormComponent } from './component/form/login-form/login-form.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
     ExhibitionEditionComponent,
     ExhibitionListHomepageComponent,
     ItemDetailEditionComponent,
-    ItemListComponent
+    ItemListComponent,
+    LoginFormComponent
   ],
   imports: [
     HttpClientModule,

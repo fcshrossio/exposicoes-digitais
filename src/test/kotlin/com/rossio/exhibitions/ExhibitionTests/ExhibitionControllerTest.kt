@@ -242,6 +242,7 @@ class ExhibitionControllerTest {
             0,
             0,
             exhibitionDAO1.id,
+            "título",
             "text"
         )
 

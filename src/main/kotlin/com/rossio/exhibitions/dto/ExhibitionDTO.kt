@@ -1,8 +1,6 @@
 package com.rossio.exhibitions.dto
 
-import com.rossio.exhibitions.dto.UserDTO
-import com.rossio.exhibitions.dto.DigitalResourceDTO
-import com.rossio.exhibitions.dto.IntroductionItemDTO
+
 import com.rossio.exhibitions.enums.Keywords
 import com.rossio.exhibitions.enums.Status
 import com.rossio.exhibitions.exception.NotFoundException

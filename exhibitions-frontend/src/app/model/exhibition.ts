@@ -8,7 +8,7 @@ export class Exhibition {
     editor : string;
     creationDate: string;
     status: string;
-    keywords: string;
+    keywords: string[];
     items : ExhibitionItem[]
 
     constructor(
@@ -22,12 +22,12 @@ export class Exhibition {
         this.editor = editor
         this.creationDate = (new Date()).toString()
         this.status = "PRIVATE"
-        this.keywords = "keywords"
+        this.keywords = ["keywords"]
         this.items = [
-            new ExhibitionItem(2,0,"texto"),
-            new ExhibitionItem(2,0,"texto"),
-            new ExhibitionItem(2,0,"texto"),
-            new ExhibitionItem(2,0,"texto")
+            new ExhibitionItem(2,0,"titulo","texto","introduction"),
+            new ExhibitionItem(2,0,"titulo","texto","introduction"),
+            new ExhibitionItem(2,0,"titulo","texto","introduction"),
+            new ExhibitionItem(2,0,"titulo","texto","introduction")
         ]
     }
 }
