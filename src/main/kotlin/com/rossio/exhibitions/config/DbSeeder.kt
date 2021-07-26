@@ -75,43 +75,9 @@ class DbSeeder (
 
         val exhibitionDAO:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO, editorDAO, digitalDAO))
 
-        /**
-        var editorDTO = UserDTO(0,"Henrique Raposo","password")
 
-        var editorDAO = EditorDAO(editorDTO)
-
-        editorService.addOneEditor(editorDAO)
-
-        var collaboratorDTO = UserDTO(0,"Colaborador Raposo","password")
-
-        var collaboratorDAO = CollaboratorDAO(collaboratorDTO)
-
-        collaboratorService.addOneCollaborator(collaboratorDAO)
-
-
-
-        var dia = Date(0);
-
-        val exhibitionDTO1 = ExhibitionDTO(0, editorDTO, emptyList(),"","", digital, emptyList(),dia,
-            Status.PRIVATE, mutableListOf(),
-            emptyList())
-
-        val exhibitionDTO2 = ExhibitionDTO(0, editorDTO, emptyList(),"","", digital, emptyList(),dia,Status.PRIVATE,
-            mutableListOf(),
-            emptyList())
-
-        val exhibitionDTOList = listOf(exhibitionDTO1, exhibitionDTO2)
-
-        val exhibitionDAO1 = ExhibitionDAO(exhibitionDTO1)
-
-        val exhibitionDAO2 = ExhibitionDAO(exhibitionDTO2)
-
-        //exhibitionService.createExhibition(exhibitionDAO1)
-        //exhibitionController.createExhibition(exhibitionDTO1)
-
-        val exhibitionDAOList = listOf(exhibitionDAO1, exhibitionDAO2)
 
         print("\n\n\t( ͡o ͜ʖ ͡o) Database Seed Completed (╯ ͠° ͟ʖ ͡°)╯┻━┻\n")
-        **/
+
     }
 }

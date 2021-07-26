@@ -14,7 +14,7 @@ import org.springframework.security.web.AuthenticationEntryPoint
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter
 
-
+/**
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
@@ -53,3 +53,4 @@ class SecurityConfig(val customUserDetailsService: CustomUserDetailsService) : W
 
     }
 }
+**/
