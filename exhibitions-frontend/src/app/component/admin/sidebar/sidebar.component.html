@@ -1,0 +1,106 @@
+<nav class="sidebar">
+    <div class="d-flex flex-column flex-shrink-0" style="width: 15em; background-color: white;">
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item p-0 m-0">
+            <a routerLink="/admin/dashboard" class="nav-link sidebar-link" [routerLinkActive]="['sidebar-active']"  aria-current="page">
+              <div class="row align-items-center justify-content-center">
+                <div class="col-auto ml-3">
+                  <img src="https://www.fillmurray.com/40/40"/>
+                </div>
+                <div class="col ml-0 pl-1">
+                  Dashboard
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/admin/search" [routerLinkActive]="['sidebar-active']" class="nav-link sidebar-link">
+              <div class="row align-items-center justify-content-center">
+                <div class="col-auto ml-3">
+                  <img src="https://www.fillmurray.com/40/40"/>
+                </div>
+                <div class="col ml-0 pl-1">
+                  Pesquisar
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/admin/resources" [routerLinkActive]="['sidebar-active']" class="nav-link sidebar-link">
+              <div class="row align-items-center justify-content-center">
+                <div class="col-auto ml-3">
+                  <img src="https://www.fillmurray.com/40/40"/>
+                </div>
+                <div class="col ml-0 pl-1">
+                  Recursos
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <button class="btn btn-toggle align-items-center collapsed sidebar-link"  [routerLinkActive]="['active']" (click)="isMenuCollapsed = !isMenuCollapsed" data-toggle="collapse" data-target="#exhibitions-collapse" aria-expanded="false" aria-controls="collapseLayouts">
+              <div class="row align-items-center justify-content-center">
+                <div class="col-auto ml-3">
+                  <img src="https://www.fillmurray.com/40/40"/>
+                </div>
+                <div class="col ml-0 pl-1">
+                  Exposições
+                </div>
+              </div>
+            </button>
+              <div [ngbCollapse]="isMenuCollapsed" class="collapse" id="exhibitions-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 ">
+                  <li>
+                    <a routerLink="/admin/exhibitions/create" class="nav-link sidebar-link " [routerLinkActive]="['sidebar-active']">
+                      <div class="row align-items-center justify-content-center">
+                        <div class="col-auto ml-4">
+                          <img src="https://www.fillmurray.com/40/40"/>
+                        </div>
+                        <div class="col ml-0 pl-1">
+                          Nova Exposição
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a routerLink="/admin/exhibitions/drafts" class="nav-link sidebar-link " [routerLinkActive]="['sidebar-active']">
+                      <div class="row align-items-center justify-content-center">
+                        <div class="col-auto ml-4">
+                          <img src="https://www.fillmurray.com/40/40"/>
+                        </div>
+                        <div class="col ml-0 pl-1">
+                          Rascunhos
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a routerLink="/admin/exhibitions" class="nav-link sidebar-link " [routerLinkActive]="['sidebar-active']" >
+                      <div class="row align-items-center justify-content-center">
+                        <div class="col-auto ml-4">
+                          <img src="https://www.fillmurray.com/40/40"/>
+                        </div>
+                        <div class="col ml-0 pl-1">
+                          Lista de Exposições
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+          <li>
+            <a href="#" class="nav-link sidebar-link">
+              <div class="row align-items-center justify-content-center">
+                <div class="col-auto ml-3">
+                  <img src="https://www.fillmurray.com/40/40"/>
+                </div>
+                <div class="col ml-0 pl-1">
+                  Ajuda
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <hr>
+    </div>
+</nav>

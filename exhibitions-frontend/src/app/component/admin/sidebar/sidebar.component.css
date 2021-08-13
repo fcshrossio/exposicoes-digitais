@@ -1,0 +1,29 @@
+.sidebar {
+    display: flex;
+    flex-wrap: nowrap;
+    min-height: 100vh;
+    height: 100%;
+    height: -webkit-fill-available;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+.sidebar-link {
+  width: 100%;
+  padding: 1em;
+  padding-left: 4vh;
+  font-weight: 600;
+  background-color: white;
+  text-decoration: none;
+  border-radius: 0;
+  color: black;
+}
+
+.sidebar-sublink {
+  padding-left: 6vh;
+}
+
+.sidebar-active {
+  background-color: #f0f1f2;
+  color:  #167fa6;
+}

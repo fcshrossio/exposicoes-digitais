@@ -1,0 +1,19 @@
+.createnav {
+    background-color: #e0e4e5;
+    color: gray;
+    border: 0;
+    box-shadow: none;
+    font-weight: 600;
+
+}
+
+.createnav-active {
+    background-color: #167fa6;
+    color: white;
+   
+}
+
+.createnav-cancel {
+    background-color: #666d73;
+    color: white;
+}
