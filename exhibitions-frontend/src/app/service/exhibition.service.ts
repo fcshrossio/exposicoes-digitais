@@ -36,7 +36,18 @@ export class ExhibitionService {
     mockExhibitions.push(exhibition)
   }
 
+  createSessionExhibition(exhibition: Exhibition) {
+    sessionStorage.setItem("exhibition", JSON.stringify(exhibition))
+  }
 
+  getSessionExhibition() {
+
+      let json : string = <string>sessionStorage.getItem("exhibition")
+      var exhibition = <Exhibition>JSON.parse(json) 
+
+    return exhibition
+   
+  }
 
 
 
