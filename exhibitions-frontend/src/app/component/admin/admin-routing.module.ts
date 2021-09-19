@@ -12,6 +12,7 @@ import { MapFormComponent } from './create-exhibition/map-form/map-form.componen
 import { SectionFormComponent } from './create-exhibition/section-form/section-form.component';
 import { SearchComponent } from './search/search.component';
 import { ResourcesComponent } from './resources/resources.component';
+import { AuxiliaryItemsFormComponent } from './create-exhibition/auxiliary-items-form/auxiliary-items-form.component';
 
 const routes: Routes = [
   { path: 'admin', redirectTo: 'admin/dashboard', pathMatch: 'full' },
@@ -26,7 +27,8 @@ const routes: Routes = [
         { path: 'title', component: TitleFormComponent },
         { path: 'introduction', component: IntroductionFormComponent },
         { path: 'sections' , component: SectionFormComponent },
-        { path: 'map', component: MapFormComponent }
+        { path: 'map', component: MapFormComponent },
+        { path: 'auxiliary-items', component: AuxiliaryItemsFormComponent}
      
       ]},
       { path: 'exhibitions/drafts', component: ExhibitionDraftsComponent },

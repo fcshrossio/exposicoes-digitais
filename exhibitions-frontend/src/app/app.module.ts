@@ -29,6 +29,9 @@ import { SectionFormComponent } from './component/admin/create-exhibition/sectio
 import { MapFormComponent } from './component/admin/create-exhibition/map-form/map-form.component';
 import { SearchComponent } from './component/admin/search/search.component';
 import { ResourcesComponent } from './component/admin/resources/resources.component';
+import { AuxiliaryItemsFormComponent } from './component/admin/create-exhibition/auxiliary-items-form/auxiliary-items-form.component';
+import { DraganddropDirective } from './component/admin/create-exhibition/introduction-form/draganddrop.directive';
+import { DraganddroplistDirective } from './component/admin/create-exhibition/section-form/draganddroplist.directive';
 
 
 @NgModule({
@@ -55,7 +58,10 @@ import { ResourcesComponent } from './component/admin/resources/resources.compon
     SectionFormComponent,
     MapFormComponent,
     SearchComponent,
-    ResourcesComponent
+    ResourcesComponent,
+    AuxiliaryItemsFormComponent,
+    DraganddropDirective,
+    DraganddroplistDirective
   ],
   imports: [
     HttpClientModule,

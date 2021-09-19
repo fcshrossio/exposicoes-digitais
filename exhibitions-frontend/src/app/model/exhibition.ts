@@ -22,7 +22,7 @@ export class Exhibition {
         this.editor = editor
         this.creationDate = (new Date()).toString()
         this.status = "PRIVATE"
-        this.keywords = ["keywords"]
+        this.keywords = ["item 1", "item 2"]
         this.items = [
             new ExhibitionItem(2,0,"titulo","texto","introduction"),
             new ExhibitionItem(2,0,"titulo","texto","introduction"),

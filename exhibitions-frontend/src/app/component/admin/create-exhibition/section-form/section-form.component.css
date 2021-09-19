@@ -1,0 +1,27 @@
+.section {
+    color: white;
+    /* background-color: violet; */
+    width: 40px;
+    height: 100%;
+    margin: 4px;
+    text-align: center;
+}
+
+.draggable {
+    cursor: move;
+    user-select: none;
+}
+
+.dropzone {
+    width: 10px;
+    height: 40px;
+}
+
+.createnav {
+    /* background-color: #e0e4e5; */
+    color: gray;
+    border: 0;
+    box-shadow: none;
+    font-weight: 600;
+
+}

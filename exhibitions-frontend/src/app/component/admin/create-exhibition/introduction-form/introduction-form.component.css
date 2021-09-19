@@ -1,0 +1,19 @@
+.dropit {
+    background-color: azure;
+    width: 100%;
+    height: 40vh;
+    text-align: center;
+    border: dashed 1px #979797;
+}
+
+.keyword {
+    background-color: lightgrey;
+    padding: 10px 10px 10px 20px;
+    border-radius: 30px;
+    margin: 10px;
+}
+
+.keyword-delete {
+    margin-left: 10px;
+    color: white;
+}

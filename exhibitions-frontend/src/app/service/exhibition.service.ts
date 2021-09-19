@@ -49,6 +49,12 @@ export class ExhibitionService {
    
   }
 
+  saveSessionExhibition(exhibition: Exhibition) {
+    console.log(exhibition)
+    sessionStorage.setItem("exhibition", JSON.stringify(exhibition))
+  }
+
+
 
 
   private handleError<T>(operation = 'operation', result?: T) {

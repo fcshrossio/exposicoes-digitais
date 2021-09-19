@@ -9,9 +9,6 @@ import { ExhibitionService } from 'src/app/service/exhibition.service';
 })
 export class TitleFormComponent implements OnInit {
 
-  title : string = "A festa"
-
-  description : string = "Grande Festona"
 
   exhibition? : Exhibition 
 
@@ -20,9 +17,26 @@ export class TitleFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.exhibition = this.exhibitionService.getSessionExhibition()
+    if(!this.exhibition){
+      this.initializeExhibition()
+    }
+  }
+
+  initializeExhibition()
+  {
     this.exhibition = new Exhibition("A festa", "Grande Feestona","editor")
     this.exhibitionService.createSessionExhibition(this.exhibition)
-    this.exhibition = this.exhibitionService.getSessionExhibition()
+   
+  }
+
+  onChangeTitle(newTitle: string){
+    if(this.exhibition){
+      this.exhibition.title = newTitle
+      this.exhibitionService.saveSessionExhibition(this.exhibition)
+    }
+    
   }
 
 }
