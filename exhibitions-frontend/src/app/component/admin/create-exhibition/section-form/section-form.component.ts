@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ExhibitionItem } from 'src/app/model/exhibitionItem';
 
+
 @Component({
   selector: 'app-section-form',
   templateUrl: './section-form.component.html',
@@ -14,6 +15,8 @@ export class SectionFormComponent implements OnInit {
   exhibitionItemName : string = ""
 
   choosenSection = 0;
+
+  htmlContent : any
 
   constructor() { }
 

@@ -33,6 +33,8 @@ import { AuxiliaryItemsFormComponent } from './component/admin/create-exhibition
 import { DraganddropDirective } from './component/admin/create-exhibition/introduction-form/draganddrop.directive';
 import { DraganddroplistDirective } from './component/admin/create-exhibition/section-form/draganddroplist.directive';
 
+import { AngularEditorModule } from '@kolkov/angular-editor';
+
 
 @NgModule({
   declarations: [
@@ -69,7 +71,8 @@ import { DraganddroplistDirective } from './component/admin/create-exhibition/se
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    AngularEditorModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

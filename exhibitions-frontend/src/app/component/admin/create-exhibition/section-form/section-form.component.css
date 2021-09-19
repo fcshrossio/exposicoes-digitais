@@ -25,3 +25,11 @@
     font-weight: 600;
 
 }
+
+.dropit {
+    background-color: azure;
+
+    height: 20vh;
+    text-align: center;
+    border: dashed 1px #979797;
+}
