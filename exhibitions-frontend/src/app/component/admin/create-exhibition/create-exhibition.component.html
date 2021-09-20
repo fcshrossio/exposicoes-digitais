@@ -20,17 +20,17 @@
         <router-outlet></router-outlet>
         <div class="row h-25">
             <div class="col-auto" style="margin: 1px; padding: 1px;">
-                <button class="btn btn-primary w-100 p-3 createnav createnav-cancel">CANCELAR</button>
+                <button class="btn btn-primary w-100 p-3 createnav createnav-cancel" (click)="clearExhibition()">CANCELAR</button>
             </div>
             <div class="col-auto" style="margin: 1px; padding: 1px;">
-                <button class="btn btn-primary w-100 p-3 createnav createnav-active">CRIAR</button>
+                <button class="btn btn-primary w-100 p-3 createnav createnav-active" (click)="createExhibition()">CRIAR</button>
             </div>
             <div class="col"></div>
             <div class="col-auto" style="margin: 1px; padding: 1px;">
                 <button class="btn btn-primary w-100 p-3 createnav">GUARDAR COMO RASCUNHO</button>
             </div>
             <div class="col-auto " style="margin: 1px; padding: 1px;">
-                <button class="btn btn-primary w-100 p-3 createnav">PREVIEW</button>
+                <button class="btn btn-primary w-100 p-3 createnav" (click)="previewExhibition()" >PREVIEW</button>
             </div>
             <div class="col-auto" style="margin: 1px; padding: 1px;">
                 <button class="btn btn-primary w-100 p-3 createnav">PUBLICAR</button>

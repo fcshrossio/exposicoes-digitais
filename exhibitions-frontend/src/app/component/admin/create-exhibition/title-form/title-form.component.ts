@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DigitalResource } from 'src/app/model/digitalResource';
+import { Editor } from 'src/app/model/editor';
 import { Exhibition } from 'src/app/model/exhibition';
 import { ExhibitionService } from 'src/app/service/exhibition.service';
 
@@ -26,7 +28,10 @@ export class TitleFormComponent implements OnInit {
 
   initializeExhibition()
   {
-    this.exhibition = new Exhibition("A festa", "Grande Feestona","editor")
+    var editor = new Editor(2,"Marco")
+    this.exhibition = new Exhibition("", "",editor)
+    var cover = new DigitalResource(4,"NOME")
+    this.exhibition.addCoverPhoto(cover)
     this.exhibitionService.createSessionExhibition(this.exhibition)
    
   }
@@ -37,6 +42,14 @@ export class TitleFormComponent implements OnInit {
       this.exhibitionService.saveSessionExhibition(this.exhibition)
     }
     
+  }
+
+  onChangeSubtitle(newTitle: string) {
+    if(this.exhibition){
+      this.exhibition.subtitle = newTitle
+      this.exhibitionService.saveSessionExhibition(this.exhibition)
+    }
+        
   }
 
 }

@@ -18,11 +18,11 @@ export class ExhibitionCreationFormComponent {
 
   onSubmit() {
      this.submitted = true; 
-      var newExhibition: Exhibition = new Exhibition(this.model.title,this.model.subtitle,this.model.editor)
+      //var newExhibition: Exhibition = new Exhibition(this.model.title,this.model.subtitle,this.model.editor)
     
-      this.exhibitionService.createExhibition(newExhibition)
+      //this.exhibitionService.createExhibition(newExhibition)
 
-      this.router.navigate(['exhibition', newExhibition.id])
+      //this.router.navigate(['exhibition', newExhibition.id])
     }
 
     constructor(private exhibitionService: ExhibitionService,private router: Router) { }

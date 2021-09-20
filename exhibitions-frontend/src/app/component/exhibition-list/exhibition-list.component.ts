@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { mockExhibitions } from 'src/app/mock-exhibitions';
 import { Exhibition } from 'src/app/model/exhibition';
 import { ExhibitionService } from 'src/app/service/exhibition.service';
 
@@ -16,7 +15,7 @@ export class ExhibitionListComponent implements OnInit {
 
   getExhibitions(): void 
   {
-    this.exhibitionService.getExhibitions().subscribe( exhibitions => this.exhibitions = exhibitions)
+   // this.exhibitionService.getExhibitions().subscribe( exhibitions => this.exhibitions = exhibitions)
   }
 
 

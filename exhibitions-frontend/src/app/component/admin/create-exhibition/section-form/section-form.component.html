@@ -1,15 +1,15 @@
-<div class="row p-0"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
-    <div class="col-fluid section draggable"  draggable="true" appDraganddroplist (click)="changeSection(section.id)" *ngFor="let section of sections" [id]="section.id">
-        <h5 class="btn createnav" [ngStyle]="{ 'background-color' : section.id -1 === choosenSection  ? '#167fa6' : '#e0e4e5' }" [id]="section.id">{{section.id}}</h5>
+<div class="row p-1"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
+    <div class="col-fluid draggable mr-1"  draggable="true" appDraganddroplist (click)="changeSection(section.id)" *ngFor="let section of sections" [id]="section.id">
+        <h5 class="btn createnav" [ngStyle]="{ 'background-color' : section.id -1 === choosenSection  ? '#167fa6' : '#e0e4e5'}"  [id]="section.id">{{section.id}}</h5>
     </div>
-    <div class="col-fluid section" appDraganddroplist ondragover>
-        <h5>dropzone</h5>
+    <div class="col-fluid addsection" (click)="addSection()">
+        <h5>+</h5>
     </div>
 </div>
 <div class="row p-2"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
     <div *ngIf="sections[choosenSection]" class="container-fluid" style="min-height: 200px;">
         <input type="text" id="exhibitionItemName" [(ngModel)]="sections[choosenSection].title" name="exhibitionItemName" class="form-control">
-        <div>
+        <div class="mt-5">
             <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent"></angular-editor>
         </div>
         <div class="row p-3">

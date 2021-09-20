@@ -9,7 +9,7 @@
                 <input type="text" class="form-control" id="title" [ngModel]="exhibition.title" (ngModelChange)="onChangeTitle($event)" name="title" >
             
                 <label>DESCRIÇÃO ( Máximo 155 caracteres ) </label>
-                <input type="text" class="form-control" id="description" [(ngModel)]="exhibition.subtitle" name="subtitle" >
+                <input type="text" class="form-control" id="description" [(ngModel)]="exhibition.subtitle" (ngModelChange)="onChangeSubtitle($event)" name="subtitle" >
             </form>
 
 

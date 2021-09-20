@@ -28,8 +28,15 @@
 
 .dropit {
     background-color: azure;
-
     height: 20vh;
+    text-align: center;
+    border: dashed 1px #979797;
+}
+
+.addsection {
+    background-color: azure;
+    width: 40px;
+    height: 40px;  
     text-align: center;
     border: dashed 1px #979797;
 }

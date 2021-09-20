@@ -4,10 +4,7 @@ import { ExhibitionItem } from "./model/exhibitionItem";
 
 
 
-export var mockExhibitions:Exhibition[] = [
 
-   new Exhibition("Título de Exposição Teste", "subtitulo de exposição teste", "editor")
-]
 
 
 export const mockExhibitionItems:ExhibitionItem[] = [

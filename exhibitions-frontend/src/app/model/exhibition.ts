@@ -1,33 +1,56 @@
 import { mockExhibitionItems } from "../mock-exhibitions";
+import { Collaborator } from "./collaborator";
+import { DigitalResource } from "./digitalResource";
+import { Editor } from "./editor";
 import { ExhibitionItem } from "./exhibitionItem";
 
 export class Exhibition {
     id : number;
     title : string;
     subtitle : string;
-    editor : string;
-    creationDate: string;
+
+    cover? : DigitalResource;
+    editor : Editor;
+    collaborators : Collaborator[];
+    creationDate: Date;
     status: string;
     keywords: string[];
     items : ExhibitionItem[]
+    digitalResources: DigitalResource[];
 
     constructor(
         title: string,
         subtitle: string,
-        editor : string
+        editor : Editor
     ) {
         this.id = 0;
         this.title = title
         this.subtitle = subtitle
         this.editor = editor
-        this.creationDate = (new Date()).toString()
+        this.collaborators = []
+        this.creationDate = (new Date())
         this.status = "PRIVATE"
-        this.keywords = ["item 1", "item 2"]
+        this.keywords = ["Teste1", "Teste2"]
         this.items = [
-            new ExhibitionItem(2,0,"titulo","texto","introduction"),
-            new ExhibitionItem(2,0,"titulo","texto","introduction"),
-            new ExhibitionItem(2,0,"titulo","texto","introduction"),
-            new ExhibitionItem(2,0,"titulo","texto","introduction")
+           // new ExhibitionItem(2,0,"introduction","texto","introduction"),
+         
         ]
+        this.digitalResources = []
+    }
+
+    addCoverPhoto(digitalResource : DigitalResource) {
+        this.cover = digitalResource
+    }
+
+    changeStatus(status : string){
+        switch(status) {
+            case "PRIVATE":
+                this.status = status
+                break;
+            case "PUBLIC": 
+                this.status= status
+                break;
+        }
+
     }
 }

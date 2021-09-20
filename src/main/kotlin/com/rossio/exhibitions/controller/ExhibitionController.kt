@@ -24,7 +24,7 @@ class ExhibitionController(
     @CrossOrigin
     @Operation(summary = "Get List of All Exhibitions ")
     @GetMapping("")
-    @PreAuthorize("hasRole('admin')")
+   // @PreAuthorize("hasRole('admin')")
     fun getAllExhibitions() : List<ExhibitionDTO> =
         exhibitionService.getAllExhibitions().map { ExhibitionDTO(it) }
 
@@ -41,15 +41,15 @@ class ExhibitionController(
 
     @Operation(summary = "Create a new Exhibition ")
     @PostMapping("")
-    @PreAuthorize("hasAnyRole('ADMIN','EDITOR')")
-    fun createExhibition(@RequestBody exhibition: ExhibitionDTO)  =
+    //@PreAuthorize("hasAnyRole('ADMIN','EDITOR')")
+    fun createExhibition(@RequestBody exhibition: ExhibitionDTO) : ExhibitionDTO =
         ExhibitionDTO(
             exhibitionService.createExhibition(
                 ExhibitionDAO(
                     exhibition,
                     editorService.getOneEditor(exhibition.editor.id),
                     digitalResourceService.getOneDigitalResource(exhibition.cover.id)
-                    )
+                )
             )
         )
 
