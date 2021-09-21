@@ -22,22 +22,14 @@ export class TitleFormComponent implements OnInit {
 
     this.exhibition = this.exhibitionService.getSessionExhibition()
     if(!this.exhibition){
-      this.initializeExhibition()
+      //this.initializeExhibition()
     }
   }
 
-  initializeExhibition()
-  {
-    var editor = new Editor(2,"Marco")
-    this.exhibition = new Exhibition("", "",editor)
-    var cover = new DigitalResource(4,"NOME")
-    this.exhibition.addCoverPhoto(cover)
-    this.exhibitionService.createSessionExhibition(this.exhibition)
-   
-  }
 
   onChangeTitle(newTitle: string){
     if(this.exhibition){
+      this.exhibition = this.exhibitionService.getSessionExhibition()
       this.exhibition.title = newTitle
       this.exhibitionService.saveSessionExhibition(this.exhibition)
     }

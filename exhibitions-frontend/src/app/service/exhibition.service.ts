@@ -38,21 +38,20 @@ export class ExhibitionService {
     );
   }
 
-  createExhibition(exhibition: Exhibition) {
+  createExhibition(exhibition: Exhibition): Observable<Exhibition> {
     //mockExhibitions.push(exhibition)
-    return this.http.post<Exhibition>(this.exhibitionsUrl, exhibition, this.httpOptions).subscribe({
-      next: data => {
-          //this. = data.id;
-      },
-      error: error => {
-          //this.errorMessage = error.message;
-          console.error('There was an error!', error);
-      }
-  })
+    return this.http.post<Exhibition>(this.exhibitionsUrl, exhibition, this.httpOptions).pipe(
+
+      catchError(this.handleError<Exhibition>('getexhibition'))
+    )
   }
 
-  updateExhibition(exhibition: Exhibition) {
-    console.log("update exhibitions")
+  updateExhibition(exhibition: Exhibition): Observable<Exhibition> {
+    console.log("sending update request to " + this.exhibitionsUrl + '/' + exhibition.id)
+    return this.http.post<Exhibition>(this.exhibitionsUrl + "/" + exhibition.id , exhibition, this.httpOptions).pipe(
+      
+      catchError(this.handleError<Exhibition>('updateexhibitions'))
+    )
   }
 
 

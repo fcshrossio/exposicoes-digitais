@@ -1,5 +1,6 @@
 package com.rossio.exhibitions.service
 
+import com.rossio.exhibitions.dto.ExhibitionDTO
 import com.rossio.exhibitions.dto.ExhibitionDetailsDTO
 import com.rossio.exhibitions.enums.Keywords
 import com.rossio.exhibitions.enums.Status
@@ -7,6 +8,7 @@ import com.rossio.exhibitions.exception.NotFoundException
 import com.rossio.exhibitions.model.*
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
+import kotlin.jvm.Throws
 
 
 @Service
@@ -24,11 +26,18 @@ class ExhibitionService(
     fun getOneExhibition(id : Long) : ExhibitionDAO =
         exhibitionsRepository.findById(id).orElseThrow { NotFoundException("No Exhibition with id: $id found") }
 
-    fun createExhibition(exhibition: ExhibitionDAO) : ExhibitionDAO =
-        exhibitionsRepository.save(exhibition)
+    fun createExhibition(exhibition: ExhibitionDAO) : ExhibitionDAO {
 
-    fun editExhibitionDetails(details: ExhibitionDetailsDTO, exhibition: ExhibitionDAO) : ExhibitionDAO =
+        if(exhibition.id == 0L) {
+            return exhibitionsRepository.save(exhibition)
+        }
+        throw Exception("id is not 0")
+    }
+
+
+    fun editExhibitionDetails(details: ExhibitionDTO, exhibition: ExhibitionDAO) : ExhibitionDAO =
         if (exhibition.editDetails(details)) {
+            print("exhibition edited...saving...")
             exhibitionsRepository.save(exhibition)
         } else
             exhibition

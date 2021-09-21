@@ -15,7 +15,7 @@ export class IntroductionFormComponent implements OnInit {
 
   file: any
 
-  keywords: string[] = ["artes", "história"]
+  keywords: string[] = ["Teste1", "Teste2"]
 
 
   exhibition? : Exhibition 

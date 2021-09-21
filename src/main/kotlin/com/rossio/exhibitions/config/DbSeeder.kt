@@ -73,7 +73,7 @@ class DbSeeder (
         mutableListOf()     //list of resources
         )
 
-        val exhibitionDAO:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO, editorDAO, digitalDAO))
+        //val exhibitionDAO:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO, editorDAO, digitalDAO))
 
 
 

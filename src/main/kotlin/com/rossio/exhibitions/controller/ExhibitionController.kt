@@ -56,10 +56,10 @@ class ExhibitionController(
 
 
     @Operation(summary = "Edit a Exhibition")
-    @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN','EDITOR') and @securityService.canEditorEditExhibition(principal, #id)")
-    fun editExhibition(@RequestBody exhibitionDetails: ExhibitionDetailsDTO, @PathVariable id: Long) : ExhibitionDTO =
-        ExhibitionDTO(exhibitionService.editExhibitionDetails(exhibitionDetails, exhibitionService.getOneExhibition(id)))
+    @PostMapping("/{id}")
+    //@PreAuthorize("hasAnyRole('ADMIN','EDITOR') and @securityService.canEditorEditExhibition(principal, #id)")
+    fun editExhibition(@RequestBody exhibition: ExhibitionDTO, @PathVariable id: Long) : ExhibitionDTO =
+        ExhibitionDTO(exhibitionService.editExhibitionDetails(exhibition, exhibitionService.getOneExhibition(id)))
 
 
     @Operation(summary = "Delete a Exhibition")

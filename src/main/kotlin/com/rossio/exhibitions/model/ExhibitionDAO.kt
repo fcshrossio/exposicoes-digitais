@@ -122,12 +122,12 @@ data class ExhibitionDAO(
         return true
     }
 
-    fun editDetails(detailsDTO: ExhibitionDetailsDTO): Boolean
+    fun editDetails(detailsDTO: ExhibitionDTO): Boolean
     {
-        if(detailsDTO.exhibitionId == this.id) {
+        if(detailsDTO.id == this.id) {
             this.title = detailsDTO.title
             this.subtitle = detailsDTO.subtitle
-
+            //TODO BETTER UPDATE FUNCTION
             return true
         }
         return false
