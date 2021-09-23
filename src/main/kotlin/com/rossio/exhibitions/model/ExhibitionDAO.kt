@@ -8,7 +8,6 @@ import java.util.*
 import javax.persistence.*
 import com.rossio.exhibitions.model.EditorDAO
 import com.rossio.exhibitions.model.DigitalResourceDAO
-import com.rossio.exhibitions.model.IntroductionItemDAO
 import com.rossio.exhibitions.model.CollaboratorDAO
 import org.hibernate.mapping.Collection
 
@@ -20,7 +19,7 @@ data class ExhibitionDAO(
     @ManyToOne
     @JoinColumn
     var editor : EditorDAO,
-    @OneToMany(mappedBy = "exhibition")
+    @OneToMany
     var items : MutableList<ExhibitionItemDAO>,
     var title: String,
     var subtitle: String,
@@ -43,7 +42,7 @@ data class ExhibitionDAO(
     constructor(exhibition : ExhibitionDTO, editor: EditorDAO, cover: DigitalResourceDAO ) : this(
         exhibition.id,
         editor,
-        exhibition.items.map{  } as MutableList<ExhibitionItemDAO>,
+        exhibition.items.map{ ExhibitionItemDAO(it) } as MutableList<ExhibitionItemDAO>,
         exhibition.title,
         exhibition.subtitle,
         cover,
@@ -139,18 +138,11 @@ data class ExhibitionDAO(
     {
         if(!items.contains(itemDAO))
         {
-            if(itemDAO is IntroductionItemDAO)
-            {
-                if(items.isEmpty() || !items.any { it is IntroductionItemDAO })
-                {
-                    items.add(itemDAO)
-                }
-            }
-            else
-            {
-                items.add(itemDAO)
-            }
-
+            items.add(itemDAO)
+        }
+        else
+        {
+            throw NotFoundException("item already exists")
         }
 
     }

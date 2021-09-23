@@ -4,7 +4,6 @@ import com.rossio.exhibitions.dto.*
 import com.rossio.exhibitions.dto.ExhibitionDTO
 import com.rossio.exhibitions.enums.Keywords
 import com.rossio.exhibitions.enums.Status
-import com.rossio.exhibitions.mapItemDTOtoDAO
 import com.rossio.exhibitions.model.*
 import com.rossio.exhibitions.service.*
 import io.swagger.v3.oas.annotations.Operation
@@ -84,7 +83,7 @@ class ExhibitionController(
     @PostMapping("/{id}/additem")
     @PreAuthorize("hasAnyRole('ADMIN','EDITOR')")
     fun addItemExhibition(@PathVariable id: Long,@RequestBody item : ExhibitionItemDTO) : ExhibitionItemDTO =
-        mapItemDAOtoDTO(exhibitionItemService.createOneExhibitionItem(mapItemDTOtoDAO(item,exhibitionService.getOneExhibition(id))))
+        ExhibitionItemDTO(exhibitionItemService.createOneExhibitionItem(ExhibitionItemDAO(item)))
 
     @Operation(summary = "Show Recent Exhibitions")
     @GetMapping("/recent")

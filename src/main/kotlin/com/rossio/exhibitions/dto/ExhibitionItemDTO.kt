@@ -4,87 +4,59 @@ import com.fasterxml.jackson.annotation.*
 import com.rossio.exhibitions.model.*
 
 
-@JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "itemType", visible = true
-)
-@JsonSubTypes(
-        JsonSubTypes.Type(TextItemDTO::class, name = "text"),
-        JsonSubTypes.Type(IntroductionItemDTO::class, name = "introduction"),
-        JsonSubTypes.Type(MapItemDTO::class, name = "map"),
-        JsonSubTypes.Type(AboutItemDTO::class, name = "about")
-)
-@JsonIgnoreProperties(ignoreUnknown = true)
-abstract class ExhibitionItemDTO(
-    open val id: Long,
-    open val position: Long,
-    open val exhibitionId: Long,
-    open val title: String
-)
 
-
-data class IntroductionItemDTO(
-    override val id: Long,
-    override val position: Long,
-    override val exhibitionId: Long,
-    override val title: String,
-    val text: String
-
-) : ExhibitionItemDTO(id, position, exhibitionId, title) {
-
-    constructor(item: IntroductionItemDAO) : this(item.id,item.position,item.exhibition.id,item.title,item.text)
-
-    //constructor() : this(0,0,0, "")
-
-}
-
-
-
-data class TextItemDTO(
-    override val id: Long,
-    override val position: Long,
-    override val exhibitionId: Long,
-    override val title: String,
+data class ExhibitionItemDTO(
+    val id: Long,
+    val position: Long,
+    //val exhibitionId: Long,
+    val title: String,
     val text: String,
     val subItems: List<SubTextItemDTO>
-
-) : ExhibitionItemDTO(id, position, exhibitionId, title) {
-
-    constructor(item: TextItemDAO) : this(item.id,item.position,item.exhibition.id,item.title,item.text,item.subTextItems.map { SubTextItemDTO(it)})
-
-    //constructor() : this(0,0,0, "", emptyList())
-
+)
+{
+    constructor() : this(0,0, "","", emptyList())
+    constructor(exhibitionItemDAO: ExhibitionItemDAO) : this(
+        exhibitionItemDAO.id,
+        exhibitionItemDAO.position,
+        exhibitionItemDAO.title,
+        exhibitionItemDAO.text,
+        mutableListOf()
+        )
 }
 
+
+
+
 data class MapItemDTO(
-    override val id: Long,
-    override val position: Long,
-    override val exhibitionId: Long,
-    override val title: String,
+    val id: Long,
+    val position: Long,
+    val exhibitionId: Long,
+    val title: String,
     val text: String,
     val markers : List<MarkerDTO>
 
-) : ExhibitionItemDTO(id, position, exhibitionId, title) {
+) {
 
-    constructor(item: MapItemDAO) : this(item.id,item.position,item.exhibition.id,item.title,item.text,
-        item.markers.map { MarkerDTO(it) } )
+   // constructor(item: MapItemDAO) : this(item.id,item.position,item.exhibition.id,item.title,item.text,
+     //   item.markers.map { MarkerDTO(it) } )
 
-    //constructor() : this(0,0,0, "", emptyList())
+    constructor() : this(0,0,0, "","", emptyList())
 
 }
 
 data class AboutItemDTO(
-    override val id: Long,
-    override val position: Long,
-    override val exhibitionId: Long,
-    override val title: String,
+    val id: Long,
+    val position: Long,
+    val exhibitionId: Long,
+    val title: String,
     val text: String,
     val subItems : List<SubAboutItemDTO>
 
-) : ExhibitionItemDTO(id, position, exhibitionId, title) {
+)  {
 
-    constructor(item: AboutItemDAO) : this(item.id,item.position,item.exhibition.id,item.title,item.text, item.subItems.map { SubAboutItemDTO( it) })
+    //constructor(item: AboutItemDAO) : this(item.id,item.position,item.exhibition.id,item.title,item.text, item.subItems.map { SubAboutItemDTO( it) })
 
-    //constructor() : this(0,0,0, "", emptyList())
+    constructor() : this(0,0,0, "","", emptyList())
 
 }
 

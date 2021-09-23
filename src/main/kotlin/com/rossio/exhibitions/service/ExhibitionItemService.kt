@@ -44,79 +44,33 @@ class ExhibitionItemService(
 
     fun addMarker(itemId: Long, markerDAO: MarkerDAO) {
      var item = getOneExhibitionItem(itemId)
-        if (item is MapItemDAO){
-            item.addMarker(createMarker(markerDAO))
-            exhibitionItemsRepository.save(item)
-        }
-        else
-        {
 
-        }
+            exhibitionItemsRepository.save(item)
+
 
     }
 
     fun removeMarker(markerDAO: MarkerDAO) {
-        var mapItem: ExhibitionItemDAO = getOneExhibitionItem(markerDAO.mapItem.id)
-        if ( mapItem is MapItemDAO)
-        {
-            mapItem.removeMarker(markerDAO)
-            exhibitionItemsRepository.save(mapItem)
-        }
-        else
-        {
-            WrongTypeException("")
-        }
+
+
     }
 
     fun addSubAbout(itemId: Long, subAboutDAO: SubAboutDAO) {
-        var item = getOneExhibitionItem(itemId)
-        if (item is AboutItemDAO){
-           item.addSubAbout(createSubAbout(subAboutDAO))
-            exhibitionItemsRepository.save(item)
-        }
-        else
-        {
 
-        }
 
     }
 
     fun removeSubAbout(subAboutDAO: SubAboutDAO) {
-        var item: ExhibitionItemDAO = getOneExhibitionItem(subAboutDAO.aboutItemDAO.id)
-        if (item is AboutItemDAO){
-            item.removeSubAbout(subAboutDAO)
-            exhibitionItemsRepository.save(item)
-        }
-        else
-        {
-            WrongTypeException("")
-        }
+
 
     }
 
     fun addSubText(itemId: Long, subTextDAO: SubTextDAO) {
-        var item = getOneExhibitionItem(itemId)
-        if (item is TextItemDAO){
-            item.addSubText(createSubText(subTextDAO))
-            exhibitionItemsRepository.save(item)
-        }
-        else
-        {
-             NotFoundException("Item is not Text item")
-        }
+
 
     }
 
     fun removeSubText( subTextDAO: SubTextDAO) {
-        var item: ExhibitionItemDAO = getOneExhibitionItem(subTextDAO.textItemDAO.id)
-        if (item is TextItemDAO){
-            item.removeSubText(subTextDAO)
-            exhibitionItemsRepository.save(item)
-        }
-        else
-        {
-            WrongTypeException("")
-        }
 
     }
 }

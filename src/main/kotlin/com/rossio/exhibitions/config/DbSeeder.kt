@@ -1,10 +1,8 @@
 package com.rossio.exhibitions.config
 
 import com.rossio.exhibitions.controller.ExhibitionController
-import com.rossio.exhibitions.dto.DigitalResourceDTO
-import com.rossio.exhibitions.dto.EditorDTO
-import com.rossio.exhibitions.dto.ExhibitionDTO
-import com.rossio.exhibitions.dto.UserPasswordDTO
+import com.rossio.exhibitions.controller.ExhibitionItemController
+import com.rossio.exhibitions.dto.*
 import com.rossio.exhibitions.enums.Status
 import com.rossio.exhibitions.model.*
 import com.rossio.exhibitions.service.*
@@ -18,11 +16,11 @@ import java.util.*
 class DbSeeder (
     val exhibitionService: ExhibitionService,
     val exhibitionItemService: ExhibitionItemService,
+    val exhibitionItemController: ExhibitionItemController,
     val editorService: EditorService,
     val adminService: AdminService,
     val collaboratorService: CollaboratorService,
     val digitalResourceService: DigitalResourceService,
-    val exhibitionController: ExhibitionController
 ) : CommandLineRunner {
     val runSeeder = true
 
@@ -73,8 +71,11 @@ class DbSeeder (
         mutableListOf()     //list of resources
         )
 
-        //val exhibitionDAO:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO, editorDAO, digitalDAO))
+        val exhibitionDAO:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO, editorDAO, digitalDAO))
 
+        val item1DAO : ExhibitionItemDAO = ExhibitionItemDAO(0,0,"As razões e funções da festa", "TEXT", mutableListOf())
+        val item2DTO : ExhibitionItemDTO =  ExhibitionItemDTO(0,0,"Os tempos da festa", "TEXT", emptyList())
+        exhibitionItemService.createOneExhibitionItem(item1DAO)
 
 
         print("\n\n\t( ͡o ͜ʖ ͡o) Database Seed Completed (╯ ͠° ͟ʖ ͡°)╯┻━┻\n")

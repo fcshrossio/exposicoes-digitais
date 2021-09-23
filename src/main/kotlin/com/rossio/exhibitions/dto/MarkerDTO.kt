@@ -12,5 +12,5 @@ data class MarkerDTO(
 ) {
     constructor() : this(0, 0,0,"description", emptyList())
 
-    constructor(markerDAO: MarkerDAO) : this(markerDAO.markerId,markerDAO.mapItem.id, markerDAO.coordinates, markerDAO.description , markerDAO.digitalResources.map { DigitalResourceDTO(it) })
+    constructor(markerDAO: MarkerDAO) : this(markerDAO.markerId,0, markerDAO.coordinates, markerDAO.description , markerDAO.digitalResources.map { DigitalResourceDTO(it) })
 }

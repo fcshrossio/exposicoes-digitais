@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import { LoginFormComponent } from '../form/login-form/login-form.component';
+import { LoginFormComponent } from '../../form/login-form/login-form.component';
 
 @Component({
   selector: 'app-homepage',

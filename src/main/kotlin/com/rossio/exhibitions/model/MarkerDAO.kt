@@ -8,14 +8,12 @@ data class MarkerDAO(
     @GeneratedValue
     @Id
     val markerId : Long,
-    @ManyToOne
-    val mapItem: MapItemDAO,
     val coordinates : Long,
     val description : String,
     @OneToMany
     val digitalResources : List<DigitalResourceDAO>
 ) {
-    constructor(markerDTO: MarkerDTO, mapItem: MapItemDAO) : this(markerDTO.markerId,mapItem,markerDTO.coordinates,markerDTO.description, markerDTO.digitalResources.map { DigitalResourceDAO(it) })
+    constructor(markerDTO: MarkerDTO) : this(markerDTO.markerId,markerDTO.coordinates,markerDTO.description, markerDTO.digitalResources.map { DigitalResourceDAO(it) })
 
 }
 

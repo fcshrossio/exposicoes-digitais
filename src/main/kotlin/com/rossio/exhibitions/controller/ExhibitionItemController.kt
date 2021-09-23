@@ -1,11 +1,7 @@
 package com.rossio.exhibitions.controller
 
 import com.rossio.exhibitions.dto.*
-import com.rossio.exhibitions.exception.WrongTypeException
-import com.rossio.exhibitions.mapItemDTOtoDAO
 import com.rossio.exhibitions.model.*
-import com.rossio.exhibitions.model.MapItemDAO
-import com.rossio.exhibitions.model.AboutItemDAO
 
 
 import com.rossio.exhibitions.service.ExhibitionItemService
@@ -25,20 +21,20 @@ class ExhibitionItemController(
     @Operation(summary = "Get List of All Exhibition Items ")
     @GetMapping("")
     fun getAllExhibitionItems() : List<ExhibitionItemDTO> =
-        exhibitionItemService.getAllExhibitionItems().map { mapItemDAOtoDTO(it) }
+        exhibitionItemService.getAllExhibitionItems().map { ExhibitionItemDTO(it) }
 
     @Operation(summary = "Get One Exhibition Item ")
     @GetMapping("/{id}")
     fun getOneExhibitionItem(@PathVariable id:Long ) : ExhibitionItemDTO =
-        mapItemDAOtoDTO(exhibitionItemService.getOneExhibitionItem(id))
+        ExhibitionItemDTO(exhibitionItemService.getOneExhibitionItem(id))
 
     @Operation(summary = "Edit One Exhibition Item ")
     @PutMapping("/{id}")
     fun editExhibitionItem(@PathVariable id: Long, @RequestBody item: ExhibitionItemDTO) : ExhibitionItemDTO =
-        mapItemDAOtoDTO(
+        ExhibitionItemDTO(
             exhibitionItemService.editOneExhibitionItem(
                 exhibitionItemService.getOneExhibitionItem(id),
-                mapItemDTOtoDAO(item,exhibitionService.getOneExhibition(item.exhibitionId))
+                ExhibitionItemDAO(item)
             )
         )
 
@@ -46,7 +42,7 @@ class ExhibitionItemController(
     @Operation(summary = "Post One Exhibition Item ")
     @PostMapping("")
     fun addExhibitionItem(@RequestBody item: ExhibitionItemDTO) =
-        mapItemDAOtoDTO(exhibitionItemService.createOneExhibitionItem(mapItemDTOtoDAO(item,exhibitionService.getOneExhibition(item.exhibitionId))))
+        ExhibitionItemDTO(exhibitionItemService.createOneExhibitionItem(ExhibitionItemDAO(item)))
 
 
     @Operation(summary = "Remove One Exhibition Item ")
@@ -62,10 +58,7 @@ class ExhibitionItemController(
     @PostMapping("/{itemId}/addmarker")
     fun createMarker(@PathVariable itemId: Long, @RequestBody markerDTO: MarkerDTO){
         val item = exhibitionItemService.getOneExhibitionItem(itemId)
-        if(item is MapItemDAO)
-            exhibitionItemService.addMarker(itemId, MarkerDAO(markerDTO,item))
-        else
-            WrongTypeException("Item is not a Map type item")
+            exhibitionItemService.addMarker(itemId, MarkerDAO(markerDTO))
     }
 
     @Operation(summary = "Delete Marker ")
@@ -84,10 +77,7 @@ class ExhibitionItemController(
     @PostMapping("/{itemId}/addsubabout")
     fun createSubAbout(@PathVariable itemId: Long, @RequestBody subAboutItemDTO: SubAboutItemDTO){
         val item = exhibitionItemService.getOneExhibitionItem(itemId)
-        if(item is AboutItemDAO)
-            exhibitionItemService.addSubAbout(itemId, SubAboutDAO(subAboutItemDTO,item))
-        else
-            WrongTypeException("Item is not an About type item")
+            exhibitionItemService.addSubAbout(itemId, SubAboutDAO(subAboutItemDTO))
     }
 
     @Operation(summary = "Remove One Sub About Item ")
@@ -106,10 +96,7 @@ class ExhibitionItemController(
     @PostMapping("/{itemId}/addsubtext")
     fun createSubText(@PathVariable itemId: Long, @RequestBody subTextItemDTO: SubTextItemDTO) {
         val item = exhibitionItemService.getOneExhibitionItem(itemId)
-        if(item is TextItemDAO)
-            exhibitionItemService.addSubText(itemId,SubTextDAO(subTextItemDTO,item))
-        else
-            WrongTypeException("Item is not a Text type item")
+            exhibitionItemService.addSubText(itemId,SubTextDAO(subTextItemDTO))
     }
 
     @Operation(summary = "Remove One Sub Text Item ")

@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ExhibitionDetailComponent } from './component/exhibition-detail/exhibition-detail.component';
-import { HomepageComponent } from './component/homepage/homepage.component';
+import { HomepageComponent } from './component/public/homepage/homepage.component';
 import { DashboardComponent } from './component/admin/dashboard/dashboard.component';
 import { ExhibitionCreationFormComponent } from './component/exhibition-creation-form/exhibition-creation-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -29,6 +30,13 @@ import { DraganddropDirective } from './component/admin/create-exhibition/introd
 import { DraganddroplistDirective } from './component/admin/create-exhibition/section-form/draganddroplist.directive';
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { ExhibitionListComponent } from './component/public/exhibition-list/exhibition-list.component';
+import { PublicRoutingModule } from './component/public/public-routing.module';
+import { PublicComponent } from './component/public/public.component';
+import { HeaderComponent } from './component/public/header/header.component';
+import { FooterComponent } from './component/public/footer/footer.component';
+import { ExhibitionPageComponent } from './component/public/exhibition-page/exhibition-page.component';
+import { ExhibitionShowcaseComponent } from './component/public/exhibition-showcase/exhibition-showcase.component';
 
 
 @NgModule({
@@ -53,7 +61,13 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     ResourcesComponent,
     AuxiliaryItemsFormComponent,
     DraganddropDirective,
-    DraganddroplistDirective
+    DraganddroplistDirective,
+    ExhibitionListComponent,
+    PublicComponent,
+    HeaderComponent,
+    FooterComponent,
+    ExhibitionPageComponent,
+    ExhibitionShowcaseComponent
   ],
   imports: [
     HttpClientModule,
@@ -62,7 +76,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     NgbModule,
     FormsModule,
     AdminRoutingModule,
-    AngularEditorModule 
+    AngularEditorModule,
+    PublicRoutingModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

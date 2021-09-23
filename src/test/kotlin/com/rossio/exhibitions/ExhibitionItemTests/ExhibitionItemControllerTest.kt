@@ -7,7 +7,6 @@ import com.rossio.exhibitions.ExhibitionTests.ExhibitionControllerTest
 import com.rossio.exhibitions.dto.*
 import com.rossio.exhibitions.enums.Status
 import com.rossio.exhibitions.exception.NotFoundException
-import com.rossio.exhibitions.mapItemDTOtoDAO
 import com.rossio.exhibitions.model.*
 import com.rossio.exhibitions.service.ExhibitionItemService
 import com.rossio.exhibitions.service.ExhibitionService

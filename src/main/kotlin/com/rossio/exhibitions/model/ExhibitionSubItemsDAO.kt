@@ -10,12 +10,10 @@ data class SubAboutDAO(
     @GeneratedValue
     val id: Long,
     val position: Long,
-    @ManyToOne
-    val aboutItemDAO: AboutItemDAO,
     val link: String
 
 ) {
-    constructor(subitem: SubAboutItemDTO, aboutItemDAO: AboutItemDAO) : this(subitem.id, subitem.position, aboutItemDAO, subitem.link)
+    constructor(subitem: SubAboutItemDTO) : this(subitem.id, subitem.position, subitem.link)
 
 }
 
@@ -27,10 +25,8 @@ data class SubTextDAO(
     val id: Long,
     val position: Long,
     val text: String,
-    @ManyToOne
-    val textItemDAO: TextItemDAO,
     @OneToMany
     val digitalResources : List<DigitalResourceDAO>
 ) {
-    constructor(subitem: SubTextItemDTO, textItemDAO: TextItemDAO) : this(subitem.id, subitem.position, subitem.text, textItemDAO, subitem.digitalResources.map { DigitalResourceDAO(it) })
+    constructor(subitem: SubTextItemDTO) : this(subitem.id, subitem.position, subitem.text, subitem.digitalResources.map { DigitalResourceDAO(it) })
 }

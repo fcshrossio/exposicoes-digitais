@@ -25,7 +25,7 @@ data class ExhibitionDTO(
     constructor(exhibition : ExhibitionDAO) : this(
         exhibition.id,
         EditorDTO(exhibition.editor),
-        exhibition.items.map { mapItemDAOtoDTO(it) },
+        exhibition.items.map { ExhibitionItemDTO(it) },
         exhibition.title,
         exhibition.subtitle,
         DigitalResourceDTO(exhibition.cover),
@@ -45,13 +45,3 @@ data class ExhibitionDetailsDTO(
     val subtitle: String
 )
 
-
-fun mapItemDAOtoDTO(item: ExhibitionItemDAO) : ExhibitionItemDTO =
-
-    when (item) {
-        is IntroductionItemDAO -> IntroductionItemDTO(item)
-        is TextItemDAO -> TextItemDTO(item)
-        is MapItemDAO ->  MapItemDTO(item)
-        is AboutItemDAO -> AboutItemDTO(item)
-        else -> throw NotFoundException("") //TODO exception
-    }
