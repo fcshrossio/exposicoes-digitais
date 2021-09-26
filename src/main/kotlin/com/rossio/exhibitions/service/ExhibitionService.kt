@@ -42,7 +42,10 @@ class ExhibitionService(
         } else
             exhibition
 
-
+    fun addExhibitionItem(exhibition: ExhibitionDAO, item: ExhibitionItemDAO) : ExhibitionDAO {
+        exhibition.addExhibitionItem(item)
+        return exhibitionsRepository.save(exhibition)
+    }
     fun deleteExhibition(exhibition: ExhibitionDAO) =
         exhibitionsRepository.delete(exhibition)
 

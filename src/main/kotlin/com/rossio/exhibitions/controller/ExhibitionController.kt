@@ -20,7 +20,7 @@ class ExhibitionController(
     val exhibitionItemService: ExhibitionItemService
 ) {
 
-    @CrossOrigin
+    //@CrossOrigin
     @Operation(summary = "Get List of All Exhibitions ")
     @GetMapping("")
    // @PreAuthorize("hasRole('admin')")
@@ -80,11 +80,13 @@ class ExhibitionController(
         exhibitionService.removeCollaborator(exhibitionService.getOneExhibition(id), collaboratorService.getOneCollaborator(collaborator.id))
 
     @Operation(summary = "Add Exhibition Item to Exhibition ")
-    @PostMapping("/{id}/additem")
+    @PostMapping("/{exhibitionId}/additem")
     @PreAuthorize("hasAnyRole('ADMIN','EDITOR')")
-    fun addItemExhibition(@PathVariable id: Long,@RequestBody item : ExhibitionItemDTO) : ExhibitionItemDTO =
-        ExhibitionItemDTO(exhibitionItemService.createOneExhibitionItem(ExhibitionItemDAO(item)))
-
+    fun addItemExhibition(@PathVariable exhibitionId: Long,@RequestBody item : ExhibitionItemDTO) : ExhibitionItemDTO {
+        var itemDAO = exhibitionItemService.createOneExhibitionItem(ExhibitionItemDAO(item))
+        exhibitionService.addExhibitionItem(exhibitionService.getOneExhibition(exhibitionId), itemDAO)
+        return ExhibitionItemDTO(itemDAO)
+    }
     @Operation(summary = "Show Recent Exhibitions")
     @GetMapping("/recent")
     fun recentExhibitions() : List<ExhibitionDTO> =

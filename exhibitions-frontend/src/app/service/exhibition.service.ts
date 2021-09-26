@@ -32,7 +32,7 @@ export class ExhibitionService {
 
   getExhibition(id: number): Observable<Exhibition> {
     // const exhibition = mockExhibitions.find(h => h.id === id)!;
-    return  this.http.get<Exhibition>(this.exhibitionsUrl+id)  .pipe(
+    return  this.http.get<Exhibition>(this.exhibitionsUrl+ '/' + id)  .pipe(
      
       catchError(this.handleError<Exhibition>('getexhibitions'))
     );

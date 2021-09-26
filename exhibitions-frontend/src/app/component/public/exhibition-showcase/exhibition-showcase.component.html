@@ -1,7 +1,7 @@
-<div class="container">
-    <div class="row">
+<div *ngIf="exhibition" class="container">
+    <div *ngFor="let item of exhibition.items" class="row">
         <div class="col">
-            <h5 style="background-color: blue;">As razões e funções da festa</h5>
+            <h5 style="background-color: blue;">item.title</h5>
         </div>
         <div class="col">
             <h5>Os tempos da festa</h5>
