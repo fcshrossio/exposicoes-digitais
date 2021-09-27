@@ -1,0 +1,12 @@
+.section {
+    background-color: #F0F1F2 ;
+    padding: 7px 20px 5px 20px;
+    color: #868E96;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.section:hover {
+    background-color: #13556E;
+    color: white;
+}

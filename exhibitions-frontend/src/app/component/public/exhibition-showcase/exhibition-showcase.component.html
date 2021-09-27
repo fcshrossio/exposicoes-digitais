@@ -1,13 +1,26 @@
 <div *ngIf="exhibition" class="container">
-    <div *ngFor="let item of exhibition.items" class="row">
-        <div class="col">
-            <h5 style="background-color: blue;">item.title</h5>
+    <div class="row justify-content-center mx-auto align-items-center text-align-center">
+        <div class="col-auto">
+            <img src="https://www.fillmurray.com/30/30"/>
         </div>
-        <div class="col">
-            <h5>Os tempos da festa</h5>
+        <div class="col-auto">
+            <img src="https://www.fillmurray.com/30/30"/>
         </div>
-        <div class="col">
-            <h5>A festa na sociedade e a sociedade na festa</h5>
+        <div class="col-auto">
+            <img src="https://www.fillmurray.com/30/30"/>
+        </div>
+    </div>
+    <div  class="row justify-content-center mx-auto align-items-center text-align-center mt-5">
+        <div *ngFor="let item of exhibition.items;let i=index;" (click)="changeSection(i)" [ngStyle]="{'background-color': i === selectedSection ? '#1681A8' : '#F0F1F2'}" class="section col-auto my-auto mx-2">
+            <h6 [ngStyle]="{'color': i === selectedSection ? 'white' : '#868E96'}">{{item.title}}</h6>
+        </div>
+    </div>
+    <div *ngIf="exhibition" class="">
+        {{exhibition.items[selectedSection].text}}
+    </div>
+    <div class="row justify-content-center mx-auto align-items-center text-align-center">
+        <div class="col-auto section" (click)="changeSection(selectedSection+1)">
+            <h6>Seguinte</h6>
         </div>
     </div>
 </div>

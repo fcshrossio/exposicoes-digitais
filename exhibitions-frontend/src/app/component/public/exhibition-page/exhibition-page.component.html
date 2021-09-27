@@ -40,8 +40,8 @@
     <div class="container w-100 mt-5" >
       <div *ngFor="let exhibition of exhibitions" class="row w-100">
           <a routerLink="/exhibition/{{exhibition.id}}" class="col-3 p-2">
-            <img class='img-fluid w-100' src="https://www.fillmurray.com/260/300"/>
-            <div class="p-1 pb-5" style="background-color: #f0f1f2;" >
+            <img class='img-fluid w-100' src="https://www.fillmurray.com/260/300" style="border-top-left-radius: 10px; border-top-right-radius: 10px;"/>
+            <div class="p-4" style="background-color: #f0f1f2; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;" >
               <h3>{{exhibition.title}}</h3>
               <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h6>
               <span>15 min</span>

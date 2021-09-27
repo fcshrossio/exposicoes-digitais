@@ -73,9 +73,9 @@ class DbSeeder (
 
         var exhibitionDAO:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO, editorDAO, digitalDAO))
 
-        var item1DAO : ExhibitionItemDAO = ExhibitionItemDAO(0,0,"As razões e funções da festa", "TEXT", mutableListOf())
-        var item2DAO : ExhibitionItemDAO =  ExhibitionItemDAO(0,0,"Os tempos da festa", "TEXT", mutableListOf())
-        var item3DAO : ExhibitionItemDAO =  ExhibitionItemDAO(0,0,"A festa na sociedade e a sociedade na festa", "TEXT", mutableListOf())
+        var item1DAO : ExhibitionItemDAO = ExhibitionItemDAO(0,0,"As razões e funções da festa", "TEXT As razões e funções da festa", mutableListOf())
+        var item2DAO : ExhibitionItemDAO =  ExhibitionItemDAO(0,0,"Os tempos da festa", "TEXT Os tempos da festa", mutableListOf())
+        var item3DAO : ExhibitionItemDAO =  ExhibitionItemDAO(0,0,"A festa na sociedade e a sociedade na festa", "TEXT A festa na sociedade e a sociedade na festa", mutableListOf())
         item1DAO = exhibitionItemService.createOneExhibitionItem(item1DAO)
         item2DAO = exhibitionItemService.createOneExhibitionItem(item2DAO)
         item3DAO = exhibitionItemService.createOneExhibitionItem(item3DAO)

@@ -1,46 +1,39 @@
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="#"><img src="https://www.fillmurray.com/140/60"/></a>
-    <a routerLink="/admin/dashboard" class="nav-link sidebar-link" [routerLinkActive]="['sidebar-active']"  aria-current="page">
-        <div class="row align-items-center justify-content-center">
-          <div class="col-auto">
-            Pesquisar
-          </div>
-        </div>
-      </a>
-      <a routerLink="/admin/dashboard" class="nav-link sidebar-link" [routerLinkActive]="['sidebar-active']"  aria-current="page">
-        <div class="row align-items-center justify-content-center">
-          <div class="col-auto">
-            Investigar
-          </div>
-        </div>
-      </a>
-      <a routerLink="/exhibitions" class="nav-link sidebar-link" [routerLinkActive]="['sidebar-active']"  aria-current="page">
-        <div class="row align-items-center justify-content-center">
-          <div class="col-auto">
-            Exposições
-          </div>
-        </div>
-      </a>
-      <a routerLink="" class="nav-link sidebar-link" [routerLinkActive]="['sidebar-active']"  aria-current="page">
-        <div class="row align-items-center justify-content-center">
-          <div class="col-auto">
-            Coleções
-          </div>
-        </div>
-      </a>
-      <a routerLink="" class="nav-link sidebar-link" [routerLinkActive]="['sidebar-active']"  aria-current="page">
-        <div class="row align-items-center justify-content-center">
-          <div class="col-auto">
-            Formação
-          </div>
-        </div>
-      </a>
-      <a routerLink="/admin/dashboard" class="nav-link sidebar-link" [routerLinkActive]="['sidebar-active']"  aria-current="page">
-        <div class="row align-items-center justify-content-center">
-          <div class="col-auto">
-            Infrastrutura
-          </div>
-        </div>
-      </a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand px-5" href="#"><img src="https://www.fillmurray.com/200/80" /></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse justify-content-between align-items-center " id="navbarSupportedContent">
+    <ul class="navbar-nav mx-auto text-md-center text-left justify-content-center">
+      <li class="nav-item active px-3">
+        <a class="nav-link" href="#">Pesquisar</a>
+      </li>
+      <li class="nav-item px-3">
+        <a class="nav-link" href="#">Investigar</a>
+      </li>
+      <li class="nav-item px-3">
+        <a class="nav-link" href="/exhibition">Exposições</a>
+      </li>
+      <li class="nav-item px-3">
+        <a class="nav-link" href="#">Coleções</a>
+      </li>
+      <li class="nav-item px-3">
+        <a class="nav-link" href="#">Formação</a>
+      </li>
+      <li class="nav-item px-3">
+        <a class="nav-link" href="#">Infraestrutura</a>
+      </li>
+    </ul>
+  </div>
+  <div class="collapse navbar-collapse justify-content-between align-items-right " id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto text-md-center">
+      <li class="nav-item active px-3">
+        <a class="nav-link" href="#">Login</a>
+      </li>
+      <li class="nav-item px-3">
+        <a class="nav-link" href="#">PT</a>
+      </li>
+    </ul>
+  </div>
 </nav>
-  
