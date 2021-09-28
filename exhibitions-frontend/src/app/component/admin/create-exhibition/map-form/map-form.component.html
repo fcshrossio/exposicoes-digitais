@@ -1,1 +1,21 @@
-<p>map-form works!</p>
+<div *ngIf="exhibition" class="row p-2"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
+    <div class="container-fluid" style="min-height: 200px;">
+        <form #markerForm="ngForm" class="form">
+            <div *ngFor="marker of markers" class="form-row">
+                <div class="col-5 form-group form-inline">
+                    <label class="m-2"><img src="https://www.fillmurray.com/30/30"/></label>
+                    <input class="form-control" id="title" [ngModel]="title" placeholder="TÍTULO DO MARCADOR">
+                </div>
+                <div class="col-5 form-group form-inline">
+                    <label class="m-2"><img src="https://www.fillmurray.com/30/30"/></label>
+                    <input class="form-control" id="coordinates" [ngModel]="coordinates" placeholder="COORDENADAS">
+                </div>
+                <div class="col-2 ">
+                    <img class="m-2 float-right" (click)="removeMarker()" src="https://www.fillmurray.com/30/30"/>
+                    <img class="m-2 float-right" (click)="addMarker()" src="https://www.fillmurray.com/30/30"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="map" class="map"></div>

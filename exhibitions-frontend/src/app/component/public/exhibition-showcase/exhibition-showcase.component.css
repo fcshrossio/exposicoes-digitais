@@ -7,6 +7,6 @@
 }
 
 .section:hover {
-    background-color: #13556E;
+    background-color: var(--primary-color-hover);
     color: white;
 }
