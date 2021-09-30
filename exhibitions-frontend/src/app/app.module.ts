@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ExhibitionDetailComponent } from './component/exhibition-detail/exhibition-detail.component';
-import { HomepageComponent } from './component/public/homepage/homepage.component';
+import { HomepageComponent } from './component/public/pages/homepage/homepage.component';
 import { DashboardComponent } from './component/admin/dashboard/dashboard.component';
 import { ExhibitionCreationFormComponent } from './component/exhibition-creation-form/exhibition-creation-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -35,8 +35,10 @@ import { PublicRoutingModule } from './component/public/public-routing.module';
 import { PublicComponent } from './component/public/public.component';
 import { HeaderComponent } from './component/public/header/header.component';
 import { FooterComponent } from './component/public/footer/footer.component';
-import { ExhibitionPageComponent } from './component/public/exhibition-page/exhibition-page.component';
-import { ExhibitionShowcaseComponent } from './component/public/exhibition-showcase/exhibition-showcase.component';
+import { ExhibitionPageComponent } from './component/public/pages/exhibition-page/exhibition-page.component';
+import { ExhibitionShowcaseComponent } from './component/public/pages/exhibition-showcase/exhibition-showcase.component';
+import { CarouselComponent } from './component/public/components/carousel/carousel.component';
+import { ExhibitionCardComponent } from './component/public/components/exhibition-card/exhibition-card.component';
 
 
 @NgModule({
@@ -67,7 +69,9 @@ import { ExhibitionShowcaseComponent } from './component/public/exhibition-showc
     HeaderComponent,
     FooterComponent,
     ExhibitionPageComponent,
-    ExhibitionShowcaseComponent
+    ExhibitionShowcaseComponent,
+    CarouselComponent,
+    ExhibitionCardComponent
   ],
   imports: [
     HttpClientModule,

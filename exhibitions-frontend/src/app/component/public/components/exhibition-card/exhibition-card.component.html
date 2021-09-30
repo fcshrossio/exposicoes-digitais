@@ -1,0 +1,23 @@
+<a *ngIf="exhibition" routerLink="/exhibition/{{exhibition.id}}" class="card" style="width: 18rem;">
+    <img class="card-img-top" src="https://www.fillmurray.com/540/600" alt="Card image cap">
+    <div class="card-img-overlay">
+      <div class="row p-2">
+        <div class="col-auto">
+          <img src="https://www.fillmurray.com/30/30"/>
+        </div>
+        <div class="col-auto ml-auto">
+          <img src="https://www.fillmurray.com/30/30"/>
+        </div>
+      </div>
+      <div class="row p-2" style="margin-top: 200px;">
+        <div class="col-auto ml-auto mt-auto">
+          <img src="https://www.fillmurray.com/30/30"/>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3 class="card-title">{{exhibition.title}}</h3>
+      <p class="card-text">{{exhibition.subtitle}}</p>
+      <p class="card-text" >15 mins</p>
+    </div>
+  </a>

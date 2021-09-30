@@ -1,5 +1,8 @@
 <div *ngIf="exhibition" class="container">
-    <div class="row justify-content-center mx-auto align-items-center text-align-center">
+    <div class="w-100">
+        <img class="img-fluid w-100" src="https://www.fillmurray.com/800/200"/>
+    </div>
+    <div class="row justify-content-center mx-auto align-items-center text-align-center mt-3">
         <div class="col-auto">
             <img src="https://www.fillmurray.com/30/30"/>
         </div>
@@ -21,6 +24,14 @@
     <div class="row justify-content-center mx-auto align-items-center text-align-center">
         <div class="col-auto section" (click)="changeSection(selectedSection+1)">
             <h6>Seguinte</h6>
+        </div>
+    </div>
+    <div class="row m-5 justify-content-center mx-auto align-items-center text-align-center">
+        <h3>Outras Exposições</h3>
+    </div>
+    <div class="row justify-content-center mx-auto align-items-center text-align-center">
+        <div *ngFor="let exhibition of exhibitions" class="col-auto">
+            <app-exhibition-card [exhibition]="exhibition"></app-exhibition-card>
         </div>
     </div>
 </div>

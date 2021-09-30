@@ -18,6 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import java.util.*
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -34,9 +35,9 @@ class DigitalControllerTest {
 
         val mapper = jacksonObjectMapper()
 
-        val resourceDTO1 = DigitalResourceDTO(1L,"Nome")
+        val resourceDTO1 = DigitalResourceDTO(1L,"Nome","", "", Date(), "", "", "")
 
-        val resourceDTO2 = DigitalResourceDTO(2L,"Nome")
+        val resourceDTO2 = DigitalResourceDTO(2L,"Nome","", "", Date(), "", "", "")
 
         val resourcesList = listOf<DigitalResourceDTO>(resourceDTO1, resourceDTO2)
 

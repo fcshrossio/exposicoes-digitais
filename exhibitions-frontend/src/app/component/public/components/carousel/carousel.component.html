@@ -1,0 +1,16 @@
+<div class="w-100">
+    <div class="container-fluid ml-0 mr-0 ">
+        <div class="row">
+            <ngb-carousel *ngIf="images&&exhibitions" class="w-100">
+                <ng-template *ngFor="let exhibition of exhibitions" ngbSlide>
+                  <div class="picsum-img-wrapper">
+                    <img [src]="images[0]" alt="Random first slide" class="img-fluid" style="height: 90vh; width: 100%;" >
+                  </div>
+                  <div class="carousel-caption">
+                    <h1>{{exhibition.title}}</h1>
+                    <h3>{{exhibition.subtitle}}</h3>
+                  </div>
+                </ng-template>
+              </ngb-carousel>        
+        </div>
+    </div>

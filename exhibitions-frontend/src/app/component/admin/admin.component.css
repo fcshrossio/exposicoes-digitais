@@ -1,0 +1,6 @@
+.content {
+    min-height: 89vh;
+    height: 100%;
+    background-color:  #f0f1f2; 
+    padding-left: var(--side-bar-width);
+}

@@ -2,10 +2,15 @@
     display: flex;
     flex-wrap: nowrap;
     min-height: 100vh;
+    width: var(--side-bar-width);
     height: 100%;
     height: -webkit-fill-available;
     overflow-x: auto;
     overflow-y: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--primary-color);
   }
 
 .sidebar-link {
@@ -13,10 +18,9 @@
   padding: 1em;
   padding-left: 4vh;
   font-weight: 600;
-  background-color: white;
   text-decoration: none;
   border-radius: 0;
-  color: black;
+  color: white;
 }
 
 .sidebar-sublink {

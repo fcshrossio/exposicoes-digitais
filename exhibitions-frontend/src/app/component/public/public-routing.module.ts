@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { PublicComponent } from './public.component';
-import { HomepageComponent } from './homepage/homepage.component';
-import { ExhibitionPageComponent } from './exhibition-page/exhibition-page.component';
-import { ExhibitionShowcaseComponent } from './exhibition-showcase/exhibition-showcase.component';
+import { HomepageComponent } from './pages/homepage/homepage.component';
+import { ExhibitionPageComponent } from './pages/exhibition-page/exhibition-page.component';
+import { ExhibitionShowcaseComponent } from './pages/exhibition-showcase/exhibition-showcase.component';
 
 
 const routes: Routes = [

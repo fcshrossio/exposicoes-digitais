@@ -51,18 +51,18 @@ class DbSeeder (
 
         collaboratorService.addOneCollaborator(collaboratorDAO)
 
-        var digital = DigitalResourceDTO(0,"NOME")
+        var digital = DigitalResourceDTO(0,"Título", "Descrição", "Cinemateca", Date(0), "Descrição fisica do objecto", "autores", "assunto")
 
         val digitalDAO = digitalResourceService.addOneDigitalResource(DigitalResourceDAO(digital))
 
         digital = DigitalResourceDTO(digitalDAO)
 
-        val exhibitionDTO = ExhibitionDTO(
+        val exhibitionDTO1 = ExhibitionDTO(
         0, //id
         editorDTO, //editor
         mutableListOf(), //items
         "A Festa",
-        "Uma Exposição",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu hendrerit augue. Donec vehicula tristique augue id semper. Sed sed dictum magna, et laoreet sit.",
         digital, //cover
         mutableListOf(), //collaborator list
         Date(), // creation date
@@ -71,7 +71,52 @@ class DbSeeder (
         mutableListOf()     //list of resources
         )
 
-        var exhibitionDAO:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO, editorDAO, digitalDAO))
+        val exhibitionDTO2 = ExhibitionDTO(
+            0, //id
+            editorDTO, //editor
+            mutableListOf(), //items
+            "A música somos nós",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu hendrerit augue. Donec vehicula tristique augue id semper. Sed sed dictum magna, et laoreet sit.",
+            digital, //cover
+            mutableListOf(), //collaborator list
+            Date(), // creation date
+            Status.PUBLIC, //status
+            mutableListOf(),  //list of keywords
+            mutableListOf()     //list of resources
+        )
+
+        val exhibitionDTO3 = ExhibitionDTO(
+            0, //id
+            editorDTO, //editor
+            mutableListOf(), //items
+            "Cinema Portugues",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu hendrerit augue. Donec vehicula tristique augue id semper. Sed sed dictum magna, et laoreet sit.",
+            digital, //cover
+            mutableListOf(), //collaborator list
+            Date(), // creation date
+            Status.PUBLIC, //status
+            mutableListOf(),  //list of keywords
+            mutableListOf()     //list of resources
+        )
+
+        val exhibitionDTO4 = ExhibitionDTO(
+            0, //id
+            editorDTO, //editor
+            mutableListOf(), //items
+            "Cinema Portugues",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu hendrerit augue. Donec vehicula tristique augue id semper. Sed sed dictum magna, et laoreet sit.",
+            digital, //cover
+            mutableListOf(), //collaborator list
+            Date(), // creation date
+            Status.PUBLIC, //status
+            mutableListOf(),  //list of keywords
+            mutableListOf()     //list of resources
+        )
+
+        var exhibitionDAO1:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO1, editorDAO, digitalDAO))
+        var exhibitionDAO2:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO2, editorDAO, digitalDAO))
+        var exhibitionDAO3:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO3, editorDAO, digitalDAO))
+        var exhibitionDAO4:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO3, editorDAO, digitalDAO))
 
         var item1DAO : ExhibitionItemDAO = ExhibitionItemDAO(0,0,"As razões e funções da festa", "TEXT As razões e funções da festa", mutableListOf())
         var item2DAO : ExhibitionItemDAO =  ExhibitionItemDAO(0,0,"Os tempos da festa", "TEXT Os tempos da festa", mutableListOf())
@@ -79,9 +124,9 @@ class DbSeeder (
         item1DAO = exhibitionItemService.createOneExhibitionItem(item1DAO)
         item2DAO = exhibitionItemService.createOneExhibitionItem(item2DAO)
         item3DAO = exhibitionItemService.createOneExhibitionItem(item3DAO)
-        exhibitionDAO = exhibitionService.addExhibitionItem(exhibitionDAO, item1DAO)
-        exhibitionDAO = exhibitionService.addExhibitionItem(exhibitionDAO, item2DAO)
-        exhibitionService.addExhibitionItem(exhibitionDAO, item3DAO)
+        exhibitionDAO1 = exhibitionService.addExhibitionItem(exhibitionDAO1, item1DAO)
+        exhibitionDAO1 = exhibitionService.addExhibitionItem(exhibitionDAO1, item2DAO)
+        exhibitionService.addExhibitionItem(exhibitionDAO1, item3DAO)
 
 
         print("\n\n\t( ͡o ͜ʖ ͡o) Database Seed Completed (╯ ͠° ͟ʖ ͡°)╯┻━┻\n")

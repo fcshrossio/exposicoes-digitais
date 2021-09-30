@@ -12,6 +12,8 @@ export class ExhibitionShowcaseComponent implements OnInit {
 
   exhibition? : Exhibition
 
+  exhibitions: Exhibition[] = []
+
   selectedSection: number = 0
 
   constructor(
@@ -20,11 +22,17 @@ export class ExhibitionShowcaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.getExhibition()
+    this.getExhibitions()
   }
 
   getExhibition(): void 
   {
     this.exhibitionService.getExhibition(5).subscribe( exhibition => this.exhibition = exhibition)
+  }
+
+  getExhibitions(): void 
+  {
+    this.exhibitionService.getExhibitions().subscribe( exhibitions => this.exhibitions = exhibitions)
   }
 
   changeSection(selection:number): void

@@ -1,0 +1,17 @@
+<div class="w-100">
+   
+    <app-carousel [exhibitions]="exhibitions"></app-carousel>
+    
+    <div class="m-0 p-5 w-100 text-center" style="background-color: #f0f1f2;">
+        <h2>Exposições Digitais</h2>
+        <h4 class="mx-auto w-75">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</h4>
+    </div>
+  
+    <div class="container-fluid mt-5" >
+      <div  class="row mx-auto w-75">
+          <div *ngFor="let exhibition of exhibitions"  class="col-3">
+            <app-exhibition-card [exhibition]="exhibition"></app-exhibition-card>
+          </div>
+      </div>
+    </div>
+  </div>
