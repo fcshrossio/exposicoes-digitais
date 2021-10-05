@@ -1,9 +1,11 @@
 .section {
-    background-color: #F0F1F2 ;
-    padding: 7px 20px 5px 20px;
-    color: #868E96;
+    background-color: var(--secondary-color) ;
+    justify-content: center;
+    padding: 11px 23px 8px 23px;
+    color: var(--text-grey);
     border-radius: 30px;
     text-align: center;
+    font-family: "OpenSansBold";
 }
 
 .section:hover {
