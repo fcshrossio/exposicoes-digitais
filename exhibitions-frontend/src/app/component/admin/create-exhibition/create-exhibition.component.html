@@ -1,24 +1,24 @@
 <div class="container p-5">
-    <div class="container-fluid" >
-        <div class="row h-25" >
-            <div class="col" style="margin: 1px; padding: 1px;">
-                <a class="btn btn-primary w-100 p-3 createnav" routerLink="/admin/exhibitions/create/title" [routerLinkActive]="['createnav-active']">NOME DA EXPOSIÇÃO</a>
+    <div class="container" >
+        <div class="row"  style="min-height: 4rem;">
+            <div class="col-auto col-xs-12" style="margin: 1px; padding: 1px;">
+                <a class="btn btn-primary createnav px-2 py-3" routerLink="/admin/exhibitions/create/title" [routerLinkActive]="['createnav-active']">NOME DA EXPOSIÇÃO</a>
             </div>
-            <div class="col" style="margin: 1px; padding: 1px;">
-                <a class="btn btn-primary w-100 p-3  createnav" routerLink="/admin/exhibitions/create/introduction" [routerLinkActive]="['createnav-active']">APRESENTAÇÃO</a>
+            <div class="col col-xs-12" style="margin: 1px; padding: 1px;">
+                <a class="btn btn-primary createnav  px-2 py-3" routerLink="/admin/exhibitions/create/introduction" [routerLinkActive]="['createnav-active']">APRESENTAÇÃO</a>
             </div>
-            <div class="col" style="margin: 1px; padding: 1px;">
-                <a class="btn btn-primary w-100 p-3  createnav" routerLink="/admin/exhibitions/create/sections" [routerLinkActive]="['createnav-active']">SECÇÕES</a>
+            <div class="col col-xs-12" style="margin: 1px; padding: 1px;">
+                <a class="btn btn-primary createnav  px-2 py-3" routerLink="/admin/exhibitions/create/sections" [routerLinkActive]="['createnav-active']">SECÇÕES</a>
             </div>
-            <div class="col" style="margin: 1px; padding: 1px;">
-                <a class="btn btn-primary w-100 p-3  createnav" routerLink="/admin/exhibitions/create/map" [routerLinkActive]="['createnav-active']">MAPA</a>
+            <div class="col col-xs-12" style="margin: 1px; padding: 1px;">
+                <a class="btn btn-primary createnav  px-2 py-3" routerLink="/admin/exhibitions/create/map" [routerLinkActive]="['createnav-active']">MAPA</a>
             </div>
-            <div class="col" style="margin: 1px; padding: 1px;">
-                <a class="btn btn-primary w-100 p-3  createnav" routerLink="/admin/exhibitions/create/auxiliary-items" [routerLinkActive]="['createnav-active']">MATERIAIS AUXILIARES</a>
+            <div class="col col-xs-12" style="margin: 1px; padding: 1px;">
+                <a class="btn btn-primary createnav px-2 py-3" routerLink="/admin/exhibitions/create/auxiliary-items" [routerLinkActive]="['createnav-active']">MATERIAIS AUXILIARES</a>
             </div>
         </div>
         <router-outlet></router-outlet>
-        <div class="row h-25">
+        <div class="row" style="min-height: 4rem;">
             <div class="col-auto" style="margin: 1px; padding: 1px;">
                 <button class="btn btn-primary w-100 p-3 createnav createnav-cancel" (click)="clearExhibition()">CANCELAR</button>
             </div>

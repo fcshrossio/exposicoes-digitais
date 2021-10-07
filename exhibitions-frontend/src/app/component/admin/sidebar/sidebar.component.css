@@ -20,7 +20,7 @@
   font-weight: 600;
   text-decoration: none;
   border-radius: 0;
-  color: white;
+  color:#B9D8E4;
 }
 
 .sidebar-sublink {
@@ -28,6 +28,5 @@
 }
 
 .sidebar-active {
-  background-color: #f0f1f2;
-  color:  #167fa6;
+  color:  white;
 }

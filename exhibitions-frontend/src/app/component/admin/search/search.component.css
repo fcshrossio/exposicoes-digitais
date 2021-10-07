@@ -1,0 +1,19 @@
+.createnav {
+    background-color: white;
+    color: var(--primary-color);
+    border: 0;
+    box-shadow: none;
+    font-family: "OpenSansBold";
+
+}
+
+.createnav-active {
+    background-color: var(--primary-color);
+    color: white;
+   
+}
+
+.createnav-cancel {
+    background-color: #666d73;
+    color: white;
+}

@@ -1,4 +1,4 @@
-<a *ngIf="exhibition" routerLink="/exhibition/{{exhibition.id}}" class="card" style="width: 18rem;">
+<a *ngIf="exhibition" routerLink="/exhibition/{{exhibition.id}}" class="card text-decoration-none" style="width: 18rem;">
     <img class="card-img-top" src="https://www.fillmurray.com/540/600" alt="Card image cap">
     <div class="card-img-overlay">
       <div class="row p-2">
@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="row p-2" style="margin-top: 200px;">
-        <div class="col-auto ml-auto mt-auto">
+        <div class="col-auto ml-auto mt-auto" (click)="open(content)">
           <img src="https://www.fillmurray.com/30/30"/>
         </div>
       </div>
@@ -18,6 +18,22 @@
     <div class="card-body">
       <h3 class="card-title">{{exhibition.title}}</h3>
       <p class="card-text">{{exhibition.subtitle}}</p>
-      <p class="card-text" >15 mins</p>
+    </div>
+    <div class="card-footer">
+      <p>15 mins</p>
     </div>
   </a>
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+     
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+  </ng-template>

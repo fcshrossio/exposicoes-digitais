@@ -1,5 +1,5 @@
 .a {
-    text-decoration: none!;
+    text-decoration: none!important;
 }
 
 .card {
@@ -9,6 +9,7 @@
     color: var(--text-color);
     border: 0;
     background-color: var(--secondary-color);
+    font-family: 'OpenSans';
 }
 
 .card:hover {
@@ -46,5 +47,25 @@
 }
 
 .card-body {
-    height: 18em;
+    height: 15em;
+}
+
+.card-footer {
+    border: none;
+    background-color: inherit;
+    border-radius: 15px;
+    font-family: 'OpenSans';
+}
+
+
+::ng-deep .modal-xl {
+    margin: 2px;
+    max-width: none;
+    max-height: 100vh;
+    height: 50vh;
+  }
+
+::ng-deep .modal-content {
+    
+    height: 98vh;
 }

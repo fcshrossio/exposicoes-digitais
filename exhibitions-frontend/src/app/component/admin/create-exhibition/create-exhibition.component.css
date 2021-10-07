@@ -1,10 +1,15 @@
 .createnav {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    text-align: center;
     background-color: #e0e4e5;
     color: gray;
+    font-family: "OpenSansBold";
+    text-decoration: none;
     border: 0;
     box-shadow: none;
-    font-weight: 600;
-
 }
 
 .createnav-active {
