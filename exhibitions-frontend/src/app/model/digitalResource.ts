@@ -3,20 +3,26 @@ export class DigitalResource {
     title : string;
     description : string;
     dataProvider : string;
-    date : Date;
+    date : string;
     physicalDescription : string;
     authors : string;
     subject : string;
+    rights : string[];
+    digitalFromat : string[];
+    identifier : string
 
     constructor(
         id : number,
         title : string,
         description : string,
         dataProvider : string,
-        date : Date,
+        date : string,
         physicalDescription : string,
         authors: string,
-        subject: string
+        subject: string,
+        rights: string[],
+        digitalFormat: string[],
+        identifier: string
     ) {
         this.id = id;
         this.title = title
@@ -26,5 +32,8 @@ export class DigitalResource {
         this.physicalDescription = physicalDescription
         this.authors = authors
         this.subject = subject
+        this.rights = rights
+        this.digitalFromat = digitalFormat
+        this.identifier = identifier
     }
 }

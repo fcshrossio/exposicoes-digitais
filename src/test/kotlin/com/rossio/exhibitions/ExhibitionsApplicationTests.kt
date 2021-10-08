@@ -29,7 +29,7 @@ class ExhibitionsApplicationTests {
 
         var editorDTO = EditorDTO(editorDAO)
 
-        var digitalDAO = DigitalResourceDAO(uuid++, "NOME","", "", Date(), "", "", "")
+        var digitalDAO = DigitalResourceDAO(uuid++, "NOME","", "", "", "", emptyList(), "", emptyList(), "", "" )
 
         val digitalDTO = DigitalResourceDTO(digitalDAO)
 

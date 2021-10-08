@@ -1,6 +1,5 @@
 package com.rossio.exhibitions.config
 
-import com.rossio.exhibitions.controller.ExhibitionController
 import com.rossio.exhibitions.controller.ExhibitionItemController
 import com.rossio.exhibitions.dto.*
 import com.rossio.exhibitions.enums.Status
@@ -51,11 +50,54 @@ class DbSeeder (
 
         collaboratorService.addOneCollaborator(collaboratorDAO)
 
-        var digital = DigitalResourceDTO(0,"Título", "Descrição", "Cinemateca", Date(0), "Descrição fisica do objecto", "autores", "assunto")
+        /**
+        var digital = DigitalResourceDTO(
+            0,
+            "Título",
+            "Descrição",
+            "Cinemateca",
+            Date(0),
+            "Descrição fisica do objecto",
+            "autores",
+            "assunto",
+            "",
+            ""
+        )
+        **/
+        var digital1 = DigitalResourceDTO(
+            0,
+            "Avenida Infante Dom Henrique",
+            "",
+            "Lisboa. Arquivo Municipal",
+            "1999",
+            "28 x 35 cm Prova cromogénea plastificada",
+            listOf("Letria, Pedro. 1965-, fotógrafo"),
+            "assunto",
+            listOf("Documento original não comunicável.","Direitos reservados. Reprodução mediante autorização do proprietário da imagem."),
+            "Image",
+            "https://www.fillmurray.com/540/600"
+        )
 
-        val digitalDAO = digitalResourceService.addOneDigitalResource(DigitalResourceDAO(digital))
+        var digital2 = DigitalResourceDTO(
+            0,
+            "A Rainha Dona Amélia e Dom Luís Filipe na festa de Santa Eufémia, promovida pelos empregados do palácio da Pena",
+            "",
+            "Lisboa. Arquivo Municipal",
+            "1904-08-07",
+            "Dimensão: 9 x 12 cmSuporte: Negativo de gelatina e prata em nitrato de celulose",
+            listOf("Novais, António. 1854-1940, fotógrafo"),
+            "assunto",
+            listOf("Documento original não comunicável.","Direitos reservados. Reprodução mediante autorização do proprietário da imagem."),
+            "Image",
+            "https://www.fillmurray.com/540/600"
+        )
 
-        digital = DigitalResourceDTO(digitalDAO)
+
+        val digitalDAO1 = digitalResourceService.addOneDigitalResource(DigitalResourceDAO(digital1))
+        val digitalDAO2 = digitalResourceService.addOneDigitalResource(DigitalResourceDAO(digital2))
+
+        digital1 = DigitalResourceDTO(digitalDAO1)
+        digital2 = DigitalResourceDTO(digitalDAO2)
 
         val exhibitionDTO1 = ExhibitionDTO(
         0, //id
@@ -63,7 +105,7 @@ class DbSeeder (
         mutableListOf(), //items
         "A Festa",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu hendrerit augue. Donec vehicula tristique augue id semper. Sed sed dictum magna, et laoreet sit.",
-        digital, //cover
+        digital2, //cover
         mutableListOf(), //collaborator list
         Date(), // creation date
         Status.PUBLIC, //status
@@ -77,7 +119,7 @@ class DbSeeder (
             mutableListOf(), //items
             "A música somos nós",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu hendrerit augue. Donec vehicula tristique augue id semper. Sed sed dictum magna, et laoreet sit.",
-            digital, //cover
+            digital1, //cover
             mutableListOf(), //collaborator list
             Date(), // creation date
             Status.PUBLIC, //status
@@ -91,7 +133,7 @@ class DbSeeder (
             mutableListOf(), //items
             "Cinema Portugues",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu hendrerit augue. Donec vehicula tristique augue id semper. Sed sed dictum magna, et laoreet sit.",
-            digital, //cover
+            digital1, //cover
             mutableListOf(), //collaborator list
             Date(), // creation date
             Status.PUBLIC, //status
@@ -105,7 +147,7 @@ class DbSeeder (
             mutableListOf(), //items
             "Cinema Portugues",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu hendrerit augue. Donec vehicula tristique augue id semper. Sed sed dictum magna, et laoreet sit.",
-            digital, //cover
+            digital1, //cover
             mutableListOf(), //collaborator list
             Date(), // creation date
             Status.PUBLIC, //status
@@ -113,10 +155,10 @@ class DbSeeder (
             mutableListOf()     //list of resources
         )
 
-        var exhibitionDAO1:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO1, editorDAO, digitalDAO))
-        var exhibitionDAO2:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO2, editorDAO, digitalDAO))
-        var exhibitionDAO3:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO3, editorDAO, digitalDAO))
-        var exhibitionDAO4:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO3, editorDAO, digitalDAO))
+        var exhibitionDAO1:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO1, editorDAO, digitalDAO1))
+        var exhibitionDAO2:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO2, editorDAO, digitalDAO1))
+        var exhibitionDAO3:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO3, editorDAO, digitalDAO1))
+        var exhibitionDAO4:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO3, editorDAO, digitalDAO1))
 
         var item1DAO : ExhibitionItemDAO = ExhibitionItemDAO(0,0,"As razões e funções da festa", "TEXT As razões e funções da festa", mutableListOf())
         var item2DAO : ExhibitionItemDAO =  ExhibitionItemDAO(0,0,"Os tempos da festa", "TEXT Os tempos da festa", mutableListOf())

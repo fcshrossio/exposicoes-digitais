@@ -9,13 +9,16 @@ data class DigitalResourceDTO(
     val title: String,
     val description: String,
     val dataProvider: String,
-    val date: Date,
+    val date: String,
     val physicalDescription: String,
-    val authors: String,
-    val subject: String
+    val authors: List<String>,
+    val subject: String,
+    val rights: List<String>,
+    val digitalFormat: String,
+    val identifier : String
 ){
 
-    constructor() : this(0,"","","",Date(), "", "", "")
+    constructor() : this(0,"","","","", "", emptyList(), "", emptyList(),"","")
 
-    constructor(resource: DigitalResourceDAO) : this(resource.id,resource.title,resource.description,resource.dataProvider,resource.date,resource.physicalDescription,resource.authors,resource.subject)
+    constructor(resource: DigitalResourceDAO) : this(resource.id,resource.title,resource.description,resource.dataProvider,resource.date,resource.physicalDescription,resource.authors,resource.subject, resource.rights, resource.digitalFormat, resource.identifier)
 }

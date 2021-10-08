@@ -35,9 +35,9 @@ class DigitalControllerTest {
 
         val mapper = jacksonObjectMapper()
 
-        val resourceDTO1 = DigitalResourceDTO(1L,"Nome","", "", Date(), "", "", "")
+        val resourceDTO1 = DigitalResourceDTO(1L,"Nome","", "", "", "", emptyList(), "", emptyList(),"","")
 
-        val resourceDTO2 = DigitalResourceDTO(2L,"Nome","", "", Date(), "", "", "")
+        val resourceDTO2 = DigitalResourceDTO(2L,"Nome","", "","", "", emptyList(), "", emptyList(),"","")
 
         val resourcesList = listOf<DigitalResourceDTO>(resourceDTO1, resourceDTO2)
 

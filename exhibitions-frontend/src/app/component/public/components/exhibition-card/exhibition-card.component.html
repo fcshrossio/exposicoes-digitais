@@ -1,5 +1,5 @@
 <a *ngIf="exhibition" routerLink="/exhibition/{{exhibition.id}}" class="card text-decoration-none" style="width: 18rem;">
-    <img class="card-img-top" src="https://www.fillmurray.com/540/600" alt="Card image cap">
+    <img *ngIf="exhibition.cover" class="card-img-top" src="{{exhibition.cover.identifier}}" alt="https://www.fillmurray.com/540/600">
     <div class="card-img-overlay">
       <div class="row p-2">
         <div class="col-auto">

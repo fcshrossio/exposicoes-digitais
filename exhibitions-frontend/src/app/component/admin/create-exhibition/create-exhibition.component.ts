@@ -28,7 +28,7 @@ export class CreateExhibitionComponent implements OnInit {
   {
     var editor = new Editor(2,"Marco")
     this.exhibition = new Exhibition("", "",editor)
-    var cover = new DigitalResource(4,"NOME","","",new Date(), "","","")
+    var cover = new DigitalResource(4,"NOME","","","", "","","",[],[],"")
     this.exhibition.addCoverPhoto(cover)
     this.exhibitionService.createSessionExhibition(this.exhibition)
    
