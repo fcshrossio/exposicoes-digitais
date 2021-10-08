@@ -21,6 +21,8 @@
 .card-img-top {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px; 
+    height: 330px;
+    object-fit: cover;
 }
 
 .overlay {
@@ -32,6 +34,7 @@
     left: 0;
     right: 0;
     opacity: 1;
+    height: 330px;
 }
 
 .card-title {

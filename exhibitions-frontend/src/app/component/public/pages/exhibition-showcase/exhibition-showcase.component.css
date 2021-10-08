@@ -1,7 +1,7 @@
 .section {
     background-color: var(--secondary-color) ;
     justify-content: center;
-    padding: 11px 23px 8px 23px;
+    padding: 12px 23px 8px 23px;
     color: var(--text-grey);
     border-radius: 30px;
     text-align: center;

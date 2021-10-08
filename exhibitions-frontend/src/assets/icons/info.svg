@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28" height="28" viewBox="0 0 28 28">
+  <defs>
+    <filter id="Path_3062" x="0" y="0" width="28" height="28" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feFlood flood-color="#666d73" flood-opacity="0.396"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_3063" x="7.719" y="4.156" width="11.969" height="19.799" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1.5" result="blur-2"/>
+      <feFlood flood-color="#666d73" flood-opacity="0.396"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Icon_ficha_recurso" data-name="Icon ficha recurso" transform="translate(4.5 3.5)">
+    <g id="Group_2393" data-name="Group 2393">
+      <g transform="matrix(1, 0, 0, 1, -4.5, -3.5)" filter="url(#Path_3062)">
+        <path id="Path_3062-2" data-name="Path 3062" d="M9.5,17.813A8.313,8.313,0,1,1,17.813,9.5,8.312,8.312,0,0,1,9.5,17.813ZM9.5,19A9.5,9.5,0,1,0,0,9.5,9.5,9.5,0,0,0,9.5,19Z" transform="translate(4.5 3.5)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, -4.5, -3.5)" filter="url(#Path_3063)">
+        <path id="Path_3063-2" data-name="Path 3063" d="M9.386,7.167l-2.719.341-.1.451.534.1c.349.083.418.209.342.557l-.876,4.118c-.23,1.065.125,1.566.96,1.566a2.459,2.459,0,0,0,1.74-.71l.1-.494a1.316,1.316,0,0,1-.815.292c-.327,0-.445-.229-.361-.633Zm.083-2.479A1.188,1.188,0,1,1,8.281,3.5,1.188,1.188,0,0,1,9.469,4.688Z" transform="translate(5.72 4.16)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

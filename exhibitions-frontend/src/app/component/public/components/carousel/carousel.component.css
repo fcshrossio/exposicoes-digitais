@@ -4,3 +4,7 @@
     left: 20%;
     bottom: 40%;
 }
+
+.img-fluid {
+    object-fit: cover
+}

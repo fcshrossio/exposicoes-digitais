@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Exhibition } from 'src/app/model/exhibition';
 import { ExhibitionService } from 'src/app/service/exhibition.service';
 import { isTemplateSpan } from 'typescript';
@@ -17,6 +18,7 @@ export class ExhibitionShowcaseComponent implements OnInit {
   selectedSection: number = 0
 
   constructor(
+    private route: ActivatedRoute,
     private exhibitionService: ExhibitionService
     ) { }
 
@@ -27,7 +29,8 @@ export class ExhibitionShowcaseComponent implements OnInit {
 
   getExhibition(): void 
   {
-    this.exhibitionService.getExhibition(5).subscribe( exhibition => this.exhibition = exhibition)
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.exhibitionService.getExhibition(id).subscribe( exhibition => this.exhibition = exhibition)
   }
 
   getExhibitions(): void 

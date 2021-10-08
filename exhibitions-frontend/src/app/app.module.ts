@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { ExhibitionDetailComponent } from './component/exhibition-detail/exhibition-detail.component';
 import { HomepageComponent } from './component/public/pages/homepage/homepage.component';
 import { DashboardComponent } from './component/admin/dashboard/dashboard.component';
-import { ExhibitionCreationFormComponent } from './component/exhibition-creation-form/exhibition-creation-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginFormComponent } from './component/form/login-form/login-form.component';
@@ -47,7 +46,6 @@ import { ExhibitionCardComponent } from './component/public/components/exhibitio
     ExhibitionDetailComponent,
     HomepageComponent,
     DashboardComponent,
-    ExhibitionCreationFormComponent,
     LoginFormComponent,
     AdminComponent,
     HeaderAdminComponent,

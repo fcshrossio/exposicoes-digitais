@@ -1,19 +1,32 @@
-<div *ngIf="exhibition" class="container">
-    <div class="w-100">
-        <img class="img-fluid w-100" src="https://www.fillmurray.com/800/200"/>
+<div *ngIf="exhibition" class="container-fluid">
+    <div *ngIf="exhibition.cover" class="w-100">
+        <img class="img-fluid w-100" style="height:88vh; object-fit: cover;"src="{{exhibition.cover.identifier}}"/>
     </div>
-    <div class="row justify-content-center mx-auto align-items-center text-align-center mt-3">
-        <div class="col-auto">
-            <img src="https://www.fillmurray.com/30/30"/>
+    <div class="row">
+        <div class="row justify-content-center text-align-center mt-3 ml-2">
+            <div class="col-auto">
+                <img src="https://www.fillmurray.com/30/30"/>
+            </div>
         </div>
-        <div class="col-auto">
-            <img src="https://www.fillmurray.com/30/30"/>
+        <div class="row w-50 justify-content-center mx-auto align-items-center text-align-center mt-3">
+            <div class="col-auto">
+                <img src="https://www.fillmurray.com/30/30"/>
+            </div>
+            <div class="col-auto">
+                <img src="https://www.fillmurray.com/30/30"/>
+            </div>
+            <div class="col-auto">
+                <img src="https://www.fillmurray.com/30/30"/>
+            </div>
+            <div class="col-auto">
+                <img src="https://www.fillmurray.com/30/30"/>
+            </div>
+ 
         </div>
-        <div class="col-auto">
-            <img src="https://www.fillmurray.com/30/30"/>
-        </div>
-        <div class="col-auto">
-            <img src="https://www.fillmurray.com/30/30"/>
+        <div class="row justify-content-center text-align-center mt-3 mr-2">
+            <div class="col-auto">
+                <img src="https://www.fillmurray.com/30/30"/>
+            </div>
         </div>
     </div>
     <div  class="row justify-content-center mx-auto align-items-center text-align-center mt-5">
@@ -22,6 +35,7 @@
         </div>
     </div>
     <div *ngIf="exhibition" class="">
+        <h3>{{exhibition.items[selectedSection].title}}</h3>
         {{exhibition.items[selectedSection].text}}
     </div>
     <div class="row justify-content-center mx-auto align-items-center text-align-center">
