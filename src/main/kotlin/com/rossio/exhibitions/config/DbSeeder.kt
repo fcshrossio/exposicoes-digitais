@@ -110,7 +110,8 @@ class DbSeeder (
         Date(), // creation date
         Status.PUBLIC, //status
         mutableListOf(),  //list of keywords
-        mutableListOf()     //list of resources
+        mutableListOf(),     //list of resources
+        ""
         )
 
         val exhibitionDTO2 = ExhibitionDTO(
@@ -124,7 +125,8 @@ class DbSeeder (
             Date(), // creation date
             Status.PUBLIC, //status
             mutableListOf(),  //list of keywords
-            mutableListOf()     //list of resources
+            mutableListOf(),    //list of resources
+            ""
         )
 
         val exhibitionDTO3 = ExhibitionDTO(
@@ -138,7 +140,9 @@ class DbSeeder (
             Date(), // creation date
             Status.PUBLIC, //status
             mutableListOf(),  //list of keywords
-            mutableListOf()     //list of resources
+            mutableListOf(),     //list of resources
+            ""
+
         )
 
         val exhibitionDTO4 = ExhibitionDTO(
@@ -152,7 +156,8 @@ class DbSeeder (
             Date(), // creation date
             Status.PUBLIC, //status
             mutableListOf(),  //list of keywords
-            mutableListOf()     //list of resources
+            mutableListOf(),    //list of resources
+            ""
         )
 
         var exhibitionDAO1:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO1, editorDAO, digitalDAO1))

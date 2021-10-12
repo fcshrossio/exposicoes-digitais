@@ -1,1 +1,27 @@
-<p>auxiliary-items-form works!</p>
+<div *ngIf="exhibition&&auxiliaryMaterials">
+    <form #titleForm="ngForm">
+        <div class="row p-3" style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
+            <div class="container-fluid m-1 mt-4" style="min-height: 200px;">
+                <div class="mt-5">
+                    <label for="title" class="text">RECURSOS ONLINE NOVA FCSH </label>
+                    <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="auxiliaryMaterials.onlineResourcesNova"></angular-editor>
+                </div>
+
+                <div class="mt-5">
+                    <label for="title" class="text">BIBLIOGRAFIA </label>
+                    <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="auxiliaryMaterials.bibliography"></angular-editor>
+                </div>
+
+                <div class="mt-5">
+                    <label for="title" class="text">RECURSOS AUDIOVISUAIS </label>
+                    <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="auxiliaryMaterials.audiovisualResources"></angular-editor>
+                </div>
+
+                <div class="mt-5">
+                    <label for="title" class="text">SÍTIOS NA INTERNET </label>
+                    <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="auxiliaryMaterials.webPlaces"></angular-editor>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Exhibition } from 'src/app/model/exhibition';
 import { ExhibitionItem} from 'src/app/model/exhibitionItem'
 import { ExhibitionService } from 'src/app/service/exhibition.service';
@@ -18,7 +18,9 @@ export class IntroductionFormComponent implements OnInit {
   keywords: string[] = ["Teste1", "Teste2"]
 
 
-  exhibition? : Exhibition 
+  @Input() exhibition? : Exhibition 
+
+  @Output() exhibitionChange:EventEmitter<Exhibition> = new EventEmitter<Exhibition>()
 
 
   constructor(

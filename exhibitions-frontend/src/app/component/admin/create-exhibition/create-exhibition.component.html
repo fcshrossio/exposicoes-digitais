@@ -1,23 +1,50 @@
-<div class="container p-5">
-    <div class="container" >
-        <div class="row"  style="min-height: 4rem;">
+<div class="container-fluid">
+    <div class="container-fluid p-5" >
+        <div class="row w-100"  style="min-height: 4rem;">
             <div class="col-auto col-xs-12" style="margin: 1px; padding: 1px;">
-                <a class="btn btn-primary createnav px-2 py-3" routerLink="/admin/exhibitions/create/title" [routerLinkActive]="['createnav-active']">NOME DA EXPOSIÇÃO</a>
+                <button class="btn btn-primary createnav px-4 py-3" (click)="changeStep(0)">NOME DA EXPOSIÇÃO</button>
             </div>
             <div class="col col-xs-12" style="margin: 1px; padding: 1px;">
-                <a class="btn btn-primary createnav  px-2 py-3" routerLink="/admin/exhibitions/create/introduction" [routerLinkActive]="['createnav-active']">APRESENTAÇÃO</a>
+                <button class="btn btn-primary createnav  px-2 py-3" (click)="changeStep(1)">APRESENTAÇÃO</button>
             </div>
             <div class="col col-xs-12" style="margin: 1px; padding: 1px;">
-                <a class="btn btn-primary createnav  px-2 py-3" routerLink="/admin/exhibitions/create/sections" [routerLinkActive]="['createnav-active']">SECÇÕES</a>
+                <button class="btn btn-primary createnav  px-2 py-3" (click)="changeStep(2)">SECÇÕES</button>
             </div>
             <div class="col col-xs-12" style="margin: 1px; padding: 1px;">
-                <a class="btn btn-primary createnav  px-2 py-3" routerLink="/admin/exhibitions/create/map" [routerLinkActive]="['createnav-active']">MAPA</a>
+                <a class="btn btn-primary createnav  px-2 py-3" (click)="changeStep(3)">MAPA</a>
             </div>
             <div class="col col-xs-12" style="margin: 1px; padding: 1px;">
-                <a class="btn btn-primary createnav px-2 py-3" routerLink="/admin/exhibitions/create/auxiliary-items" [routerLinkActive]="['createnav-active']">MATERIAIS AUXILIARES</a>
+                <a class="btn btn-primary createnav px-2 py-3" (click)="changeStep(4)" >MATERIAIS AUXILIARES</a>
+            </div>
+            <div class="col col-xs-12" style="margin: 1px; padding: 1px;">
+                <a class="btn btn-primary createnav px-2 py-3" (click)="changeStep(5)" >FICHA TÉCNICA</a>
             </div>
         </div>
-        <router-outlet></router-outlet>
+        
+        <div [ngSwitch]="step">
+            <div *ngSwitchCase = "0">
+                <app-title-form [(exhibition)]="exhibition"></app-title-form>
+            </div>
+            <div *ngSwitchCase = "1">
+                <app-introduction-form [(exhibition)]="exhibition"></app-introduction-form>
+            </div>
+            <div *ngSwitchCase = "2">
+                <app-section-form [exhibition]="exhibition"></app-section-form>
+            </div>
+            <div *ngSwitchCase = "3">
+                <app-map-form [exhibition]="exhibition"></app-map-form>
+            </div>
+            <div *ngSwitchCase = "4">
+                <app-auxiliary-items-form [exhibition]="exhibition"></app-auxiliary-items-form>
+            </div>
+            <div *ngSwitchCase = "5">
+                <app-credits-form [exhibition]="exhibition"></app-credits-form>
+            </div>
+            <div *ngSwitchDefault>
+                <app-title-form [exhibition]="exhibition"></app-title-form>
+            </div>
+        </div>
+        <!-- <router-outlet></router-outlet> -->
         <div class="row" style="min-height: 4rem;">
             <div class="col-auto" style="margin: 1px; padding: 1px;">
                 <button class="btn btn-primary w-100 p-3 createnav createnav-cancel" (click)="clearExhibition()">CANCELAR</button>

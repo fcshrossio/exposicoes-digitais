@@ -38,7 +38,8 @@ class ExhibitionsApplicationTests {
         val exhibitionDTO1 = ExhibitionDTO(
             uuid++, editorDTO, emptyList(), "titulo", "subtitulo", digitalDTO, emptyList(), dia,
             Status.PRIVATE, mutableListOf(),
-            emptyList()
+            emptyList(),
+            ""
         )
 
         val exhibitionDTO2 = ExhibitionDTO(
@@ -52,7 +53,8 @@ class ExhibitionsApplicationTests {
             dia,
             Status.PUBLIC,
             mutableListOf(),
-            emptyList()
+            emptyList(),
+            ""
         )
 
         val exhibitionDTOList = listOf(exhibitionDTO1, exhibitionDTO2)

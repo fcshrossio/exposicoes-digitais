@@ -38,6 +38,7 @@ import { ExhibitionPageComponent } from './component/public/pages/exhibition-pag
 import { ExhibitionShowcaseComponent } from './component/public/pages/exhibition-showcase/exhibition-showcase.component';
 import { CarouselComponent } from './component/public/components/carousel/carousel.component';
 import { ExhibitionCardComponent } from './component/public/components/exhibition-card/exhibition-card.component';
+import { CreditsFormComponent } from './component/admin/create-exhibition/credits-form/credits-form.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { ExhibitionCardComponent } from './component/public/components/exhibitio
     ExhibitionPageComponent,
     ExhibitionShowcaseComponent,
     CarouselComponent,
-    ExhibitionCardComponent
+    ExhibitionCardComponent,
+    CreditsFormComponent
   ],
   imports: [
     HttpClientModule,

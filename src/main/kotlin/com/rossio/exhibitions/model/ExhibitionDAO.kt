@@ -36,7 +36,8 @@ data class ExhibitionDAO(
     @Enumerated(EnumType.STRING)
     var keywords: MutableList<Keywords>,
     @OneToMany
-    var digitalResources: List<DigitalResourceDAO>
+    var digitalResources: List<DigitalResourceDAO>,
+    var credits : String
 ) {
 
     constructor(exhibition : ExhibitionDTO, editor: EditorDAO, cover: DigitalResourceDAO ) : this(
@@ -50,11 +51,12 @@ data class ExhibitionDAO(
         exhibition.creationDate,
         exhibition.status,
         exhibition.keywords,
-        exhibition.digitalResources.map { DigitalResourceDAO(it)}
+        exhibition.digitalResources.map { DigitalResourceDAO(it)},
+        exhibition.credits
     )
 
     constructor() : this(0, EditorDAO(), mutableListOf(), "","", DigitalResourceDAO(), mutableListOf(),Date(),Status.PRIVATE,
-        mutableListOf(), mutableListOf()) {
+        mutableListOf(), mutableListOf(),"") {
 
     }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Exhibition } from 'src/app/model/exhibition';
 import { Marker } from 'src/app/model/marker';
 import { ExhibitionService } from 'src/app/service/exhibition.service';
@@ -21,7 +21,7 @@ import XYZ from 'ol/source/XYZ';
 export class MapFormComponent implements OnInit {
 
 
-  exhibition? : Exhibition
+  @Input() exhibition? : Exhibition
 
   title : string = ""
 

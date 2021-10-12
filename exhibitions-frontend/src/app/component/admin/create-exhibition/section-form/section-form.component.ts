@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Exhibition } from 'src/app/model/exhibition';
 import { ExhibitionItem } from 'src/app/model/exhibitionItem';
 import { ExhibitionService } from 'src/app/service/exhibition.service';
@@ -15,7 +15,7 @@ export class SectionFormComponent implements OnInit {
   choosenSection = 0;
 
  
-  exhibition? : Exhibition
+  @Input() exhibition? : Exhibition
 
   htmlContent : any
 

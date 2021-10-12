@@ -18,7 +18,8 @@ data class ExhibitionDTO(
     val creationDate: Date,
     val status: Status,
     val keywords: MutableList<Keywords>,
-    val digitalResources: List<DigitalResourceDTO>
+    val digitalResources: List<DigitalResourceDTO>,
+    val credits: String
 )
 {
 
@@ -33,7 +34,8 @@ data class ExhibitionDTO(
         exhibition.creationDate,
         exhibition.status,
         exhibition.keywords,
-        exhibition.digitalResources.map { DigitalResourceDTO(it) }
+        exhibition.digitalResources.map { DigitalResourceDTO(it) },
+        exhibition.credits
     )
 
 

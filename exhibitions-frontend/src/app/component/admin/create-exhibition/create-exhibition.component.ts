@@ -11,17 +11,21 @@ import { ExhibitionService } from 'src/app/service/exhibition.service';
 })
 export class CreateExhibitionComponent implements OnInit {
   
-  exhibition?: Exhibition;
+  exhibition: Exhibition = new Exhibition("", "",new Editor(2,"Marco"))
+
+  step = 0
 
   constructor(
     private exhibitionService: ExhibitionService
   ) { }
 
   ngOnInit(): void {
-    this.exhibition = this.exhibitionService.getSessionExhibition()
-    if(!this.exhibition){
-      this.initializeExhibition()
-    }
+ 
+
+    // this.exhibition = this.exhibitionService.getSessionExhibition()
+    // if(!this.exhibition){
+    //   this.initializeExhibition()
+    // }
   }
 
   initializeExhibition()
@@ -30,7 +34,7 @@ export class CreateExhibitionComponent implements OnInit {
     this.exhibition = new Exhibition("", "",editor)
     var cover = new DigitalResource(4,"NOME","","","", "","","",[],[],"")
     this.exhibition.addCoverPhoto(cover)
-    this.exhibitionService.createSessionExhibition(this.exhibition)
+    //this.exhibitionService.createSessionExhibition(this.exhibition)
    
   }
 
@@ -63,11 +67,15 @@ export class CreateExhibitionComponent implements OnInit {
 
   previewExhibition(){
     console.log("preview exhibition")
-    console.log(this.exhibitionService.getSessionExhibition())
+    console.log(this.exhibition)
   }
 
   publishExhibition(){
     console.log("publish exhibition")
+  }
+
+  changeStep(step: number){
+    this.step = step
   }
 
 }
