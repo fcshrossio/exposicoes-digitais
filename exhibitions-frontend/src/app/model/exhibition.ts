@@ -18,6 +18,10 @@ export class Exhibition {
     items : ExhibitionItem[]
     digitalResources: DigitalResource[];
     credits: string;
+    onlineResourcesNova: string;
+    bibliography: string;
+    audiovisualResources: string;
+    webPlaces: string;
 
     constructor(
         title: string,
@@ -37,7 +41,11 @@ export class Exhibition {
          
         ]
         this.digitalResources = []
-        this.credits = ""
+        this.credits = "",
+        this.onlineResourcesNova = ""
+        this.bibliography = ""
+        this.audiovisualResources = ""
+        this.webPlaces = ""
     }
 
     addCoverPhoto(digitalResource : DigitalResource) {

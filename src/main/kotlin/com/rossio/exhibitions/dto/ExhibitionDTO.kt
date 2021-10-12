@@ -19,7 +19,11 @@ data class ExhibitionDTO(
     val status: Status,
     val keywords: MutableList<Keywords>,
     val digitalResources: List<DigitalResourceDTO>,
-    val credits: String
+    val credits: String,
+    var onlineResourcesNova : String,
+    var bibliography : String,
+    var audioVisualResources: String,
+    var webPlaces: String
 )
 {
 
@@ -35,7 +39,11 @@ data class ExhibitionDTO(
         exhibition.status,
         exhibition.keywords,
         exhibition.digitalResources.map { DigitalResourceDTO(it) },
-        exhibition.credits
+        exhibition.credits,
+        exhibition.onlineResourcesNova,
+        exhibition.bibliography,
+        exhibition.audioVisualResources,
+        exhibition.webPlaces
     )
 
 

@@ -1,25 +1,25 @@
-<div *ngIf="exhibition&&auxiliaryMaterials">
+<div *ngIf="exhibition">
     <form #titleForm="ngForm">
         <div class="row p-3" style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
             <div class="container-fluid m-1 mt-4" style="min-height: 200px;">
                 <div class="mt-5">
                     <label for="title" class="text">RECURSOS ONLINE NOVA FCSH </label>
-                    <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="auxiliaryMaterials.onlineResourcesNova"></angular-editor>
+                    <angular-editor id="editor1"  [(ngModel)]="exhibition.onlineResourcesNova"  [config]="editorConfig"></angular-editor>
                 </div>
 
                 <div class="mt-5">
                     <label for="title" class="text">BIBLIOGRAFIA </label>
-                    <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="auxiliaryMaterials.bibliography"></angular-editor>
+                    <angular-editor id="editor2"  [(ngModel)]="exhibition.bibliography" [config]="editorConfig"></angular-editor>
                 </div>
 
                 <div class="mt-5">
                     <label for="title" class="text">RECURSOS AUDIOVISUAIS </label>
-                    <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="auxiliaryMaterials.audiovisualResources"></angular-editor>
+                    <angular-editor id="editor3"  [(ngModel)]="exhibition.audiovisualResources" [config]="editorConfig"></angular-editor>
                 </div>
 
                 <div class="mt-5">
                     <label for="title" class="text">SÍTIOS NA INTERNET </label>
-                    <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="auxiliaryMaterials.webPlaces"></angular-editor>
+                    <angular-editor id="editor4"  [(ngModel)]="exhibition.webPlaces" [config]="editorConfig"></angular-editor>
                 </div>
             </div>
         </div>

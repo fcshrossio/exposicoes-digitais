@@ -5,7 +5,7 @@
                 <div class="row w-100">
                     <div class="col-auto">
                         <label for="title" class="text">TÍTULO DA EXPOSIÇÃO </label>
-                        <span [hidden] = "title.valid">
+                        <span class="text" style="color: red;" [hidden]  = "title.valid">
                             *
                           </span>
                     </div>
@@ -20,7 +20,7 @@
                 <div class="row w-100 mt-5">
                     <div class="col-auto">
                         <label for="subtitle" class="text">DESCRIÇÃO </label>
-                        <span [hidden] = "subtitle.valid">
+                        <span class="text" style="color: red;" [hidden] = "subtitle.valid">
                             *
                           </span>
                     </div>
@@ -39,8 +39,11 @@
                 <div class="row w-100 px-3">
                     <input type="text" class="form-control" id="description" [(ngModel)]="exhibition.subtitle" name="subtitle" >
                 </div>
-                <div [hidden] = "title.valid && subtitle.valid ">
-                  * Obrigatório
+                <div class="text mt-5" [hidden] = "title.valid && subtitle.valid ">
+                    <span style="color: red;" [hidden] = "subtitle.valid">
+                        *
+                      </span>
+                   Obrigatório
                 </div>
        
             </div>

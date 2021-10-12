@@ -100,18 +100,22 @@ class DbSeeder (
         digital2 = DigitalResourceDTO(digitalDAO2)
 
         val exhibitionDTO1 = ExhibitionDTO(
-        0, //id
-        editorDTO, //editor
-        mutableListOf(), //items
-        "A Festa",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu hendrerit augue. Donec vehicula tristique augue id semper. Sed sed dictum magna, et laoreet sit.",
-        digital2, //cover
-        mutableListOf(), //collaborator list
-        Date(), // creation date
-        Status.PUBLIC, //status
-        mutableListOf(),  //list of keywords
-        mutableListOf(),     //list of resources
-        ""
+            0, //id
+            editorDTO, //editor
+            mutableListOf(), //items
+            "A Festa",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu hendrerit augue. Donec vehicula tristique augue id semper. Sed sed dictum magna, et laoreet sit.",
+            digital2, //cover
+            mutableListOf(), //collaborator list
+            Date(), // creation date
+            Status.PUBLIC, //status
+            mutableListOf(),  //list of keywords
+            mutableListOf(),     //list of resources
+            "",
+            "",
+            "",
+            "",
+            ""
         )
 
         val exhibitionDTO2 = ExhibitionDTO(
@@ -126,6 +130,10 @@ class DbSeeder (
             Status.PUBLIC, //status
             mutableListOf(),  //list of keywords
             mutableListOf(),    //list of resources
+            "",
+            "",
+            "",
+            "",
             ""
         )
 
@@ -141,6 +149,10 @@ class DbSeeder (
             Status.PUBLIC, //status
             mutableListOf(),  //list of keywords
             mutableListOf(),     //list of resources
+            "",
+            "",
+            "",
+            "",
             ""
 
         )
@@ -157,6 +169,10 @@ class DbSeeder (
             Status.PUBLIC, //status
             mutableListOf(),  //list of keywords
             mutableListOf(),    //list of resources
+            "",
+            "",
+            "",
+            "",
             ""
         )
 

@@ -39,6 +39,10 @@ class ExhibitionsApplicationTests {
             uuid++, editorDTO, emptyList(), "titulo", "subtitulo", digitalDTO, emptyList(), dia,
             Status.PRIVATE, mutableListOf(),
             emptyList(),
+            "",
+            "",
+            "",
+            "",
             ""
         )
 
@@ -54,6 +58,10 @@ class ExhibitionsApplicationTests {
             Status.PUBLIC,
             mutableListOf(),
             emptyList(),
+            "",
+            "",
+            "",
+            "",
             ""
         )
 

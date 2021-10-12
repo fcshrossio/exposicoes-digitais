@@ -37,7 +37,11 @@ data class ExhibitionDAO(
     var keywords: MutableList<Keywords>,
     @OneToMany
     var digitalResources: List<DigitalResourceDAO>,
-    var credits : String
+    var credits : String,
+    var onlineResourcesNova : String,
+    var bibliography : String,
+    var audioVisualResources: String,
+    var webPlaces: String
 ) {
 
     constructor(exhibition : ExhibitionDTO, editor: EditorDAO, cover: DigitalResourceDAO ) : this(
@@ -52,11 +56,15 @@ data class ExhibitionDAO(
         exhibition.status,
         exhibition.keywords,
         exhibition.digitalResources.map { DigitalResourceDAO(it)},
-        exhibition.credits
+        exhibition.credits,
+        exhibition.onlineResourcesNova,
+        exhibition.bibliography,
+        exhibition.audioVisualResources,
+        exhibition.webPlaces
     )
 
     constructor() : this(0, EditorDAO(), mutableListOf(), "","", DigitalResourceDAO(), mutableListOf(),Date(),Status.PRIVATE,
-        mutableListOf(), mutableListOf(),"") {
+        mutableListOf(), mutableListOf(),"","","","","") {
 
     }
 
