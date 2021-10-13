@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { Exhibition } from 'src/app/model/exhibition';
 import { ExhibitionItem} from 'src/app/model/exhibitionItem'
 import { ExhibitionService } from 'src/app/service/exhibition.service';
@@ -24,28 +25,16 @@ export class IntroductionFormComponent implements OnInit {
 
 
   constructor(
-    private exhibitionService: ExhibitionService
   ) { }
 
   ngOnInit(): void {
-    
-    this.exhibition = this.exhibitionService.getSessionExhibition()
-    if(this.exhibition.items.length == 0)
-    {
-      this.initializeIntroductionItem(this.exhibition)
-    } 
-    
-
-    
   }
 
-  initializeIntroductionItem(exhibition : Exhibition) {
-    console.log("item introdução criado")
-    var introductionItem = new ExhibitionItem(0,0,"introduction","Apresentação","")
-    exhibition.keywords = this.keywords
-    exhibition.items.push(introductionItem)
-    this.exhibitionService.saveSessionExhibition(exhibition)
+  
+  onSubmit(){
+    this.exhibitionChange.emit(this.exhibition)
   }
+
 
   onFileDropped($event : any) {
     //console.log("on file dropped")
@@ -62,9 +51,9 @@ export class IntroductionFormComponent implements OnInit {
     if(this.exhibition)
     {
       this.exhibition.keywords = this.exhibition.keywords.filter((keyword) => keywordRemove != keyword)
-      //save
-      this.exhibitionService.saveSessionExhibition(this.exhibition)
     }
   }
+
+
 
 }

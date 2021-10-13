@@ -1,26 +1,57 @@
-<div class="row p-3" style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
-    <div class="container-fluid" style="min-height: 200px;">
-        <div *ngIf="exhibition&&exhibition.items[0]" class="container p-1">
-            <form #introductionForm="ngForm">
-                <div class="dropit" appDraganddrop (fileDropped)="onFileDropped($event)">
-                    <h3>drag n drop</h3>
+<div *ngIf="exhibition">
+    <form #introductionForm="ngForm">
+        <div class="row p-3" style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
+            <div class="container-fluid m-1 mt-4" style="min-height: 200px;">
+                <div class="row w-100">
+                    <div class="col-auto">
+                        <label for="cover" class="text">RECURSO - IMAGEM DE DESTAQUE </label>
+                    </div>
+                    <div class="col-auto ml-auto">
+                        <label for="cover" class="text">?  </label>
+                    </div>
                 </div>
-                <div *ngIf="file.name">
-                    <h6>{{file.name}}</h6>
+                <div class="row w-100 px-3">
+                    <input required type="text" class="form-control" id="title" [(ngModel)]="exhibition.title" name="title" #title="ngModel" >
                 </div>
                 
-                <label > LEGENDA EDITÁVEL</label>
-                <input type="text" id="editableName" [(ngModel)]="editableName" name="editableName" class="form-control">
-                <label>TEXTO DE INTRODUÇÃO</label>
-                <textarea class="form-control" [(ngModel)]="exhibition.items[0].text" name="text" id="text" rows="6" ></textarea>
-                <label>ASSUNTOS/PALAVRAS CHAVE</label>
+                <div class="row w-100 mt-5">
+                    <div class="col-auto">
+                        <label for="subtitle" class="text">LEGENDA EDITÁVEL - IMAGEM DE DESTAQUE </label>
+                    </div>
+                </div>
+                <div class="row w-100 px-3">
+                    <input required type="text" class="form-control" id="title" [(ngModel)]="exhibition.title" name="title" #title="ngModel" >
+                </div>
+                <div class="row w-100 mt-5">
+                    <div class="col-auto">
+                        <label for="title" class="text">TEXTO DE INTRODUÇÃO </label>
+                    </div>
+                    <div class="col-auto ml-auto ">
+                        <label for="subtitle" class="text"> ( Máximo 3500 caracteres )  </label>
+                    </div>
+                </div>
+                <div class="row w-100 px-3">
+                    <angular-editor id="introduction" [(ngModel)]="exhibition.introduction" name="introduction" #introduction="ngModel"></angular-editor>
+                    <!-- <textarea rows="3" required  type="text" class="form-control" id="introduction" [(ngModel)]="exhibition.introduction"  name="introduction" #introduction="ngModel"></textarea> -->
+                </div>
+                <div class="mt-5">
+                    <label for="title" class="text">ASSUNTOS/PALAVRAS-CHAVE </label>
+                </div>
                 <div class="form-control" style="height: 200px; padding: 20px" id="exampleFormControlTextarea2">
                     <span *ngFor="let keyword of exhibition.keywords" class="keyword"><span>{{keyword}}</span> <button style="background-color: transparent; border: 0;" (click)="removeKeyword(keyword)"><h6 class="keyword-delete"> X</h6></button></span>
                 </div>
-            </form>
-        
+       
+            </div>
 
-            
         </div>
-    </div>
+
+        <div class="row" style="min-height: 4rem;">
+            <div class="col-auto" style="margin: 1px; padding: 1px;">
+                <button class="btn btn-primary w-100 p-3 createnav createnav-cancel">CANCELAR</button>
+            </div>
+       
+        </div>
+
+  
+    </form>
 </div>

@@ -8,7 +8,7 @@ export class Exhibition {
     id : number;
     title : string;
     subtitle : string;
-
+    introduction : string;
     cover? : DigitalResource;
     editor : Editor;
     collaborators : Collaborator[];
@@ -31,6 +31,7 @@ export class Exhibition {
         this.id = 0;
         this.title = title
         this.subtitle = subtitle
+        this.introduction = ""
         this.editor = editor
         this.collaborators = []
         this.creationDate = (new Date())

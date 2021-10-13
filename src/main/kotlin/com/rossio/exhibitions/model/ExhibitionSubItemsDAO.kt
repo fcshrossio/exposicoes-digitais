@@ -24,9 +24,12 @@ data class SubTextDAO(
     @GeneratedValue
     val id: Long,
     val position: Long,
-    val text: String,
+    val itemType: String,
+    @ElementCollection
+    @CollectionTable
+    val textSections: List<String>,
     @OneToMany
     val digitalResources : List<DigitalResourceDAO>
 ) {
-    constructor(subitem: SubTextItemDTO) : this(subitem.id, subitem.position, subitem.text, subitem.digitalResources.map { DigitalResourceDAO(it) })
+    constructor(subitem: SubTextItemDTO) : this(subitem.id, subitem.position, subitem.itemType, subitem.textSections, subitem.digitalResources.map { DigitalResourceDAO(it) })
 }

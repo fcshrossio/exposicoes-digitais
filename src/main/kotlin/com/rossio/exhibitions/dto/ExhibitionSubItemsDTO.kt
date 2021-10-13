@@ -15,10 +15,11 @@ data class SubAboutItemDTO(
 data class SubTextItemDTO(
     val id: Long,
     val position: Long,
-    val text: String,
+    val itemType: String,
+    val textSections: List<String>,
     val digitalResources: List<DigitalResourceDTO>
 ) {
-    constructor(item: SubTextDAO) : this(item.id,item.position, item.text, item.digitalResources.map { DigitalResourceDTO(it) })
+    constructor(item: SubTextDAO) : this(item.id,item.position, item.itemType, item.textSections, item.digitalResources.map { DigitalResourceDTO(it) })
 
-    constructor() : this(0,0,"", emptyList())
+    constructor() : this(0,0, "", emptyList(), emptyList())
 }

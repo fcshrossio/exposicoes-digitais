@@ -1,34 +1,70 @@
-<div *ngIf="exhibition" class="row p-1"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
-    <div class="col-fluid draggable mr-1"  draggable="true" appDraganddroplist (click)="changeSection(section.id)" *ngFor="let section of exhibition.items" [id]="section.id">
-        <h5 class="btn createnav" [ngStyle]="{ 'background-color' : section.id -1 === choosenSection  ? '#167fa6' : '#e0e4e5'}"  [id]="section.id">{{section.id}}</h5>
+<div *ngIf="exhibition" class="row w-100 p-3 text"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
+    <div class="col-fluid draggable m-1"  draggable="true" appDraganddroplist (click)="changeSection(section.id)" *ngFor="let section of exhibition.items" [id]="section.id">
+        <button [className]="section.id -1 === choosenSection  ? 'btn createnav createnav-active' : 'btn createnav'"  [id]="section.id">{{section.id}}</button>
     </div>
-    <div class="col-fluid addsection" (click)="addSection()">
-        <h5>+</h5>
+    <div class="col-fluid addsection m-1" >
+        <button class="btn addsection" (click)="addSection()">+</button>
+    </div>
+    <div *ngFor="let section of availableSections"  class="col-fluid addsection m-1">
+        <button class="btn addsection">+</button>
     </div>
 </div>
 <div *ngIf="exhibition" class="row p-2"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
     <div *ngIf="exhibition.items[choosenSection]" class="container-fluid" style="min-height: 200px;">
-        <input type="text" id="{{'exhibitionItemTitle' + exhibition.items[choosenSection].id" [(ngModel)]="exhibition.items[choosenSection].title" name="exhibitionItemName" class="form-control">
-        <div class="mt-5">
-            <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent"></angular-editor>
-        </div>
-        <div class="row p-3">
-            <div class="col m-1 dropit">
-                <h5>+</h5>
-            </div>
-            <div class="col m-1 dropit">
-                
-            </div>
-            <div class="col m-1 dropit">
-                
-            </div>
-            <div class="col m-1 dropit">
-                
+        <div class="row w-100  mt-5">
+            <div class="col-auto">
+                <label for="cover" class="text">NOME SECÇÃO </label>
             </div>
         </div>
-        
+        <div class="row w-100 px-3">
+            <input required type="text" class="form-control" id="{{'exhibitionItemTitle' + exhibition.items[choosenSection].id" [(ngModel)]="exhibition.items[choosenSection].title" name="exhibitionItemName" #title="ngModel" >
+        </div>
+
+        <div class="row w-100 mt-5 mb-5">
+            <div (click)="addSubSection('text')" class="col-1">
+                <img  src="https://www.fillmurray.com/60/40"/>
+            </div>
+            <div (click)="addSubSection('texttext')" class="col-1">
+                <img src="https://www.fillmurray.com/40/40"/>
+                <img src="https://www.fillmurray.com/40/40"/>
+            </div>
+            <div (click)="addSubSection('textresource')" class="col-1">
+                <img src="https://www.fillmurray.com/40/40"/>
+                <img src="https://www.fillmurray.com/40/40"/>
+            </div>
+            <div (click)="addSubSection('resourcetext')" class="col-1">
+                <img src="https://www.fillmurray.com/40/40"/>
+                <img src="https://www.fillmurray.com/40/40"/>
+            </div>
+            <div (click)="addSubSection('resourceresource')" class="col-1">
+                <img src="https://www.fillmurray.com/40/40"/>
+                <img src="https://www.fillmurray.com/40/40"/>
+            </div>
+            <div (click)="addSubSection('resource')" class="col-1">
+                <img src="https://www.fillmurray.com/60/40"/>
+            </div>
+            <div (click)="addSubSection('resourcefull')" class="col-1">
+                <img src="https://www.fillmurray.com/80/40"/>
+            </div>
+        </div>
     </div>
 </div>
-<div class="row p-2j"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
-    <h4>SUBSECÇÃO</h4>
+<div class="row p-2 my-2"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngFor="let subsection of subsections">
+    <h3>{{subsection.itemType}}</h3>
+    <div [ngSwitch]="subsection.itemType">
+        <div *ngSwitchCase = "'text'">
+            <div class="row">
+                <div class="col-11">
+                    <angular-editor [(ngModel)]="htmlContent"></angular-editor>
+                </div>
+                <div class="col-1">
+                    t
+                </div>
+            </div>
+        </div>
+        <div *ngSwitchDefault>
+            <angular-editor [(ngModel)]="htmlContent"></angular-editor>
+        </div>
+    </div>
+    
 </div>

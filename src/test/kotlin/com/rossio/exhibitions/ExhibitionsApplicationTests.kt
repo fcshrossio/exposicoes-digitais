@@ -36,7 +36,7 @@ class ExhibitionsApplicationTests {
         var dia = Date(0);
 
         val exhibitionDTO1 = ExhibitionDTO(
-            uuid++, editorDTO, emptyList(), "titulo", "subtitulo", digitalDTO, emptyList(), dia,
+            uuid++, editorDTO, emptyList(), "titulo", "subtitulo","", digitalDTO, emptyList(), dia,
             Status.PRIVATE, mutableListOf(),
             emptyList(),
             "",
@@ -52,6 +52,7 @@ class ExhibitionsApplicationTests {
             emptyList(),
             "titulo2",
             "suntitulo2",
+            "",
             digitalDTO,
             emptyList(),
             dia,
