@@ -49,22 +49,96 @@
         </div>
     </div>
 </div>
-<div class="row p-2 my-2"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngFor="let subsection of subsections">
-    <h3>{{subsection.itemType}}</h3>
-    <div [ngSwitch]="subsection.itemType">
-        <div *ngSwitchCase = "'text'">
-            <div class="row">
-                <div class="col-11">
-                    <angular-editor [(ngModel)]="htmlContent"></angular-editor>
-                </div>
-                <div class="col-1">
-                    t
+<div *ngIf="exhibition&&exhibition.items[choosenSection]">
+    <div  class="row p-2 my-2"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngFor="let subsection of exhibition.items[choosenSection].subItems">
+        <h3>{{subsection.itemType}}</h3>
+        <div [ngSwitch]="subsection.itemType">
+            <div *ngSwitchCase = "'text'">
+                <div class="row w-100">
+                    <div class="col-11">
+                        <angular-editor [(ngModel)]="htmlContent"></angular-editor>
+                    </div>
+                    <div class="col-1">
+                        t
+                    </div>
                 </div>
             </div>
+            <div *ngSwitchCase = "'texttext'">
+                <div class="row w-100">
+                    <div class="col-5">
+                        <angular-editor [(ngModel)]="htmlContent"></angular-editor>
+                    </div>
+                    <div class="col-5">
+                        <angular-editor [(ngModel)]="htmlContent"></angular-editor>
+                    </div>
+                    <div class="col-1">
+                        t
+                    </div>
+                </div>
+            </div>
+            <div *ngSwitchCase = "'textresource'">
+                <div class="row w-100">
+                    <div class="col-5">
+                        <angular-editor [(ngModel)]="htmlContent"></angular-editor>
+                    </div>
+                    <div class="col-5">
+                        <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
+                    </div>
+                    <div class="col-1">
+                        t
+                    </div>
+                </div>
+            </div>
+            <div *ngSwitchCase = "'resourcetext'">
+                <div class="row w-100">
+                    <div class="col-5">
+                        <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
+                    </div>
+                    <div class="col-5">
+                        <angular-editor [(ngModel)]="htmlContent"></angular-editor>
+                    </div>
+                    <div class="col-1">
+                        t
+                    </div>
+                </div>
+            </div>
+            <div *ngSwitchCase = "'resourceresource'">
+                <div class="row w-100">
+                    <div class="col-5">
+                        <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
+                    </div>
+                    <div class="col-5">
+                        <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
+                    </div>
+                    <div class="col-1">
+                        t
+                    </div>
+                </div>
+            </div>
+            <div *ngSwitchCase = "'resource'">
+                <div class="row w-100">
+                    <div class="col-11">
+                        <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
+                    </div>
+                    <div class="col-1">
+                        t
+                    </div>
+                </div>
+            </div>
+            <div *ngSwitchCase = "'resourcefull'">
+                <div class="row w-100">
+                    <div class="col-11">
+                        <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
+                    </div>
+                    <div class="col-1">
+                        t
+                    </div>
+                </div>
+            </div>
+            <div *ngSwitchDefault>
+                <angular-editor [(ngModel)]="htmlContent"></angular-editor>
+            </div>
         </div>
-        <div *ngSwitchDefault>
-            <angular-editor [(ngModel)]="htmlContent"></angular-editor>
-        </div>
+        
     </div>
-    
 </div>

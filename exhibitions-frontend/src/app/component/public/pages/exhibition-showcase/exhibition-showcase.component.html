@@ -36,7 +36,7 @@
     </div>
     <div *ngIf="exhibition" class="">
         <h3>{{exhibition.items[selectedSection].title}}</h3>
-        {{exhibition.items[selectedSection].text}}
+        {{exhibition.items[selectedSection]}}
     </div>
     <div class="row justify-content-center mx-auto align-items-center text-align-center">
         <div class="col-auto section" (click)="changeSection(selectedSection+1)">

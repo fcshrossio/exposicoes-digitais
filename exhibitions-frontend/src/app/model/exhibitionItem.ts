@@ -1,23 +1,24 @@
+import { ExhibitionSubItem } from "./exhibitionSubItem";
+
 export class ExhibitionItem {
 
     id : number;
     exhibitionId: number;
-    itemType: string;
+    position: number;
     title:string;
-    text: string;
+    subItems: ExhibitionSubItem[]
 
     constructor(
         id: number,
         exhibitionId: number,
-        itemType: string,
+        position:number,
         title:string,
-        text: string
     ) {
 
         this.id = id;
         this.exhibitionId = exhibitionId;
+        this.position = position;
         this.title = title
-        this.text = text;
-        this.itemType = itemType
+        this.subItems = []
     }
 }

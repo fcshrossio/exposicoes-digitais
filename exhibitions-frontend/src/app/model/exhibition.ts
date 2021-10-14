@@ -1,4 +1,3 @@
-import { mockExhibitionItems } from "../mock-exhibitions";
 import { Collaborator } from "./collaborator";
 import { DigitalResource } from "./digitalResource";
 import { Editor } from "./editor";

@@ -20,7 +20,6 @@ export class SectionFormComponent implements OnInit {
  
   @Input() exhibition? : Exhibition
 
-  subsections : ExhibitionSubItem[] = []
 
   htmlContent : any
 
@@ -28,6 +27,11 @@ export class SectionFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(this.exhibition)
+    {
+      this.availableSections = new Array(this.sectionLimit-1-this.exhibition.items[this.choosenSection].subItems.length)
+    }
+   
   }
 
   changeSection(id : number) {
@@ -36,15 +40,15 @@ export class SectionFormComponent implements OnInit {
 
   addSection() {
     if(this.exhibition && this.exhibition.items.length < this.sectionLimit)
-    this.exhibition.items.push(new ExhibitionItem(this.exhibition.items.length+1,0,"","",""))
+    this.exhibition.items.push(new ExhibitionItem(this.exhibition.items.length+1,0,this.exhibition.items.length+1,""))
     this.availableSections.pop()
   }
 
   addSubSection(type : string){
     if(this.exhibition)
     {
-        var subsection = new ExhibitionSubItem(0,this.exhibition.id,0,this.subsections.length,type)
-        this.subsections.push( subsection)
+        var subsection = new ExhibitionSubItem(0,this.exhibition.id,0,this.exhibition.items[this.choosenSection].subItems.length,type)
+        this.exhibition.items[this.choosenSection].subItems.push( subsection)
         
     }
   }

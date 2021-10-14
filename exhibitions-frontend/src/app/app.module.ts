@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ExhibitionDetailComponent } from './component/exhibition-detail/exhibition-detail.component';
 import { HomepageComponent } from './component/public/pages/homepage/homepage.component';
 import { DashboardComponent } from './component/admin/dashboard/dashboard.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -44,7 +43,6 @@ import { CreditsFormComponent } from './component/admin/create-exhibition/credit
 @NgModule({
   declarations: [
     AppComponent,
-    ExhibitionDetailComponent,
     HomepageComponent,
     DashboardComponent,
     LoginFormComponent,
