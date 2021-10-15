@@ -1,7 +1,7 @@
 package com.rossio.exhibitions.model
 
 import com.rossio.exhibitions.dto.SubAboutItemDTO
-import com.rossio.exhibitions.dto.SubTextItemDTO
+import com.rossio.exhibitions.dto.SubItemDTO
 import javax.persistence.*
 
 @Entity
@@ -19,7 +19,7 @@ data class SubAboutDAO(
 
 
 @Entity
-data class SubTextDAO(
+data class SubItemDAO(
     @Id
     @GeneratedValue
     val id: Long,
@@ -31,5 +31,7 @@ data class SubTextDAO(
     @OneToMany
     val digitalResources : List<DigitalResourceDAO>
 ) {
-    constructor(subitem: SubTextItemDTO) : this(subitem.id, subitem.position, subitem.itemType, subitem.textSections, subitem.digitalResources.map { DigitalResourceDAO(it) })
+    constructor() : this(0,0,"texttext", mutableListOf(), mutableListOf())
+
+    constructor(subitem: SubItemDTO) : this(subitem.id, subitem.position, subitem.itemType, subitem.textSections, subitem.digitalResources.map { DigitalResourceDAO(it) })
 }

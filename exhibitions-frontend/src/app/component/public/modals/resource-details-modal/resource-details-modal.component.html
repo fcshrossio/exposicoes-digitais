@@ -1,32 +1,7 @@
-<a *ngIf="exhibition" routerLink="/exhibition/{{exhibition.id}}" class="card text-decoration-none"  style="width: 18rem;">
-    <img *ngIf="exhibition.cover" class="card-img-top"  src="../../../../../assets/images/0001_M2.jpg" >
-    <div class="card-img-overlay">
-      <div class="row p-2">
-        <div class="col-auto">
-          <img src="../../../../../assets/icons/info.svg"/>
-        </div>
-        <div class="col-auto ml-auto">
-          <img src="../../../../../assets/icons/share.svg"/>
-        </div>
-      </div>
-      <div class="row p-2" style="margin-top: 200px;">
-        <div class="col-auto ml-auto mt-auto" (click)="open()">
-          <img src="../../../../../assets/icons/info.svg"/>
-        </div>
-      </div>
-    </div>
-    <div class="card-body">
-      <h3 class="card-title">{{exhibition.title}}</h3>
-      <p class="card-text">{{exhibition.subtitle}}</p>
-    </div>
-    <div class="card-footer">
-      <p>15 mins</p>
-    </div>
-  </a>
-  <!-- <ng-template #content let-modal>
+<div *ngIf="digitalResource">
     <div class="modal-header w-100">
       <h4 class="modal-title w-100" style="text-align: center;" id="modal-basic-title"><img src="https://www.fillmurray.com/30/30"/><img src="https://www.fillmurray.com/30/30"/><img src="https://www.fillmurray.com/30/30"/><img src="https://www.fillmurray.com/30/30"/></h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -63,44 +38,44 @@
             </div>
           </div>
         </div>
-        <div class="col-9">
+        <div class="col-9 text">
             <h2> Lorem Ipsum</h2>
             <div class="row">
                 <div class="col-6">
                     <h6>DESCR</h6>
-                    Lorem upsium
+                    {{digitalResource.description}}
                 </div>
                 <div class="col-6">
                   <h6>ASSUNTO</h6>
-                  Lorem upsium
+                  {{digitalResource.subject}}
                 </div>
                 <div class="col-6">
                   <h6>AUTOR(ES)</h6>
-                  Lorem upsium
+                  {{digitalResource.authors}}
                 </div>
                 <div class="col-6">
                   <h6>PROVEDOR</h6>
-                  Lorem upsium
+                  {{digitalResource.dataProvider}}
                 </div>
                 <div class="col-6">
                   <h6>DATA</h6>
-                  Lorem upsium
+                  {{digitalResource.date}}
                 </div>
                 <div class="col-6">
                     <h6>REFERÊNCIA RECURSO</h6>
-                    Lorem upsium
+                    {{digitalResource.identifier}}
                 </div>
                 <div class="col-6">
                   <h6>DESCR. FISICA</h6>
-                  Lorem upsium
+                  {{digitalResource.physicalDescription}}
                 </div>
                 <div class="col-6">
                   <h6>CONDIÇÕES DE REPRODUÇÃO</h6>
-                  Lorem upsium
+                  {{digitalResource.rights}}
                 </div>
 
             </div>
         </div>
      </div>
     </div>
-  </ng-template> -->
+  </div>

@@ -15,6 +15,7 @@ import java.util.*
 class DbSeeder (
     val exhibitionService: ExhibitionService,
     val exhibitionItemService: ExhibitionItemService,
+    val exhibitionSubItemService: ExhibitionSubItemService,
     val exhibitionItemController: ExhibitionItemController,
     val editorService: EditorService,
     val adminService: AdminService,
@@ -188,13 +189,19 @@ class DbSeeder (
         var item1DAO : ExhibitionItemDAO = ExhibitionItemDAO(0,0,"As razões e funções da festa", "TEXT As razões e funções da festa", mutableListOf())
         var item2DAO : ExhibitionItemDAO =  ExhibitionItemDAO(0,0,"Os tempos da festa", "TEXT Os tempos da festa", mutableListOf())
         var item3DAO : ExhibitionItemDAO =  ExhibitionItemDAO(0,0,"A festa na sociedade e a sociedade na festa", "TEXT A festa na sociedade e a sociedade na festa", mutableListOf())
+
         item1DAO = exhibitionItemService.createOneExhibitionItem(item1DAO)
         item2DAO = exhibitionItemService.createOneExhibitionItem(item2DAO)
         item3DAO = exhibitionItemService.createOneExhibitionItem(item3DAO)
+
         exhibitionDAO1 = exhibitionService.addExhibitionItem(exhibitionDAO1, item1DAO)
         exhibitionDAO1 = exhibitionService.addExhibitionItem(exhibitionDAO1, item2DAO)
         exhibitionService.addExhibitionItem(exhibitionDAO1, item3DAO)
 
+        var subitem1DAO : SubItemDAO = SubItemDAO(0,0,"textresource", mutableListOf("este","é","o texto"), mutableListOf())
+
+        subitem1DAO = exhibitionSubItemService.createSubItem(subitem1DAO)
+        exhibitionItemService.addSubItem(item1DAO,subitem1DAO)
 
         print("\n\n\t( ͡o ͜ʖ ͡o) Database Seed Completed (╯ ͠° ͟ʖ ͡°)╯┻━┻\n")
 

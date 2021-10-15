@@ -14,7 +14,7 @@ interface MarkersRepository : JpaRepository<MarkerDAO, Long>
 
 interface SubAboutRepository : JpaRepository<SubAboutDAO, Long>
 
-interface SubTextRepository : JpaRepository<SubTextDAO, Long>
+interface SubTextRepository : JpaRepository<SubItemDAO, Long>
 
 interface UserRepository : JpaRepository<UserDAO, Long> {
     fun findUserByUsername(username: String): Optional<UserDAO>

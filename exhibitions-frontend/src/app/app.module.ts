@@ -28,7 +28,6 @@ import { DraganddropDirective } from './component/admin/create-exhibition/introd
 import { DraganddroplistDirective } from './component/admin/create-exhibition/section-form/draganddroplist.directive';
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { ExhibitionListComponent } from './component/public/exhibition-list/exhibition-list.component';
 import { PublicRoutingModule } from './component/public/public-routing.module';
 import { PublicComponent } from './component/public/public.component';
 import { HeaderComponent } from './component/public/header/header.component';
@@ -38,6 +37,8 @@ import { ExhibitionShowcaseComponent } from './component/public/pages/exhibition
 import { CarouselComponent } from './component/public/components/carousel/carousel.component';
 import { ExhibitionCardComponent } from './component/public/components/exhibition-card/exhibition-card.component';
 import { CreditsFormComponent } from './component/admin/create-exhibition/credits-form/credits-form.component';
+import { ResourceDetailsModalComponent } from './component/public/modals/resource-details-modal/resource-details-modal.component';
+import { ResourceShowcaseModalComponent } from './component/public/modals/resource-showcase-modal/resource-showcase-modal.component';
 
 
 @NgModule({
@@ -61,7 +62,6 @@ import { CreditsFormComponent } from './component/admin/create-exhibition/credit
     AuxiliaryItemsFormComponent,
     DraganddropDirective,
     DraganddroplistDirective,
-    ExhibitionListComponent,
     PublicComponent,
     HeaderComponent,
     FooterComponent,
@@ -69,7 +69,9 @@ import { CreditsFormComponent } from './component/admin/create-exhibition/credit
     ExhibitionShowcaseComponent,
     CarouselComponent,
     ExhibitionCardComponent,
-    CreditsFormComponent
+    CreditsFormComponent,
+    ResourceDetailsModalComponent,
+    ResourceShowcaseModalComponent
   ],
   imports: [
     HttpClientModule,

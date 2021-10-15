@@ -3,7 +3,6 @@ package com.rossio.exhibitions.service
 import com.rossio.exhibitions.exception.NotFoundException
 import com.rossio.exhibitions.model.*
 import org.springframework.stereotype.Service
-import java.util.*
 
 @Service
 class ExhibitionSubItemService(
@@ -24,13 +23,18 @@ class ExhibitionSubItemService(
     fun getOneSubAboutItem(id:Long) : SubAboutDAO =
         subAboutRepository.findById(id).orElseThrow { NotFoundException("No Item with id: $id found") }
 
-    fun getAllSubTextItems(): List<SubTextDAO> =
+    fun getAllSubTextItems(): List<SubItemDAO> =
         subTextRepository.findAll()
 
-    fun getOneSubTextItem(id:Long) : SubTextDAO =
+    fun getOneSubTextItem(id:Long) : SubItemDAO =
         subTextRepository.findById(id).orElseThrow { NotFoundException("No Item with id: $id found") }
 
-
+    fun createSubItem(subItemDAO: SubItemDAO): SubItemDAO {
+        if(subItemDAO.id == 0L){
+            return subTextRepository.save(subItemDAO)
+        }
+        throw Exception("id is not 0")
+    }
     fun deleteSubTextItem(id: Long) =
         subTextRepository.delete(getOneSubTextItem(id))
 

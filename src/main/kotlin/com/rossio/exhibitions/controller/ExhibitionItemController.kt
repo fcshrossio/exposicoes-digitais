@@ -85,22 +85,23 @@ class ExhibitionItemController(
     fun deleteSubAboutItem(@PathVariable id: Long) =
         exhibitionItemService.removeSubAbout(exhibitionSubItemService.getOneSubAboutItem(id))
 
-    @Operation(summary = "Get All Sub Text Items ")
-    @GetMapping("/subtext")
-    fun getAllSubTextItems() =
-        exhibitionSubItemService.getAllSubTextItems().map { SubTextItemDTO(it) }
+    @Operation(summary = "Get All Sub Items ")
+    @GetMapping("/subitems")
+    fun getAllSubItems() =
+        exhibitionSubItemService.getAllSubTextItems().map { SubItemDTO(it) }
 
 
 
-    @Operation(summary = "Create Sub Text Items")
-    @PostMapping("/{itemId}/addsubtext")
-    fun createSubText(@PathVariable itemId: Long, @RequestBody subTextItemDTO: SubTextItemDTO) {
+    @Operation(summary = "Create Sub Items")
+    @PostMapping("/{itemId}/addsubitem")
+    fun createSubItem(@PathVariable itemId: Long, @RequestBody subItemDTO: SubItemDTO) {
         val item = exhibitionItemService.getOneExhibitionItem(itemId)
-            exhibitionItemService.addSubText(itemId,SubTextDAO(subTextItemDTO))
+        var subitem = exhibitionSubItemService.createSubItem(SubItemDAO(subItemDTO))
+        exhibitionItemService.addSubItem(item,subitem)
     }
 
-    @Operation(summary = "Remove One Sub Text Item ")
-    @DeleteMapping("/subtext/{itemId}")
+    @Operation(summary = "Remove One Sub Item ")
+    @DeleteMapping("/subitem/{itemId}")
     fun deleteSubTextItem(@PathVariable itemId: Long) =
         exhibitionItemService.removeSubText(exhibitionSubItemService.getOneSubTextItem(itemId))
 

@@ -1,6 +1,5 @@
 package com.rossio.exhibitions.dto
 
-import com.fasterxml.jackson.annotation.*
 import com.rossio.exhibitions.model.*
 
 
@@ -11,7 +10,7 @@ data class ExhibitionItemDTO(
     //val exhibitionId: Long,
     val title: String,
     val text: String,
-    val subItems: List<SubTextItemDTO>
+    val subItems: List<SubItemDTO>
 )
 {
     constructor() : this(0,0, "","", emptyList())
@@ -20,7 +19,7 @@ data class ExhibitionItemDTO(
         exhibitionItemDAO.position,
         exhibitionItemDAO.title,
         exhibitionItemDAO.text,
-        mutableListOf()
+        exhibitionItemDAO.subItems.map { SubItemDTO(it) }
         )
 }
 

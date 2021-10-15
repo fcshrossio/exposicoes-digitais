@@ -1,8 +1,6 @@
 package com.rossio.exhibitions.service
 
-import com.rossio.exhibitions.dto.SubAboutItemDTO
 import com.rossio.exhibitions.exception.NotFoundException
-import com.rossio.exhibitions.exception.WrongTypeException
 import com.rossio.exhibitions.model.*
 
 import com.rossio.exhibitions.model.ExhibitionItemsRepository
@@ -39,8 +37,10 @@ class ExhibitionItemService(
     fun createSubAbout(subItem: SubAboutDAO) : SubAboutDAO =
         subAboutRepository.save(subItem)
 
-    fun createSubText(subItem: SubTextDAO) : SubTextDAO =
-        subTextRepository.save(subItem)
+    fun addSubItem(item: ExhibitionItemDAO, subItem: SubItemDAO) : ExhibitionItemDAO {
+        item.addSubItem(subItem)
+        return exhibitionItemsRepository.save(item)
+    }
 
     fun addMarker(itemId: Long, markerDAO: MarkerDAO) {
      var item = getOneExhibitionItem(itemId)
@@ -65,12 +65,12 @@ class ExhibitionItemService(
 
     }
 
-    fun addSubText(itemId: Long, subTextDAO: SubTextDAO) {
+    fun addSubText(itemId: Long, subItemDAO: SubItemDAO) {
 
 
     }
 
-    fun removeSubText( subTextDAO: SubTextDAO) {
+    fun removeSubText(subItemDAO: SubItemDAO) {
 
     }
 }

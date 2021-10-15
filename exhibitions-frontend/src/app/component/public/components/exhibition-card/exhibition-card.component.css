@@ -61,14 +61,3 @@
 }
 
 
-::ng-deep .modal-xl {
-    margin: 2px;
-    max-width: none;
-    max-height: 100vh;
-    height: 50vh;
-  }
-
-::ng-deep .modal-content {
-    
-    height: 98vh;
-}
