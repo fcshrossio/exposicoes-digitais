@@ -1,0 +1,16 @@
+::ng-deep .modal-xl {
+    padding: 2px;
+    max-width: none;
+    width: 98%;
+    max-height: 100vh;
+    
+  }
+
+::ng-deep .modal-content {
+    
+    height:98vh;
+}
+
+.text{
+    font-family: 'OpenSans';
+}

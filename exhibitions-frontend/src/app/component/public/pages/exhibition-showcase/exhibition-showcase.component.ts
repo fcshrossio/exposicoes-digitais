@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Exhibition } from 'src/app/model/exhibition';
 import { ExhibitionService } from 'src/app/service/exhibition.service';
 import { isTemplateSpan } from 'typescript';
+import { ResourceShowcaseModalComponent } from '../../modals/resource-showcase-modal/resource-showcase-modal.component';
 
 @Component({
   selector: 'app-exhibition-showcase',
@@ -19,7 +21,8 @@ export class ExhibitionShowcaseComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private exhibitionService: ExhibitionService
+    private exhibitionService: ExhibitionService,
+    private modalService: NgbModal
     ) { }
 
   ngOnInit(): void {
@@ -43,6 +46,12 @@ export class ExhibitionShowcaseComponent implements OnInit {
     if(this.exhibition && selection < this.exhibition?.items.length)
     this.selectedSection = selection
     console.log(this.selectedSection)
+  }
+
+  open() {
+    //this.modalService.open(content, { size: 'xl', backdrop: 'static' })
+    const modalRef = this.modalService.open(ResourceShowcaseModalComponent,{ size: 'xl', backdrop: 'static' });
+    modalRef.componentInstance.digitalResource = this.exhibition?.cover;
   }
 
 }

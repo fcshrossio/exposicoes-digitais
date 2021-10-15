@@ -34,9 +34,24 @@
             <h6 [ngStyle]="{'color': i === selectedSection ? 'white' : '#4C4C4C'}">{{item.title}}</h6>
         </div>
     </div>
-    <div *ngIf="exhibition" class="">
+    <div *ngIf="exhibition.items[selectedSection].subItems" style="text-align: center;" class="text-align-center justify-content-center">
         <h3>{{exhibition.items[selectedSection].title}}</h3>
-        {{exhibition.items[selectedSection]}}
+        <div *ngFor="let subitem of exhibition.items[selectedSection].subItems">
+            {{subitem.itemType}}
+            <div [ngSwitch]="subitem.itemType">
+                <div *ngSwitchCase = "'textresource'">
+                    <div class="row">
+                        <div class="col">
+                            text
+                        </div>
+                        <div class="col">
+                            <img (click)="open()" src="https://www.fillmurray.com/130/130"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     <div class="row justify-content-center mx-auto align-items-center text-align-center">
         <div class="col-auto section" (click)="changeSection(selectedSection+1)">
