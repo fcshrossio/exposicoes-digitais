@@ -98,7 +98,7 @@ class ExhibitionItemControllerTest {
 
         val exhibitionItemDAO1 = IntroductionItemDAO(exhibitionItemDTO1, exhibitionDAO1)
 
-        val exhibitionItemDAO2 = TextItemDAO(exhibitionItemDTO2, exhibitionDAO1)
+
 
         val exhibitionItemDAO3 = AboutItemDAO(exhibitionItemDTO3, exhibitionDAO1)
 

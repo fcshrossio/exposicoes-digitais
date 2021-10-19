@@ -1,6 +1,6 @@
-<a *ngIf="exhibition" routerLink="/exhibition/{{exhibition.id}}" class="card text-decoration-none"  style="width: 18rem;">
-    <img *ngIf="exhibition.cover" class="card-img-top"  src="../../../../../assets/images/0001_M2.jpg" >
-    <div class="card-img-overlay">
+<div *ngIf="exhibition" class="card text-decoration-none"  style="width: 18rem;">
+    <img *ngIf="exhibition.cover" class="card-img-top"  src="{{exhibition.cover.identifier}}" >
+    <div routerLink="/exhibition/{{exhibition.id}}" class="card-img-overlay">
       <div class="row p-2">
         <div class="col-auto">
           <img src="../../../../../assets/icons/info.svg"/>
@@ -15,14 +15,17 @@
         </div>
       </div>
     </div>
-    <div class="card-body">
-      <h3 class="card-title">{{exhibition.title}}</h3>
-      <p class="card-text">{{exhibition.subtitle}}</p>
+    <div routerLink="/exhibition/{{exhibition.id}}">
+      <div class="card-body">
+        <h3 class="card-title">{{exhibition.title}}</h3>
+        <p class="card-text">{{exhibition.subtitle}}</p>
+      </div>
+      <div class="card-footer">
+        <p>15 mins</p>
+      </div>
     </div>
-    <div class="card-footer">
-      <p>15 mins</p>
-    </div>
-  </a>
+
+  </div>
   <!-- <ng-template #content let-modal>
     <div class="modal-header w-100">
       <h4 class="modal-title w-100" style="text-align: center;" id="modal-basic-title"><img src="https://www.fillmurray.com/30/30"/><img src="https://www.fillmurray.com/30/30"/><img src="https://www.fillmurray.com/30/30"/><img src="https://www.fillmurray.com/30/30"/></h4>

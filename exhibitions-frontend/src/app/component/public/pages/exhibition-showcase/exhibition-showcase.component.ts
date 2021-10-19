@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DigitalResource } from 'src/app/model/digitalResource';
 import { Exhibition } from 'src/app/model/exhibition';
+import { ExhibitionItem } from 'src/app/model/exhibitionItem';
+import { ExhibitionSubItem } from 'src/app/model/exhibitionSubItem';
 import { ExhibitionService } from 'src/app/service/exhibition.service';
 import { isTemplateSpan } from 'typescript';
 import { ResourceShowcaseModalComponent } from '../../modals/resource-showcase-modal/resource-showcase-modal.component';
@@ -15,9 +18,19 @@ export class ExhibitionShowcaseComponent implements OnInit {
 
   exhibition? : Exhibition
 
+  id : number | undefined
+
   exhibitions: Exhibition[] = []
 
+  exhibitionItems : ExhibitionItem[] = []
+
+  exhibitionSubItems : ExhibitionSubItem[] = []
+
+  digitalResources : DigitalResource[] = []
+
   selectedSection: number = 0
+
+  selectedContent: number = 0
 
   constructor(
     private route: ActivatedRoute,
@@ -26,14 +39,39 @@ export class ExhibitionShowcaseComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => { 
+      this.id = params['id']; 
+      if(this.id){
+        this.exhibitionService.getExhibition(this.id).subscribe( exhibition => 
+          {
+            console.log(exhibition) 
+            this.exhibition = exhibition
+            this.exhibitionItems = exhibition.items
+            this.selectedSection = 0
+            this.selectedContent = 0
+            this.exhibitionSubItems = this.exhibition?.items[this.selectedSection].subItems
+            this.exhibitionSubItems.forEach(element => {
+              this.digitalResources = this.digitalResources.concat(element.digitalResources)
+
+            });
+          }
+        )
+      }
+ 
+      
+
+    }
+   )
     this.getExhibition()
     this.getExhibitions()
   }
 
   getExhibition(): void 
   {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.exhibitionService.getExhibition(id).subscribe( exhibition => this.exhibition = exhibition)
+    //const id = Number(this.route.snapshot.paramMap.get('id'));
+ 
+    
+    // })
   }
 
   getExhibitions(): void 
@@ -44,14 +82,23 @@ export class ExhibitionShowcaseComponent implements OnInit {
   changeSection(selection:number): void
   {
     if(this.exhibition && selection < this.exhibition?.items.length)
-    this.selectedSection = selection
+    {
+      this.selectedSection = selection
+      this.exhibitionSubItems = this.exhibition?.items[this.selectedSection].subItems
+    }
+ 
     console.log(this.selectedSection)
   }
 
+  changeSelectedContent(selected: number) {
+    this.selectedContent = selected
+  }
+
   open() {
+    console.log(this.digitalResources)
     //this.modalService.open(content, { size: 'xl', backdrop: 'static' })
-    const modalRef = this.modalService.open(ResourceShowcaseModalComponent,{ size: 'xl', backdrop: 'static' });
-    modalRef.componentInstance.digitalResource = this.exhibition?.cover;
+    const modalRef = this.modalService.open(ResourceShowcaseModalComponent,{ size: 'lg' });
+    modalRef.componentInstance.digitalResources = this.digitalResources;
   }
 
 }

@@ -18,36 +18,25 @@ export class TitleFormComponent implements OnInit {
   @Output() exhibitionChange:EventEmitter<Exhibition> = new EventEmitter<Exhibition>()
 
   constructor(
-    //private exhibitionService: ExhibitionService
+    private exhibitionService: ExhibitionService
   ) { }
 
   ngOnInit(): void {
-    //this.exhibition = new Exhibition("","", new Editor(0,"Marco"))
   }
-
-
-  /** 
-  onChangeTitle(newTitle: string){
-    if(this.exhibition){
-      this.exhibition = this.exhibitionService.getSessionExhibition()
-      this.exhibition.title = newTitle
-      this.exhibitionService.saveSessionExhibition(this.exhibition)
-    }
-    
-  }
-
-  onChangeSubtitle(newTitle: string) {
-    if(this.exhibition){
-      this.exhibition.subtitle = newTitle
-      this.exhibitionService.saveSessionExhibition(this.exhibition)
-    }
-        
-  }
-
-  */
 
   onSubmit(){
       this.exhibitionChange.emit(this.exhibition)
   }
+
+  createExhibition(){
+    if(this.exhibition){
+      this.exhibitionService.createExhibition(this.exhibition).subscribe(
+        exhibition => { 
+          console.log( "exhibition posted: " + exhibition.id)
+          this.exhibition = exhibition
+      })
+    }
+  }
+ 
 
 }

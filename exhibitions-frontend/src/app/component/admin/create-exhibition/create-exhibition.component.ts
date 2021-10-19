@@ -21,7 +21,10 @@ export class CreateExhibitionComponent implements OnInit {
 
   ngOnInit(): void {
  
-
+    if(this.exhibition.id == 0)
+    {
+      this.initializeExhibition()
+    }
     // this.exhibition = this.exhibitionService.getSessionExhibition()
     // if(!this.exhibition){
     //   this.initializeExhibition()
@@ -32,7 +35,7 @@ export class CreateExhibitionComponent implements OnInit {
   {
     var editor = new Editor(2,"Marco")
     this.exhibition = new Exhibition("", "",editor)
-    var cover = new DigitalResource(4,"NOME","","","", "","","",[],[],"")
+    var cover = new DigitalResource(4,"NOME","","","", "",[],"",[],"","")
     this.exhibition.addCoverPhoto(cover)
     //this.exhibitionService.createSessionExhibition(this.exhibition)
    
@@ -44,23 +47,26 @@ export class CreateExhibitionComponent implements OnInit {
       this.exhibitionService.clearSessionExhibition()
   }
 
-  createExhibition() {
-    console.log("create exhibition")
-    var exhibition: Exhibition = this.exhibitionService.getSessionExhibition()
-    this.exhibitionService.createExhibition(exhibition).subscribe(
+  createExhibition(){
+    if(this.exhibition){
+      this.exhibitionService.createExhibition(this.exhibition).subscribe(
         exhibition => { 
-          console.log( "exhibition posted: " + exhibition)
-          if(exhibition) this.exhibitionService.saveSessionExhibition(exhibition)}
-    )
-    /** this overrides the session data with the server data, to retrieve the id */
+          console.log( "exhibition posted: " + exhibition.id)
+          this.exhibition = exhibition
+      })
+    }
   }
 
   saveExhibitionAsDraft(){
     console.log("save exhibition as draft")
-    var exhibition: Exhibition = this.exhibitionService.getSessionExhibition()
-    this.exhibitionService.updateExhibition(exhibition).subscribe(
+    this.exhibitionService.updateExhibition(this.exhibition).subscribe(
       exhibition => { 
-        console.log( "exhibition updated: " + exhibition)
+        console.log( "exhibition details updated: " + exhibition)
+      }
+    )
+    this.exhibitionService.updateExhibitionCredits(this.exhibition).subscribe(
+      exhibition => { 
+        console.log( "exhibition credits updated: " + exhibition)
       }
     )
   }

@@ -12,7 +12,6 @@ interface ExhibitionItemsRepository : JpaRepository<ExhibitionItemDAO, Long>
 
 interface MarkersRepository : JpaRepository<MarkerDAO, Long>
 
-interface SubAboutRepository : JpaRepository<SubAboutDAO, Long>
 
 interface SubTextRepository : JpaRepository<SubItemDAO, Long>
 

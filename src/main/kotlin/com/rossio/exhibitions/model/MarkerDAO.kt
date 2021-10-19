@@ -15,5 +15,6 @@ data class MarkerDAO(
 ) {
     constructor(markerDTO: MarkerDTO) : this(markerDTO.markerId,markerDTO.coordinates,markerDTO.description, markerDTO.digitalResources.map { DigitalResourceDAO(it) })
 
+    constructor() :  this(0,0,"",mutableListOf())
 }
 

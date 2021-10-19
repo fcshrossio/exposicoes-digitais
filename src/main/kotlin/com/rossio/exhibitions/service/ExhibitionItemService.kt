@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service
 class ExhibitionItemService(
     val exhibitionItemsRepository : ExhibitionItemsRepository,
     val markersRepository: MarkersRepository,
-    val subAboutRepository: SubAboutRepository,
     val subTextRepository: SubTextRepository
 ) {
     fun getAllExhibitionItems(): List<ExhibitionItemDAO> =
@@ -19,8 +18,13 @@ class ExhibitionItemService(
     fun getOneExhibitionItem(id : Long) : ExhibitionItemDAO =
         exhibitionItemsRepository.findById(id).orElseThrow { NotFoundException("No Exhibition Item with id: $id found") }
 
-    fun createOneExhibitionItem(item : ExhibitionItemDAO) : ExhibitionItemDAO =
-        exhibitionItemsRepository.save(item)
+    fun createOneExhibitionItem(item : ExhibitionItemDAO) : ExhibitionItemDAO {
+        if(item.id == 0L){
+            return exhibitionItemsRepository.save(item)
+        }
+        throw Exception("id is not 0")
+    }
+
 
     fun editOneExhibitionItem(item : ExhibitionItemDAO, newItem : ExhibitionItemDAO): ExhibitionItemDAO {
         item.editItem(newItem)
@@ -34,12 +38,12 @@ class ExhibitionItemService(
     fun createMarker(markerDAO: MarkerDAO) : MarkerDAO =
         markersRepository.save(markerDAO)
 
-    fun createSubAbout(subItem: SubAboutDAO) : SubAboutDAO =
-        subAboutRepository.save(subItem)
-
     fun addSubItem(item: ExhibitionItemDAO, subItem: SubItemDAO) : ExhibitionItemDAO {
-        item.addSubItem(subItem)
-        return exhibitionItemsRepository.save(item)
+        if(subItem.id !== 0L && item.id !== 0L){
+            item.addSubItem(subItem)
+            return exhibitionItemsRepository.save(item)
+        }
+        throw Exception("id is 0")
     }
 
     fun addMarker(itemId: Long, markerDAO: MarkerDAO) {
@@ -51,16 +55,6 @@ class ExhibitionItemService(
     }
 
     fun removeMarker(markerDAO: MarkerDAO) {
-
-
-    }
-
-    fun addSubAbout(itemId: Long, subAboutDAO: SubAboutDAO) {
-
-
-    }
-
-    fun removeSubAbout(subAboutDAO: SubAboutDAO) {
 
 
     }

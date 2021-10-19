@@ -6,10 +6,6 @@ import com.rossio.exhibitions.enums.Status
 import com.rossio.exhibitions.exception.NotFoundException
 import java.util.*
 import javax.persistence.*
-import com.rossio.exhibitions.model.EditorDAO
-import com.rossio.exhibitions.model.DigitalResourceDAO
-import com.rossio.exhibitions.model.CollaboratorDAO
-import org.hibernate.mapping.Collection
 
 @Entity
 data class ExhibitionDAO(
@@ -36,12 +32,10 @@ data class ExhibitionDAO(
     @CollectionTable
     @Enumerated(EnumType.STRING)
     var keywords: MutableList<Keywords>,
-    @OneToMany
-    var digitalResources: List<DigitalResourceDAO>,
     var credits : String,
     var onlineResourcesNova : String,
     var bibliography : String,
-    var audioVisualResources: String,
+    var audiovisualResources: String,
     var webPlaces: String
 ) {
 
@@ -57,16 +51,15 @@ data class ExhibitionDAO(
         exhibition.creationDate,
         exhibition.status,
         exhibition.keywords,
-        exhibition.digitalResources.map { DigitalResourceDAO(it)},
         exhibition.credits,
         exhibition.onlineResourcesNova,
         exhibition.bibliography,
-        exhibition.audioVisualResources,
+        exhibition.audiovisualResources,
         exhibition.webPlaces
     )
 
     constructor() : this(0, EditorDAO(), mutableListOf(), "","","", DigitalResourceDAO(), mutableListOf(),Date(),Status.PRIVATE,
-        mutableListOf(), mutableListOf(),"","","","","") {
+        mutableListOf(),"","","","","") {
 
     }
 
@@ -157,6 +150,19 @@ data class ExhibitionDAO(
             throw NotFoundException("item already exists")
         }
 
+    }
+
+    fun editCredits( credits: String)
+    {
+        this.credits = credits
+    }
+
+    fun editAuxiliaryMaterials ( onlineResourcesNova : String, bibliography : String, audioVisualResources : String, webPlaces : String )
+    {
+        this.onlineResourcesNova = onlineResourcesNova
+        this.bibliography = bibliography
+        this.audiovisualResources = audioVisualResources
+        this.webPlaces = webPlaces
     }
 }
 

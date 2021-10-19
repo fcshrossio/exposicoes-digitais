@@ -9,7 +9,7 @@
   }
 
 ::ng-deep .modal-content {
-    
+    background-color: whitesmoke;
     height:30em;
 }
 

@@ -67,24 +67,6 @@ class ExhibitionItemController(
         exhibitionItemService.removeMarker(exhibitionSubItemService.getOneMarker(itemId))
 
 
-    @Operation(summary = "Get All Sub About Items ")
-    @GetMapping("/subabout")
-    fun getAllSubAbouts() =
-        exhibitionSubItemService.getAllSubAboutItems().map { SubAboutItemDTO(it) }
-
-
-    @Operation(summary = "Create Sub About Items")
-    @PostMapping("/{itemId}/addsubabout")
-    fun createSubAbout(@PathVariable itemId: Long, @RequestBody subAboutItemDTO: SubAboutItemDTO){
-        val item = exhibitionItemService.getOneExhibitionItem(itemId)
-            exhibitionItemService.addSubAbout(itemId, SubAboutDAO(subAboutItemDTO))
-    }
-
-    @Operation(summary = "Remove One Sub About Item ")
-    @DeleteMapping("/subabout/{id}")
-    fun deleteSubAboutItem(@PathVariable id: Long) =
-        exhibitionItemService.removeSubAbout(exhibitionSubItemService.getOneSubAboutItem(id))
-
     @Operation(summary = "Get All Sub Items ")
     @GetMapping("/subitems")
     fun getAllSubItems() =

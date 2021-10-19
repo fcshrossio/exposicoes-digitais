@@ -1,69 +1,149 @@
-<div *ngIf="exhibition" class="container-fluid">
+<div *ngIf="exhibition" class="container-fluid pb-5 pl-0 pr-0 justify-content-center">
     <div *ngIf="exhibition.cover" class="w-100">
         <img class="img-fluid w-100" style="height:88vh; object-fit: cover;"src="{{exhibition.cover.identifier}}"/>
     </div>
-    <div class="row">
-        <div class="row justify-content-center text-align-center mt-3 ml-2">
-            <div class="col-auto">
-                <img src="https://www.fillmurray.com/30/30"/>
+    <div class="row w-100 mx-0">
+        <div class="col-auto mr-auto mt-3">
+            <img src="https://www.fillmurray.com/30/30"/>
+        </div>
+        <div class="col-auto mx-auto">
+            <div class="row w-100 mx-auto  mt-3">
+                <div class="col-auto">
+                    <img (click)="changeSelectedContent(0)" src="https://www.fillmurray.com/30/30"/>
+                </div>
+                <div class="col-auto">
+                    <img (click)="changeSelectedContent(1)" src="https://www.fillmurray.com/30/30"/>
+                </div>
+                <div class="col-auto">
+                    <img (click)="changeSelectedContent(2)"src="https://www.fillmurray.com/30/30"/>
+                </div>
+                <div class="col-auto">
+                    <img (click)="changeSelectedContent(3)"src="https://www.fillmurray.com/30/30"/>
+                </div>
+     
             </div>
         </div>
-        <div class="row w-50 justify-content-center mx-auto align-items-center text-align-center mt-3">
-            <div class="col-auto">
-                <img src="https://www.fillmurray.com/30/30"/>
-            </div>
-            <div class="col-auto">
-                <img src="https://www.fillmurray.com/30/30"/>
-            </div>
-            <div class="col-auto">
-                <img src="https://www.fillmurray.com/30/30"/>
-            </div>
-            <div class="col-auto">
-                <img src="https://www.fillmurray.com/30/30"/>
-            </div>
- 
-        </div>
-        <div class="row justify-content-center text-align-center mt-3 mr-2">
-            <div class="col-auto">
-                <img src="https://www.fillmurray.com/30/30"/>
-            </div>
+        <div class="col-auto ml-auto mt-3">
+            <img src="https://www.fillmurray.com/30/30"/>
         </div>
     </div>
-    <div  class="row justify-content-center mx-auto align-items-center text-align-center mt-5">
-        <div *ngFor="let item of exhibition.items;let i=index;" (click)="changeSection(i)" [ngStyle]="{'background-color': i === selectedSection ? '#1681A8' : '#F0F1F2'}" class="section col-auto my-auto mx-2">
+   
+    <div class="row justify-content-center mx-auto align-items-center text-align-center mt-5">
+        <div *ngFor="let item of exhibitionItems;let i=index;" (click)="changeSection(i)" [ngStyle]="{'background-color': i === selectedSection ? '#1681A8' : '#F0F1F2'}" class="section col-auto my-auto mx-2">
             <h6 [ngStyle]="{'color': i === selectedSection ? 'white' : '#4C4C4C'}">{{item.title}}</h6>
         </div>
     </div>
-    <div *ngIf="exhibition.items[selectedSection].subItems" style="text-align: center;" class="text-align-center justify-content-center">
-        <h3>{{exhibition.items[selectedSection].title}}</h3>
-        <div *ngFor="let subitem of exhibition.items[selectedSection].subItems">
-            {{subitem.itemType}}
-            <div [ngSwitch]="subitem.itemType">
-                <div *ngSwitchCase = "'textresource'">
-                    <div class="row">
-                        <div class="col">
-                            text
+    <div *ngIf="exhibitionItems.length > 0">
+        <div [ngSwitch]="selectedContent">
+            <div *ngSwitchCase ="0">
+                <div  style="text-align: center;" class="text-align-center justify-content-center mt-5">
+                    <h3  class="title m-5" >{{exhibitionItems[selectedSection].title}}</h3>
+                    <div *ngFor="let subitem of exhibitionSubItems">
+                        {{subitem.itemType}}
+                        <div [ngSwitch]="subitem.itemType">
+                            <div *ngSwitchCase = "'textresource'">
+                                <div class="row pr-5 pl-5 mx-5">
+                                    <div class="col">
+                                        <div class="text pt-3" *ngFor="let textitem of subitem.textSections">
+                                            <div [innerHTML]="textitem"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div *ngFor="let resource of subitem.digitalResources">
+                                            <img class="img-fluid w-50" (click)="open()" src="{{resource.identifier}}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngSwitchCase = "'resourcetext'">
+                                <div class="row pr-5 pl-5 mx-5">
+                                    <div class="col">
+                                        <div *ngFor="let resource of subitem.digitalResources">
+                                            <img class="img-fluid w-100" (click)="open()" src="{{resource.identifier}}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="text pt-3" *ngFor="let textitem of subitem.textSections">
+                                            <div [innerHTML]="textitem"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngSwitchCase = "'resourceresource'">
+                                <div class="row pr-5 pl-5 mx-5">
+                                    <div class="col-6">
+                                        <div *ngFor="let resource of subitem.digitalResources">
+                                            <img class="img-fluid w-100" (click)="open()" src="{{resource.identifier}}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div *ngFor="let resource of subitem.digitalResources">
+                                            <img class="img-fluid w-100" (click)="open()" src="{{resource.identifier}}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngSwitchCase = "'resource'">
+                                <div class="row pr-5 pl-5 mx-5 justify-content-center">
+                                    <div class="col-12">
+                                        <div *ngFor="let resource of subitem.digitalResources">
+                                            <div class="image-container">
+                                                <img class="w-100" (click)="open()" src="{{resource.identifier}}"/>
+                                                <div class="overlay">
+                                                    <img height="40px" width="40px" src="../../../../../assets/icons/info.svg"/>   
+                                                </div>
+                                            </div>
+                                            <h6>{{resource.dataProvider}} - {{resource.title}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngSwitchCase = "'resourcefull'">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div *ngFor="let resource of subitem.digitalResources">
+                                            <img class="img-fluid w-100" (click)="open()" src="{{resource.identifier}}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col">
-                            <img (click)="open()" src="https://www.fillmurray.com/130/130"/>
-                        </div>
+                    </div>
+            
+                </div>
+                <div class="row justify-content-center mx-auto align-items-center text-align-center mt-5">
+                    <div class="col-auto section" (click)="changeSection(selectedSection+1)">
+                        <h6>Seguinte</h6>
+                    </div>
+                </div>
+                <div class="row m-5 justify-content-center mx-auto align-items-center text-align-center">
+                    <h3  class="title" >Outras Exposições</h3>
+                </div>
+                <div class="row justify-content-center mx-auto align-items-center text-align-center">
+                    <div *ngFor="let exhibition of exhibitions" class="col-auto">
+                        <app-exhibition-card [exhibition]="exhibition"></app-exhibition-card>
                     </div>
                 </div>
             </div>
-        </div>
-
-    </div>
-    <div class="row justify-content-center mx-auto align-items-center text-align-center">
-        <div class="col-auto section" (click)="changeSection(selectedSection+1)">
-            <h6>Seguinte</h6>
-        </div>
-    </div>
-    <div class="row m-5 justify-content-center mx-auto align-items-center text-align-center">
-        <h3>Outras Exposições</h3>
-    </div>
-    <div class="row justify-content-center mx-auto align-items-center text-align-center">
-        <div *ngFor="let exhibition of exhibitions" class="col-auto">
-            <app-exhibition-card [exhibition]="exhibition"></app-exhibition-card>
+            <div *ngSwitchCase = "1">
+                <div style="text-align: center;" class="text-align-center justify-content-center">
+                    <h3>{{exhibition.items[selectedSection].title}}</h3>
+                </div>
+                <div class="container">
+                    <app-map></app-map>
+                </div>
+            
+            </div>
+            <div *ngSwitchCase = "2">
+                <div style="text-align: center;" class="text-align-center justify-content-center">
+                    <h3>{{exhibition.items[selectedSection].title}}</h3>
+                </div>
+                <h3>bibliografia</h3>
+            </div>
+            <div *ngSwitchCase = "3">
+                <h3>creditos</h3>
+            </div>
+            
         </div>
     </div>
 </div>

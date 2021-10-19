@@ -38,7 +38,6 @@ class ExhibitionsApplicationTests {
         val exhibitionDTO1 = ExhibitionDTO(
             uuid++, editorDTO, emptyList(), "titulo", "subtitulo","", digitalDTO, emptyList(), dia,
             Status.PRIVATE, mutableListOf(),
-            emptyList(),
             "",
             "",
             "",
@@ -58,7 +57,6 @@ class ExhibitionsApplicationTests {
             dia,
             Status.PUBLIC,
             mutableListOf(),
-            emptyList(),
             "",
             "",
             "",

@@ -42,6 +42,16 @@ class ExhibitionService(
         } else
             exhibition
 
+    fun editExhibitionCredits(credits : String, exhibition: ExhibitionDAO) : ExhibitionDAO {
+        exhibition.editCredits(credits)
+        return exhibitionsRepository.save(exhibition)
+    }
+
+    fun editExhibitionAuxiliaryMaterials(onlineResourcesNova : String, bibliography : String, audioVisualResources : String, webPlaces : String, exhibition: ExhibitionDAO) : ExhibitionDAO {
+        exhibition.editAuxiliaryMaterials(onlineResourcesNova,bibliography,audioVisualResources,webPlaces)
+        return exhibitionsRepository.save(exhibition)
+    }
+
     fun addExhibitionItem(exhibition: ExhibitionDAO, item: ExhibitionItemDAO) : ExhibitionDAO {
         exhibition.addExhibitionItem(item)
         return exhibitionsRepository.save(exhibition)

@@ -4,9 +4,11 @@
             <div class="container-fluid m-1 mt-4" style="min-height: 200px;">
                 <div class="mt-5">
                     <label for="title" class="text">FICHA TÉCNICA </label>
-                    <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="exhibition.credits"></angular-editor>
+                    <angular-editor id="credits123" [(ngModel)]="htmlContent" [config]="config"></angular-editor>
                 </div>
             </div>
+            <div [innerHTML]="htmlContent"></div>
+            <button (click)="preview()"> preview</button>
         </div>
     </form>
 </div>

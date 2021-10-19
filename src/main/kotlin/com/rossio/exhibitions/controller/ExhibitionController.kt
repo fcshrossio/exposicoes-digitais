@@ -87,6 +87,7 @@ class ExhibitionController(
         exhibitionService.addExhibitionItem(exhibitionService.getOneExhibition(exhibitionId), itemDAO)
         return ExhibitionItemDTO(itemDAO)
     }
+
     @Operation(summary = "Show Recent Exhibitions")
     @GetMapping("/recent")
     fun recentExhibitions() : List<ExhibitionDTO> =
@@ -111,6 +112,19 @@ class ExhibitionController(
     @PreAuthorize("hasAnyRole('ADMIN','EDITOR')")
     fun changeStatus(@PathVariable id: Long,@RequestParam value : Status) =
         exhibitionService.changeStatus(exhibitionService.getOneExhibition(id), value)
+
+
+    @Operation(summary = "Change Credits")
+    @PutMapping("/{id}/credits")
+    //@PreAuthorize("hasAnyRole('ADMIN','EDITOR')")
+    fun editCredits(@PathVariable id: Long,@RequestParam value : String) =
+        exhibitionService.editExhibitionCredits(value,exhibitionService.getOneExhibition(id))
+
+    @Operation(summary = "Change Auxiliary Materials")
+    @PutMapping("/{id}/materials")
+    //@PreAuthorize("hasAnyRole('ADMIN','EDITOR')")
+    fun editAuxiliaryMaterials(@PathVariable id: Long,@RequestParam value : String) =
+        exhibitionService.editExhibitionAuxiliaryMaterials(value,value,value,value,exhibitionService.getOneExhibition(id))
 
 
 

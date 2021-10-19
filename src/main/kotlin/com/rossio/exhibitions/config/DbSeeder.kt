@@ -76,7 +76,7 @@ class DbSeeder (
             "assunto",
             listOf("Documento original não comunicável.","Direitos reservados. Reprodução mediante autorização do proprietário da imagem."),
             "Image",
-            "https://www.fillmurray.com/540/600"
+            "../../../../../assets/images/0001_M2.jpg"
         )
 
         var digital2 = DigitalResourceDTO(
@@ -90,12 +90,27 @@ class DbSeeder (
             "assunto",
             listOf("Documento original não comunicável.","Direitos reservados. Reprodução mediante autorização do proprietário da imagem."),
             "Image",
-            "https://www.fillmurray.com/540/600"
+            "../../../../../assets/images/0001_M2.jpg"
+        )
+
+        var digital3 = DigitalResourceDTO(
+            0,
+            "A Rainha Dona Amélia e Dom Luís Filipe na festa de Santa Eufémia, promovida pelos empregados do palácio da Pena",
+            "",
+            "Lisboa. Arquivo Municipal",
+            "1904-08-07",
+            "Dimensão: 9 x 12 cmSuporte: Negativo de gelatina e prata em nitrato de celulose",
+            listOf("Novais, António. 1854-1940, fotógrafo"),
+            "assunto",
+            listOf("Documento original não comunicável.","Direitos reservados. Reprodução mediante autorização do proprietário da imagem."),
+            "Image",
+            "../../../../../assets/images/0001_M2.jpg"
         )
 
 
         val digitalDAO1 = digitalResourceService.addOneDigitalResource(DigitalResourceDAO(digital1))
         val digitalDAO2 = digitalResourceService.addOneDigitalResource(DigitalResourceDAO(digital2))
+        val digitalDAO3 = digitalResourceService.addOneDigitalResource(DigitalResourceDAO(digital3))
 
         digital1 = DigitalResourceDTO(digitalDAO1)
         digital2 = DigitalResourceDTO(digitalDAO2)
@@ -112,7 +127,6 @@ class DbSeeder (
             Date(), // creation date
             Status.PUBLIC, //status
             mutableListOf(),  //list of keywords
-            mutableListOf(),     //list of resources
             "",
             "",
             "",
@@ -132,7 +146,6 @@ class DbSeeder (
             Date(), // creation date
             Status.PUBLIC, //status
             mutableListOf(),  //list of keywords
-            mutableListOf(),    //list of resources
             "",
             "",
             "",
@@ -152,7 +165,6 @@ class DbSeeder (
             Date(), // creation date
             Status.PUBLIC, //status
             mutableListOf(),  //list of keywords
-            mutableListOf(),     //list of resources
             "",
             "",
             "",
@@ -173,7 +185,6 @@ class DbSeeder (
             Date(), // creation date
             Status.PUBLIC, //status
             mutableListOf(),  //list of keywords
-            mutableListOf(),    //list of resources
             "",
             "",
             "",
@@ -198,10 +209,19 @@ class DbSeeder (
         exhibitionDAO1 = exhibitionService.addExhibitionItem(exhibitionDAO1, item2DAO)
         exhibitionService.addExhibitionItem(exhibitionDAO1, item3DAO)
 
-        var subitem1DAO : SubItemDAO = SubItemDAO(0,0,"textresource", mutableListOf("este","é","o texto"), mutableListOf())
+        var subitem1DAO : SubItemDAO = SubItemDAO(0,0,"textresource", mutableListOf("<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur auctor justo lorem. Vestibulum in commodo mauris, vel commodo lorem. Phasellus a suscipit quam. Proin pretium magna sed mollis dapibus. Curabitur cursus turpis in nunc lacinia, vel pellentesque nunc convallis. Duis imperdiet ullamcorper dui, sit amet imperdiet purus. Fusce ac tincidunt mi. Suspendisse potenti. Vivamus libero orci, molestie sit amet lacus vel, luctus lobortis augue. Curabitur eget pretium lorem, in euismod purus. Pellentesque volutpat eros ut urna elementum vestibulum. <p/>","<p>Vestibulum id tincidunt enim. Integer sit amet libero ac erat feugiat suscipit. Quisque tincidunt massa congue pharetra ultrices. Integer condimentum sem sit amet mauris consectetur, in sagittis elit iaculis. Proin ac sagittis orci, sit amet varius erat. Sed suscipit tortor justo, vitae facilisis elit tempus a. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse tincidunt volutpat ex quis hendrerit. Vestibulum pellentesque eu felis sit amet dictum. Nullam feugiat, lorem vitae ullamcorper dignissim, nulla sapien consectetur magna, sed laoreet erat erat at odio. Phasellus sit amet convallis odio. Cras ullamcorper turpis ac mauris feugiat, vel sagittis metus scelerisque. Aenean aliquet tempus justo, a venenatis ante luctus vel. </p>","o texto"), mutableListOf(digitalDAO2))
+        var subitem2DAO : SubItemDAO = SubItemDAO(0,0,"resourcetext", mutableListOf("<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur auctor justo lorem. Vestibulum in commodo mauris, vel commodo lorem. Phasellus a suscipit quam. Proin pretium magna sed mollis dapibus. Curabitur cursus turpis in nunc lacinia, vel pellentesque nunc convallis. Duis imperdiet ullamcorper dui, sit amet imperdiet purus. Fusce ac tincidunt mi. Suspendisse potenti. Vivamus libero orci, molestie sit amet lacus vel, luctus lobortis augue. Curabitur eget pretium lorem, in euismod purus. Pellentesque volutpat eros ut urna elementum vestibulum. <p/>","<p>Vestibulum id tincidunt enim. Integer sit amet libero ac erat feugiat suscipit. Quisque tincidunt massa congue pharetra ultrices. Integer condimentum sem sit amet mauris consectetur, in sagittis elit iaculis. Proin ac sagittis orci, sit amet varius erat. Sed suscipit tortor justo, vitae facilisis elit tempus a. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse tincidunt volutpat ex quis hendrerit. Vestibulum pellentesque eu felis sit amet dictum. Nullam feugiat, lorem vitae ullamcorper dignissim, nulla sapien consectetur magna, sed laoreet erat erat at odio. Phasellus sit amet convallis odio. Cras ullamcorper turpis ac mauris feugiat, vel sagittis metus scelerisque. Aenean aliquet tempus justo, a venenatis ante luctus vel. </p>","o texto"), mutableListOf(digitalDAO1))
+        var subitem3DAO : SubItemDAO = SubItemDAO(0,0,"resource", mutableListOf(), mutableListOf(digitalDAO3))
+        var subitem4DAO : SubItemDAO = SubItemDAO(0,0,"resourcefull", mutableListOf(), mutableListOf(digitalDAO3))
 
         subitem1DAO = exhibitionSubItemService.createSubItem(subitem1DAO)
         exhibitionItemService.addSubItem(item1DAO,subitem1DAO)
+        subitem2DAO = exhibitionSubItemService.createSubItem(subitem2DAO)
+        //exhibitionItemService.addSubItem(item1DAO,subitem2DAO)
+        //subitem3DAO = exhibitionSubItemService.createSubItem(subitem3DAO)
+        //exhibitionItemService.addSubItem(item3DAO,subitem3DAO)
+        //subitem4DAO = exhibitionSubItemService.createSubItem(subitem4DAO)
+        //exhibitionItemService.addSubItem(item3DAO,subitem4DAO)
 
         print("\n\n\t( ͡o ͜ʖ ͡o) Database Seed Completed (╯ ͠° ͟ʖ ͡°)╯┻━┻\n")
 

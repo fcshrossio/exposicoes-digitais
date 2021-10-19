@@ -3,7 +3,6 @@ package com.rossio.exhibitions.dto
 
 import com.rossio.exhibitions.enums.Keywords
 import com.rossio.exhibitions.enums.Status
-import com.rossio.exhibitions.exception.NotFoundException
 import com.rossio.exhibitions.model.*
 import java.util.*
 
@@ -19,11 +18,10 @@ data class ExhibitionDTO(
     val creationDate: Date,
     val status: Status,
     val keywords: MutableList<Keywords>,
-    val digitalResources: List<DigitalResourceDTO>,
     val credits: String,
     var onlineResourcesNova : String,
     var bibliography : String,
-    var audioVisualResources: String,
+    var audiovisualResources: String,
     var webPlaces: String
 )
 {
@@ -40,11 +38,10 @@ data class ExhibitionDTO(
         exhibition.creationDate,
         exhibition.status,
         exhibition.keywords,
-        exhibition.digitalResources.map { DigitalResourceDTO(it) },
         exhibition.credits,
         exhibition.onlineResourcesNova,
         exhibition.bibliography,
-        exhibition.audioVisualResources,
+        exhibition.audiovisualResources,
         exhibition.webPlaces
     )
 

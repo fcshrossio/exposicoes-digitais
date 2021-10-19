@@ -8,14 +8,13 @@ export class Exhibition {
     title : string;
     subtitle : string;
     introduction : string;
-    cover? : DigitalResource;
+    cover : DigitalResource;
     editor : Editor;
     collaborators : Collaborator[];
     creationDate: Date;
     status: string;
     keywords: string[];
     items : ExhibitionItem[]
-    digitalResources: DigitalResource[];
     credits: string;
     onlineResourcesNova: string;
     bibliography: string;
@@ -31,6 +30,7 @@ export class Exhibition {
         this.title = title
         this.subtitle = subtitle
         this.introduction = ""
+        this.cover = new DigitalResource(4,"","","","","",[],"",[],"","")
         this.editor = editor
         this.collaborators = []
         this.creationDate = (new Date())
@@ -40,8 +40,7 @@ export class Exhibition {
            // new ExhibitionItem(2,0,"introduction","texto","introduction"),
          
         ]
-        this.digitalResources = []
-        this.credits = "",
+        this.credits = '',
         this.onlineResourcesNova = ""
         this.bibliography = ""
         this.audiovisualResources = ""

@@ -54,6 +54,14 @@ export class ExhibitionService {
     )
   }
 
+  updateExhibitionCredits(exhibition: Exhibition): Observable<Exhibition> {
+    console.log("sending update request to " + this.exhibitionsUrl + '/' + exhibition.id  + '/credits')
+    return this.http.post<Exhibition>(this.exhibitionsUrl + "/" + exhibition.id , exhibition, this.httpOptions).pipe(
+      
+      catchError(this.handleError<Exhibition>('updateexhibitions'))
+    )
+  }
+
 
   createSessionExhibition(exhibition: Exhibition) {
     sessionStorage.setItem(this.sessionDataKey, JSON.stringify(exhibition))

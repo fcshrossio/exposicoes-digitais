@@ -12,3 +12,27 @@
     background-color: var(--primary-color-hover);
     color: white;
 }
+
+.title {
+    font-family: 'Montserrat';
+}
+
+.text {
+    text-align: left;
+    font-family: 'OpenSans';
+    size: 19;
+}
+
+.overlay {
+    position: absolute;
+    top: 2em;
+    right: 2em;
+    width: 6%;
+    height: 6%;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    
+}

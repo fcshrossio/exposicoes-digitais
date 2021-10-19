@@ -1,15 +1,8 @@
 package com.rossio.exhibitions.dto
 
-import com.rossio.exhibitions.model.SubAboutDAO
 import com.rossio.exhibitions.model.SubItemDAO
 
-data class SubAboutItemDTO(
-    val id: Long,
-    val position: Long,
-    val link: String
-) {
-    constructor(item: SubAboutDAO) : this(item.id,item.position,item.link)
-}
+
 
 
 data class SubItemDTO(

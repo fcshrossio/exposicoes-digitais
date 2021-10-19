@@ -1,16 +1,42 @@
-::ng-deep .modal-xl {
-    padding: 2px;
+::ng-deep .modal-lg {
+    padding:0;
+    margin: 0;
     max-width: none;
-    width: 98%;
-    max-height: 100vh;
+    width: 100%;
     
   }
 
 ::ng-deep .modal-content {
     
-    height:98vh;
 }
 
 .text{
     font-family: 'OpenSans';
+}
+
+img.custom {
+    -webkit-transition: width 1s ease-in-out;
+    -moz-transition: width 1s ease-in-out;
+    -o-transition: width 1s ease-in-out;
+    transition: width 1s ease-in-out;
+    width: 200px;
+    
+  }
+img.custom:hover {
+    -webkit-transition: width 1s ease-in-out;
+    -moz-transition: width 1s ease-in-out;
+    -o-transition: width 1s ease-in-out;
+    transition: width 1s ease-in-out;
+
+    width:100%;
+}
+
+.title {
+    font-family: 'Montserrat';
+    color: white;
+}
+
+.text {
+    font-family: 'OpenSans';
+    color: white;
 }

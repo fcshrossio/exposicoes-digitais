@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service
 @Service
 class ExhibitionSubItemService(
     val subTextRepository: SubTextRepository,
-    val subAboutRepository: SubAboutRepository,
     val markersRepository: MarkersRepository
 ) {
 
@@ -16,12 +15,6 @@ class ExhibitionSubItemService(
 
     fun getOneMarker(id:Long): MarkerDAO =
         markersRepository.findById(id).orElseThrow { NotFoundException("No Item with id: $id found") }
-
-    fun getAllSubAboutItems(): List<SubAboutDAO> =
-        subAboutRepository.findAll()
-
-    fun getOneSubAboutItem(id:Long) : SubAboutDAO =
-        subAboutRepository.findById(id).orElseThrow { NotFoundException("No Item with id: $id found") }
 
     fun getAllSubTextItems(): List<SubItemDAO> =
         subTextRepository.findAll()
@@ -38,6 +31,4 @@ class ExhibitionSubItemService(
     fun deleteSubTextItem(id: Long) =
         subTextRepository.delete(getOneSubTextItem(id))
 
-    fun deleteSubAboutItem(id: Long) =
-        subAboutRepository.delete(getOneSubAboutItem(id))
 }

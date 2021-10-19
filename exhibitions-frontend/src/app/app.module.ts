@@ -39,6 +39,7 @@ import { ExhibitionCardComponent } from './component/public/components/exhibitio
 import { CreditsFormComponent } from './component/admin/create-exhibition/credits-form/credits-form.component';
 import { ResourceDetailsModalComponent } from './component/public/modals/resource-details-modal/resource-details-modal.component';
 import { ResourceShowcaseModalComponent } from './component/public/modals/resource-showcase-modal/resource-showcase-modal.component';
+import { MapComponent } from './component/public/components/map/map.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { ResourceShowcaseModalComponent } from './component/public/modals/resour
     ExhibitionCardComponent,
     CreditsFormComponent,
     ResourceDetailsModalComponent,
-    ResourceShowcaseModalComponent
+    ResourceShowcaseModalComponent,
+    MapComponent
   ],
   imports: [
     HttpClientModule,

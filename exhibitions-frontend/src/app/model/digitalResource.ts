@@ -5,10 +5,10 @@ export class DigitalResource {
     dataProvider : string;
     date : string;
     physicalDescription : string;
-    authors : string;
+    authors : string[];
     subject : string;
     rights : string[];
-    digitalFromat : string[];
+    digitalFormat : string;
     identifier : string
 
     constructor(
@@ -18,10 +18,10 @@ export class DigitalResource {
         dataProvider : string,
         date : string,
         physicalDescription : string,
-        authors: string,
+        authors: string[],
         subject: string,
         rights: string[],
-        digitalFormat: string[],
+        digitalFormat: string,
         identifier: string
     ) {
         this.id = id;
@@ -33,7 +33,7 @@ export class DigitalResource {
         this.authors = authors
         this.subject = subject
         this.rights = rights
-        this.digitalFromat = digitalFormat
+        this.digitalFormat = digitalFormat
         this.identifier = identifier
     }
 }

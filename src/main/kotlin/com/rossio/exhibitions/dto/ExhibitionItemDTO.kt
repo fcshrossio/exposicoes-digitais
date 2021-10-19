@@ -43,19 +43,4 @@ data class MapItemDTO(
 
 }
 
-data class AboutItemDTO(
-    val id: Long,
-    val position: Long,
-    val exhibitionId: Long,
-    val title: String,
-    val text: String,
-    val subItems : List<SubAboutItemDTO>
-
-)  {
-
-    //constructor(item: AboutItemDAO) : this(item.id,item.position,item.exhibition.id,item.title,item.text, item.subItems.map { SubAboutItemDTO( it) })
-
-    constructor() : this(0,0,0, "","", emptyList())
-
-}
 
