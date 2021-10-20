@@ -91,6 +91,7 @@ export class ExhibitionShowcaseComponent implements OnInit {
   }
 
   changeSelectedContent(selected: number) {
+    console.log(selected)
     this.selectedContent = selected
   }
 

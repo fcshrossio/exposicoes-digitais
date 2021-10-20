@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { catchError, map, tap } from 'rxjs/operators';
 import { Exhibition } from '../model/exhibition';
+import { Credits } from '../model/credits';
 
 @Injectable({
   providedIn: 'root'
@@ -56,7 +57,9 @@ export class ExhibitionService {
 
   updateExhibitionCredits(exhibition: Exhibition): Observable<Exhibition> {
     console.log("sending update request to " + this.exhibitionsUrl + '/' + exhibition.id  + '/credits')
-    return this.http.post<Exhibition>(this.exhibitionsUrl + "/" + exhibition.id , exhibition, this.httpOptions).pipe(
+    var credits = new Credits(exhibition.credits)
+    console.log(credits)
+    return this.http.post<Exhibition>(this.exhibitionsUrl + '/' + exhibition.id + '/credits' , credits , this.httpOptions).pipe(
       
       catchError(this.handleError<Exhibition>('updateexhibitions'))
     )

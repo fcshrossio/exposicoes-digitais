@@ -9,16 +9,14 @@ data class ExhibitionItemDTO(
     val position: Long,
     //val exhibitionId: Long,
     val title: String,
-    val text: String,
     val subItems: List<SubItemDTO>
 )
 {
-    constructor() : this(0,0, "","", emptyList())
+    constructor() : this(0,0,"", emptyList())
     constructor(exhibitionItemDAO: ExhibitionItemDAO) : this(
         exhibitionItemDAO.id,
         exhibitionItemDAO.position,
         exhibitionItemDAO.title,
-        exhibitionItemDAO.text,
         exhibitionItemDAO.subItems.map { SubItemDTO(it) }
         )
 }

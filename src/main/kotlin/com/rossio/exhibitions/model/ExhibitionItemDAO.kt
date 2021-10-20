@@ -11,7 +11,6 @@ data class ExhibitionItemDAO(
     var id: Long,
     var position: Long,
     var title: String,
-    var text: String,
     @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
     var subItems : MutableList<SubItemDAO>
 ) {
@@ -19,11 +18,10 @@ data class ExhibitionItemDAO(
         exhibitionItemDTO.id,
         exhibitionItemDTO.position,
         exhibitionItemDTO.title,
-        exhibitionItemDTO.text,
         exhibitionItemDTO.subItems.map { SubItemDAO(it) } as MutableList<SubItemDAO>
     )
 
-    constructor() : this(0,0,"","", mutableListOf())
+    constructor() : this(0,0,"", mutableListOf())
 
     fun addSubItem(subItemDAO: SubItemDAO)
     {

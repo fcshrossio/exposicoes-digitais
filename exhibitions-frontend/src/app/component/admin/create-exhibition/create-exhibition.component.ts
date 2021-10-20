@@ -60,10 +60,12 @@ export class CreateExhibitionComponent implements OnInit {
   saveExhibitionAsDraft(){
     console.log("save exhibition as draft")
     this.exhibitionService.updateExhibition(this.exhibition).subscribe(
-      exhibition => { 
-        console.log( "exhibition details updated: " + exhibition)
-      }
-    )
+    exhibition => { 
+         this.exhibition = exhibition
+         console.log( "exhibition details updated: " + exhibition)
+       }
+     )
+    console.log(this.exhibition)
     this.exhibitionService.updateExhibitionCredits(this.exhibition).subscribe(
       exhibition => { 
         console.log( "exhibition credits updated: " + exhibition)

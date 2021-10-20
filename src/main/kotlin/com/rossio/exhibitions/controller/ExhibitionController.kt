@@ -115,10 +115,10 @@ class ExhibitionController(
 
 
     @Operation(summary = "Change Credits")
-    @PutMapping("/{id}/credits")
+    @PostMapping("/{id}/credits")
     //@PreAuthorize("hasAnyRole('ADMIN','EDITOR')")
-    fun editCredits(@PathVariable id: Long,@RequestParam value : String) =
-        exhibitionService.editExhibitionCredits(value,exhibitionService.getOneExhibition(id))
+    fun editCredits(@PathVariable id: Long,@RequestBody creditsDTO: CreditsDTO) : ExhibitionDTO =
+        ExhibitionDTO(exhibitionService.editExhibitionCredits(creditsDTO,id))
 
     @Operation(summary = "Change Auxiliary Materials")
     @PutMapping("/{id}/materials")

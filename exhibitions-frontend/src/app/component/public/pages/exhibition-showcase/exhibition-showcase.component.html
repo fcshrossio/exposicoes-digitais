@@ -28,15 +28,16 @@
         </div>
     </div>
    
-    <div class="row justify-content-center mx-auto align-items-center text-align-center mt-5">
-        <div *ngFor="let item of exhibitionItems;let i=index;" (click)="changeSection(i)" [ngStyle]="{'background-color': i === selectedSection ? '#1681A8' : '#F0F1F2'}" class="section col-auto my-auto mx-2">
-            <h6 [ngStyle]="{'color': i === selectedSection ? 'white' : '#4C4C4C'}">{{item.title}}</h6>
-        </div>
-    </div>
-    <div *ngIf="exhibitionItems.length > 0">
+
+    <div>
         <div [ngSwitch]="selectedContent">
             <div *ngSwitchCase ="0">
-                <div  style="text-align: center;" class="text-align-center justify-content-center mt-5">
+                <div class="row justify-content-center mx-auto align-items-center text-align-center mt-5">
+                    <div *ngFor="let item of exhibitionItems;let i=index;" (click)="changeSection(i)" [ngStyle]="{'background-color': i === selectedSection ? '#1681A8' : '#F0F1F2'}" class="section col-auto my-auto mx-2">
+                        <h6 [ngStyle]="{'color': i === selectedSection ? 'white' : '#4C4C4C'}">{{item.title}}</h6>
+                    </div>
+                </div>
+                <div *ngIf="exhibitionItems.length > 0" style="text-align: center;" class="text-align-center justify-content-center mt-5">
                     <h3  class="title m-5" >{{exhibitionItems[selectedSection].title}}</h3>
                     <div *ngFor="let subitem of exhibitionSubItems">
                         {{subitem.itemType}}
@@ -126,8 +127,11 @@
                 </div>
             </div>
             <div *ngSwitchCase = "1">
-                <div style="text-align: center;" class="text-align-center justify-content-center">
-                    <h3>{{exhibition.items[selectedSection].title}}</h3>
+                <div class="row mt-5">
+                    <div class="col-auto mx-auto">
+                        <h1 class="title credits-title" >{{exhibition.title}}</h1>
+                        <h4 class="title" style="text-align: center;">Mapa</h4>
+                    </div>
                 </div>
                 <div class="container">
                     <app-map></app-map>
@@ -135,13 +139,46 @@
             
             </div>
             <div *ngSwitchCase = "2">
-                <div style="text-align: center;" class="text-align-center justify-content-center">
-                    <h3>{{exhibition.items[selectedSection].title}}</h3>
+                <div class="row mt-5">
+                    <div class="col-auto mx-auto">
+                        <h1 class="title credits-title" >{{exhibition.title}}</h1>
+                        <h4 class="title" style="text-align: center;">Bibliografia Consultada</h4>
+                    </div>
                 </div>
-                <h3>bibliografia</h3>
+                <div class="row justify-content-center mx-auto align-items-center text-align-center mt-5">
+                    <div [ngStyle]="{'background-color': '#1681A8'}" class="section col-auto my-auto mx-2">
+                        <h6 [ngStyle]="{'color': 'white'}">RECURSOS ON-LINE NOVA FCSH</h6>
+                    </div>
+                    <div [ngStyle]="{'background-color': '#1681A8'}" class="section col-auto my-auto mx-2">
+                        <h6 [ngStyle]="{'color': 'white'}">BIBLIOGRAFIA</h6>
+                    </div>
+                    <div [ngStyle]="{'background-color': '#1681A8'}" class="section col-auto my-auto mx-2">
+                        <h6 [ngStyle]="{'color': 'white'}">RECURSOS AUDIOVISUAIS</h6>
+                    </div>
+                    <div [ngStyle]="{'background-color': '#1681A8'}" class="section col-auto my-auto mx-2">
+                        <h6 [ngStyle]="{'color': 'white'}">SÍTIOS NA INTERNET</h6>
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-5">
+                    <div class="col-8">
+                        <div [innerHTML]="exhibition.credits"></div>
+                    </div>
+                </div>
             </div>
             <div *ngSwitchCase = "3">
-                <h3>creditos</h3>
+                <div class="row mt-5">
+                    <div class="col-auto mx-auto">
+                        <h1 class="title credits-title" >{{exhibition.title}}</h1>
+                        <h4 class="title" style="text-align: center;">Ficha Técnica</h4>
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-5">
+                    <div class="col-8">
+                        <div [innerHTML]="exhibition.credits"></div>
+                    </div>
+                </div>
+
+                
             </div>
             
         </div>

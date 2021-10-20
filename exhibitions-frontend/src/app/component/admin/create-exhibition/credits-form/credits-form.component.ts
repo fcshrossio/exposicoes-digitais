@@ -14,35 +14,60 @@ export class CreditsFormComponent implements OnInit {
 
   @Output() exhibitionChange:EventEmitter<Exhibition> = new EventEmitter<Exhibition>()
 
-  htmlContent =
-  '<p><span>Hel</span>looooo<span style="font-size:72.0pt;">oooo</span>oooooooooooooo</p><p><span style="font-weight:bold;">Hello</span></p>';
+  // htmlContent =
+  // '<p><span>Hel</span>looooo<span style="font-size:72.0pt;">oooo</span>oooooooooooooo</p><p><span style="font-weight:bold;">Hello</span></p>';
 
-config: AngularEditorConfig = {
-  editable: true,
-  spellcheck: true,
-  height: "15rem",
-  minHeight: "5rem",
-  placeholder: "Enter text here...",
-  translate: "no",
-  defaultParagraphSeparator: "p",
-  defaultFontName: "Arial",
-  toolbarHiddenButtons: [["bold"]],
-  sanitize: false,
-  customClasses: [
-    {
-      name: "quote",
-      class: "quote"
-    },
-    {
-      name: "redText",
-      class: "redText"
-    },
-    {
-      name: "titleText",
-      class: "titleText",
-      tag: "h1"
-    }
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+      spellcheck: true,
+      height: 'auto',
+      minHeight: '200px',
+      maxHeight: 'auto',
+      width: 'auto',
+      minWidth: '0',
+      translate: 'yes',
+      enableToolbar: true,
+      showToolbar: true,
+      defaultParagraphSeparator: '',
+      defaultFontName: '',
+      defaultFontSize: '',
+      fonts: [
+        {class: 'arial', name: 'Arial'},
+        {class: 'times-new-roman', name: 'Times New Roman'},
+        {class: 'calibri', name: 'Calibri'},
+        {class: 'comic-sans-ms', name: 'Comic Sans MS'}
+      ],
+      customClasses: [
+     
+    ],
+    sanitize: true,
+    toolbarPosition: 'top',
+    toolbarHiddenButtons: [
+  [
+    'subscript',
+    'superscript',
+    'justifyLeft',
+    'justifyCenter',
+    'justifyRight',
+    'justifyFull',
+    'indent',
+    'outdent',
+    'insertUnorderedList',
+    'insertOrderedList',
+    'heading',
+    'fontName'
+  ],
+  [
+    'textColor',
+    'backgroundColor',
+    'customClasses',
+    'insertImage',
+    'insertVideo',
+    'insertHorizontalRule',
+    'removeFormat',
+    'toggleEditorMode'
   ]
+]
 };
 
   constructor() { }
@@ -55,6 +80,6 @@ config: AngularEditorConfig = {
   }
 
   preview(){
-    console.log("HTML: " + String(this.htmlContent))
+    //console.log("HTML: " + String(this.htmlContent))
   }
 }

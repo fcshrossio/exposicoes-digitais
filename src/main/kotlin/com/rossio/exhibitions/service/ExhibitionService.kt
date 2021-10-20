@@ -1,5 +1,6 @@
 package com.rossio.exhibitions.service
 
+import com.rossio.exhibitions.dto.CreditsDTO
 import com.rossio.exhibitions.dto.ExhibitionDTO
 import com.rossio.exhibitions.dto.ExhibitionDetailsDTO
 import com.rossio.exhibitions.enums.Keywords
@@ -42,8 +43,9 @@ class ExhibitionService(
         } else
             exhibition
 
-    fun editExhibitionCredits(credits : String, exhibition: ExhibitionDAO) : ExhibitionDAO {
-        exhibition.editCredits(credits)
+    fun editExhibitionCredits(credits : CreditsDTO, exhibitionId : Long) : ExhibitionDAO {
+        var exhibition : ExhibitionDAO = getOneExhibition(exhibitionId)
+        exhibition.editCredits(credits.value)
         return exhibitionsRepository.save(exhibition)
     }
 

@@ -17,6 +17,11 @@
     font-family: 'Montserrat';
 }
 
+.credits-title {
+    color: var(--primary-color);
+    text-align: center;
+}
+
 .text {
     text-align: left;
     font-family: 'OpenSans';

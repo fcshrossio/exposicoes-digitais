@@ -32,6 +32,7 @@ data class ExhibitionDAO(
     @CollectionTable
     @Enumerated(EnumType.STRING)
     var keywords: MutableList<Keywords>,
+    @Column( length = 100000 )
     var credits : String,
     var onlineResourcesNova : String,
     var bibliography : String,
