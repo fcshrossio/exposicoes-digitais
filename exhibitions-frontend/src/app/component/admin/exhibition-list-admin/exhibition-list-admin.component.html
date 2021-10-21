@@ -1,28 +1,50 @@
-<div class="container-fluid p-5 ">
-    <div *ngFor="let exhibition of exhibitions" class="row w-100" style="background-color: white; border-radius: 5px;">
-        <div class="col-auto p-3">
-            <img src="https://www.fillmurray.com/200/200" style="border-radius: 5px;"/>
+<div class="container-fluid">
+    <div class="row my-auto py-4 px-5" style="background: white;">
+        <div class="col-auto">
+            <button [ngClass]="selection == 'all' ? 'btn section section-active' : 'btn section'"> TODAS </button>
         </div>
-        <div class="col w-100">
-            <div class="row w-100">
-                <div class="col flex-grow pt-3 mt-3">
-                    <h3>{{exhibition.title}}</h3>
-                </div>
-                <div class="col-auto">
-                    <h5>icones</h5>
-                </div>
+        <div class="col-auto">
+            <button class="btn section"> PUBLICADAS  </button>
+        </div>
+        <div class="col-auto">
+            <button class="btn section"> EM APROVAÇÃO  </button>
+        </div>
+    </div>
+    <div class="container-fluid p-5">
+        <div class="row">
+            <div *ngFor="let exhibition of exhibitions" class="col-5 m-1 my-4">
+                <div class="card text-white">
+                    <img class="card-img" src="../../../../../assets/images/0001_M2.jpg" alt="Card image">
+                    <div class="card-img-overlay">
+                    <div class="row">
+                        <div class="col-auto">
+                            <img src="../../../../../assets/icons/info.svg"/>
+                        </div>
+                    </div>
+                      <h5 class="card-title">{{exhibition.title}}</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <div class="card-footer">
+                        <div class="row mt-auto">
+                            <div class="col-auto">
+                                <img src="../../../../../assets/icons/info.svg"/>
+                            </div>
+                            <div class="col-auto">
+                                Ana Silva
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-auto">
+                                <img src="../../../../../assets/icons/info.svg"/>
+                            </div>
+                            <div class="col-auto">
+                                Ana Silva,Ana Silva,Ana Silva,Ana Silva
+                            </div>
+                        </div>
+                      </div>
+ 
+                    </div>
+                  </div>
             </div>
-            <div class="row flex-grow">
-                <div class="col flex-grow">
-                    {{exhibition.subtitle}}
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </div>
-            </div>
-            <div class="mt-4">
-               {{exhibition.status}}
-            </div>
-      
-
         </div>
     </div>
 </div>

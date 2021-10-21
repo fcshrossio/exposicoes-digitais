@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DigitalResource } from 'src/app/model/digitalResource';
 import { Editor } from 'src/app/model/editor';
 import { Exhibition } from 'src/app/model/exhibition';
@@ -15,11 +16,25 @@ export class CreateExhibitionComponent implements OnInit {
 
   step = 0
 
+  @Input() editId : number | undefined 
+
   constructor(
+    private route: ActivatedRoute,
     private exhibitionService: ExhibitionService
   ) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => { 
+      this.editId = params['id']; 
+      if(this.editId){
+        this.exhibitionService.getExhibition(this.editId).subscribe( exhibition => 
+          {
+            console.log(exhibition) 
+            this.exhibition = exhibition
+          }
+        )
+      }
+    })
  
     if(this.exhibition.id == 0)
     {

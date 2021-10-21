@@ -57,9 +57,6 @@ export class ExhibitionShowcaseComponent implements OnInit {
           }
         )
       }
- 
-      
-
     }
    )
     this.getExhibition()

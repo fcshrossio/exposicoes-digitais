@@ -2,22 +2,22 @@
     <div class="container-fluid p-5" >
         <div class="row w-100"  style="min-height: 4rem;">
             <div class="col-auto col-xs-12" style="margin: 1px; padding: 1px;">
-                <button class="btn btn-primary createnav px-4 py-3" (click)="changeStep(0)">NOME DA EXPOSIÇÃO</button>
+                <button class="btn btn-primary createnav px-4 py-3" [ngClass]="step == 0 ? 'createnav-active' : ''" (click)="changeStep(0)">NOME DA EXPOSIÇÃO</button>
             </div>
             <div class="col col-xs-12" style="margin: 1px; padding: 1px;">
-                <button class="btn btn-primary createnav  px-2 py-3" [disabled]="exhibition.id == 0" (click)="changeStep(1)">APRESENTAÇÃO</button>
+                <button class="btn btn-primary createnav  px-2 py-3" [ngClass]="step == 1 ? 'createnav-active' : ''" [disabled]="exhibition.id == 0" (click)="changeStep(1)">APRESENTAÇÃO</button>
             </div>
             <div class="col col-xs-12" style="margin: 1px; padding: 1px;">
-                <button class="btn btn-primary createnav  px-2 py-3" [disabled]="exhibition.id == 0" (click)="changeStep(2)">SECÇÕES</button>
+                <button class="btn btn-primary createnav  px-2 py-3" [ngClass]="step == 2 ? 'createnav-active' : ''" [disabled]="exhibition.id == 0" (click)="changeStep(2)">SECÇÕES</button>
             </div>
             <div class="col col-xs-12" style="margin: 1px; padding: 1px;">
-                <button class="btn btn-primary createnav  px-2 py-3" [disabled]="exhibition.id == 0" (click)="changeStep(3)">MAPA</button>
+                <button class="btn btn-primary createnav  px-2 py-3" [ngClass]="step == 3 ? 'createnav-active' : ''" [disabled]="exhibition.id == 0" (click)="changeStep(3)">MAPA</button>
             </div>
             <div class="col col-xs-12" style="margin: 1px; padding: 1px;">
-                <button class="btn btn-primary createnav px-2 py-3" [disabled]="exhibition.id == 0" (click)="changeStep(4)" >MATERIAIS AUXILIARES</button>
+                <button class="btn btn-primary createnav px-2 py-3" [ngClass]="step == 4 ? 'createnav-active' : ''" [disabled]="exhibition.id == 0" (click)="changeStep(4)" >MATERIAIS AUXILIARES</button>
             </div>
             <div class="col col-xs-12" style="margin: 1px; padding: 1px;">
-                <button class="btn btn-primary createnav px-2 py-3" [disabled]="exhibition.id == 0" (click)="changeStep(5)" >FICHA TÉCNICA</button>
+                <button class="btn btn-primary createnav px-2 py-3" [ngClass]="step == 5 ? 'createnav-active' : ''" [disabled]="exhibition.id == 0" (click)="changeStep(5)" >FICHA TÉCNICA</button>
             </div>
         </div>
         

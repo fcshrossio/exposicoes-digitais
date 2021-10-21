@@ -11,12 +11,14 @@ export class ExhibitionListAdminComponent implements OnInit {
 
   exhibitions: Exhibition[] = []
 
-  constructor(private exhibitionService: ExhibitionService) { }
+  selection: string = "all"
+
+  constructor(private exhibitionService: ExhibitionService,) { }
 
   ngOnInit(): void {
-      this.getExhibitions()
-      
+    this.getExhibitions()
   }
+
 
   getExhibitions(): void 
   {

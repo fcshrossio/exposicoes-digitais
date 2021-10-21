@@ -18,6 +18,11 @@
    
 }
 
+.createnav:hover {
+    background-color: var(--primary-color-hover);
+    color:white
+}
+
 .createnav-cancel {
     background-color: #666d73;
     color: white;

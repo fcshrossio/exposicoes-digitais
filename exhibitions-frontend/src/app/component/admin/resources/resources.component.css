@@ -1,0 +1,12 @@
+.text {
+   
+    font-family: 'OpenSans';
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color:  #FAFAFB;
+  }
+
+  .table-striped tbody tr:nth-of-type(even) {
+    background-color:  white;
+  }

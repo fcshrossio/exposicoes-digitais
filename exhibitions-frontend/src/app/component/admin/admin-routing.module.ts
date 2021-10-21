@@ -32,6 +32,7 @@ const routes: Routes = [
      
       ]},
       { path: 'exhibitions/drafts', component: ExhibitionDraftsComponent },
+      { path: 'exhibitions/edit/:id', component: CreateExhibitionComponent },
       { path: 'exhibitions', component: ExhibitionListAdminComponent }
     ]
   }
