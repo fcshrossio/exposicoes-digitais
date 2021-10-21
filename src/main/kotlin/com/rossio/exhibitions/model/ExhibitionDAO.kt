@@ -132,6 +132,13 @@ data class ExhibitionDAO(
         if(detailsDTO.id == this.id) {
             this.title = detailsDTO.title
             this.subtitle = detailsDTO.subtitle
+
+            this.onlineResourcesNova = detailsDTO.onlineResourcesNova
+            this.bibliography = detailsDTO.bibliography
+            this.audiovisualResources = detailsDTO.audiovisualResources
+            this.webPlaces = detailsDTO.webPlaces
+
+            this.credits = detailsDTO.credits
             //TODO BETTER UPDATE FUNCTION
             return true
         }

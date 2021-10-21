@@ -33,8 +33,8 @@
         <div [ngSwitch]="selectedContent">
             <div *ngSwitchCase ="0">
                 <div class="row justify-content-center mx-auto align-items-center text-align-center mt-5">
-                    <div *ngFor="let item of exhibitionItems;let i=index;" (click)="changeSection(i)" [ngStyle]="{'background-color': i === selectedSection ? '#1681A8' : '#F0F1F2'}" class="section col-auto my-auto mx-2">
-                        <h6 [ngStyle]="{'color': i === selectedSection ? 'white' : '#4C4C4C'}">{{item.title}}</h6>
+                    <div *ngFor="let item of exhibitionItems;let i=index;" (click)="changeSection(i)" [ngClass]="selectedSection == i ? 'section-active' : ''" class="section col-auto my-auto mx-2">
+                        <h6>{{item.title}}</h6>
                     </div>
                 </div>
                 <div *ngIf="exhibitionItems.length > 0" style="text-align: center;" class="text-align-center justify-content-center mt-5">
@@ -146,22 +146,31 @@
                     </div>
                 </div>
                 <div class="row justify-content-center mx-auto align-items-center text-align-center mt-5">
-                    <div [ngStyle]="{'background-color': '#1681A8'}" class="section col-auto my-auto mx-2">
-                        <h6 [ngStyle]="{'color': 'white'}">RECURSOS ON-LINE NOVA FCSH</h6>
+                    <div [ngClass]="selectedAuxiliaryMaterial == 0 ? 'section-active' : ''" (click)="changeSelectedAuxiliaryMaterial(0)" class="section col-auto my-auto mx-2">
+                        <h6>RECURSOS ON-LINE NOVA FCSH</h6>
                     </div>
-                    <div [ngStyle]="{'background-color': '#1681A8'}" class="section col-auto my-auto mx-2">
-                        <h6 [ngStyle]="{'color': 'white'}">BIBLIOGRAFIA</h6>
+                    <div [ngClass]="selectedAuxiliaryMaterial == 1 ? 'section-active' : ''" (click)="changeSelectedAuxiliaryMaterial(1)" class="section col-auto my-auto mx-2">
+                        <h6>BIBLIOGRAFIA</h6>
                     </div>
-                    <div [ngStyle]="{'background-color': '#1681A8'}" class="section col-auto my-auto mx-2">
-                        <h6 [ngStyle]="{'color': 'white'}">RECURSOS AUDIOVISUAIS</h6>
+                    <div [ngClass]="selectedAuxiliaryMaterial == 2 ? 'section-active' : ''" (click)="changeSelectedAuxiliaryMaterial(2)" class="section col-auto my-auto mx-2">
+                        <h6>RECURSOS AUDIOVISUAIS</h6>
                     </div>
-                    <div [ngStyle]="{'background-color': '#1681A8'}" class="section col-auto my-auto mx-2">
-                        <h6 [ngStyle]="{'color': 'white'}">SÍTIOS NA INTERNET</h6>
+                    <div [ngClass]="selectedAuxiliaryMaterial == 3 ? 'section-active' : ''" (click)="changeSelectedAuxiliaryMaterial(3)" class="section col-auto my-auto mx-2">
+                        <h6>SÍTIOS NA INTERNET</h6>
                     </div>
                 </div>
-                <div class="row justify-content-center mt-5">
-                    <div class="col-8">
-                        <div [innerHTML]="exhibition.credits"></div>
+                <div  [ngSwitch]="selectedAuxiliaryMaterial" class="row justify-content-center mt-5">
+                    <div *ngSwitchCase = "0" class="col-8">
+                        <div [innerHTML]="exhibition.onlineResourcesNova"></div>
+                    </div>
+                    <div *ngSwitchCase = "1" class="col-8">
+                        <div [innerHTML]="exhibition.bibliography"></div>
+                    </div>
+                    <div *ngSwitchCase = "2" class="col-8">
+                        <div [innerHTML]="exhibition.audiovisualResources"></div>
+                    </div>
+                    <div *ngSwitchCase = "3" class="col-8">
+                        <div [innerHTML]="exhibition.webPlaces"></div>
                     </div>
                 </div>
             </div>

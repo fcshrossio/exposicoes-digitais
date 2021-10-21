@@ -32,6 +32,8 @@ export class ExhibitionShowcaseComponent implements OnInit {
 
   selectedContent: number = 0
 
+  selectedAuxiliaryMaterial : number = 0
+
   constructor(
     private route: ActivatedRoute,
     private exhibitionService: ExhibitionService,
@@ -90,6 +92,11 @@ export class ExhibitionShowcaseComponent implements OnInit {
   changeSelectedContent(selected: number) {
     console.log(selected)
     this.selectedContent = selected
+  }
+
+  changeSelectedAuxiliaryMaterial(selected: number) {
+    console.log(selected)
+    this.selectedAuxiliaryMaterial = selected
   }
 
   open() {

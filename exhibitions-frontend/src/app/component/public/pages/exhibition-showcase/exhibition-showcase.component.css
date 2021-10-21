@@ -8,6 +8,11 @@
     font-family: "OpenSansBold";
 }
 
+.section-active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
 .section:hover {
     background-color: var(--primary-color-hover);
     color: white;

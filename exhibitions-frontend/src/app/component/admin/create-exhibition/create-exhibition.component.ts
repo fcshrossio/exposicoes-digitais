@@ -80,12 +80,13 @@ export class CreateExhibitionComponent implements OnInit {
          console.log( "exhibition details updated: " + exhibition)
        }
      )
-    console.log(this.exhibition)
-    this.exhibitionService.updateExhibitionCredits(this.exhibition).subscribe(
-      exhibition => { 
-        console.log( "exhibition credits updated: " + exhibition)
-      }
-    )
+    // console.log(this.exhibition)
+    // this.exhibitionService.updateExhibitionCredits(this.exhibition).subscribe(
+    //   exhibition => { 
+    //     this.exhibition = exhibition
+    //     console.log( "exhibition credits updated: " + exhibition)
+    //   }
+    // )
   }
 
   previewExhibition(){
