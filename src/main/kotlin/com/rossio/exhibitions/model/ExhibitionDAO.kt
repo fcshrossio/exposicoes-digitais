@@ -19,6 +19,7 @@ data class ExhibitionDAO(
     var items : MutableList<ExhibitionItemDAO>,
     var title: String,
     var subtitle: String,
+    var estimatedViewingTime: String,
     var introduction: String,
     @ManyToOne
     @JoinColumn
@@ -46,6 +47,7 @@ data class ExhibitionDAO(
         exhibition.items.map{ ExhibitionItemDAO(it) } as MutableList<ExhibitionItemDAO>,
         exhibition.title,
         exhibition.subtitle,
+        exhibition.estimatedViewingTime,
         exhibition.introduction,
         cover,
         exhibition.collaborators.map{ CollaboratorDAO(it)} as MutableList<CollaboratorDAO>,
@@ -59,7 +61,7 @@ data class ExhibitionDAO(
         exhibition.webPlaces
     )
 
-    constructor() : this(0, EditorDAO(), mutableListOf(), "","","", DigitalResourceDAO(), mutableListOf(),Date(),Status.PRIVATE,
+    constructor() : this(0, EditorDAO(), mutableListOf(), "","","","", DigitalResourceDAO(), mutableListOf(),Date(),Status.PRIVATE,
         mutableListOf(),"","","","","") {
 
     }
@@ -132,6 +134,7 @@ data class ExhibitionDAO(
         if(detailsDTO.id == this.id) {
             this.title = detailsDTO.title
             this.subtitle = detailsDTO.subtitle
+            this.estimatedViewingTime = detailsDTO.estimatedViewingTime
 
             this.onlineResourcesNova = detailsDTO.onlineResourcesNova
             this.bibliography = detailsDTO.bibliography

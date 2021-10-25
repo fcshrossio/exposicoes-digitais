@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-5 form-group form-inline">
                     <label class="m-2"><img src="https://www.fillmurray.com/30/30"/></label>
-                    <input class="form-control" id="coordinates" [ngModel]="coordinates" placeholder="COORDENADAS">
+                    <input class="form-control" id="coordinates" [(ngModel)]="coordinates" placeholder="COORDENADAS" name="coordinates"  >
                 </div>
                 <div class="col-2 ">
                     <img class="m-2 float-right" (click)="removeMarker()" src="https://www.fillmurray.com/30/30"/>
@@ -19,3 +19,8 @@
     </div>
 </div>
 <div id="map" class="map"></div>
+
+<div id="popup" class="ol-popup">
+    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+    <div id="popup-content"></div>
+  </div>

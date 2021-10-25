@@ -7,6 +7,7 @@ export class Exhibition {
     id : number;
     title : string;
     subtitle : string;
+    estimatedViewingTime : string;
     introduction : string;
     cover : DigitalResource;
     editor : Editor;
@@ -29,6 +30,7 @@ export class Exhibition {
         this.id = 0;
         this.title = title
         this.subtitle = subtitle
+        this.estimatedViewingTime = ""
         this.introduction = ""
         this.cover = new DigitalResource(4,"","","","","",[],"",[],"","")
         this.editor = editor

@@ -6,6 +6,13 @@
     border: dashed 1px #979797;
 }
 
+.dashed-box {
+    height: 36rem;
+    border-width: 2px;
+    border-color: var(--primary-color);
+    border-style: dashed;
+}
+
 .keyword {
     background-color: lightgrey;
     padding: 10px 10px 10px 20px;

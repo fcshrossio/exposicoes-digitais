@@ -121,6 +121,7 @@ class DbSeeder (
             mutableListOf(), //items
             "A Festa",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu hendrerit augue. Donec vehicula tristique augue id semper. Sed sed dictum magna, et laoreet sit.",
+            "15",
             "",
             digital2, //cover
             mutableListOf(), //collaborator list
@@ -140,6 +141,7 @@ class DbSeeder (
             mutableListOf(), //items
             "A música somos nós",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu hendrerit augue. Donec vehicula tristique augue id semper. Sed sed dictum magna, et laoreet sit.",
+            "20",
             "",
             digital1, //cover
             mutableListOf(), //collaborator list
@@ -159,6 +161,7 @@ class DbSeeder (
             mutableListOf(), //items
             "Cinema Portugues",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu hendrerit augue. Donec vehicula tristique augue id semper. Sed sed dictum magna, et laoreet sit.",
+            "30",
             "",
             digital1, //cover
             mutableListOf(), //collaborator list
@@ -179,6 +182,7 @@ class DbSeeder (
             mutableListOf(), //items
             "Cinema Portugues",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu hendrerit augue. Donec vehicula tristique augue id semper. Sed sed dictum magna, et laoreet sit.",
+            "10",
             "",
             digital1, //cover
             mutableListOf(), //collaborator list

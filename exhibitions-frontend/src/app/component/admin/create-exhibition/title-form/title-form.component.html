@@ -2,8 +2,8 @@
     <form #titleForm="ngForm">
         <div class="row p-3" style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
             <div class="container-fluid m-1 mt-4" style="min-height: 200px;">
-                <div class="row w-100">
-                    <div class="col-auto">
+                <div class="row w-100 mx-0">
+                    <div class="col-auto pl-0">
                         <label for="title" class="text">TÍTULO DA EXPOSIÇÃO </label>
                         <span class="text" style="color: red;" [hidden]  = "title.valid">
                             *
@@ -13,12 +13,12 @@
                         <label for="title" class="text"> ( Máximo 60 caracteres )  </label>
                     </div>
                 </div>
-                <div class="row w-100 px-3">
-                    <input required type="text" class="form-control" id="title" [(ngModel)]="exhibition.title" name="title" #title="ngModel" >
-                </div>
                 
-                <div class="row w-100 mt-5">
-                    <div class="col-auto">
+                <input required type="text" class="form-control" id="title" [(ngModel)]="exhibition.title" name="title" #title="ngModel" >
+              
+                
+                <div class="row w-100 mt-5 mx-0">
+                    <div class="col-auto pl-0">
                         <label for="subtitle" class="text">DESCRIÇÃO </label>
                         <span class="text" style="color: red;" [hidden] = "subtitle.valid">
                             *
@@ -28,17 +28,19 @@
                         <label for="subtitle" class="text"> ( Máximo 160 caracteres )  </label>
                     </div>
                 </div>
-                <div class="row w-100 px-3">
-                    <textarea rows="3" required  type="text" class="form-control" id="description" [(ngModel)]="exhibition.subtitle"  name="subtitle" #subtitle="ngModel"></textarea>
-                </div>
+                <textarea rows="3" required  type="text" class="form-control" id="description" [(ngModel)]="exhibition.subtitle"  name="subtitle" #subtitle="ngModel"></textarea>
                 <div class="row w-100 mt-5">
                     <div class="col-auto">
-                        <label for="title" class="text">EQUIPA A PARTILHAR </label>
+                        <label for="collaborators" class="text">EQUIPA A PARTILHAR </label>
                     </div>
                 </div>
-                <div class="row w-100 px-3">
-                    <input type="text" class="form-control" id="description" [(ngModel)]="exhibition.subtitle" name="subtitle" >
+                <input type="email" class="form-control" id="collaborators" [(ngModel)]="exhibition.subtitle" name="collaborators" >
+                <div class="row w-100 mt-5">
+                    <div class="col-auto">
+                        <label for="estimatedViewingTime" class="text">TEMPO DE LEITURA EM MINUTOS </label>
+                    </div>
                 </div>
+                <input type="text" class="form-control" id="estimatedViewingTime" [(ngModel)]="exhibition.estimatedViewingTime" name="estimatedViewingTime" >
                 <div class="text mt-5" [hidden] = "title.valid && subtitle.valid ">
                     <span style="color: red;" [hidden] = "subtitle.valid">
                         *
