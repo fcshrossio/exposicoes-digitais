@@ -41,6 +41,7 @@ import { ResourceDetailsModalComponent } from './component/public/modals/resourc
 import { ResourceShowcaseModalComponent } from './component/public/modals/resource-showcase-modal/resource-showcase-modal.component';
 import { MapComponent } from './component/public/components/map/map.component';
 import { ResourceListModalComponent } from './component/admin/modals/resource-list-modal/resource-list-modal.component';
+import { DragulaModule } from 'ng2-dragula';
 
 
 @NgModule({
@@ -85,7 +86,8 @@ import { ResourceListModalComponent } from './component/admin/modals/resource-li
     FormsModule,
     AdminRoutingModule,
     AngularEditorModule,
-    PublicRoutingModule 
+    PublicRoutingModule ,
+    DragulaModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

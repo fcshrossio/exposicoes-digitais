@@ -35,8 +35,15 @@ data class ExhibitionItemDAO(
         }
     }
 
-    fun editItem(item:ExhibitionItemDAO) : Boolean {
-        return true
+    fun editItem(item:ExhibitionItemDAO) : Boolean
+    {
+        if(item.id == this.id)
+        {
+            this.title = item.title
+            this.position = item.position
+            return true
+        }
+       return false
     }
 }
 

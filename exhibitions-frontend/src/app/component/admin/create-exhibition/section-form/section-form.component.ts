@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { DragulaService } from 'ng2-dragula';
 import { Exhibition } from 'src/app/model/exhibition';
 import { ExhibitionItem } from 'src/app/model/exhibitionItem';
 import { ExhibitionSubItem } from 'src/app/model/exhibitionSubItem';
@@ -20,6 +21,10 @@ export class SectionFormComponent implements OnInit {
   availableSections = new Array(this.sectionLimit-1)
  
   @Input() exhibition? : Exhibition
+
+  exhibitionItems : ExhibitionItem[] = []
+
+  @Output() exhibitionChange:EventEmitter<Exhibition> = new EventEmitter<Exhibition>()
 
   editorConfig: AngularEditorConfig = {
         editable: true,
@@ -77,25 +82,75 @@ export class SectionFormComponent implements OnInit {
   htmlContent : any
 
   constructor(
-  ) { }
+    private exhibitionService : ExhibitionService,
+    private dragulaService: DragulaService
+  ) {
+
+    this.dragulaService.createGroup("ITEMS", {
+      // ...
+    });
+
+    this.dragulaService.dropModel("ITEMS").subscribe(args => {
+      console.log(args);
+      //if(this.exhibition)
+        //console.log(this.exhibition.items)
+    });
+
+    this.dragulaService.createGroup("SUBITEMS", {
+      // ...
+    });
+
+    this.dragulaService.dropModel("SUBITEMS").subscribe(args => {
+      console.log(args);
+      //if(this.exhibition)
+        //console.log(this.exhibition.items)
+    });
+  
+   }
 
   ngOnInit(): void {
     if(this.exhibition)
     {
+      this.exhibition.items = this.exhibition.items.sort((a, b) => {
+        return a.position - b.position;
+      });
       this.availableSections = new Array(this.sectionLimit-1-this.exhibition.items[this.choosenSection].subItems.length)
     }
    
   }
 
-  changeSection(id : number) {
+  
+
+  
+
+  changeSection(index : number) {
     console.log(this.choosenSection)
-    this.choosenSection = id-1
+    this.choosenSection = index
+  }
+
+  saveOrder(){
+    console.log(this.exhibition?.items)
+    if(this.exhibition){
+      this.exhibition.items.forEach( (item,index) => {
+        item.position = index+1
+      })
+      console.log(this.exhibition?.items)
+    }
+
   }
 
   addSection() {
-    if(this.exhibition && this.exhibition.items.length < this.sectionLimit)
-    this.exhibition.items.push(new ExhibitionItem(this.exhibition.items.length+1,0,this.exhibition.items.length+1,""))
-    this.availableSections.pop()
+    if(this.exhibition && this.exhibition.items.length < this.sectionLimit){
+    // this.exhibition.items.push(new ExhibitionItem(this.exhibition.items.length+1,0,this.exhibition.items.length+1,""))
+    // this.availableSections.pop()
+    var newItem: ExhibitionItem = new ExhibitionItem(0,0,this.exhibition.items.length+1,"")
+    this.exhibitionService.addExhibitionItem(this.exhibition.id,newItem).subscribe(
+      exhibition => { 
+           this.exhibition = exhibition
+           console.log( "exhibition details updated: " + exhibition)
+         }
+       ) 
+    }
   }
 
   addSubSection(type : string){
@@ -108,3 +163,4 @@ export class SectionFormComponent implements OnInit {
   }
 
 }
+

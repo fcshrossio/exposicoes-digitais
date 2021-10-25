@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { mockExhibitionItems } from '../mock-exhibitions';
 import { ExhibitionItem } from '../model/exhibitionItem';
 
 @Injectable({
@@ -8,11 +7,11 @@ import { ExhibitionItem } from '../model/exhibitionItem';
 })
 export class ExhibitionItemService {
 
-  getExhibitionItem(id: number): Observable<ExhibitionItem> {
-    const item = mockExhibitionItems.find(h => h.id === id)!;
-    console.log(item)
-    return of(item)
- }
+//   getExhibitionItem(id: number): Observable<ExhibitionItem> {
+//     const item = mockExhibitionItems.find(h => h.id === id)!;
+//     console.log(item)
+//     return of(item)
+//  }
 
 
   constructor() { }

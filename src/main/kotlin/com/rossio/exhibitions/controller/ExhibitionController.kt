@@ -57,9 +57,15 @@ class ExhibitionController(
     @Operation(summary = "Edit a Exhibition")
     @PostMapping("/{id}")
     //@PreAuthorize("hasAnyRole('ADMIN','EDITOR') and @securityService.canEditorEditExhibition(principal, #id)")
-    fun editExhibition(@RequestBody exhibition: ExhibitionDTO, @PathVariable id: Long) : ExhibitionDTO =
-        ExhibitionDTO(exhibitionService.editExhibitionDetails(exhibition, exhibitionService.getOneExhibition(id)))
-
+    fun editExhibition(@RequestBody exhibition: ExhibitionDTO, @PathVariable id: Long) : ExhibitionDTO {
+        var editedexhibition = ExhibitionDTO(exhibitionService.editExhibitionDetails(exhibition, exhibitionService.getOneExhibition(id)))
+        exhibition.items.forEach{
+            exhibitionItemService.editOneExhibitionItem(exhibitionItemService.getOneExhibitionItem(it.id),
+                ExhibitionItemDAO(it)
+            )
+        }
+        return ExhibitionDTO(exhibitionService.getOneExhibition(editedexhibition.id))
+    }
 
     @Operation(summary = "Delete a Exhibition")
     @DeleteMapping("/{id}")
@@ -80,12 +86,13 @@ class ExhibitionController(
         exhibitionService.removeCollaborator(exhibitionService.getOneExhibition(id), collaboratorService.getOneCollaborator(collaborator.id))
 
     @Operation(summary = "Add Exhibition Item to Exhibition ")
-    @PostMapping("/{exhibitionId}/additem")
-    @PreAuthorize("hasAnyRole('ADMIN','EDITOR')")
-    fun addItemExhibition(@PathVariable exhibitionId: Long,@RequestBody item : ExhibitionItemDTO) : ExhibitionItemDTO {
+    @PostMapping("/additem/{exhibitionId}")
+    //@PreAuthorize("hasAnyRole('ADMIN','EDITOR')")
+    fun addItemExhibition(@PathVariable exhibitionId: Long,@RequestBody item : ExhibitionItemDTO) : ExhibitionDAO {
         var itemDAO = exhibitionItemService.createOneExhibitionItem(ExhibitionItemDAO(item))
-        exhibitionService.addExhibitionItem(exhibitionService.getOneExhibition(exhibitionId), itemDAO)
-        return ExhibitionItemDTO(itemDAO)
+        var exhibitionDAO = exhibitionService.getOneExhibition(exhibitionId)
+        exhibitionService.addExhibitionItem(exhibitionDAO, itemDAO)
+        return exhibitionDAO
     }
 
     @Operation(summary = "Show Recent Exhibitions")

@@ -1,6 +1,6 @@
-<div *ngIf="exhibition" class="row w-100 p-3 text"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
-    <div class="col-fluid draggable m-1"  draggable="true" appDraganddroplist (click)="changeSection(section.id)" *ngFor="let section of exhibition.items;index as i;" [id]="section.id">
-        <button [className]="section.id -1 === choosenSection  ? 'btn createnav createnav-active' : 'btn createnav'"  [id]="section.id">{{i+1}}</button>
+<div *ngIf="exhibition" class="row w-100 p-3 text" dragula="ITEMS" [(dragulaModel)]="exhibition.items"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
+    <div class="col-fluid draggable m-1"  (click)="changeSection(i)" *ngFor="let section of exhibition.items;index as i;" [id]="section.id">
+        <button [className]="i === choosenSection  ? 'btn createnav createnav-active' : 'btn createnav'"  [id]="section.id">{{section.position}}</button>
     </div>
     <div class="col-fluid m-1" >
         <button class="btn addsection" (click)="addSection()">+</button>
@@ -8,6 +8,9 @@
     <div *ngFor="let section of availableSections"  class="col-fluid  m-1">
         <button class="btn availablesection">+</button>
     </div>
+</div>
+<div>
+    <button class="btn btn-primary" (click)="saveOrder()"> guardar ordem</button>
 </div>
 <div *ngIf="exhibition" class="row p-2"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
     <div *ngIf="exhibition.items[choosenSection]" class="container-fluid" style="min-height: 200px;">
@@ -49,217 +52,219 @@
         </div>
     </div>
 </div>
-<div *ngIf="exhibition&&exhibition.items[choosenSection]">
-    <div  class=""   *ngFor="let subsection of exhibition.items[choosenSection].subItems">
-        <div [ngSwitch]="subsection.itemType">
-            <div class="row w-100" draggable="true" appDraganddroplist style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'text'">
-                <div class="col p-3"  >
-                    <angular-editor [(ngModel)]="htmlContent" [config]="editorConfig"></angular-editor>
-                </div>
-                <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
-                    <div class="row h-100 justify-content-center">
-                        <div class="col-12 justify-content-center">
-                            <img src="https://www.fillmurray.com/40/40"/>
+<div  *ngIf="exhibition&&exhibition.items[choosenSection]">
+    <div dragula="SUBITEMS" [(dragulaModel)]="exhibition.items[choosenSection].subItems" >
+        <div  class=""   *ngFor="let subsection of exhibition.items[choosenSection].subItems">
+            <div [ngSwitch]="subsection.itemType">
+                <div class="row w-100" draggable="true" appDraganddroplist style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'text'">
+                    <div class="col p-3"  >
+                        <angular-editor [(ngModel)]="htmlContent" [config]="editorConfig"></angular-editor>
+                    </div>
+                    <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
+                        <div class="row h-100 justify-content-center">
+                            <div class="col-12 justify-content-center">
+                                <img src="https://www.fillmurray.com/40/40"/>
+                            </div>
+                            <div class="col mt-auto justify-content-center">
+                                <img src="https://www.fillmurray.com/40/40"/>
+                            </div>
                         </div>
-                        <div class="col mt-auto justify-content-center">
-                            <img src="https://www.fillmurray.com/40/40"/>
+                    </div>
+                </div>
+                <div class="row w-100" draggable="true" appDraganddroplist style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'texttext'">
+                    <div class="col p-3"  >
+                        <div class="row w-100">
+                            <div class="col">
+                                <angular-editor [(ngModel)]="htmlContent" [config]="editorConfig"></angular-editor>
+                            </div>
+                            <div class="col">
+                                <angular-editor [(ngModel)]="htmlContent" [config]="editorConfig"></angular-editor>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
+                        <div class="row h-100 justify-content-center">
+                            <div class="col-12 justify-content-center">
+                                <img src="https://www.fillmurray.com/40/40"/>
+                            </div>
+                            <div class="col mt-auto justify-content-center">
+                                <img src="https://www.fillmurray.com/40/40"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row w-100" draggable="true" appDraganddroplist style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'textresource'">
+                    <div class="col p-3"  >
+                        <div class="row w-100">
+                            <div class="col">
+                                <angular-editor [(ngModel)]="htmlContent" [config]="editorConfig"></angular-editor>
+                            </div>
+                            <div class="col">
+                                <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
+                        <div class="row h-100 justify-content-center">
+                            <div class="col-12 justify-content-center">
+                                <img src="https://www.fillmurray.com/40/40"/>
+                            </div>
+                            <div class="col mt-auto justify-content-center">
+                                <img src="https://www.fillmurray.com/40/40"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row w-100" draggable="true" appDraganddroplist style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'resourcetext'">
+                    <div class="col p-3"  >
+                        <div class="row w-100">
+                            <div class="col">
+                                <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
+                            </div>
+                            <div class="col">
+                                <angular-editor [(ngModel)]="htmlContent" [config]="editorConfig"></angular-editor>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
+                        <div class="row h-100 justify-content-center">
+                            <div class="col-12 justify-content-center">
+                                <img src="https://www.fillmurray.com/40/40"/>
+                            </div>
+                            <div class="col mt-auto justify-content-center">
+                                <img src="https://www.fillmurray.com/40/40"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row w-100" style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'resource'">
+                    <div class="col p-3"  >
+                        <div class="row w-100">
+                            <div class="col">
+                                <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
+                        <div class="row h-100 justify-content-center">
+                            <div class="col-12 justify-content-center">
+                                <img src="https://www.fillmurray.com/40/40"/>
+                            </div>
+                            <div class="col mt-auto justify-content-center">
+                                <img src="https://www.fillmurray.com/40/40"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row w-100" style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'resourcefull'">
+                    <div class="col p-3"  >
+                        <div class="row w-100">
+                            <div class="col">
+                                <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
+                        <div class="row h-100 justify-content-center">
+                            <div class="col-12 justify-content-center">
+                                <img src="https://www.fillmurray.com/40/40"/>
+                            </div>
+                            <div class="col mt-auto justify-content-center">
+                                <img src="https://www.fillmurray.com/40/40"/>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row w-100" draggable="true" appDraganddroplist style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'texttext'">
-                <div class="col p-3"  >
-                    <div class="row w-100">
-                        <div class="col">
-                            <angular-editor [(ngModel)]="htmlContent" [config]="editorConfig"></angular-editor>
-                        </div>
-                        <div class="col">
-                            <angular-editor [(ngModel)]="htmlContent" [config]="editorConfig"></angular-editor>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
-                    <div class="row h-100 justify-content-center">
-                        <div class="col-12 justify-content-center">
-                            <img src="https://www.fillmurray.com/40/40"/>
-                        </div>
-                        <div class="col mt-auto justify-content-center">
-                            <img src="https://www.fillmurray.com/40/40"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row w-100" draggable="true" appDraganddroplist style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'textresource'">
-                <div class="col p-3"  >
-                    <div class="row w-100">
-                        <div class="col">
-                            <angular-editor [(ngModel)]="htmlContent" [config]="editorConfig"></angular-editor>
-                        </div>
-                        <div class="col">
-                            <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
-                    <div class="row h-100 justify-content-center">
-                        <div class="col-12 justify-content-center">
-                            <img src="https://www.fillmurray.com/40/40"/>
-                        </div>
-                        <div class="col mt-auto justify-content-center">
-                            <img src="https://www.fillmurray.com/40/40"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row w-100" draggable="true" appDraganddroplist style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'resourcetext'">
-                <div class="col p-3"  >
-                    <div class="row w-100">
-                        <div class="col">
-                            <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
-                        </div>
-                        <div class="col">
-                            <angular-editor [(ngModel)]="htmlContent" [config]="editorConfig"></angular-editor>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
-                    <div class="row h-100 justify-content-center">
-                        <div class="col-12 justify-content-center">
-                            <img src="https://www.fillmurray.com/40/40"/>
-                        </div>
-                        <div class="col mt-auto justify-content-center">
-                            <img src="https://www.fillmurray.com/40/40"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row w-100" style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'resource'">
-                <div class="col p-3"  >
-                    <div class="row w-100">
-                        <div class="col">
-                            <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
-                    <div class="row h-100 justify-content-center">
-                        <div class="col-12 justify-content-center">
-                            <img src="https://www.fillmurray.com/40/40"/>
-                        </div>
-                        <div class="col mt-auto justify-content-center">
-                            <img src="https://www.fillmurray.com/40/40"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row w-100" style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'resourcefull'">
-                <div class="col p-3"  >
-                    <div class="row w-100">
-                        <div class="col">
-                            <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
-                    <div class="row h-100 justify-content-center">
-                        <div class="col-12 justify-content-center">
-                            <img src="https://www.fillmurray.com/40/40"/>
-                        </div>
-                        <div class="col mt-auto justify-content-center">
-                            <img src="https://www.fillmurray.com/40/40"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+            
 
-        <!-- <h3>{{subsection.itemType}}</h3>
-        <div class="row w-100" [ngSwitch]="subsection.itemType">
-            <div class="col"  *ngSwitchCase = "'text'">
-                <angular-editor [(ngModel)]="htmlContent"></angular-editor>
+            <!-- <h3>{{subsection.itemType}}</h3>
+            <div class="row w-100" [ngSwitch]="subsection.itemType">
+                <div class="col"  *ngSwitchCase = "'text'">
+                    <angular-editor [(ngModel)]="htmlContent"></angular-editor>
+                </div>
+                <div class="col-1">
+                    t
+                </div>
             </div>
-            <div class="col-1">
-                t
             </div>
+                <div *ngSwitchCase = "'texttext'">
+                    <div class="row w-100">
+                        <div class="col-5">
+                            <angular-editor [(ngModel)]="htmlContent"></angular-editor>
+                        </div>
+                        <div class="col-5">
+                            <angular-editor [(ngModel)]="htmlContent"></angular-editor>
+                        </div>
+                        <div class="col-1">
+                            t
+                        </div>
+                    </div>
+                </div>
+                <div *ngSwitchCase = "'textresource'">
+                    <div class="row w-100">
+                        <div class="col-5">
+                            <angular-editor [(ngModel)]="htmlContent"></angular-editor>
+                        </div>
+                        <div class="col-5">
+                            <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
+                        </div>
+                        <div class="col-1">
+                            t
+                        </div>
+                    </div>
+                </div>
+                <div *ngSwitchCase = "'resourcetext'">
+                    <div class="row w-100">
+                        <div class="col-5">
+                            <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
+                        </div>
+                        <div class="col-5">
+                            <angular-editor [(ngModel)]="htmlContent"></angular-editor>
+                        </div>
+                        <div class="col-1">
+                            t
+                        </div>
+                    </div>
+                </div>
+                <div *ngSwitchCase = "'resourceresource'">
+                    <div class="row w-100">
+                        <div class="col-5">
+                            <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
+                        </div>
+                        <div class="col-5">
+                            <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
+                        </div>
+                        <div class="col-1">
+                            t
+                        </div>
+                    </div>
+                </div>
+                <div *ngSwitchCase = "'resource'">
+                    <div class="row w-100">
+                        <div class="col-11">
+                            <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
+                        </div>
+                        <div class="col-1">
+                            t
+                        </div>
+                    </div>
+                </div>
+                <div *ngSwitchCase = "'resourcefull'">
+                    <div class="row w-100">
+                        <div class="col-11">
+                            <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
+                        </div>
+                        <div class="col-1">
+                            t
+                        </div>
+                    </div>
+                </div>
+                <div *ngSwitchDefault>
+                    <angular-editor [(ngModel)]="htmlContent"></angular-editor>
+                </div>
+            </div> -->
+            
         </div>
-        </div>
-            <div *ngSwitchCase = "'texttext'">
-                <div class="row w-100">
-                    <div class="col-5">
-                        <angular-editor [(ngModel)]="htmlContent"></angular-editor>
-                    </div>
-                    <div class="col-5">
-                        <angular-editor [(ngModel)]="htmlContent"></angular-editor>
-                    </div>
-                    <div class="col-1">
-                        t
-                    </div>
-                </div>
-            </div>
-            <div *ngSwitchCase = "'textresource'">
-                <div class="row w-100">
-                    <div class="col-5">
-                        <angular-editor [(ngModel)]="htmlContent"></angular-editor>
-                    </div>
-                    <div class="col-5">
-                        <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
-                    </div>
-                    <div class="col-1">
-                        t
-                    </div>
-                </div>
-            </div>
-            <div *ngSwitchCase = "'resourcetext'">
-                <div class="row w-100">
-                    <div class="col-5">
-                        <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
-                    </div>
-                    <div class="col-5">
-                        <angular-editor [(ngModel)]="htmlContent"></angular-editor>
-                    </div>
-                    <div class="col-1">
-                        t
-                    </div>
-                </div>
-            </div>
-            <div *ngSwitchCase = "'resourceresource'">
-                <div class="row w-100">
-                    <div class="col-5">
-                        <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
-                    </div>
-                    <div class="col-5">
-                        <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
-                    </div>
-                    <div class="col-1">
-                        t
-                    </div>
-                </div>
-            </div>
-            <div *ngSwitchCase = "'resource'">
-                <div class="row w-100">
-                    <div class="col-11">
-                        <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
-                    </div>
-                    <div class="col-1">
-                        t
-                    </div>
-                </div>
-            </div>
-            <div *ngSwitchCase = "'resourcefull'">
-                <div class="row w-100">
-                    <div class="col-11">
-                        <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
-                    </div>
-                    <div class="col-1">
-                        t
-                    </div>
-                </div>
-            </div>
-            <div *ngSwitchDefault>
-                <angular-editor [(ngModel)]="htmlContent"></angular-editor>
-            </div>
-        </div> -->
-        
     </div>
 </div>

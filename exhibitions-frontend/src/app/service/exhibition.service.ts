@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Exhibition } from '../model/exhibition';
 import { Credits } from '../model/credits';
+import { ExhibitionItem } from '../model/exhibitionItem';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +63,14 @@ export class ExhibitionService {
     return this.http.post<Exhibition>(this.exhibitionsUrl + '/' + exhibition.id + '/credits' , credits , this.httpOptions).pipe(
       
       catchError(this.handleError<Exhibition>('updateexhibitions'))
+    )
+  }
+
+  addExhibitionItem(exhibitionId: Number, item : ExhibitionItem): Observable<Exhibition> {
+    console.log("sending item to  " + this.exhibitionsUrl + '/additem/' + exhibitionId)
+    return this.http.post<Exhibition>(this.exhibitionsUrl + '/additem/' + exhibitionId, item , this.httpOptions).pipe(
+      
+      catchError(this.handleError<Exhibition>('add item exhibitions'))
     )
   }
 

@@ -23,6 +23,11 @@
   color:#B9D8E4;
 }
 
+.sidebar-link:hover {
+  background-color: var(--primary-color-hover);
+  color : white
+}
+
 .sidebar-sublink {
   padding-left: 6vh;
 }
