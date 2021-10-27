@@ -24,7 +24,7 @@ class SavedResourcesService(
     }
 
     fun editSavedResources(savedResourcesDAO: SavedResourcesDAO, newSavedResourcesDAO: SavedResourcesDAO) : SavedResourcesDAO{
-        
+
         return savedResourcesDAO
     }
 

@@ -46,3 +46,10 @@
     width: 100%;
     
 }
+
+.overlay-footer{
+    border: 0;
+    position:absolute;
+      bottom:0;
+    }
+

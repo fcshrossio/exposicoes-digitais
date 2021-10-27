@@ -28,9 +28,9 @@ class ExhibitionController(
     fun getAllExhibitions() : List<ExhibitionDTO> =
         exhibitionService.getAllExhibitions().map { ExhibitionDTO(it) }
 
-    @Operation(summary = "Get List of All public Exhibitions ")
-    @GetMapping("/public")
-    fun getAllPublicExhibitions() : List<ExhibitionDTO> =
+    @Operation(summary = "Get List of All published Exhibitions ")
+    @GetMapping("/published")
+    fun getAllPublishedExhibitions() : List<ExhibitionDTO> =
         exhibitionService.getAllPublicExhibitions().map { ExhibitionDTO(it) }
 
 

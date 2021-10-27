@@ -13,6 +13,11 @@
     height:30em;
 }
 
+.title {
+    font-family: 'Montserrat';
+}
+
+
 .text{
     font-family: 'OpenSans';
 }

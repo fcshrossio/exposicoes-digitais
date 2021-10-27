@@ -8,7 +8,7 @@
     <div class="container justify-content-center">
      <div class="row">
         <div class="col-3">
-          <img style="width: 100%" src="https://www.fillmurray.com/230/230"/>
+          <img style="width: 100%" src="{{digitalResource.identifier}}"/>
           <div class="row justify-content-center">
               <div class="col-auto m-1 p-0">
                 <img src="https://www.fillmurray.com/30/30"/>
@@ -34,43 +34,43 @@
           </div>
           <div class="row justify-content-center">
             <div class="col-auto">
-              <button class="btn">ORIGEM RECURSO<img style="width: 30;" src="../../../../../assets/icons/gotoorigin.svg"></button>
+              <button class="btn btn-outline-primary" style="border-radius: 30px;">ORIGEM RECURSO <img  src="../../../../../assets/icons/gotoorigin.svg"></button>
             </div>
           </div>
         </div>
         <div class="col-9 text">
-            <h2> Lorem Ipsum</h2>
+            <h2 class="title">{{digitalResource.title}}</h2>
             <div class="row">
                 <div class="col-6">
-                    <h6>DESCR</h6>
+                    <h6 class="title">DESCR</h6>
                     {{digitalResource.description}}
                 </div>
                 <div class="col-6">
-                  <h6>ASSUNTO</h6>
+                  <h6 class="title">ASSUNTO</h6>
                   {{digitalResource.subject}}
                 </div>
                 <div class="col-6">
-                  <h6>AUTOR(ES)</h6>
+                  <h6 class="title">AUTOR(ES)</h6>
                   {{digitalResource.authors}}
                 </div>
                 <div class="col-6">
-                  <h6>PROVEDOR</h6>
+                  <h6 class="title">PROVEDOR</h6>
                   {{digitalResource.dataProvider}}
                 </div>
                 <div class="col-6">
-                  <h6>DATA</h6>
+                  <h6 class="title">DATA</h6>
                   {{digitalResource.date}}
                 </div>
                 <div class="col-6">
-                    <h6>REFERÊNCIA RECURSO</h6>
+                    <h6 class="title">REFERÊNCIA RECURSO</h6>
                     {{digitalResource.identifier}}
                 </div>
                 <div class="col-6">
-                  <h6>DESCR. FISICA</h6>
+                  <h6 class="title">DESCR. FISICA</h6>
                   {{digitalResource.physicalDescription}}
                 </div>
                 <div class="col-6">
-                  <h6>CONDIÇÕES DE REPRODUÇÃO</h6>
+                  <h6 class="title">CONDIÇÕES DE REPRODUÇÃO</h6>
                   {{digitalResource.rights}}
                 </div>
 

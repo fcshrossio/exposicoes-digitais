@@ -36,7 +36,7 @@ export class Exhibition {
         this.editor = editor
         this.collaborators = []
         this.creationDate = (new Date())
-        this.status = "PRIVATE"
+        this.status = "DRAFT"
         this.keywords = ["Teste1", "Teste2"]
         this.items = [
            // new ExhibitionItem(2,0,"introduction","texto","introduction"),

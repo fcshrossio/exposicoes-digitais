@@ -7,10 +7,9 @@
             <img (click)='changeView("images")' class="icone" src="../../../../../assets/icons/resourcesgallery.svg"/>
         </div>
         <div class="col-2">
-            <select class="form-control">
-                <option>Default select</option>
-                <option>Default select</option>
-                <option>Default select</option>
+            <select class="form-control" (change)="onChangeList($event)">
+                <option></option>
+                <option *ngFor="let list of savedResources" [value]="list.id" >{{list.name}}</option>
             </select>
         </div>
         <div class="col">

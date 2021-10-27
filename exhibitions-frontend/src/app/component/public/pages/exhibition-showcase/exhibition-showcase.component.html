@@ -1,6 +1,25 @@
 <div *ngIf="exhibition" class="container-fluid pb-5 pl-0 pr-0 justify-content-center">
     <div *ngIf="exhibition.cover" class="w-100">
         <img class="img-fluid w-100" style="height:88vh; object-fit: cover;"src="{{exhibition.cover.identifier}}"/>
+        <div class="card-img-overlay m-0 p-0">
+            <div class="row w-100 justify-content-center" style="margin-top: 54vh;">
+                <div style="color:white" class="col-auto mx-auto"><h6><img (click)="openDetails()"  src="../../../../../assets/icons/info.svg"/>{{exhibition.cover.title}}</h6></div>
+            </div>
+            <div class="container-fluid w-100 m-0" style="background-color: white; opacity: 0.7; height: 44vh;">
+                <div class="row justify-content-center pt-5" >
+                    <div class="col-auto">
+                        <h1 class="title credits-title" >{{exhibition.title}}</h1>
+                    </div>
+                </div>
+                <div class="row justify-content-center" >
+                    <div class="col-6 px-5 ">
+                        <h4 class="title" style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation </h4>
+                        <h6 class="title" style="text-align: center;">Equipa de Investigação da Infraestrutura ROSSIO</h6>
+                        <h6 class="title" style="text-align: center;">Tempo de leitura {{exhibition.estimatedViewingTime}}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row w-100 mx-0">
         <div class="col-auto mr-auto mt-3">
@@ -32,9 +51,9 @@
     <div>
         <div [ngSwitch]="selectedContent">
             <div *ngSwitchCase ="0">
-                <div class="row justify-content-center mx-auto align-items-center text-align-center mt-5">
-                    <div *ngFor="let item of exhibitionItems;let i=index;" (click)="changeSection(i)" [ngClass]="selectedSection == i ? 'section-active' : ''" class="section col-auto my-auto mx-2">
-                        <h6>{{item.title}}</h6>
+                <div class="row justify-content-center mx-auto align-items-center text-align-center mt-5 px-3">
+                    <div *ngFor="let item of exhibitionItems;let i=index;" (click)="changeSection(i)" [ngClass]="selectedSection == i ? 'section-active' : ''" class="section col-auto  mx-2 my-2">
+                        <h6>{{i+1}}. {{item.title}}</h6>
                     </div>
                 </div>
                 <div *ngIf="exhibitionItems.length > 0" style="text-align: center;" class="text-align-center justify-content-center mt-5">
@@ -49,18 +68,20 @@
                                             <div [innerHTML]="textitem"></div>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-5">
                                         <div *ngFor="let resource of subitem.digitalResources">
-                                            <img class="img-fluid w-50" (click)="open()" src="{{resource.identifier}}"/>
+                                            <img class="img-fluid w-100" (click)="open()" src="{{resource.identifier}}"/>
+                                            <h6 style="text-align: left;">legenda</h6>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div *ngSwitchCase = "'resourcetext'">
                                 <div class="row pr-5 pl-5 mx-5">
-                                    <div class="col">
+                                    <div class="col-5">
                                         <div *ngFor="let resource of subitem.digitalResources">
                                             <img class="img-fluid w-100" (click)="open()" src="{{resource.identifier}}"/>
+                                            <h6 style="text-align: left;">legenda</h6>
                                         </div>
                                     </div>
                                     <div class="col">

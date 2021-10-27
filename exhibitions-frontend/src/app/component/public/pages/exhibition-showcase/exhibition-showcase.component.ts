@@ -7,6 +7,7 @@ import { ExhibitionItem } from 'src/app/model/exhibitionItem';
 import { ExhibitionSubItem } from 'src/app/model/exhibitionSubItem';
 import { ExhibitionService } from 'src/app/service/exhibition.service';
 import { isTemplateSpan } from 'typescript';
+import { ResourceDetailsModalComponent } from '../../modals/resource-details-modal/resource-details-modal.component';
 import { ResourceShowcaseModalComponent } from '../../modals/resource-showcase-modal/resource-showcase-modal.component';
 
 @Component({
@@ -104,6 +105,11 @@ export class ExhibitionShowcaseComponent implements OnInit {
     //this.modalService.open(content, { size: 'xl', backdrop: 'static' })
     const modalRef = this.modalService.open(ResourceShowcaseModalComponent,{ size: 'lg' });
     modalRef.componentInstance.digitalResources = this.digitalResources;
+  }
+
+  openDetails() {
+    const modalRef = this.modalService.open(ResourceDetailsModalComponent,{ size: 'xl', backdrop: 'static' });
+    modalRef.componentInstance.digitalResource = this.exhibition?.cover;
   }
 
 }
