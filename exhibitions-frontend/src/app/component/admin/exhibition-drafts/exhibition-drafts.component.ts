@@ -13,16 +13,31 @@ export class ExhibitionDraftsComponent implements OnInit {
 
   selection: string = "all"
 
+  collaborations: Exhibition[] = []
+
+  drafts: Exhibition[] = []
+
   constructor(private exhibitionService: ExhibitionService,) { }
 
   ngOnInit(): void {
     this.getExhibitions()
+
+    console.log(this.drafts)
   }
 
 
   getExhibitions(): void 
   {
-    this.exhibitionService.getExhibitions().subscribe( exhibitions => this.exhibitions = exhibitions)
+    this.exhibitionService.getExhibitions().subscribe( exhibitions => { 
+      this.exhibitions = exhibitions 
+      this.drafts = this.exhibitions.filter( (element) => { return element.status === "DRAFT" })
+      this.collaborations = this.exhibitions.filter( (element) => { return element.collaborators.length >= 1 })
+    })
+  }
+
+  
+  changeSelection( selection : string){
+    this.selection = selection
   }
 
 

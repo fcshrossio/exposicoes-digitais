@@ -70,3 +70,10 @@
     color: gray;
     font-family: "OpenSansBold";
 }
+
+.dashed-box {
+    height: 100%;
+    border-width: 2px;
+    border-color: var(--primary-color);
+    border-style: dashed;
+}

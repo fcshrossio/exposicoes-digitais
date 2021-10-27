@@ -10,3 +10,12 @@
   .table-striped tbody tr:nth-of-type(even) {
     background-color:  white;
   }
+
+
+  .icone {
+    width: 25px;
+  }
+
+  .icone:hover {
+    fill:var(--primary-color)
+  }

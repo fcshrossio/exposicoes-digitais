@@ -1,24 +1,110 @@
 <div class="container-fluid">
     <div class="row my-auto py-4 px-5" style="background: white;">
         <div class="col-auto">
-            <button [ngClass]="selection == 'all' ? 'btn section section-active' : 'btn section'"> TODAS </button>
+            <button [ngClass]="selection == 'all' ? 'btn section section-active' : 'btn section'" (click)="changeSelection('all')"> TODAS </button>
         </div>
         <div class="col-auto">
-            <button class="btn section"> RASCUNHOS  </button>
+            <button class="btn section-grey" [ngClass]="selection == 'drafts' ? 'section-grey-active' : ''" (click)="changeSelection('drafts')"> RASCUNHOS  </button>
         </div>
         <div class="col-auto">
-            <button class="btn section"> EM COLABORAÇÃO  </button>
+            <button class="btn section" [ngClass]="selection == 'collaboration' ? 'section-active' : ''" (click)="changeSelection('collaboration')"> EM COLABORAÇÃO  </button>
         </div>
     </div>
-    <div class="container-fluid p-5">
-        <div class="row">
+    <div [ngSwitch]="selection" class="container-fluid p-5">
+        <div class="row" *ngSwitchCase = "'all'">
             <div *ngFor="let exhibition of exhibitions" class="col-5 m-1 my-4">
                 <div class="card text-white">
                     <img class="card-img" src="../../../../../assets/images/0001_M2.jpg" alt="Card image">
                     <div class="card-img-overlay">
                     <div class="row">
                         <div class="col-auto">
-                            <span class="dot"></span>
+                            <span class="dot-gray" [ngClass]="{'dot-blue': exhibition.collaborators.length > 0 }"></span>
+                        </div>
+                        <div class="col-auto ml-auto">
+                            <a routerLink='/admin/exhibitions/edit/{{exhibition.id}}'>
+                                <img style="width: 23px" src="/../../../../assets/icons/edit.svg"/>
+                            </a>
+                        </div>
+                        <div class="col-auto">
+                            <img style="width: 23px" src="../../../../../assets/icons/deletewhite.svg"/>
+                        </div>
+                    </div>
+                      <h5 class="card-title">{{exhibition.title}}</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <div class="card-footer">
+                        <div class="row mt-auto">
+                            <div class="col-auto">
+                                <img style="width:35px" src="../../../../../assets/icons/icon_userwhite.svg"/>
+                            </div>
+                            <div class="col-auto">
+                                Ana Silva
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-auto">
+                                <img style="width:32px" src="../../../../../assets/icons/sharewhite.svg"/>
+                            </div>
+                            <div class="col-auto">
+                                Ana Silva,Ana Silva,Ana Silva,Ana Silva
+                            </div>
+                        </div>
+                      </div>
+ 
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <div class="row" *ngSwitchCase = "'drafts'">
+            <div *ngFor="let exhibition of drafts" class="col-5 m-1 my-4">
+                <div class="card text-white">
+                    <img class="card-img" src="../../../../../assets/images/0001_M2.jpg" alt="Card image">
+                    <div class="card-img-overlay">
+                    <div class="row">
+                        <div class="col-auto">
+                            <span class="dot-gray" [ngClass]="{'dot-blue': exhibition.collaborators.length > 0 }"></span>
+                        </div>
+                        <div class="col-auto ml-auto">
+                            <a routerLink='/admin/exhibitions/edit/{{exhibition.id}}'>
+                                <img style="width: 23px" src="/../../../../assets/icons/edit.svg"/>
+                            </a>
+                        </div>
+                        <div class="col-auto">
+                            <img style="width: 23px" src="../../../../../assets/icons/deletewhite.svg"/>
+                        </div>
+                    </div>
+                      <h5 class="card-title">{{exhibition.title}}</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <div class="card-footer">
+                        <div class="row mt-auto">
+                            <div class="col-auto">
+                                <img style="width:35px" src="../../../../../assets/icons/icon_userwhite.svg"/>
+                            </div>
+                            <div class="col-auto">
+                                Ana Silva
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-auto">
+                                <img style="width:32px" src="../../../../../assets/icons/sharewhite.svg"/>
+                            </div>
+                            <div class="col-auto">
+                                Ana Silva,Ana Silva,Ana Silva,Ana Silva
+                            </div>
+                        </div>
+                      </div>
+ 
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <div class="row" *ngSwitchCase = "'collaboration'">
+            <div *ngFor="let exhibition of collaborations" class="col-5 m-1 my-4">
+                <div class="card text-white">
+                    <img class="card-img" src="../../../../../assets/images/0001_M2.jpg" alt="Card image">
+                    <div class="card-img-overlay">
+                    <div class="row">
+                        <div class="col-auto">
+                            <span class="dot-gray" [ngClass]="{'dot-blue': exhibition.collaborators.length > 0 }"></span>
                         </div>
                         <div class="col-auto ml-auto">
                             <a routerLink='/admin/exhibitions/edit/{{exhibition.id}}'>

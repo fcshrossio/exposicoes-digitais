@@ -1,270 +1,188 @@
-<div *ngIf="exhibition" class="row w-100 p-3 text" dragula="ITEMS" [(dragulaModel)]="exhibition.items"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
-    <div class="col-fluid draggable m-1"  (click)="changeSection(i)" *ngFor="let section of exhibition.items;index as i;" [id]="section.id">
-        <button [className]="i === choosenSection  ? 'btn createnav createnav-active' : 'btn createnav'"  [id]="section.id">{{section.position}}</button>
-    </div>
-    <div class="col-fluid m-1" >
-        <button class="btn addsection" (click)="addSection()">+</button>
-    </div>
-    <div *ngFor="let section of availableSections"  class="col-fluid  m-1">
-        <button class="btn availablesection">+</button>
-    </div>
-</div>
-<div>
-    <button class="btn btn-primary" (click)="saveOrder()"> guardar ordem</button>
-</div>
-<div *ngIf="exhibition" class="row p-2"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
-    <div *ngIf="exhibition.items[choosenSection]" class="container-fluid" style="min-height: 200px;">
-        <div class="row w-100  mt-5">
-            <div class="col-auto">
-                <label for="cover" class="text">NOME SECÇÃO </label>
-            </div>
+<div *ngIf="exhibition">
+    <div class="row w-100 p-3 text" dragula="ITEMS" [(dragulaModel)]="exhibition.items"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
+        <div class="col-fluid draggable m-1"  (click)="changeSection(i)" *ngFor="let section of exhibition.items;index as i;" [id]="section.id">
+            <button [className]="i === choosenSection  ? 'btn createnav createnav-active' : 'btn createnav'"  [id]="section.id">{{section.position}}</button>
         </div>
-        <div class="row w-100 px-3">
-            <input required type="text" class="form-control" id="{{'exhibitionItemTitle' + exhibition.items[choosenSection].id" [(ngModel)]="exhibition.items[choosenSection].title" name="exhibitionItemName" #title="ngModel" >
+        <div class="col-fluid m-1" >
+            <button class="btn addsection" (click)="addSection()">+</button>
         </div>
-
-        <div class="row w-100 mt-5 mb-5">
-            <div (click)="addSubSection('text')" class="col-1">
-                <img  src="https://www.fillmurray.com/60/40"/>
+        <div *ngFor="let section of availableSections"  class="col-fluid  m-1">
+            <button class="btn availablesection">+</button>
+        </div>
+    </div>
+    <div>
+        <button class="btn btn-primary" (click)="saveOrder()"> guardar ordem</button>
+    </div>
+    <div class="row p-2"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
+        <div *ngIf="exhibition.items[choosenSection]" class="container-fluid" style="min-height: 200px;">
+            <div class="row w-100  mt-5">
+                <div class="col-auto">
+                    <label for="cover" class="text">NOME SECÇÃO </label>
+                </div>
             </div>
-            <div (click)="addSubSection('texttext')" class="col-1">
-                <img src="https://www.fillmurray.com/40/40"/>
-                <img src="https://www.fillmurray.com/40/40"/>
+            <div class="row w-100 px-3">
+                <input required type="text" class="form-control" id="{{'exhibitionItemTitle' + exhibition.items[choosenSection].id" [(ngModel)]="exhibition.items[choosenSection].title" name="exhibitionItemName" #title="ngModel" >
             </div>
-            <div (click)="addSubSection('textresource')" class="col-1">
-                <img src="https://www.fillmurray.com/40/40"/>
-                <img src="https://www.fillmurray.com/40/40"/>
-            </div>
-            <div (click)="addSubSection('resourcetext')" class="col-1">
-                <img src="https://www.fillmurray.com/40/40"/>
-                <img src="https://www.fillmurray.com/40/40"/>
-            </div>
-            <div (click)="addSubSection('resourceresource')" class="col-1">
-                <img src="https://www.fillmurray.com/40/40"/>
-                <img src="https://www.fillmurray.com/40/40"/>
-            </div>
-            <div (click)="addSubSection('resource')" class="col-1">
-                <img src="https://www.fillmurray.com/60/40"/>
-            </div>
-            <div (click)="addSubSection('resourcefull')" class="col-1">
-                <img src="https://www.fillmurray.com/80/40"/>
+    
+            <div class="row w-100 mt-5 mb-5">
+                <div (click)="addSubSection('text')" class="col-1">
+                    <img style="height: 30px;" src="../../../../../assets/icons/bt_text.svg"/>
+                </div>
+                <div (click)="addSubSection('texttext')" class="col-1">
+                    <img style="height: 30px;" src="../../../../../assets/icons/bt_texttext.svg"/>
+                </div>
+                <div (click)="addSubSection('textresource')" class="col-1">
+                    <img style="height: 30px;" src="../../../../../assets/icons/bt_textresource.svg"/>
+                </div>
+                <div (click)="addSubSection('resourcetext')" class="col-1">
+                    <img style="height: 30px;" src="../../../../../assets/icons/bt_resourcetext.svg"/>
+                </div>
+                <div (click)="addSubSection('resourceresource')" class="col-1">
+                    <img style="height: 30px;" src="../../../../../assets/icons/bt_2_colunas_imagem_default_state.svg"/>
+                </div>
+                <div (click)="addSubSection('resource')" class="col-1">
+                    <img style="height: 30px;" src="../../../../../assets/icons/bt_imagem_large_default_state.svg"/>
+                </div>
+                <div (click)="addSubSection('resourcefull')" class="col-1">
+                    <img style="height: 30px;" src="../../../../../assets/icons/bt_imagem_full.svg"/>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div  *ngIf="exhibition&&exhibition.items[choosenSection]">
-    <div dragula="SUBITEMS" [(dragulaModel)]="exhibition.items[choosenSection].subItems" >
-        <div  class=""   *ngFor="let subsection of exhibition.items[choosenSection].subItems">
-            <div [ngSwitch]="subsection.itemType">
-                <div class="row w-100" draggable="true" appDraganddroplist style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'text'">
-                    <div class="col p-3"  >
-                        <angular-editor [(ngModel)]="htmlContent" [config]="editorConfig"></angular-editor>
-                    </div>
-                    <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
-                        <div class="row h-100 justify-content-center">
-                            <div class="col-12 justify-content-center">
-                                <img src="https://www.fillmurray.com/40/40"/>
-                            </div>
-                            <div class="col mt-auto justify-content-center">
-                                <img src="https://www.fillmurray.com/40/40"/>
+    <div  *ngIf="exhibition.items[choosenSection]">
+        <div dragula="SUBITEMS" [(dragulaModel)]="exhibition.items[choosenSection].subItems" >
+            <div  class=""   *ngFor="let subsection of exhibition.items[choosenSection].subItems">
+                <div [ngSwitch]="subsection.itemType">
+                    <div class="row w-100" style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'text'">
+                        <div class="col p-3"  >
+                            <angular-editor [(ngModel)]="subsection.textSections[0]" [config]="editorConfig"></angular-editor>
+                        </div>
+                        <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
+                            <div class="row h-100 justify-content-center">
+                                <div class="col-12 justify-content-center handle">
+                                    <img src="https://www.fillmurray.com/40/40"/>
+                                </div>
+                                <div class="col mt-auto justify-content-center">
+                                    <img src="../../../../../assets/icons/delete.svg"/>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row w-100" draggable="true" appDraganddroplist style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'texttext'">
-                    <div class="col p-3"  >
-                        <div class="row w-100">
-                            <div class="col">
-                                <angular-editor [(ngModel)]="htmlContent" [config]="editorConfig"></angular-editor>
+                    <div class="row w-100"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'texttext'">
+                        <div class="col p-3"  >
+                            <div class="row w-100">
+                                <div class="col">
+                                    <angular-editor [(ngModel)]="subsection.textSections[0]" [config]="editorConfig"></angular-editor>
+                                </div>
+                                <div class="col">
+                                    <angular-editor [(ngModel)]="subsection.textSections[1]" [config]="editorConfig"></angular-editor>
+                                </div>
                             </div>
-                            <div class="col">
-                                <angular-editor [(ngModel)]="htmlContent" [config]="editorConfig"></angular-editor>
+                        </div>
+                        <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
+                            <div class="row h-100 justify-content-center">
+                                <div class="col-12 justify-content-center handle">
+                                    <img src="https://www.fillmurray.com/40/40"/>
+                                </div>
+                                <div class="col mt-auto justify-content-center">
+                                    <img src="../../../../../assets/icons/delete.svg"/>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
-                        <div class="row h-100 justify-content-center">
-                            <div class="col-12 justify-content-center">
-                                <img src="https://www.fillmurray.com/40/40"/>
+                    <div class="row w-100"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'textresource'">
+                        <div class="col p-3"  >
+                            <div class="row w-100">
+                                <div class="col">
+                                    <angular-editor [(ngModel)]="subsection.textSections[0]" [config]="editorConfig"></angular-editor>
+                                </div>
+                                <div class="col">
+                                    <div *ngIf="subsection.digitalResources.length == 0" class="form-control dashed-box text-center justify-content-center" (click)="open(subsection.id,0)" >+</div>
+                                    <div *ngIf="subsection.digitalResources.length > 0" class="form-control dashed-box text-center justify-content-center" (click)="open(subsection.id,0)" >
+                                        <img class="img-fluid" src="{{subsection.digitalResources[0].identifier}}" /> 
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col mt-auto justify-content-center">
-                                <img src="https://www.fillmurray.com/40/40"/>
+                        </div>
+                        <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
+                            <div class="row h-100 justify-content-center">
+                                <div class="col-12 justify-content-center">
+                                    <img src="https://www.fillmurray.com/40/40"/>
+                                </div>
+                                <div class="col mt-auto justify-content-center">
+                                    <img (click)="removeSubSection(subsection.id)" src="../../../../../assets/icons/delete.svg"/>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row w-100" draggable="true" appDraganddroplist style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'textresource'">
-                    <div class="col p-3"  >
-                        <div class="row w-100">
-                            <div class="col">
-                                <angular-editor [(ngModel)]="htmlContent" [config]="editorConfig"></angular-editor>
+                    <div class="row w-100"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'resourcetext'">
+                        <div class="col p-3"  >
+                            <div class="row w-100">
+                                <div class="col">
+                                    <div *ngIf="subsection.digitalResources.length == 0" class="form-control dashed-box text-center justify-content-center " (click)="open(subsection.id,0)" >+</div>
+                                    <div *ngIf="subsection.digitalResources.length > 0" class="form-control dashed-box text-center justify-content-center" (click)="open(subsection.id,0)" >
+                                        <img class="img-fluid" src="{{subsection.digitalResources[0].identifier}}" /> 
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <angular-editor [(ngModel)]="subsection.textSections[0]" [config]="editorConfig"></angular-editor>
+                                </div>
                             </div>
-                            <div class="col">
-                                <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
+                        </div>
+                        <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
+                            <div class="row h-100 justify-content-center">
+                                <div class="col-12 justify-content-center">
+                                    <img src="https://www.fillmurray.com/40/40"/>
+                                </div>
+                                <div class="col mt-auto justify-content-center">
+                                    <img (click)="removeSubSection(subsection.id)" src="../../../../../assets/icons/delete.svg"/>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
-                        <div class="row h-100 justify-content-center">
-                            <div class="col-12 justify-content-center">
-                                <img src="https://www.fillmurray.com/40/40"/>
+                    <div class="row w-100" style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'resource'">
+                        <div class="col p-3"  >
+                            <div class="row w-100">
+                                <div class="col">
+                                    <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
+                                </div>
                             </div>
-                            <div class="col mt-auto justify-content-center">
-                                <img src="https://www.fillmurray.com/40/40"/>
+                        </div>
+                        <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
+                            <div class="row h-100 justify-content-center">
+                                <div class="col-12 justify-content-center">
+                                    <img src="https://www.fillmurray.com/40/40"/>
+                                </div>
+                                <div class="col mt-auto justify-content-center">
+                                    <img (click)="removeSubSection(subsection.id)" src="../../../../../assets/icons/delete.svg"/>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row w-100" draggable="true" appDraganddroplist style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'resourcetext'">
-                    <div class="col p-3"  >
-                        <div class="row w-100">
-                            <div class="col">
-                                <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
+                    <div class="row w-100" style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'resourcefull'">
+                        <div class="col p-3"  >
+                            <div class="row w-100">
+                                <div class="col">
+                                    <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
+                                </div>
                             </div>
-                            <div class="col">
-                                <angular-editor [(ngModel)]="htmlContent" [config]="editorConfig"></angular-editor>
+                        </div>
+                        <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
+                            <div class="row h-100 justify-content-center">
+                                <div class="col-12 justify-content-center">
+                                    <img src="https://www.fillmurray.com/40/40"/>
+                                </div>
+                                <div class="col mt-auto justify-content-center">
+                                    <img (click)="removeSubSection(subsection.id)" src="../../../../../assets/icons/delete.svg"/>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
-                        <div class="row h-100 justify-content-center">
-                            <div class="col-12 justify-content-center">
-                                <img src="https://www.fillmurray.com/40/40"/>
-                            </div>
-                            <div class="col mt-auto justify-content-center">
-                                <img src="https://www.fillmurray.com/40/40"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row w-100" style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'resource'">
-                    <div class="col p-3"  >
-                        <div class="row w-100">
-                            <div class="col">
-                                <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
-                        <div class="row h-100 justify-content-center">
-                            <div class="col-12 justify-content-center">
-                                <img src="https://www.fillmurray.com/40/40"/>
-                            </div>
-                            <div class="col mt-auto justify-content-center">
-                                <img src="https://www.fillmurray.com/40/40"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row w-100" style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;" *ngSwitchCase = "'resourcefull'">
-                    <div class="col p-3"  >
-                        <div class="row w-100">
-                            <div class="col">
-                                <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-auto m-0 p-3" style="width: 80px; border-left-width: 2px; border-left-style: solid; border-left-color: var(--background-color)">
-                        <div class="row h-100 justify-content-center">
-                            <div class="col-12 justify-content-center">
-                                <img src="https://www.fillmurray.com/40/40"/>
-                            </div>
-                            <div class="col mt-auto justify-content-center">
-                                <img src="https://www.fillmurray.com/40/40"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div>      
             </div>
-            
-
-            <!-- <h3>{{subsection.itemType}}</h3>
-            <div class="row w-100" [ngSwitch]="subsection.itemType">
-                <div class="col"  *ngSwitchCase = "'text'">
-                    <angular-editor [(ngModel)]="htmlContent"></angular-editor>
-                </div>
-                <div class="col-1">
-                    t
-                </div>
-            </div>
-            </div>
-                <div *ngSwitchCase = "'texttext'">
-                    <div class="row w-100">
-                        <div class="col-5">
-                            <angular-editor [(ngModel)]="htmlContent"></angular-editor>
-                        </div>
-                        <div class="col-5">
-                            <angular-editor [(ngModel)]="htmlContent"></angular-editor>
-                        </div>
-                        <div class="col-1">
-                            t
-                        </div>
-                    </div>
-                </div>
-                <div *ngSwitchCase = "'textresource'">
-                    <div class="row w-100">
-                        <div class="col-5">
-                            <angular-editor [(ngModel)]="htmlContent"></angular-editor>
-                        </div>
-                        <div class="col-5">
-                            <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
-                        </div>
-                        <div class="col-1">
-                            t
-                        </div>
-                    </div>
-                </div>
-                <div *ngSwitchCase = "'resourcetext'">
-                    <div class="row w-100">
-                        <div class="col-5">
-                            <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
-                        </div>
-                        <div class="col-5">
-                            <angular-editor [(ngModel)]="htmlContent"></angular-editor>
-                        </div>
-                        <div class="col-1">
-                            t
-                        </div>
-                    </div>
-                </div>
-                <div *ngSwitchCase = "'resourceresource'">
-                    <div class="row w-100">
-                        <div class="col-5">
-                            <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
-                        </div>
-                        <div class="col-5">
-                            <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
-                        </div>
-                        <div class="col-1">
-                            t
-                        </div>
-                    </div>
-                </div>
-                <div *ngSwitchCase = "'resource'">
-                    <div class="row w-100">
-                        <div class="col-11">
-                            <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
-                        </div>
-                        <div class="col-1">
-                            t
-                        </div>
-                    </div>
-                </div>
-                <div *ngSwitchCase = "'resourcefull'">
-                    <div class="row w-100">
-                        <div class="col-11">
-                            <img class="img-fluid" src="https://www.fillmurray.com/40/40"/>
-                        </div>
-                        <div class="col-1">
-                            t
-                        </div>
-                    </div>
-                </div>
-                <div *ngSwitchDefault>
-                    <angular-editor [(ngModel)]="htmlContent"></angular-editor>
-                </div>
-            </div> -->
-            
+        </div>
+        <div>
+            <button class="btn btn-primary" (click)="saveSubOrder()"> guardar ordem</button>
         </div>
     </div>
 </div>

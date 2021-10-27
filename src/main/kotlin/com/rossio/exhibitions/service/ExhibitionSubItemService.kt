@@ -28,6 +28,15 @@ class ExhibitionSubItemService(
         }
         throw Exception("id is not 0")
     }
+
+    fun editSubItem(subItemDAO: SubItemDAO, newItem : SubItemDAO) : SubItemDAO
+    {
+        if (subItemDAO.editSubItem(newItem)) {
+            return subTextRepository.save(newItem)
+        }
+        return subItemDAO
+    }
+
     fun deleteSubTextItem(id: Long) =
         subTextRepository.delete(getOneSubTextItem(id))
 

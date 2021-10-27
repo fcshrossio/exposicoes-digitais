@@ -2,7 +2,10 @@ package com.rossio.exhibitions.enums
 
 enum class Status {
     PUBLIC,
-    PRIVATE
+    PRIVATE,
+    PUBLISHED,
+    DRAFT,
+    FORAPPROVAL
 }
 
 enum class Keywords {

@@ -1,4 +1,7 @@
 <div *ngIf="exhibition" class="row p-2"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
+    <div class="col-fluid draggable m-1"  (click)="changeSection(i)" *ngFor="let section of exhibition.items;index as i;" [id]="section.id">
+        <button [className]="i === choosenSection  ? 'btn createnav createnav-active' : 'btn createnav'"  [id]="section.id">{{section.position}}</button>
+    </div>
     <div class="container-fluid" style="min-height: 200px;">
         <form #markerForm="ngForm" class="form">
             <div *ngFor="marker of markers" class="form-row">

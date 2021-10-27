@@ -35,6 +35,18 @@ data class ExhibitionItemDAO(
         }
     }
 
+    fun removeSubItem(subItemDAO: SubItemDAO)
+    {
+        if(subItems.contains(subItemDAO))
+        {
+            subItems.remove(subItemDAO)
+        }
+        else
+        {
+            throw NotFoundException("sub item does not exist")
+        }
+    }
+
     fun editItem(item:ExhibitionItemDAO) : Boolean
     {
         if(item.id == this.id)

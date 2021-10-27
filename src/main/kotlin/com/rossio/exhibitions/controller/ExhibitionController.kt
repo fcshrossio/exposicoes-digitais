@@ -17,7 +17,8 @@ class ExhibitionController(
     val digitalResourceService: DigitalResourceService,
     val editorService: EditorService,
     val collaboratorService : CollaboratorService,
-    val exhibitionItemService: ExhibitionItemService
+    val exhibitionItemService: ExhibitionItemService,
+    val exhibitionSubItemService: ExhibitionSubItemService
 ) {
 
     //@CrossOrigin
@@ -63,6 +64,11 @@ class ExhibitionController(
             exhibitionItemService.editOneExhibitionItem(exhibitionItemService.getOneExhibitionItem(it.id),
                 ExhibitionItemDAO(it)
             )
+            it.subItems.forEach{
+                exhibitionSubItemService.editSubItem(exhibitionSubItemService.getOneSubTextItem(it.id),
+                SubItemDAO(it)
+                )
+            }
         }
         return ExhibitionDTO(exhibitionService.getOneExhibition(editedexhibition.id))
     }

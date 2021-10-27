@@ -26,3 +26,5 @@ interface CollaboratorRepository : JpaRepository<CollaboratorDAO, Long>
 interface AdminRepository : JpaRepository<AdminDAO, Long>
 
 interface DigitalResourceRepository : JpaRepository<DigitalResourceDAO, Long>
+
+interface SavedResourcesRepository : JpaRepository<SavedResourcesDAO, Long>

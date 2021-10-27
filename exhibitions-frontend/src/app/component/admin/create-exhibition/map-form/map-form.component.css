@@ -5,3 +5,21 @@
     height: 100vh;
   }
   
+  .createnav {
+    background-color: #e0e4e5;
+    color: gray;
+    border-radius: 5px;
+    text-align: center;
+    font-family: "OpenSansBold";
+    border: 0;
+    box-shadow: none;
+    font-weight: 600;
+    width: 50px;
+    height: 55px;  
+
+}
+
+.createnav-active {
+    background-color: var(--primary-color);
+    color: white;
+}

@@ -10,8 +10,42 @@
     font-family: "OpenSans";
 }
 
+.section-green {
+    background-color: white ;
+    border-color: #53A451 ;
+    justify-content: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    color:#53A451;
+    border-radius: 30px;
+    text-align: center;
+    font-family: "OpenSans";
+}
+
+.section-yellow {
+    background-color: white ;
+    border-color: #FFC107 ;
+    justify-content: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    color:#FFC107;
+    border-radius: 30px;
+    text-align: center;
+    font-family: "OpenSans";
+}
+
 .section:hover {
     background-color: var(--primary-color-hover);
+    color:white
+}
+
+.section-green:hover {
+    background-color: #53A451;
+    color:white
+}
+
+.section-yellow:hover {
+    background-color: #FFC107;
     color:white
 }
 
@@ -20,9 +54,45 @@
     color:white;
 }
 
+.section-green-active {
+    background-color: #53A451 ;
+    color:white;
+}
+
+.section-yellow-active {
+    background-color: #FFC107 ;
+    color:white;
+}
+
+
 
 .card-footer{
     border: 0;
     position:absolute;
       bottom:0;
     }
+
+
+.dot {
+    height: 25px;
+    width: 25px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    display: inline-block;
+    }
+
+.dot-green {
+    height: 25px;
+    width: 25px;
+    background-color: #53A451 ;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot-yellow {
+    height: 25px;
+    width: 25px;
+    background-color: #FFC107;
+    border-radius: 50%;
+    display: inline-block;
+}

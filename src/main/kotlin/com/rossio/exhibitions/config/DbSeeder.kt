@@ -126,7 +126,7 @@ class DbSeeder (
             digital2, //cover
             mutableListOf(), //collaborator list
             Date(), // creation date
-            Status.PUBLIC, //status
+            Status.PUBLISHED, //status
             mutableListOf(),  //list of keywords
             "<b>Conce&#231;&#227;o geral</b></div><div> Phasellus eget efficitur leo. Aenean scelerisque felis sit amet sagittis interdum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</div><div><br></div><div><b>Coordena&#231;&#227;o cient&#237;fica</b></div><div> Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti.</div><div><br></div><div><b>Equipa de investiga&#231;&#227;o</b><br></div><div> Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti.<br>",
             "",
@@ -146,7 +146,7 @@ class DbSeeder (
             digital1, //cover
             mutableListOf(), //collaborator list
             Date(), // creation date
-            Status.PUBLIC, //status
+            Status.FORAPPROVAL, //status
             mutableListOf(),  //list of keywords
             "",
             "",
@@ -166,7 +166,7 @@ class DbSeeder (
             digital1, //cover
             mutableListOf(), //collaborator list
             Date(), // creation date
-            Status.PUBLIC, //status
+            Status.DRAFT, //status
             mutableListOf(),  //list of keywords
             "",
             "",
@@ -187,7 +187,7 @@ class DbSeeder (
             digital1, //cover
             mutableListOf(), //collaborator list
             Date(), // creation date
-            Status.PUBLIC, //status
+            Status.DRAFT, //status
             mutableListOf(),  //list of keywords
             "",
             "",
@@ -201,9 +201,9 @@ class DbSeeder (
         var exhibitionDAO3:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO3, editorDAO, digitalDAO1))
         var exhibitionDAO4:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO3, editorDAO, digitalDAO1))
 
-        var item1DAO : ExhibitionItemDAO = ExhibitionItemDAO(0,0,"As razões e funções da festa", mutableListOf())
-        var item2DAO : ExhibitionItemDAO =  ExhibitionItemDAO(0,0,"Os tempos da festa", mutableListOf())
-        var item3DAO : ExhibitionItemDAO =  ExhibitionItemDAO(0,0,"A festa na sociedade e a sociedade na festa", mutableListOf())
+        var item1DAO : ExhibitionItemDAO = ExhibitionItemDAO(0,1,"As razões e funções da festa", mutableListOf())
+        var item2DAO : ExhibitionItemDAO =  ExhibitionItemDAO(0,2,"Os tempos da festa", mutableListOf())
+        var item3DAO : ExhibitionItemDAO =  ExhibitionItemDAO(0,3,"A festa na sociedade e a sociedade na festa", mutableListOf())
 
         item1DAO = exhibitionItemService.createOneExhibitionItem(item1DAO)
         item2DAO = exhibitionItemService.createOneExhibitionItem(item2DAO)

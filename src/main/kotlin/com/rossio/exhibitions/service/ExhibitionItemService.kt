@@ -66,7 +66,16 @@ class ExhibitionItemService(
 
     }
 
-    fun removeSubText(subItemDAO: SubItemDAO) {
-
+    fun removeSubItem(itemId: Long,subItemDAO: SubItemDAO) : ExhibitionItemDAO{
+        var item : ExhibitionItemDAO = getOneExhibitionItem(itemId)
+        if(item.subItems.contains(subItemDAO))
+        {
+            item.removeSubItem(subItemDAO)
+            return exhibitionItemsRepository.save(item)
+        }
+        else
+        {
+            throw NotFoundException("The $itemId item does not contain this sub item")
+        }
     }
 }

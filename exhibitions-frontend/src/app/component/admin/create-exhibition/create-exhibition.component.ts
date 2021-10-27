@@ -99,6 +99,7 @@ export class CreateExhibitionComponent implements OnInit {
   }
 
   changeStep(step: number){
+    console.log(step)
     this.step = step
   }
 

@@ -11,6 +11,10 @@ export class ExhibitionListAdminComponent implements OnInit {
 
   exhibitions: Exhibition[] = []
 
+  published: Exhibition[] = []
+
+  forapproval : Exhibition[] = []
+
   selection: string = "all"
 
   constructor(private exhibitionService: ExhibitionService,) { }
@@ -22,7 +26,17 @@ export class ExhibitionListAdminComponent implements OnInit {
 
   getExhibitions(): void 
   {
-    this.exhibitionService.getExhibitions().subscribe( exhibitions => this.exhibitions = exhibitions)
+    this.exhibitionService.getExhibitions().subscribe( exhibitions => {
+      this.exhibitions = exhibitions
+      this.published = exhibitions.filter( (element) => { return element.status == "PUBLISHED" })
+      this.forapproval = exhibitions.filter( (element) => { return element.status == "FORAPPROVAL" })
+    })
+  }
+
+
+
+  changeSelection( selection : string){
+    this.selection = selection
   }
 
 

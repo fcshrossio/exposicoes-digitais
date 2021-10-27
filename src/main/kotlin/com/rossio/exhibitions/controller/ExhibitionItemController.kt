@@ -76,16 +76,20 @@ class ExhibitionItemController(
 
     @Operation(summary = "Create Sub Items")
     @PostMapping("/{itemId}/addsubitem")
-    fun createSubItem(@PathVariable itemId: Long, @RequestBody subItemDTO: SubItemDTO) {
+    fun createSubItem(@PathVariable itemId: Long, @RequestBody subItemDTO: SubItemDTO) : ExhibitionItemDTO {
         val item = exhibitionItemService.getOneExhibitionItem(itemId)
         var subitem = exhibitionSubItemService.createSubItem(SubItemDAO(subItemDTO))
         exhibitionItemService.addSubItem(item,subitem)
+        return ExhibitionItemDTO(item)
     }
 
     @Operation(summary = "Remove One Sub Item ")
-    @DeleteMapping("/subitem/{itemId}")
-    fun deleteSubTextItem(@PathVariable itemId: Long) =
-        exhibitionItemService.removeSubText(exhibitionSubItemService.getOneSubTextItem(itemId))
-
-
+    @DeleteMapping("/{itemId}/subitem/{subItemId}")
+    fun deleteSubTextItem(@PathVariable itemId: Long,@PathVariable subItemId: Long) : ExhibitionItemDTO {
+        //exhibitionItemService.removeSubText(exhibitionSubItemService.getOneSubTextItem(subItemId))
+        var item : ExhibitionItemDAO = exhibitionItemService.removeSubItem(itemId, exhibitionSubItemService.getOneSubTextItem(subItemId))
+        //exhibitionSubItemService.deleteSubTextItem(subItemId)
+        print("item deleted")
+        return ExhibitionItemDTO(item)
+    }
 }

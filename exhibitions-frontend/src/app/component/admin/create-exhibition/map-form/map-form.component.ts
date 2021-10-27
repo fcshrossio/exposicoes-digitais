@@ -43,7 +43,7 @@ export class MapFormComponent implements OnInit {
 
   mymarkers : Marker[] = [this.emptymarker]
 
-
+  choosenSection = 0;
 
   map: Map | undefined;
 
@@ -200,6 +200,12 @@ export class MapFormComponent implements OnInit {
 
   removeMarker() {
     console.log("remove marker button pressed")
+  }
+
+  
+  changeSection(index : number) {
+    console.log(this.choosenSection)
+    this.choosenSection = index
   }
 
 

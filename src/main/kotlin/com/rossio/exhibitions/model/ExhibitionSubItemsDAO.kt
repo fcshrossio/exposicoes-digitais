@@ -9,16 +9,29 @@ data class SubItemDAO(
     @Id
     @GeneratedValue
     val id: Long,
-    val position: Long,
+    var position: Long,
     val itemType: String,
     @ElementCollection
     @CollectionTable
     @Column(length = 10000000)
-    val textSections: List<String>,
+    var textSections: List<String>,
     @OneToMany
-    val digitalResources : List<DigitalResourceDAO>
+    var digitalResources : List<DigitalResourceDAO>
 ) {
     constructor() : this(0,0,"texttext", mutableListOf(), mutableListOf())
 
     constructor(subitem: SubItemDTO) : this(subitem.id, subitem.position, subitem.itemType, subitem.textSections, subitem.digitalResources.map { DigitalResourceDAO(it) })
+
+    fun editSubItem(subitem:SubItemDAO) : Boolean
+    {
+        if(subitem.id == this.id)
+        {
+
+            this.position = subitem.position
+            this.textSections = subitem.textSections
+            this.digitalResources = subitem.digitalResources
+            return true
+        }
+        return false
+    }
 }
