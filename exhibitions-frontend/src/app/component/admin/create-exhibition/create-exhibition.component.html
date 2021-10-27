@@ -55,8 +55,11 @@
             <div class="col-auto" style="margin: 1px; padding: 1px;">
                 <button class="btn btn-primary w-100 p-3 createnav" (click)="saveExhibitionAsDraft()">GUARDAR COMO RASCUNHO</button>
             </div>
-            <div *ngIf="exhibition.id!=0" class="col-auto" style="margin: 1px; padding: 1px;">
+            <div *ngIf="exhibition.id!=0 && step !=5" class="col-auto" style="margin: 1px; padding: 1px;">
                 <button class="btn btn-primary w-100 p-3 createnav " (click)="changeStep(step+1)">SEGUINTE</button>
+            </div>
+            <div *ngIf="exhibition.id!=0 && step ==5" class="col-auto" style="margin: 1px; padding: 1px;">
+                <button class="btn btn-primary w-100 p-3 createnav " (click)="changeStep(step+1)">PUBLICAR</button>
             </div>
         </div>
     </div>

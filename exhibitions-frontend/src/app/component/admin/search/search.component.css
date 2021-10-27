@@ -17,3 +17,12 @@
     background-color: #666d73;
     color: white;
 }
+
+.text {
+    color: gray;
+    font-family: "OpenSansBold";
+}
+
+.icone {
+    width: 25px;
+  }

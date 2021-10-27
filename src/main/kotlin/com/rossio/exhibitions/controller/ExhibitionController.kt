@@ -75,9 +75,13 @@ class ExhibitionController(
 
     @Operation(summary = "Delete a Exhibition")
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    fun deleteExhibition(@PathVariable id: Long) =
-        exhibitionService.deleteExhibition(exhibitionService.getOneExhibition(id))
+    //@PreAuthorize("hasRole('ADMIN')")
+    fun deleteExhibition(@PathVariable id: Long) {
+        var exhibition = exhibitionService.getOneExhibition(id)
+        exhibitionService.deleteExhibition(exhibition)
+
+    }
+
 
     @Operation(summary = "Add a Collaborator to Exhibition ")
     @PostMapping("/{id}/collaborator")

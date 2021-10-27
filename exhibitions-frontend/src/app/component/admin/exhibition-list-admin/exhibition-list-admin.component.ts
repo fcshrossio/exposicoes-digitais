@@ -27,7 +27,7 @@ export class ExhibitionListAdminComponent implements OnInit {
   getExhibitions(): void 
   {
     this.exhibitionService.getExhibitions().subscribe( exhibitions => {
-      this.exhibitions = exhibitions
+      this.exhibitions = exhibitions.filter( (element) => { return element.status != "DRAFT" })
       this.published = exhibitions.filter( (element) => { return element.status == "PUBLISHED" })
       this.forapproval = exhibitions.filter( (element) => { return element.status == "FORAPPROVAL" })
     })

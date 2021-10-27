@@ -26,18 +26,18 @@
                             </a>
                         </div>
                         <div class="col-auto">
-                            <img style="width: 23px" src="../../../../../assets/icons/deletewhite.svg"/>
+                            <img style="width: 23px" (click)="open(exhibition.id)" src="../../../../../assets/icons/deletewhite.svg"/>
                         </div>
                     </div>
                       <h5 class="card-title">{{exhibition.title}}</h5>
-                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <p class="card-text">{{exhibition.subtitle}}</p>
                       <div class="card-footer">
                         <div class="row mt-auto">
                             <div class="col-auto">
                                 <img style="width:35px" src="../../../../../assets/icons/icon_userwhite.svg"/>
                             </div>
                             <div class="col-auto">
-                                Ana Silva
+                                {{exhibition.editor.username}}
                             </div>
                         </div>
                         <div class="row">
@@ -73,14 +73,14 @@
                         </div>
                     </div>
                       <h5 class="card-title">{{exhibition.title}}</h5>
-                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <p class="card-text">{{exhibition.subtitle}}</p>
                       <div class="card-footer">
                         <div class="row mt-auto">
                             <div class="col-auto">
                                 <img style="width:35px" src="../../../../../assets/icons/icon_userwhite.svg"/>
                             </div>
                             <div class="col-auto">
-                                Ana Silva
+                                {{exhibition.editor.username}}
                             </div>
                         </div>
                         <div class="row">
@@ -112,18 +112,18 @@
                             </a>
                         </div>
                         <div class="col-auto">
-                            <img style="width: 23px" src="../../../../../assets/icons/deletewhite.svg"/>
+                            <img style="width: 23px"  src="../../../../../assets/icons/deletewhite.svg"/>
                         </div>
                     </div>
                       <h5 class="card-title">{{exhibition.title}}</h5>
-                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <p class="card-text">{{exhibition.subtitle}}</p>
                       <div class="card-footer">
                         <div class="row mt-auto">
                             <div class="col-auto">
                                 <img style="width:35px" src="../../../../../assets/icons/icon_userwhite.svg"/>
                             </div>
                             <div class="col-auto">
-                                Ana Silva
+                                {{exhibition.editor.username}}
                             </div>
                         </div>
                         <div class="row">

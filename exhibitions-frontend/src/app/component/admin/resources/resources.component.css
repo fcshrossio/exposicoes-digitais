@@ -19,3 +19,8 @@
   .icone:hover {
     fill:var(--primary-color)
   }
+
+  .text {
+    color: var(--text-grey);
+    font-family: "OpenSansBold";
+}

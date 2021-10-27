@@ -58,8 +58,11 @@ class ExhibitionService(
         exhibition.addExhibitionItem(item)
         return exhibitionsRepository.save(exhibition)
     }
-    fun deleteExhibition(exhibition: ExhibitionDAO) =
+    fun deleteExhibition(exhibition: ExhibitionDAO) : ExhibitionDAO {
         exhibitionsRepository.delete(exhibition)
+        return exhibition
+
+    }
 
     fun addCollaborator(exhibition: ExhibitionDAO, collaborator: CollaboratorDAO) {
         exhibition.addCollaborator(collaborator)

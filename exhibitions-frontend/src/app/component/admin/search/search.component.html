@@ -1,6 +1,6 @@
-<div class="container p-5">
-    <div class="container-fluid" >
-        <div class="row h-25 justify-content-center mx-auto align-items-center" >
+<div class="">
+    
+        <div class="row h-50 justify-content-center mx-auto align-items-center pt-5" >
             <div class="col-3" style="margin: 1px; padding: 1px;">
                 <a class="btn btn-primary w-100 p-3 createnav" >PESQUISA SIMPLES</a>
             </div>
@@ -8,16 +8,129 @@
                 <a class="btn btn-primary w-100 p-3  createnav" >PESQUISA AVANÇADA</a>
             </div>
         </div>
-        <div class="row p-3 " style="background-color: white;">
+        <div class="row  p-5 m-2 " style="background-color: white;">
             <div class="col-6">
-                <input placeholder="O QUE PROCURA?">
+                <input class="form-control text" [(ngModel)]="search" placeholder="O QUE PROCURA?" name="search" >
             </div>
             <div class="col-3">
-                PROVEDORES DE CONTEUDO
+                <select class="custom-select text" >
+                    <option selected>PROVEDORES DE CONTEÚDO</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
             </div>
             <div class="col createnav-active">
-                <a class="btn btn-primary w-100 p-2 createnav createnav-active" >PESQUISA SIMPLES</a>
+                <button (click)="getResources()" class="btn btn-primary w-100 p-2 createnav createnav-active" >PESQUISAR</button>
             </div>
         </div>
-    </div>
+        <div class="row w-100 p-4 m-0 justify-content-center" style="background-color: #FAFAFB;">
+            <div class="col-auto">
+                <img (click)='changeView("list")' class="icone" src="../../../../../assets/icons/resourceslist.svg"/>
+            </div>
+            <div class="col-auto mr-auto">
+                <img (click)='changeView("images")' class="icone" src="../../../../../assets/icons/resourcesgallery.svg"/>
+            </div>
+            <div class="col-auto mr-auto">
+                <h4 class="text">" {{search}} ": {{digitalResources.length}} resultados</h4>
+            </div>
+        </div>
+        <div *ngIf="viewType=='list'">
+            <table class="table table-striped table-borderless text w-100">
+                <tbody>
+                     <tr *ngFor="let resource of digitalResources" >
+                        <td class="align-middle justify-content-center">
+                            <div  class="row">
+                                <div class="col-4 pl-0">
+                                    <img width="20px" src="../../../../../assets/icons/resourcesinfo.svg"/>
+                                </div>
+                                <div class="col-4 pl-0">
+                                    <img src="https://www.fillmurray.com/30/30"/>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="align-middle" >{{resource.title}}</td>
+                        <td class="align-middle" >{{resource.dataProvider}}</td>
+                        <td class="align-middle"> Pellentesque aliquet.</td>
+                        <td class="align-middle"> 20/10/2021</td>
+                        <td class="align-middle" style="width: 15%">
+                            <select class="form-control">
+                                <option>Default select</option>
+                                <option>Default select</option>
+                                <option>Default select</option>
+                            </select>
+                        </td>
+                        <td class="align-middle"><img src="../../../../../assets/icons/share.svg"/></td>
+                    </tr>
+                </tbody>
+              </table>
+        </div>
+        <div class="row w-100 p-4 m-0 justify-content-center" style="background-color: white;">
+            <div class="col-auto justify-content-center text-center">
+                <h6>FILTROS</h6>
+            </div>
+            <div class="col">
+                <select class="form-control">
+                    <option>Default select</option>
+                    <option>Default select</option>
+                    <option>Default select</option>
+                </select>
+            </div>
+            <div class="col">
+                <select class="form-control">
+                    <option>Default select</option>
+                    <option>Default select</option>
+                    <option>Default select</option>
+                </select>
+            </div>
+            <div class="col">
+                <select class="form-control">
+                    <option>Default select</option>
+                    <option>Default select</option>
+                    <option>Default select</option>
+                </select>
+            </div>
+            <div class="col">
+                <select class="form-control">
+                    <option>Default select</option>
+                    <option>Default select</option>
+                    <option>Default select</option>
+                </select>
+            </div>
+        </div>
+        <div *ngIf="viewType=='images'">
+            <div class="container-fluid w-100" style="background-color: white;">
+                <div class="row p-2 justify-content-center">
+                    <div *ngFor="let resource of digitalResources" class="col-3 m-3" style="background-color:  #FAFAFB;">
+                        <div class="row m-0 p-2">
+                            <div class="col-1 d-flex justify-content-center text-center">
+                                <img style="width: 30px" src="../../../../../assets/icons/info.svg"/>
+                            </div>
+                            <div class="col m-0 pr-0">
+                                <select class="form-control">
+                                    <option>Default select</option>
+                                    <option>Default select</option>
+                                    <option>Default select</option>
+                                </select>
+                            </div>
+                            <div class="col-1 m-0 d-flex justify-content-center text-center">
+                                <img style="width: 30px" src="../../../../../assets/icons/info.svg"/>
+                            </div>
+                            <div class="col-1 m-0 d-flex justify-content-center text-center">
+                                <img src="../../../../../assets/icons/share.svg"/>
+                            </div>
+                        </div>
+                        <div class="row p-0 ">
+                            <div class="col p-0">
+                                <img class="w-100" src="https://www.fillmurray.com/30/30"/>
+                            </div>
+                        </div>
+                        <div>
+                            {{resource.title}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 </div>

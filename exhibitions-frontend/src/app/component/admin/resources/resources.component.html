@@ -68,7 +68,7 @@
                                 <img width="20px" src="../../../../../assets/icons/resourcesinfo.svg"/>
                             </div>
                             <div class="col-4 pl-0">
-                                <img src="https://www.fillmurray.com/30/30"/>
+                                <img style="height: 40px" src="{{resource.identifier}}"/>
                             </div>
                         </div>
                     </td>
@@ -112,11 +112,11 @@
                     </div>
                     <div class="row p-0 ">
                         <div class="col p-0">
-                            <img class="w-100" src="https://www.fillmurray.com/30/30"/>
+                            <img style="height: 350px; object-fit: cover;" class="w-100" src="{{resource.identifier}}"/>
                         </div>
                     </div>
-                    <div>
-                        {{resource.title}}
+                    <div style="min-height: 150px; margin-top: 10px;">
+                        <h6 class="text">{{resource.title}}</h6>
                     </div>
                 </div>
             </div>

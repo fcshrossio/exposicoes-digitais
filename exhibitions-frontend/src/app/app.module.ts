@@ -42,6 +42,7 @@ import { ResourceShowcaseModalComponent } from './component/public/modals/resour
 import { MapComponent } from './component/public/components/map/map.component';
 import { ResourceListModalComponent } from './component/admin/modals/resource-list-modal/resource-list-modal.component';
 import { DragulaModule } from 'ng2-dragula';
+import { DeleteModalComponent } from './component/public/modals/delete-modal/delete-modal.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { DragulaModule } from 'ng2-dragula';
     ResourceDetailsModalComponent,
     ResourceShowcaseModalComponent,
     MapComponent,
-    ResourceListModalComponent
+    ResourceListModalComponent,
+    DeleteModalComponent
   ],
   imports: [
     HttpClientModule,

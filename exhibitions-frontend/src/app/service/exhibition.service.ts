@@ -74,6 +74,14 @@ export class ExhibitionService {
     )
   }
 
+  deleteExhibition(exhibitionId: Number): Observable<any> {
+    console.log("sending item to  " +  this.exhibitionsUrl + '/' + exhibitionId)
+    return this.http.delete<any>(this.exhibitionsUrl + '/' + exhibitionId, this.httpOptions).pipe(
+      
+      catchError(this.handleError<any>('delete exhibition'))
+    )
+  }
+
 
   createSessionExhibition(exhibition: Exhibition) {
     sessionStorage.setItem(this.sessionDataKey, JSON.stringify(exhibition))
