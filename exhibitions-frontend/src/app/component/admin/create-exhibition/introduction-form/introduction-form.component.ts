@@ -14,11 +14,11 @@ import { ResourceListModalComponent } from '../../modals/resource-list-modal/res
 export class IntroductionFormComponent implements OnInit {
 
 
-  editableName: string = "FCG/BA - Teatro de São Carlos"
+  editableName: string = "FCG/BA - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 
   file: any
 
-  keywords: string[] = ["Teste1", "Teste2"]
+  keywords: string[] = ["Teste1", "Teste2", "Teste3", "Teste4"]
 
 
   @Input() exhibition? : Exhibition 

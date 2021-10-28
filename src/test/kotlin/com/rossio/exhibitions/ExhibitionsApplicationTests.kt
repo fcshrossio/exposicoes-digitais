@@ -36,13 +36,14 @@ class ExhibitionsApplicationTests {
         var dia = Date(0);
 
         val exhibitionDTO1 = ExhibitionDTO(
-            uuid++, editorDTO, emptyList(), "titulo", "subtitulo","","", digitalDTO, emptyList(), dia,
+            uuid++, editorDTO, emptyList(), "titulo", "subtitulo","","", digitalDTO,"", emptyList(), dia,
             Status.PRIVATE, mutableListOf(),
             "",
             "",
             "",
             "",
-            ""
+            "",
+            mutableListOf(),  //list of markers
         )
 
         val exhibitionDTO2 = ExhibitionDTO(
@@ -54,6 +55,7 @@ class ExhibitionsApplicationTests {
             "",
             "",
             digitalDTO,
+            "",
             emptyList(),
             dia,
             Status.PUBLIC,
@@ -62,7 +64,8 @@ class ExhibitionsApplicationTests {
             "",
             "",
             "",
-            ""
+            "",
+            mutableListOf(),  //list of markers
         )
 
         val exhibitionDTOList = listOf(exhibitionDTO1, exhibitionDTO2)

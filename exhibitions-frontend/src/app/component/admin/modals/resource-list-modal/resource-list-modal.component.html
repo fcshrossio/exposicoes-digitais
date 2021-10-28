@@ -8,16 +8,15 @@
     <div class="container-fluid px-5 pt-5 justify-content-center">
         <div class="row w-100 p-4 m-0 justify-content-center" style="background-color: #FAFAFB;">
             <div class="col-auto">
-                <img (click)='changeView("list")' src="https://www.fillmurray.com/30/30"/>
+                <img (click)='changeView("list")' class="icone" src="../../../../../assets/icons/resourceslist.svg"/>
             </div>
             <div class="col-auto">
-                <img (click)='changeView("images")' src="https://www.fillmurray.com/30/30"/>
+                <img (click)='changeView("images")' class="icone" src="../../../../../assets/icons/resourcesgallery.svg"/>
             </div>
             <div class="col-2">
-                <select class="form-control">
-                    <option>Default select</option>
-                    <option>Default select</option>
-                    <option>Default select</option>
+                <select class="form-control" (change)="onChangeList($event)">
+                    <option></option>
+                    <option *ngFor="let list of savedResources" [value]="list.id" >{{list.name}}</option>
                 </select>
             </div>
             <div class="col-auto ml-auto">
@@ -74,7 +73,7 @@
                         </div>
                         <div class="row p-0 ">
                             <div class="col p-0">
-                                <img class="w-100" src="https://www.fillmurray.com/30/30"/>
+                                <img class="w-100" src="{{resource.identifier}}"/>
                             </div>
                         </div>
                         <div>

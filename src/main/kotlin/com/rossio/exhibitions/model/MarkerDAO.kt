@@ -7,14 +7,25 @@ import javax.persistence.*
 data class MarkerDAO(
     @GeneratedValue
     @Id
-    val markerId : Long,
-    val coordinates : Long,
-    val description : String,
-    @OneToMany
-    val digitalResources : List<DigitalResourceDAO>
+    val id : Long,
+    @ElementCollection
+    @CollectionTable
+    var coordinates : MutableList<Double>,
+    var title : String,
 ) {
-    constructor(markerDTO: MarkerDTO) : this(markerDTO.markerId,markerDTO.coordinates,markerDTO.description, markerDTO.digitalResources.map { DigitalResourceDAO(it) })
+    constructor(markerDTO: MarkerDTO) : this(markerDTO.id,markerDTO.coordinates,markerDTO.title)
 
-    constructor() :  this(0,0,"",mutableListOf())
+    constructor() :  this(0, mutableListOf(0.0,0.0),"")
+
+    fun editMarker(marker:MarkerDAO) : Boolean
+    {
+        if(marker.id == this.id)
+        {
+            this.title = marker.title
+            this.coordinates = marker.coordinates
+            return true
+        }
+        return false
+    }
 }
 

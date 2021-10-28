@@ -23,3 +23,30 @@
     background-color: var(--primary-color);
     color: white;
 }
+
+.text {
+  color: gray;
+  font-family: "OpenSansBold";
+}
+
+.addsection {
+  color : var(--primary-color);
+  background-color: #F0F1F2;
+  width: 50px;
+  height: 55px;  
+  text-align: center;
+  border-width: 2px;
+  border-color: var(--primary-color);
+  border-style: solid;
+}
+
+.availablesection {
+  color : #E2E6EA;
+  background-color: #F0F1F2;
+  width: 50px;
+  height: 55px;  
+  text-align: center;
+  border-width: 2px;
+  border-color: #E2E6EA;
+  border-style: dashed;
+}

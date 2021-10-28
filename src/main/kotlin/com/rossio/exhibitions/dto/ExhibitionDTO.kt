@@ -15,6 +15,7 @@ data class ExhibitionDTO(
     val estimatedViewingTime: String,
     val introduction : String,
     val cover: DigitalResourceDTO,
+    val coverEditable : String,
     val collaborators: List<UserDTO>,
     val creationDate: Date,
     val status: Status,
@@ -23,7 +24,8 @@ data class ExhibitionDTO(
     var onlineResourcesNova : String,
     var bibliography : String,
     var audiovisualResources: String,
-    var webPlaces: String
+    var webPlaces: String,
+    var markers : List<MarkerDTO>
 )
 {
 
@@ -36,6 +38,7 @@ data class ExhibitionDTO(
         exhibition.estimatedViewingTime,
         exhibition.introduction,
         DigitalResourceDTO(exhibition.cover),
+        exhibition.coverEditable,
         exhibition.collaborators.map { UserDTO(it) },
         exhibition.creationDate,
         exhibition.status,
@@ -44,7 +47,8 @@ data class ExhibitionDTO(
         exhibition.onlineResourcesNova,
         exhibition.bibliography,
         exhibition.audiovisualResources,
-        exhibition.webPlaces
+        exhibition.webPlaces,
+        exhibition.markers.map { MarkerDTO(it) }
     )
 
 

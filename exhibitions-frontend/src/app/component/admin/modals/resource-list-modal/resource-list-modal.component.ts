@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DigitalResource } from 'src/app/model/digitalResource';
+import { SavedResources } from 'src/app/model/savedResources';
 import { DigitalResourcesService } from 'src/app/service/digital-resources.service';
+import { SavedResourcesService } from 'src/app/service/saved-resources.service';
 
 @Component({
   selector: 'app-resource-list-modal',
@@ -20,6 +22,8 @@ export class ResourceListModalComponent implements OnInit {
 
   digitalResources : DigitalResource[] = []
 
+  savedResources : SavedResources[] = []
+
   viewType : string = 'images'
 
   getResources(){
@@ -33,14 +37,31 @@ export class ResourceListModalComponent implements OnInit {
     this.viewType = type
   }
 
+  onChangeList(e : any){
+
+    console.log(e.target.value)
+    var listId : number = e.target.value 
+    var selected: SavedResources | undefined = this.savedResources.find( element => element.id == listId)
+    if(selected)
+    this.digitalResources = selected.digitalResources
+  }
+
 
   constructor(
     public activeModal: NgbActiveModal,
-    private digitalResourceService : DigitalResourcesService) { }
+    private digitalResourceService : DigitalResourcesService,
+    private savedResourcesService : SavedResourcesService
+    ) { }
 
   ngOnInit(): void {
     console.log(this.cover)
-    this.getResources()
+    this.getSavedResources()
+  }
+
+  getSavedResources() {
+    this.savedResourcesService.getSavedResourcesLists().subscribe( resources => {
+      this.savedResources = resources
+    })
   }
 
   insert(): void {
@@ -50,7 +71,9 @@ export class ResourceListModalComponent implements OnInit {
       this.cover = this.selection[0]
       console.log(this.cover)
       this.coverChange.emit(this.cover)
+      this.activeModal.close()
     }
+    
     
   }
 

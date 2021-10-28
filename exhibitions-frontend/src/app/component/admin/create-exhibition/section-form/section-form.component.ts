@@ -221,7 +221,15 @@ export class SectionFormComponent implements OnInit {
     modalRef.componentInstance.coverChange.subscribe((cover: any) => { 
       if(this.exhibition){
         var subsectionIndex = this.exhibition.items[this.choosenSection].subItems.findIndex( element => element.id == subsectionId)
-        this.exhibition.items[this.choosenSection].subItems[subsectionIndex].digitalResources[index] = cover
+        if(index >= this.exhibition.items[this.choosenSection].subItems[subsectionIndex].digitalResources.length)
+        {
+          this.exhibition.items[this.choosenSection].subItems[subsectionIndex].digitalResources.push(cover)
+        }
+        else {
+          this.exhibition.items[this.choosenSection].subItems[subsectionIndex].digitalResources[index] = cover
+        }
+         
+        
       }})
     }
   }

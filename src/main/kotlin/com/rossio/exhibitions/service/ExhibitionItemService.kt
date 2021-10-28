@@ -37,34 +37,17 @@ class ExhibitionItemService(
     fun deleteOneExhibitionItem(id: Long)  =
         exhibitionItemsRepository.delete(getOneExhibitionItem(id))
 
-    fun createMarker(markerDAO: MarkerDAO) : MarkerDAO =
-        markersRepository.save(markerDAO)
 
     fun addSubItem(item: ExhibitionItemDAO, subItem: SubItemDAO) : ExhibitionItemDAO {
-        if(subItem.id !== 0L && item.id !== 0L){
+        if(subItem.id != 0L && item.id != 0L){
             item.addSubItem(subItem)
             return exhibitionItemsRepository.save(item)
         }
         throw Exception("id is 0")
     }
 
-    fun addMarker(itemId: Long, markerDAO: MarkerDAO) {
-     var item = getOneExhibitionItem(itemId)
-
-            exhibitionItemsRepository.save(item)
 
 
-    }
-
-    fun removeMarker(markerDAO: MarkerDAO) {
-
-
-    }
-
-    fun addSubText(itemId: Long, subItemDAO: SubItemDAO) {
-
-
-    }
 
     fun removeSubItem(itemId: Long,subItemDAO: SubItemDAO) : ExhibitionItemDAO{
         var item : ExhibitionItemDAO = getOneExhibitionItem(itemId)

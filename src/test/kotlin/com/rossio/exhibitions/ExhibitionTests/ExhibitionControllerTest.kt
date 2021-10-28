@@ -131,13 +131,14 @@ class ExhibitionControllerTest {
 
 
         val newExhibitionDTO = ExhibitionDTO(
-            uuid++, editorDTO, emptyList(), "titulo", "subtitulo","","", digitalDTO, emptyList(), dia,
+            uuid++, editorDTO, emptyList(), "titulo", "subtitulo","","", digitalDTO,"", emptyList(), dia,
             Status.PRIVATE, mutableListOf(),
             "",
             "",
             "",
             "",
-            ""
+            "",
+            mutableListOf(),  //list of markers
         )
 
 

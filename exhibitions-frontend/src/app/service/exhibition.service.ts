@@ -7,6 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Exhibition } from '../model/exhibition';
 import { Credits } from '../model/credits';
 import { ExhibitionItem } from '../model/exhibitionItem';
+import { Marker } from '../model/marker';
 
 @Injectable({
   providedIn: 'root'
@@ -71,6 +72,22 @@ export class ExhibitionService {
     return this.http.post<Exhibition>(this.exhibitionsUrl + '/additem/' + exhibitionId, item , this.httpOptions).pipe(
       
       catchError(this.handleError<Exhibition>('add item exhibitions'))
+    )
+  }
+
+  addExhibitionMarker(exhibitionId: Number, item : Marker): Observable<Exhibition> {
+    console.log("sending item to  " + this.exhibitionsUrl + '/' + exhibitionId + '/addmarker')
+    return this.http.post<Exhibition>(this.exhibitionsUrl + '/' + exhibitionId + '/addmarker', item , this.httpOptions).pipe(
+      
+      catchError(this.handleError<Exhibition>('add marker exhibitions'))
+    )
+  }
+
+  removeExhibitionMarker(exhibitionId: Number, markerId : Number): Observable<Exhibition> {
+    console.log("sending item to  " + this.exhibitionsUrl + '/' + exhibitionId + '/marker/' + markerId)
+    return this.http.delete<Exhibition>(this.exhibitionsUrl + '/' + exhibitionId + '/marker/' + markerId  , this.httpOptions).pipe(
+      
+      catchError(this.handleError<Exhibition>('remove marker exhibitions'))
     )
   }
 

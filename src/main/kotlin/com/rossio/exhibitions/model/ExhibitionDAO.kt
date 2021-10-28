@@ -20,10 +20,12 @@ data class ExhibitionDAO(
     var title: String,
     var subtitle: String,
     var estimatedViewingTime: String,
+    @Column( length = 100000 )
     var introduction: String,
     @ManyToOne
     @JoinColumn
     var cover: DigitalResourceDAO,
+    var coverEditable : String,
     @OneToMany
     var collaborators: MutableList<CollaboratorDAO>,
     var creationDate: Date,
@@ -35,10 +37,16 @@ data class ExhibitionDAO(
     var keywords: MutableList<Keywords>,
     @Column( length = 100000 )
     var credits : String,
+    @Column( length = 100000 )
     var onlineResourcesNova : String,
+    @Column( length = 100000 )
     var bibliography : String,
+    @Column( length = 100000 )
     var audiovisualResources: String,
-    var webPlaces: String
+    @Column( length = 100000 )
+    var webPlaces: String,
+    @OneToMany
+    var markers : MutableList<MarkerDAO>
 ) {
 
     constructor(exhibition : ExhibitionDTO, editor: EditorDAO, cover: DigitalResourceDAO ) : this(
@@ -50,6 +58,7 @@ data class ExhibitionDAO(
         exhibition.estimatedViewingTime,
         exhibition.introduction,
         cover,
+        exhibition.coverEditable,
         exhibition.collaborators.map{ CollaboratorDAO(it)} as MutableList<CollaboratorDAO>,
         exhibition.creationDate,
         exhibition.status,
@@ -58,11 +67,13 @@ data class ExhibitionDAO(
         exhibition.onlineResourcesNova,
         exhibition.bibliography,
         exhibition.audiovisualResources,
-        exhibition.webPlaces
+        exhibition.webPlaces,
+        exhibition.markers.map{ MarkerDAO(it)} as MutableList<MarkerDAO>
     )
 
-    constructor() : this(0, EditorDAO(), mutableListOf(), "","","","", DigitalResourceDAO(), mutableListOf(),Date(),Status.PRIVATE,
-        mutableListOf(),"","","","","") {
+    constructor() : this(0, EditorDAO(), mutableListOf(), "","","","", DigitalResourceDAO(),"", mutableListOf(),Date(),Status.DRAFT,
+        mutableListOf(),"","","","","",
+        mutableListOf()) {
 
     }
 
@@ -135,12 +146,15 @@ data class ExhibitionDAO(
             this.title = detailsDTO.title
             this.subtitle = detailsDTO.subtitle
             this.estimatedViewingTime = detailsDTO.estimatedViewingTime
-
+            this.cover = DigitalResourceDAO(detailsDTO.cover)
+            this.coverEditable = detailsDTO.coverEditable
+            this.introduction = detailsDTO.introduction
+            this.keywords = detailsDTO.keywords
             this.onlineResourcesNova = detailsDTO.onlineResourcesNova
             this.bibliography = detailsDTO.bibliography
             this.audiovisualResources = detailsDTO.audiovisualResources
             this.webPlaces = detailsDTO.webPlaces
-
+            this.status = detailsDTO.status
             this.credits = detailsDTO.credits
             //TODO BETTER UPDATE FUNCTION
             return true
@@ -161,6 +175,30 @@ data class ExhibitionDAO(
             throw NotFoundException("item already exists")
         }
 
+    }
+
+    fun addExhibitionMarker(markerDAO: MarkerDAO)
+    {
+        if(!markers.contains(markerDAO))
+        {
+            markers.add(markerDAO)
+        }
+        else
+        {
+            throw NotFoundException("marker already exists")
+        }
+
+    }
+
+    fun removeExhibitionMarker(markerDAO: MarkerDAO)
+    {
+        if(markers.contains(markerDAO))
+        {
+            markers.remove(markerDAO)
+        } else
+        {
+            throw NotFoundException("sub item does not exist")
+        }
     }
 
     fun editCredits( credits: String)

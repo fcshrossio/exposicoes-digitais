@@ -30,6 +30,11 @@ export class ExhibitionSubItem {
             this.textSections.push("")
             this.textSections.push("")
         }
+        if(itemType == "resourceresource")
+        {
+            this.digitalResources.push()
+            this.digitalResources.push()
+        }
         // if(itemType == "resourcefull" || itemType == "resource" || itemType == "resourcetext" )
         // {
         //     this.digitalResources.push()

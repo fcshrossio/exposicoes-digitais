@@ -11,11 +11,8 @@
                     </div>
                 </div>
                 
-                <div *ngIf="exhibition.cover.identifier == ''" class="form-control dashed-box" (click)="open()" >
-
-                </div>
-                <div *ngIf="exhibition.cover.identifier.length > 0" class="form-control dashed-box" (click)="open()">
-                    <img class="w-100" style="max-height: 36rem; object-fit: cover;" src="{{exhibition.cover.identifier}}">
+                <div class="form-control dashed-box" (click)="open()">
+                    <img *ngIf="exhibition.cover.title != 'placeholder'" class="w-100" style="max-height: 36rem; object-fit: cover;" src="{{exhibition.cover.identifier}}">
                 </div>
                
                 
@@ -25,7 +22,7 @@
                     </div>
                 </div>
                 <div >
-                    <input class="form-control" required type="text" class="form-control" id="title" [(ngModel)]="exhibition.cover.title" name="title" #title="ngModel" >
+                    <input class="form-control" required type="text" class="form-control" id="coverEditable" [(ngModel)]="exhibition.coverEditable" name="coverEditable" #coverEditable="ngModel" >
                 </div>
                 <div class="row w-100 mt-5">
                     <div class="col-auto">
@@ -43,6 +40,7 @@
                 <div class="form-control" style="height: 200px; padding: 20px" id="exampleFormControlTextarea2">
                     <span *ngFor="let keyword of exhibition.keywords" class="keyword"><span>{{keyword}}</span> <button style="background-color: transparent; border: 0;" (click)="removeKeyword(keyword)"><h6 class="keyword-delete"> X</h6></button></span>
                     <select id="exampleFormControlSelect1" (change)="onChangeKeyword($event)">
+                        <option></option>
                         <option *ngFor="let keyword of keywords" [value]="keyword">{{keyword}}</option>
                       </select>
                 </div>

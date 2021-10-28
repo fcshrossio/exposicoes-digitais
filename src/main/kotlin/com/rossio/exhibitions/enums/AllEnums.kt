@@ -10,7 +10,9 @@ enum class Status {
 
 enum class Keywords {
     Teste1,
-    Teste2
+    Teste2,
+    Teste3,
+    Teste4
 }
 
 enum class Roles {

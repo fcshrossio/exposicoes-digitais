@@ -1,29 +1,39 @@
-<div *ngIf="exhibition" class="row p-2"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
-    <div class="col-fluid draggable m-1"  (click)="changeSection(i)" *ngFor="let section of exhibition.items;index as i;" [id]="section.id">
-        <button [className]="i === choosenSection  ? 'btn createnav createnav-active' : 'btn createnav'"  [id]="section.id">{{section.position}}</button>
+<div *ngIf="exhibition">
+    <div class="row p-2 text" style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
+        <div class="col-fluid draggable m-1"  (click)="changeSection(i)" *ngFor="let marker of exhibition.markers;index as i;" [id]="marker.id">
+            <button [className]="i === choosenSection  ? 'btn createnav createnav-active' : 'btn createnav'"  [id]="marker.id">{{i+1}}</button>
+        </div>
+        <div class="col-fluid m-1" >
+            <button class="btn addsection" (click)="addSection()">+</button>
+        </div>
+        <div *ngFor="let section of availableSections"  class="col-fluid  m-1">
+            <button class="btn availablesection">+</button>
+        </div>
     </div>
-    <div class="container-fluid" style="min-height: 200px;">
-        <form #markerForm="ngForm" class="form">
-            <div *ngFor="marker of markers" class="form-row">
-                <div class="col-5 form-group form-inline">
-                    <label class="m-2"><img src="https://www.fillmurray.com/30/30"/></label>
-                    <input class="form-control" id="title" [ngModel]="title" placeholder="TÍTULO DO MARCADOR">
-                </div>
-                <div class="col-5 form-group form-inline">
-                    <label class="m-2"><img src="https://www.fillmurray.com/30/30"/></label>
-                    <input class="form-control" id="coordinates" [(ngModel)]="coordinates" placeholder="COORDENADAS" name="coordinates"  >
-                </div>
-                <div class="col-2 ">
-                    <img class="m-2 float-right" (click)="removeMarker()" src="https://www.fillmurray.com/30/30"/>
-                    <img class="m-2 float-right" (click)="addMarker()" src="https://www.fillmurray.com/30/30"/>
-                </div>
+    <div class="row w-100 p-4 text"  style="background-color: white; margin-top: 4px; margin-bottom: 4px; border-radius: 5px;">
+        <div *ngIf="exhibition.markers[choosenSection]" class="form-row w-100">
+            <div class="col-5 form-group">
+                <label for="title" class="text">TÍTULO DO MARCADOR </label>
+                <input class="form-control" id="title" [(ngModel)]="exhibition.markers[choosenSection].title">
             </div>
-        </form>
+            <div class="col-5 form-group ">
+                <label class="text">COORDENADAS       (clique no mapa para alterar)</label>
+                <input class="form-control" [id]="coordinates" [(ngModel)]="exhibition.markers[choosenSection].coordinates"  name="coordinates"  >
+            </div>
+            <div class="col-2 form-group pt-4">
+                <!-- <button class="btn btn-primary " (click)="addMarker()" > GUARDAR  </button> -->
+                <img class="ml-2" (click)="removeMarker(exhibition.markers[choosenSection].id)" src="../../../../../assets/icons/delete.svg"/>
+            </div>
+        </div>
+        
     </div>
 </div>
-<div id="map" class="map"></div>
+
+<div class="container-fluid" style="min-height: 200px;">
+    <div id="map" class="map"></div>
+</div>
 
 <div id="popup" class="ol-popup">
     <a href="#" id="popup-closer" class="ol-popup-closer"></a>
     <div id="popup-content"></div>
-  </div>
+</div>

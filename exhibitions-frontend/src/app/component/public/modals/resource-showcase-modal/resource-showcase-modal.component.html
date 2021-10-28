@@ -2,24 +2,27 @@
     <div class="row h-100 w-100" style="height:100%; background-color: black;">
         <div class="col-10">
             <!-- <img class="image-display" style="object-fit: cover;" src="https://www.fillmurray.com/30/30"/> -->
-            <img class="custom" src="{{images[index]}}"/>
+            <img class="custom" src="{{digitalResources[index].identifier}}"/>
         </div>
         <div class="col-2">
             <div class="row">
                 <div class="col-auto">
                     <img (click)="open()"  src="../../../../../assets/icons/info.svg"/>
                 </div>
-                <div class="col-auto">
+                <!-- <div class="col-auto">
                     <img (click)="changeSelect(index)" src="https://www.fillmurray.com/30/30"/>
+                </div> -->
+                <div class="col-auto">
+                    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')">
+                        <span aria-hidden="true" style="color:white">&times;</span>
+                    </button>
                 </div>
-                <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+
             </div>
             <div class="row mt-5 align-items-center" style="min-height: 90vh;">
                 <div class="col-auto">
-                    <h3 class="title">Nome do capitulo</h3>
-                    <h5 class="text">origem do recuso + nome e descrição da foto</h5>
+                    <h3 class="title">{{digitalResources[index].title}}</h3>
+                    <h5 class="text">{{digitalResources[index].dataProvider}} {{digitalResources[index].description}}</h5>
                 </div>
             </div>
         </div>

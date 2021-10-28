@@ -39,11 +39,15 @@ export class MapFormComponent implements OnInit {
 
   coordinates : number[] = [] 
 
-  emptymarker = new Marker(0,"","")
+  emptymarker = new Marker(0,[0,0],"")
 
   mymarkers : Marker[] = [this.emptymarker]
 
   choosenSection = 0;
+
+  markerLimit = 30;
+
+  availableSections = new Array(this.markerLimit-1)
 
   map: Map | undefined;
 
@@ -62,7 +66,9 @@ export class MapFormComponent implements OnInit {
     }),
   });
 
-  constructor() {
+  constructor(
+    private exhibitionService : ExhibitionService
+  ) {
    }
 
   ngOnInit(): void {
@@ -82,11 +88,19 @@ export class MapFormComponent implements OnInit {
       });
     }
  
-
-    this.markers.push(new Feature({
-      geometry: new Point(fromLonLat([ -9.138574381126347,38.72219608332645])),
-      name : "Lisboa"
-    }));
+    if(this.exhibition)
+    {
+      this.exhibition.markers.forEach(
+        element => {
+            var newMarker = new Feature({
+              geometry: new Point(fromLonLat(element.coordinates)),
+              name : element.title
+            })
+            //newMarker.setStyle(this.iconStyle)
+            this.markers.push(newMarker)
+       }
+      )
+    }
 
     this.vectorSource = new VectorSource({
       features: this.markers
@@ -108,7 +122,7 @@ export class MapFormComponent implements OnInit {
         ],
         view: new View({
           center: fromLonLat([ -9.138574381126347, 38.72219608332645,]),
-          zoom: 5
+          zoom: 7
         })
       });
 
@@ -134,7 +148,11 @@ export class MapFormComponent implements OnInit {
            if(coordinate.length > 0)
            {
             console.log(toLonLat(coordinate))
-            this.coordinates = coordinate
+            if(this.exhibition)
+            {
+              this.exhibition.markers[this.choosenSection].coordinates = toLonLat(coordinate)
+            }
+            
            }
           }
         );
@@ -184,7 +202,7 @@ export class MapFormComponent implements OnInit {
         name : "Évora"
       })
 
-      newMarker2.setStyle(this.iconStyle)
+      //newMarker2.setStyle(this.iconStyle)
       this.vectorSource?.addFeature(newMarker2)
     }
     
@@ -197,9 +215,32 @@ export class MapFormComponent implements OnInit {
 
     // this.vectorSource?.addFeature(newMarker)
   }
+  addSection() {
+     if(this.exhibition && this.exhibition.markers.length < this.markerLimit){
+    // // this.exhibition.items.push(new ExhibitionItem(this.exhibition.items.length+1,0,this.exhibition.items.length+1,""))
+    // // this.availableSections.pop()
+     var newMarker: Marker = new Marker(0,[0.0,0.0],"")
+     this.exhibitionService.addExhibitionMarker(this.exhibition.id,newMarker).subscribe(
+       exhibition => { 
+            this.exhibition = exhibition
+            console.log( "exhibition details updated: " + exhibition)
+          }
+        ) 
+     }
+  }
 
-  removeMarker() {
-    console.log("remove marker button pressed")
+  removeMarker(id : number) {
+    if(this.exhibition && this.exhibition.markers.length > 0)
+    {
+    console.log("remove marker button pressed id "+ id)
+
+    this.exhibitionService.removeExhibitionMarker(this.exhibition.id, id ).subscribe(
+      exhibition => {
+        this.exhibition = exhibition
+        console.log( "exhibition details updated: " + exhibition)
+      }
+    )
+    }
   }
 
   

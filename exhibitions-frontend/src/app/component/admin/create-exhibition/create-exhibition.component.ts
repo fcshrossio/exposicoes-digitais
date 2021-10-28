@@ -50,7 +50,7 @@ export class CreateExhibitionComponent implements OnInit {
   {
     var editor = new Editor(2,"Marco")
     this.exhibition = new Exhibition("", "",editor)
-    var cover = new DigitalResource(4,"NOME","","","", "",[],"",[],"","")
+    var cover = new DigitalResource(4,"placeholder","","","", "",[],"",[],"","")
     this.exhibition.addCoverPhoto(cover)
     //this.exhibitionService.createSessionExhibition(this.exhibition)
    
@@ -74,6 +74,7 @@ export class CreateExhibitionComponent implements OnInit {
 
   saveExhibitionAsDraft(){
     console.log("save exhibition as draft")
+    this.exhibition.status = "DRAFT"
     this.exhibitionService.updateExhibition(this.exhibition).subscribe(
     exhibition => { 
          this.exhibition = exhibition
@@ -96,6 +97,13 @@ export class CreateExhibitionComponent implements OnInit {
 
   publishExhibition(){
     console.log("publish exhibition")
+    this.exhibition.status = "FORAPPROVAL"
+    this.exhibitionService.updateExhibition(this.exhibition).subscribe(
+      exhibition => { 
+           this.exhibition = exhibition
+           console.log( "exhibition details updated: " + exhibition)
+         }
+       )
   }
 
   changeStep(step: number){

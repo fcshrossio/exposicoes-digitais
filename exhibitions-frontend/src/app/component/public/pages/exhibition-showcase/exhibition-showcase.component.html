@@ -1,8 +1,8 @@
 <div *ngIf="exhibition" class="container-fluid pb-5 pl-0 pr-0 justify-content-center">
-    <div *ngIf="exhibition.cover" class="w-100">
-        <img class="img-fluid w-100" style="height:88vh; object-fit: cover;"src="{{exhibition.cover.identifier}}"/>
-        <div class="card-img-overlay m-0 p-0">
-            <div class="row w-100 justify-content-center" style="margin-top: 54vh;">
+    <div *ngIf="exhibition.cover" class="card w-100">
+        <img class="card-img img-fluid w-100" style="height:88vh; object-fit: cover;"src="{{exhibition.cover.identifier}}"/>
+        <div class="card-img-overlay p-0">
+            <div class="row w-100 justify-content-center" style="margin-top: 44vh;">
                 <div style="color:white" class="col-auto mx-auto"><h6><img (click)="openDetails()"  src="../../../../../assets/icons/info.svg"/>{{exhibition.cover.title}}</h6></div>
             </div>
             <div class="container-fluid w-100 m-0" style="background-color: white; opacity: 0.7; height: 44vh;">
@@ -22,29 +22,30 @@
         </div>
     </div>
     <div class="row w-100 mx-0">
-        <div class="col-auto mr-auto mt-3">
+        <!-- <div class="col-auto mr-auto mt-3">
             <img src="https://www.fillmurray.com/30/30"/>
-        </div>
+        </div> -->
         <div class="col-auto mx-auto">
             <div class="row w-100 mx-auto  mt-3">
                 <div class="col-auto">
-                    <img (click)="changeSelectedContent(0)" src="https://www.fillmurray.com/30/30"/>
+                    <img style="width: 30px;" (click)="changeSelectedContent(0)" src="../../../../../assets/icons/bt_sections_default.svg"/>
                 </div>
                 <div class="col-auto">
-                    <img (click)="changeSelectedContent(1)" src="https://www.fillmurray.com/30/30"/>
+                    <!-- <img style="width: 30px;" (click)="changeSelectedContent(1)" src="../../../../../assets/icons/bt_mapa_default.svg"/> -->
+                    <svg width="30px" (click)="changeSelectedContent(1)" id="Camada_1" data-name="Camada 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 23"><defs><style>.cls-1{fill:#353a3f;fill-rule:evenodd;}</style></defs><path id="Path_3079" data-name="Path 3079" class="cls-1" d="M11.51,2.75A3.75,3.75,0,1,0,15.26,6.5h0A3.75,3.75,0,0,0,11.51,2.75Zm-5,3.75a5,5,0,1,1,5.62,5v6.92a.63.63,0,0,1-1.25,0V11.46a5,5,0,0,1-4.37-5ZM9.63,17.22a.62.62,0,0,1-.52.71A7.17,7.17,0,0,0,7,18.55a1.5,1.5,0,0,0-.46.33.41.41,0,0,0-.07.11h0s0,0,0,.05a.77.77,0,0,0,.18.18,3.46,3.46,0,0,0,1,.5,12.37,12.37,0,0,0,3.78.51,12.41,12.41,0,0,0,3.78-.51,3.53,3.53,0,0,0,1-.5.62.62,0,0,0,.18-.18s0,0,0-.05h0a.26.26,0,0,0-.07-.11,1.5,1.5,0,0,0-.46-.33,6.77,6.77,0,0,0-2.07-.61.63.63,0,0,1-.53-.71.61.61,0,0,1,.7-.53h0a8.31,8.31,0,0,1,2.44.74A1.91,1.91,0,0,1,17.75,19a1.55,1.55,0,0,1-.68,1.22,4.49,4.49,0,0,1-1.4.7,13.69,13.69,0,0,1-4.17.58,13.75,13.75,0,0,1-4.18-.58,4.55,4.55,0,0,1-1.39-.7A1.55,1.55,0,0,1,5.25,19a1.91,1.91,0,0,1,1.2-1.56,8.31,8.31,0,0,1,2.44-.74.63.63,0,0,1,.73.5Z"/></svg>
                 </div>
                 <div class="col-auto">
-                    <img (click)="changeSelectedContent(2)"src="https://www.fillmurray.com/30/30"/>
+                    <img style="width: 30px;" (click)="changeSelectedContent(2)" src="../../../../../assets/icons/bt_bibliografia_default.svg"/>
                 </div>
                 <div class="col-auto">
-                    <img (click)="changeSelectedContent(3)"src="https://www.fillmurray.com/30/30"/>
+                    <img style="width: 30px;" (click)="changeSelectedContent(3)" src="../../../../../assets/icons/bt_ficha_tecnica_default.svg"/>
                 </div>
      
             </div>
         </div>
-        <div class="col-auto ml-auto mt-3">
+        <!-- <div class="col-auto ml-auto mt-3">
             <img src="https://www.fillmurray.com/30/30"/>
-        </div>
+        </div> -->
     </div>
    
 
@@ -59,7 +60,6 @@
                 <div *ngIf="exhibitionItems.length > 0" style="text-align: center;" class="text-align-center justify-content-center mt-5">
                     <h3  class="title m-5" >{{exhibitionItems[selectedSection].title}}</h3>
                     <div *ngFor="let subitem of exhibitionSubItems">
-                        {{subitem.itemType}}
                         <div [ngSwitch]="subitem.itemType">
                             <div *ngSwitchCase = "'textresource'">
                                 <div class="row pr-5 pl-5 mx-5">
@@ -71,7 +71,7 @@
                                     <div class="col-5">
                                         <div *ngFor="let resource of subitem.digitalResources">
                                             <img class="img-fluid w-100" (click)="open()" src="{{resource.identifier}}"/>
-                                            <h6 style="text-align: left;">legenda</h6>
+                                            <h6 style="text-align: left;">{{resource.dataProvider}} - {{resource.title}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@
                                     <div class="col-5">
                                         <div *ngFor="let resource of subitem.digitalResources">
                                             <img class="img-fluid w-100" (click)="open()" src="{{resource.identifier}}"/>
-                                            <h6 style="text-align: left;">legenda</h6>
+                                            <h6 style="text-align: left;">{{resource.dataProvider}} - {{resource.title}}</h6>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -96,11 +96,13 @@
                                     <div class="col-6">
                                         <div *ngFor="let resource of subitem.digitalResources">
                                             <img class="img-fluid w-100" (click)="open()" src="{{resource.identifier}}"/>
+                                            <h6 style="text-align: left;">{{resource.dataProvider}} - {{resource.title}}</h6>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div *ngFor="let resource of subitem.digitalResources">
                                             <img class="img-fluid w-100" (click)="open()" src="{{resource.identifier}}"/>
+                                            <h6 style="text-align: left;">{{resource.dataProvider}} - {{resource.title}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -125,6 +127,16 @@
                                     <div class="col-12">
                                         <div *ngFor="let resource of subitem.digitalResources">
                                             <img class="img-fluid w-100" (click)="open()" src="{{resource.identifier}}"/>
+                                            <h6 style="text-align: left;">{{resource.dataProvider}} - {{resource.title}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngSwitchCase = "'texttext'">
+                                <div class="row pr-5 pl-5 mx-5">
+                                    <div class="col" *ngFor="let textitem of subitem.textSections">
+                                        <div class="text pt-3">
+                                            <div [innerHTML]="textitem"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -155,7 +167,7 @@
                     </div>
                 </div>
                 <div class="container">
-                    <app-map></app-map>
+                    <app-map [exhibition]="exhibition"></app-map>
                 </div>
             
             </div>

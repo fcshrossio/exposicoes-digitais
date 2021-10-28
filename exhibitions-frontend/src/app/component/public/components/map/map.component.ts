@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 
 import Map from 'ol/Map';
@@ -16,6 +16,7 @@ import VectorLayer from 'ol/layer/Vector';
 
 import { fromLonLat } from 'ol/proj';
 import {Icon, Style} from 'ol/style';
+import { Exhibition } from 'src/app/model/exhibition';
 
 @Component({
   selector: 'app-map',
@@ -25,6 +26,10 @@ import {Icon, Style} from 'ol/style';
 export class MapComponent implements OnInit {
 
   map: Map | undefined;
+
+  @Input() exhibition? : Exhibition 
+
+  @Output() exhibitionChange:EventEmitter<Exhibition> = new EventEmitter<Exhibition>()
   
 
   markers: Feature<Geometry>[] = [];
@@ -44,10 +49,20 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.markers.push(new Feature({
-      geometry: new Point(fromLonLat([ -9.138574381126347,38.72219608332645])),
-      name : "Lisboa"
-    }));
+    if(this.exhibition)
+    {
+      this.exhibition.markers.forEach(
+        element => {
+            var newMarker = new Feature({
+              geometry: new Point(fromLonLat(element.coordinates)),
+              name : element.title
+            })
+            //newMarker.setStyle(this.iconStyle)
+            this.markers.push(newMarker)
+       }
+      )
+    }
+    
 
     this.vectorSource = new VectorSource({
       features: this.markers

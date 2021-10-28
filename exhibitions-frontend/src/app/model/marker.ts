@@ -2,12 +2,12 @@
 
 export class Marker {
     id : number;
-    coordinates : string;
+    coordinates : number[];
     title : string;
 
     constructor(
         id:number,
-        coordinates: string,
+        coordinates: number[],
         title : string
     ) {
         this.id = id;

@@ -3,14 +3,13 @@ package com.rossio.exhibitions.dto
 import com.rossio.exhibitions.model.MarkerDAO
 
 data class MarkerDTO(
-    val markerId: Long,
-    val mapItemId: Long,
-    val coordinates : Long,
-    val description : String,
-    val digitalResources : List<DigitalResourceDTO>
+    val id: Long,
+    val coordinates : MutableList<Double>,
+    val title : String,
 
-) {
-    constructor() : this(0, 0,0,"description", emptyList())
 
-    constructor(markerDAO: MarkerDAO) : this(markerDAO.markerId,0, markerDAO.coordinates, markerDAO.description , markerDAO.digitalResources.map { DigitalResourceDTO(it) })
+    ) {
+    constructor() : this(0, mutableListOf(0.0,0.0),"title")
+
+    constructor(markerDAO: MarkerDAO) : this(markerDAO.id, markerDAO.coordinates, markerDAO.title)
 }

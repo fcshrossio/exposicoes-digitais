@@ -20,7 +20,8 @@ class DbSeeder (
     val adminService: AdminService,
     val collaboratorService: CollaboratorService,
     val digitalResourceService: DigitalResourceService,
-    val savedResourcesService: SavedResourcesService
+    val savedResourcesService: SavedResourcesService,
+    val markerService: MarkerService
 ) : CommandLineRunner {
     val runSeeder = true
 
@@ -65,6 +66,23 @@ class DbSeeder (
             ""
         )
         **/
+
+        var digital0 = DigitalResourceDTO(
+            0,
+            "placeholder",
+            "",
+            "Lisboa. Arquivo Municipal",
+            "1999",
+            "28 x 35 cm Prova cromogénea plastificada",
+            listOf("Letria, Pedro. 1965-, fotógrafo"),
+            "assunto",
+            listOf("Documento original não comunicável.","Direitos reservados. Reprodução mediante autorização do proprietário da imagem."),
+            "Image",
+            "../../../../../assets/images/0001_M2.jpg"
+        )
+
+        val digitalDAO0 = digitalResourceService.addOneDigitalResource(DigitalResourceDAO(digital0))
+
         var digital1 = DigitalResourceDTO(
             0,
             "Avenida Infante Dom Henrique",
@@ -195,6 +213,7 @@ class DbSeeder (
             "15",
             "",
             digital2, //cover
+            "",
             mutableListOf(), //collaborator list
             Date(), // creation date
             Status.PUBLISHED, //status
@@ -203,7 +222,8 @@ class DbSeeder (
             "",
             "",
             "",
-            ""
+            "",
+            mutableListOf(),  //list of markers
         )
 
         val exhibitionDTO2 = ExhibitionDTO(
@@ -215,6 +235,7 @@ class DbSeeder (
             "20",
             "",
             digital3, //cover
+            "",
             mutableListOf(), //collaborator list
             Date(), // creation date
             Status.FORAPPROVAL, //status
@@ -223,7 +244,8 @@ class DbSeeder (
             "",
             "",
             "",
-            ""
+            "",
+            mutableListOf(),  //list of markers
         )
 
         val exhibitionDTO3 = ExhibitionDTO(
@@ -235,6 +257,7 @@ class DbSeeder (
             "30",
             "",
             digital4, //cover
+            "",
             mutableListOf(), //collaborator list
             Date(), // creation date
             Status.DRAFT, //status
@@ -243,7 +266,8 @@ class DbSeeder (
             "",
             "",
             "",
-            ""
+            "",
+            mutableListOf(),  //list of markers
 
         )
 
@@ -256,6 +280,7 @@ class DbSeeder (
             "10",
             "",
             digital5, //cover
+            "",
             mutableListOf(), //collaborator list
             Date(), // creation date
             Status.DRAFT, //status
@@ -264,7 +289,8 @@ class DbSeeder (
             "",
             "",
             "",
-            ""
+            "",
+            mutableListOf(),  //list of markers
         )
 
         var exhibitionDAO1:ExhibitionDAO = exhibitionService.createExhibition(ExhibitionDAO(exhibitionDTO1, editorDAO, digitalDAO2))
@@ -288,30 +314,40 @@ class DbSeeder (
         exhibitionDAO1 = exhibitionService.addExhibitionItem(exhibitionDAO1, item2DAO)
 
         item3DAO = exhibitionItemService.createOneExhibitionItem(item3DAO)
-        exhibitionService.addExhibitionItem(exhibitionDAO1, item3DAO)
+        exhibitionDAO1 = exhibitionService.addExhibitionItem(exhibitionDAO1, item3DAO)
 
         item4DAO = exhibitionItemService.createOneExhibitionItem(item4DAO)
-        exhibitionService.addExhibitionItem(exhibitionDAO1, item4DAO)
+        exhibitionDAO1 = exhibitionService.addExhibitionItem(exhibitionDAO1, item4DAO)
 
         item5DAO = exhibitionItemService.createOneExhibitionItem(item5DAO)
-        exhibitionService.addExhibitionItem(exhibitionDAO1, item5DAO)
+        exhibitionDAO1 = exhibitionService.addExhibitionItem(exhibitionDAO1, item5DAO)
 
         item6DAO = exhibitionItemService.createOneExhibitionItem(item6DAO)
-        exhibitionService.addExhibitionItem(exhibitionDAO1, item6DAO)
+        exhibitionDAO1 = exhibitionService.addExhibitionItem(exhibitionDAO1, item6DAO)
 
-        var subitem1DAO : SubItemDAO = SubItemDAO(0,0,"textresource", mutableListOf("<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur auctor justo lorem. Vestibulum in commodo mauris, vel commodo lorem. Phasellus a suscipit quam. Proin pretium magna sed mollis dapibus. Curabitur cursus turpis in nunc lacinia, vel pellentesque nunc convallis. Duis imperdiet ullamcorper dui, sit amet imperdiet purus. Fusce ac tincidunt mi. Suspendisse potenti. Vivamus libero orci, molestie sit amet lacus vel, luctus lobortis augue. Curabitur eget pretium lorem, in euismod purus. Pellentesque volutpat eros ut urna elementum vestibulum. <p/>","<p>Vestibulum id tincidunt enim. Integer sit amet libero ac erat feugiat suscipit. Quisque tincidunt massa congue pharetra ultrices. Integer condimentum sem sit amet mauris consectetur, in sagittis elit iaculis. Proin ac sagittis orci, sit amet varius erat. Sed suscipit tortor justo, vitae facilisis elit tempus a. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse tincidunt volutpat ex quis hendrerit. Vestibulum pellentesque eu felis sit amet dictum. Nullam feugiat, lorem vitae ullamcorper dignissim, nulla sapien consectetur magna, sed laoreet erat erat at odio. Phasellus sit amet convallis odio. Cras ullamcorper turpis ac mauris feugiat, vel sagittis metus scelerisque. Aenean aliquet tempus justo, a venenatis ante luctus vel. </p>","o texto"), mutableListOf(digitalDAO2))
-        var subitem2DAO : SubItemDAO = SubItemDAO(0,0,"resourcetext", mutableListOf("<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur auctor justo lorem. Vestibulum in commodo mauris, vel commodo lorem. Phasellus a suscipit quam. Proin pretium magna sed mollis dapibus. Curabitur cursus turpis in nunc lacinia, vel pellentesque nunc convallis. Duis imperdiet ullamcorper dui, sit amet imperdiet purus. Fusce ac tincidunt mi. Suspendisse potenti. Vivamus libero orci, molestie sit amet lacus vel, luctus lobortis augue. Curabitur eget pretium lorem, in euismod purus. Pellentesque volutpat eros ut urna elementum vestibulum. <p/>","<p>Vestibulum id tincidunt enim. Integer sit amet libero ac erat feugiat suscipit. Quisque tincidunt massa congue pharetra ultrices. Integer condimentum sem sit amet mauris consectetur, in sagittis elit iaculis. Proin ac sagittis orci, sit amet varius erat. Sed suscipit tortor justo, vitae facilisis elit tempus a. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse tincidunt volutpat ex quis hendrerit. Vestibulum pellentesque eu felis sit amet dictum. Nullam feugiat, lorem vitae ullamcorper dignissim, nulla sapien consectetur magna, sed laoreet erat erat at odio. Phasellus sit amet convallis odio. Cras ullamcorper turpis ac mauris feugiat, vel sagittis metus scelerisque. Aenean aliquet tempus justo, a venenatis ante luctus vel. </p>","o texto"), mutableListOf(digitalDAO1))
-        var subitem3DAO : SubItemDAO = SubItemDAO(0,0,"resource", mutableListOf(), mutableListOf(digitalDAO3))
-        var subitem4DAO : SubItemDAO = SubItemDAO(0,0,"resourcefull", mutableListOf(), mutableListOf(digitalDAO3))
+        var marker1DAO : MarkerDAO = MarkerDAO(0, mutableListOf(-7.907558, 38.571703 ),"Évora");
+        marker1DAO = markerService.createOneMarker(marker1DAO)
+        exhibitionDAO1 = exhibitionService.addExhibitionMarker(exhibitionDAO1,marker1DAO)
+
+        var marker2DAO : MarkerDAO = MarkerDAO(0, mutableListOf( -9.138574381126347,38.72219608332645),"Lisboa");
+        marker2DAO = markerService.createOneMarker(marker2DAO)
+        exhibitionDAO1 = exhibitionService.addExhibitionMarker(exhibitionDAO1,marker2DAO)
+
+        var subitem1DAO : SubItemDAO = SubItemDAO(0,0,"textresource", mutableListOf("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"), mutableListOf(digitalDAO3))
+        var subitem2DAO : SubItemDAO = SubItemDAO(0,1,"resourcetext", mutableListOf("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"), mutableListOf(digitalDAO4))
+        var subitem3DAO : SubItemDAO = SubItemDAO(0,2,"resource", mutableListOf(), mutableListOf(digitalDAO3))
+        var subitem4DAO : SubItemDAO = SubItemDAO(0,0,"resourcefull", mutableListOf(), mutableListOf(digitalDAO4))
 
         subitem1DAO = exhibitionSubItemService.createSubItem(subitem1DAO)
-        exhibitionItemService.addSubItem(item1DAO,subitem1DAO)
+        item1DAO = exhibitionItemService.addSubItem(item1DAO,subitem1DAO)
         subitem2DAO = exhibitionSubItemService.createSubItem(subitem2DAO)
-        //exhibitionItemService.addSubItem(item1DAO,subitem2DAO)
+        item1DAO = exhibitionItemService.addSubItem(item1DAO,subitem2DAO)
         //subitem3DAO = exhibitionSubItemService.createSubItem(subitem3DAO)
-        //exhibitionItemService.addSubItem(item3DAO,subitem3DAO)
+        //exhibitionItemService.addSubItem(item1DAO,subitem3DAO)
         //subitem4DAO = exhibitionSubItemService.createSubItem(subitem4DAO)
-        //exhibitionItemService.addSubItem(item3DAO,subitem4DAO)
+        //exhibitionItemService.addSubItem(item4DAO,subitem4DAO)
+
+
         var savedResourcesDAO1 = SavedResourcesDAO(0,"A festa", listOf(digitalDAO1,digitalDAO2,digitalDAO3))
         savedResourcesDAO1 = savedResourcesService.createSavedResources(savedResourcesDAO1)
         var savedResourcesDAO2 = SavedResourcesDAO(0,"A festa 2", listOf(digitalDAO4,digitalDAO5,digitalDAO6,digitalDAO7))

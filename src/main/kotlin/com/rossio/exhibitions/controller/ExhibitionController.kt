@@ -18,6 +18,7 @@ class ExhibitionController(
     val editorService: EditorService,
     val collaboratorService : CollaboratorService,
     val exhibitionItemService: ExhibitionItemService,
+    val markerService: MarkerService,
     val exhibitionSubItemService: ExhibitionSubItemService
 ) {
 
@@ -65,10 +66,13 @@ class ExhibitionController(
                 ExhibitionItemDAO(it)
             )
             it.subItems.forEach{
-                exhibitionSubItemService.editSubItem(exhibitionSubItemService.getOneSubTextItem(it.id),
+                exhibitionSubItemService.editSubItem(exhibitionSubItemService.getOneSubItem(it.id),
                 SubItemDAO(it)
                 )
             }
+        }
+        exhibition.markers.forEach{
+                markerService.editOneMarker(markerService.getOneMarker(it.id), MarkerDAO(it))
         }
         return ExhibitionDTO(exhibitionService.getOneExhibition(editedexhibition.id))
     }
@@ -143,6 +147,28 @@ class ExhibitionController(
     fun editAuxiliaryMaterials(@PathVariable id: Long,@RequestParam value : String) =
         exhibitionService.editExhibitionAuxiliaryMaterials(value,value,value,value,exhibitionService.getOneExhibition(id))
 
+    @Operation(summary = "Get All Map Marker ")
+    @GetMapping("/markers")
+    fun getAllMarkers() =
+        markerService.getAllMarkers().map { MarkerDTO(it) }
+
+    @Operation(summary = "Create Map Marker ")
+    @PostMapping("/{exhibitionId}/addmarker")
+    fun createMarker(@PathVariable exhibitionId: Long, @RequestBody markerDTO: MarkerDTO) : ExhibitionDAO {
+        var markerDAO = markerService.createOneMarker(MarkerDAO(markerDTO))
+        var exhibitionDAO = exhibitionService.getOneExhibition(exhibitionId)
+        exhibitionService.addExhibitionMarker(exhibitionDAO, markerDAO)
+        return exhibitionDAO
+    }
+
+    @Operation(summary = "Delete Marker ")
+    @DeleteMapping("{exhibitionId}/marker/{itemId}")
+    fun deleteMarker(@PathVariable exhibitionId: Long, @PathVariable itemId: Long) : ExhibitionDAO {
+
+       var exhibition : ExhibitionDAO = exhibitionService.removeExhibitionMarker(exhibitionId,markerService.getOneMarker(itemId))
+        return exhibitionService.getOneExhibition(exhibitionId)
+    }
+        //exhibitionItemService.removeMarker(exhibitionSubItemService.getOneMarker(itemId))
 
 
 

@@ -12,8 +12,6 @@ export class ResourceShowcaseModalComponent implements OnInit {
 
   index : number = 0
 
-  images = ["https://www.fillmurray.com/30/30","https://www.fillmurray.com/130/30","https://www.fillmurray.com/230/430" ]
-
   @Input() digitalResources : DigitalResource[] = []
 
   constructor(public activeModal: NgbActiveModal,private modalService: NgbModal) { }
@@ -29,7 +27,7 @@ export class ResourceShowcaseModalComponent implements OnInit {
   open() {
     //this.modalService.open(content, { size: 'xl', backdrop: 'static' })
     const modalRef = this.modalService.open(ResourceDetailsModalComponent,{ size: 'xl', backdrop: 'static' });
-    modalRef.componentInstance.digitalResource = new DigitalResource(0,"titulo","descrição","data provider", "","",[],"",[],"","https://www.fillmurray.com/30/30")
+    modalRef.componentInstance.digitalResource = this.digitalResources[this.index]
   }
 
 }
