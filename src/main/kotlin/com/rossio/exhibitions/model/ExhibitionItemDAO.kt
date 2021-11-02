@@ -11,29 +11,22 @@ data class ExhibitionItemDAO(
     var id: Long,
     var position: Long,
     var title: String,
-    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
+    @ManyToOne
+    var exhibition : ExhibitionDAO,
+
+    @OneToMany(mappedBy = "exhibitionItem", cascade = [CascadeType.ALL], orphanRemoval = true)
     var subItems : MutableList<SubItemDAO>
 ) {
-    constructor(exhibitionItemDTO: ExhibitionItemDTO) : this(
+    constructor(exhibitionItemDTO: ExhibitionItemDTO, exhibition: ExhibitionDAO ) : this(
         exhibitionItemDTO.id,
         exhibitionItemDTO.position,
         exhibitionItemDTO.title,
-        exhibitionItemDTO.subItems.map { SubItemDAO(it) } as MutableList<SubItemDAO>
+        exhibition,
+        exhibitionItemDTO.subItems.map {  } as MutableList<SubItemDAO>
     )
 
-    constructor() : this(0,0,"", mutableListOf())
+    constructor() : this(0,0,"", ExhibitionDAO(), mutableListOf())
 
-    fun addSubItem(subItemDAO: SubItemDAO)
-    {
-        if(!subItems.contains(subItemDAO))
-        {
-            subItems.add(subItemDAO)
-        }
-        else
-        {
-            throw NotFoundException("sub item already exists")
-        }
-    }
 
     fun removeSubItem(subItemDAO: SubItemDAO)
     {

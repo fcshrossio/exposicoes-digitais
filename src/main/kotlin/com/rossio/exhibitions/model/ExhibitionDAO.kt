@@ -15,7 +15,7 @@ data class ExhibitionDAO(
     @ManyToOne
     @JoinColumn
     var editor : EditorDAO,
-    @OneToMany
+    @OneToMany(mappedBy = "exhibition", cascade = [CascadeType.ALL])
     var items : MutableList<ExhibitionItemDAO>,
     var title: String,
     var subtitle: String,
@@ -45,14 +45,14 @@ data class ExhibitionDAO(
     var audiovisualResources: String,
     @Column( length = 100000 )
     var webPlaces: String,
-    @OneToMany
+    @OneToMany(mappedBy = "exhibition", cascade = [CascadeType.ALL])
     var markers : MutableList<MarkerDAO>
 ) {
 
     constructor(exhibition : ExhibitionDTO, editor: EditorDAO, cover: DigitalResourceDAO ) : this(
         exhibition.id,
         editor,
-        exhibition.items.map{ ExhibitionItemDAO(it) } as MutableList<ExhibitionItemDAO>,
+        exhibition.items.map{  } as MutableList<ExhibitionItemDAO>,
         exhibition.title,
         exhibition.subtitle,
         exhibition.estimatedViewingTime,
@@ -68,7 +68,7 @@ data class ExhibitionDAO(
         exhibition.bibliography,
         exhibition.audiovisualResources,
         exhibition.webPlaces,
-        exhibition.markers.map{ MarkerDAO(it)} as MutableList<MarkerDAO>
+        exhibition.markers.map{ } as MutableList<MarkerDAO>
     )
 
     constructor() : this(0, EditorDAO(), mutableListOf(), "","","","", DigitalResourceDAO(),"", mutableListOf(),Date(),Status.DRAFT,

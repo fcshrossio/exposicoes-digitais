@@ -52,15 +52,6 @@ class ExhibitionService(
         return exhibitionsRepository.save(exhibition)
     }
 
-    fun addExhibitionItem(exhibition: ExhibitionDAO, item: ExhibitionItemDAO) : ExhibitionDAO {
-        exhibition.addExhibitionItem(item)
-        return exhibitionsRepository.save(exhibition)
-    }
-
-    fun addExhibitionMarker(exhibition: ExhibitionDAO, markerDAO: MarkerDAO) : ExhibitionDAO {
-        exhibition.addExhibitionMarker(markerDAO)
-        return exhibitionsRepository.save(exhibition)
-    }
 
     fun removeExhibitionMarker(exhibitionId : Long, markerDAO: MarkerDAO) : ExhibitionDAO {
         var exhibition : ExhibitionDAO = getOneExhibition(exhibitionId)

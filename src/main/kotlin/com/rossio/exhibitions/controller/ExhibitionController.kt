@@ -60,21 +60,22 @@ class ExhibitionController(
     @PostMapping("/{id}")
     //@PreAuthorize("hasAnyRole('ADMIN','EDITOR') and @securityService.canEditorEditExhibition(principal, #id)")
     fun editExhibition(@RequestBody exhibition: ExhibitionDTO, @PathVariable id: Long) : ExhibitionDTO {
-        var editedexhibition = ExhibitionDTO(exhibitionService.editExhibitionDetails(exhibition, exhibitionService.getOneExhibition(id)))
-        exhibition.items.forEach{
-            exhibitionItemService.editOneExhibitionItem(exhibitionItemService.getOneExhibitionItem(it.id),
-                ExhibitionItemDAO(it)
+        var exhibitionDAO: ExhibitionDAO = exhibitionService.getOneExhibition(id)
+        exhibitionDAO = exhibitionService.editExhibitionDetails(exhibition, exhibitionDAO)
+        exhibition.items.forEach{ item ->
+            exhibitionItemService.editOneExhibitionItem(exhibitionItemService.getOneExhibitionItem(item.id),
+                ExhibitionItemDAO(item,exhibitionDAO)
             )
-            it.subItems.forEach{
+            item.subItems.forEach{
                 exhibitionSubItemService.editSubItem(exhibitionSubItemService.getOneSubItem(it.id),
-                SubItemDAO(it)
+                SubItemDAO(it,exhibitionItemService.getOneExhibitionItem(item.id))
                 )
             }
         }
         exhibition.markers.forEach{
-                markerService.editOneMarker(markerService.getOneMarker(it.id), MarkerDAO(it))
+                markerService.editOneMarker(markerService.getOneMarker(it.id), MarkerDAO(it, exhibitionDAO))
         }
-        return ExhibitionDTO(exhibitionService.getOneExhibition(editedexhibition.id))
+        return ExhibitionDTO(exhibitionService.getOneExhibition(id))
     }
 
     @Operation(summary = "Delete a Exhibition")
@@ -102,12 +103,9 @@ class ExhibitionController(
     @Operation(summary = "Add Exhibition Item to Exhibition ")
     @PostMapping("/additem/{exhibitionId}")
     //@PreAuthorize("hasAnyRole('ADMIN','EDITOR')")
-    fun addItemExhibition(@PathVariable exhibitionId: Long,@RequestBody item : ExhibitionItemDTO) : ExhibitionDAO {
-        var itemDAO = exhibitionItemService.createOneExhibitionItem(ExhibitionItemDAO(item))
-        var exhibitionDAO = exhibitionService.getOneExhibition(exhibitionId)
-        exhibitionService.addExhibitionItem(exhibitionDAO, itemDAO)
-        return exhibitionDAO
-    }
+    fun addItemExhibition(@PathVariable exhibitionId: Long,@RequestBody item : ExhibitionItemDTO) : ExhibitionItemDTO =
+       ExhibitionItemDTO(exhibitionItemService.createOneExhibitionItem(ExhibitionItemDAO(item,exhibitionService.getOneExhibition(exhibitionId))))
+
 
     @Operation(summary = "Show Recent Exhibitions")
     @GetMapping("/recent")
@@ -154,21 +152,16 @@ class ExhibitionController(
 
     @Operation(summary = "Create Map Marker ")
     @PostMapping("/{exhibitionId}/addmarker")
-    fun createMarker(@PathVariable exhibitionId: Long, @RequestBody markerDTO: MarkerDTO) : ExhibitionDAO {
-        var markerDAO = markerService.createOneMarker(MarkerDAO(markerDTO))
-        var exhibitionDAO = exhibitionService.getOneExhibition(exhibitionId)
-        exhibitionService.addExhibitionMarker(exhibitionDAO, markerDAO)
-        return exhibitionDAO
-    }
+    fun createMarker(@PathVariable exhibitionId: Long, @RequestBody markerDTO: MarkerDTO) : MarkerDTO =
+         MarkerDTO(markerService.createOneMarker(MarkerDAO(markerDTO,exhibitionService.getOneExhibition(exhibitionId))))
 
     @Operation(summary = "Delete Marker ")
     @DeleteMapping("{exhibitionId}/marker/{itemId}")
-    fun deleteMarker(@PathVariable exhibitionId: Long, @PathVariable itemId: Long) : ExhibitionDAO {
+    fun deleteMarker(@PathVariable exhibitionId: Long, @PathVariable itemId: Long) : ExhibitionDTO {
 
        var exhibition : ExhibitionDAO = exhibitionService.removeExhibitionMarker(exhibitionId,markerService.getOneMarker(itemId))
-        return exhibitionService.getOneExhibition(exhibitionId)
+        return ExhibitionDTO(exhibitionService.getOneExhibition(exhibitionId))
     }
-        //exhibitionItemService.removeMarker(exhibitionSubItemService.getOneMarker(itemId))
 
 
 

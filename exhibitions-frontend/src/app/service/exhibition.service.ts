@@ -67,19 +67,19 @@ export class ExhibitionService {
     )
   }
 
-  addExhibitionItem(exhibitionId: Number, item : ExhibitionItem): Observable<Exhibition> {
+  addExhibitionItem(exhibitionId: Number, item : ExhibitionItem): Observable<ExhibitionItem> {
     console.log("sending item to  " + this.exhibitionsUrl + '/additem/' + exhibitionId)
-    return this.http.post<Exhibition>(this.exhibitionsUrl + '/additem/' + exhibitionId, item , this.httpOptions).pipe(
+    return this.http.post<ExhibitionItem>(this.exhibitionsUrl + '/additem/' + exhibitionId, item , this.httpOptions).pipe(
       
-      catchError(this.handleError<Exhibition>('add item exhibitions'))
+      catchError(this.handleError<ExhibitionItem>('add item exhibitions'))
     )
   }
 
-  addExhibitionMarker(exhibitionId: Number, item : Marker): Observable<Exhibition> {
+  addExhibitionMarker(exhibitionId: Number, item : Marker): Observable<Marker> {
     console.log("sending item to  " + this.exhibitionsUrl + '/' + exhibitionId + '/addmarker')
-    return this.http.post<Exhibition>(this.exhibitionsUrl + '/' + exhibitionId + '/addmarker', item , this.httpOptions).pipe(
+    return this.http.post<Marker>(this.exhibitionsUrl + '/' + exhibitionId + '/addmarker', item , this.httpOptions).pipe(
       
-      catchError(this.handleError<Exhibition>('add marker exhibitions'))
+      catchError(this.handleError<Marker>('add marker exhibitions'))
     )
   }
 

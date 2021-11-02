@@ -19,7 +19,7 @@ export class SectionFormComponent implements OnInit {
 
   sectionLimit = 30;
 
-  choosenSection = 0;
+  choosenSection: number = 0;
 
   availableSections = new Array(this.sectionLimit-1)
  
@@ -120,24 +120,33 @@ export class SectionFormComponent implements OnInit {
           //console.log(this.exhibition.items)
       });
     
+      console.log("exhibition items lenght" + this.exhibition.items.length)
+      if(this.exhibition.items.length > 0){
+        this.choosenSection = 0;
 
+        this.exhibition.items = this.exhibition.items.sort((a, b) => {
+          return a.position - b.position;
+        });
+      }
 
-
-
-      this.exhibition.items = this.exhibition.items.sort((a, b) => {
-        return a.position - b.position;
-      });
-      this.availableSections = new Array(this.sectionLimit-1-this.exhibition.items[this.choosenSection].subItems.length)
+ 
+      this.availableSections = new Array(this.sectionLimit-1-this.exhibition.items.length)
     }
    
   }
+
+  ngOnDestroy() {
+    this.dragulaService.destroy('ITEMS');
+
+    this.dragulaService.destroy('SUBITEMS');
+}
 
   
 
   
 
   changeSection(index : number) {
-    console.log(this.choosenSection)
+    console.log("indice seleccionado" + this.choosenSection)
     this.choosenSection = index
   }
 
@@ -165,12 +174,17 @@ export class SectionFormComponent implements OnInit {
   addSection() {
     if(this.exhibition && this.exhibition.items.length < this.sectionLimit){
     // this.exhibition.items.push(new ExhibitionItem(this.exhibition.items.length+1,0,this.exhibition.items.length+1,""))
-    // this.availableSections.pop()
-    var newItem: ExhibitionItem = new ExhibitionItem(0,0,this.exhibition.items.length+1,"")
+    var newItem: ExhibitionItem = new ExhibitionItem(0,this.exhibition.items.length+1,"")
     this.exhibitionService.addExhibitionItem(this.exhibition.id,newItem).subscribe(
-      exhibition => { 
-           this.exhibition = exhibition
-           console.log( "exhibition details updated: " + exhibition)
+      exhibitionItem => { 
+           this.exhibition?.items.push(exhibitionItem)
+           this.availableSections.pop()
+           console.log( "exhibition item added: " + exhibitionItem)
+           if( this.exhibition){
+            this.choosenSection = this.exhibition.items.length -1
+            
+    
+           }
          }
        ) 
     }
@@ -182,11 +196,11 @@ export class SectionFormComponent implements OnInit {
         var item = this.exhibition.items[this.choosenSection]
         var subsection = new ExhibitionSubItem(0,item.subItems.length,type)
         this.exhibitionItemService.addExhibitionSubItem(item.id,subsection).subscribe(
-          exhibitionItem => { 
+          exhibitionSubItem => { 
               if(this.exhibition)
               {
-                this.exhibition.items[this.choosenSection] = exhibitionItem
-                console.log( "exhibition sub item added " + exhibitionItem)
+                this.exhibition.items[this.choosenSection].subItems.push(exhibitionSubItem)
+                console.log( "exhibition sub item added " + exhibitionSubItem)
               }
  
              }

@@ -8,14 +8,16 @@ data class MarkerDAO(
     @GeneratedValue
     @Id
     val id : Long,
+    @ManyToOne
+    var exhibition : ExhibitionDAO,
     @ElementCollection
     @CollectionTable
     var coordinates : MutableList<Double>,
     var title : String,
 ) {
-    constructor(markerDTO: MarkerDTO) : this(markerDTO.id,markerDTO.coordinates,markerDTO.title)
+    constructor(markerDTO: MarkerDTO, exhibition: ExhibitionDAO) : this(markerDTO.id,exhibition, markerDTO.coordinates,markerDTO.title)
 
-    constructor() :  this(0, mutableListOf(0.0,0.0),"")
+    constructor() :  this(0,ExhibitionDAO(),mutableListOf(0.0,0.0),"")
 
     fun editMarker(marker:MarkerDAO) : Boolean
     {

@@ -221,9 +221,13 @@ export class MapFormComponent implements OnInit {
     // // this.availableSections.pop()
      var newMarker: Marker = new Marker(0,[0.0,0.0],"")
      this.exhibitionService.addExhibitionMarker(this.exhibition.id,newMarker).subscribe(
-       exhibition => { 
-            this.exhibition = exhibition
-            console.log( "exhibition details updated: " + exhibition)
+       exhibitionMarker => { 
+            this.exhibition?.markers.push(exhibitionMarker)
+            this.availableSections.pop()
+            console.log( "exhibition marker added: " + exhibitionMarker)
+            if( this.exhibition){
+              this.choosenSection = this.exhibition.items.length -1
+             }
           }
         ) 
      }

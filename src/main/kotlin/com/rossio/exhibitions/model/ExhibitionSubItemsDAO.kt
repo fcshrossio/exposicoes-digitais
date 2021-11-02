@@ -10,6 +10,8 @@ data class SubItemDAO(
     @GeneratedValue
     val id: Long,
     var position: Long,
+    @ManyToOne
+    var exhibitionItem : ExhibitionItemDAO,
     val itemType: String,
     @ElementCollection
     @CollectionTable
@@ -18,9 +20,9 @@ data class SubItemDAO(
     @OneToMany
     var digitalResources : List<DigitalResourceDAO>
 ) {
-    constructor() : this(0,0,"texttext", mutableListOf(), mutableListOf())
+    constructor() : this(0,0, ExhibitionItemDAO(),"texttext", mutableListOf(), mutableListOf())
 
-    constructor(subitem: SubItemDTO) : this(subitem.id, subitem.position, subitem.itemType, subitem.textSections, subitem.digitalResources.map { DigitalResourceDAO(it) })
+    constructor(subitem: SubItemDTO, exhibitionItem: ExhibitionItemDAO) : this(subitem.id, subitem.position, exhibitionItem, subitem.itemType, subitem.textSections, subitem.digitalResources.map { DigitalResourceDAO(it) })
 
     fun editSubItem(subitem:SubItemDAO) : Boolean
     {

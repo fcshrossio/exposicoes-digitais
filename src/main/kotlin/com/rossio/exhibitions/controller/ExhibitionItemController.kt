@@ -34,15 +34,10 @@ class ExhibitionItemController(
         ExhibitionItemDTO(
             exhibitionItemService.editOneExhibitionItem(
                 exhibitionItemService.getOneExhibitionItem(id),
-                ExhibitionItemDAO(item)
+                ExhibitionItemDAO(item,exhibitionService.getOneExhibition(id))
             )
         )
 
-
-    @Operation(summary = "Post One Exhibition Item ")
-    @PostMapping("")
-    fun addExhibitionItem(@RequestBody item: ExhibitionItemDTO) =
-        ExhibitionItemDTO(exhibitionItemService.createOneExhibitionItem(ExhibitionItemDAO(item)))
 
 
     @Operation(summary = "Remove One Exhibition Item ")
@@ -59,9 +54,8 @@ class ExhibitionItemController(
 
     @Operation(summary = "Create Sub Items")
     @PostMapping("/{itemId}/addsubitem")
-    fun createSubItem(@PathVariable itemId: Long, @RequestBody subItemDTO: SubItemDTO) : ExhibitionItemDTO {
-        var subitem = exhibitionSubItemService.createSubItem(SubItemDAO(subItemDTO))
-        return ExhibitionItemDTO(exhibitionItemService.addSubItem(exhibitionItemService.getOneExhibitionItem(itemId),subitem))
+    fun createSubItem(@PathVariable itemId: Long, @RequestBody subItemDTO: SubItemDTO) : SubItemDTO {
+        return SubItemDTO(exhibitionSubItemService.createSubItem(SubItemDAO(subItemDTO,exhibitionItemService.getOneExhibitionItem(itemId))))
     }
 
     @Operation(summary = "Remove One Sub Item ")

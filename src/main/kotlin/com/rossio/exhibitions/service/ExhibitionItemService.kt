@@ -38,14 +38,6 @@ class ExhibitionItemService(
         exhibitionItemsRepository.delete(getOneExhibitionItem(id))
 
 
-    fun addSubItem(item: ExhibitionItemDAO, subItem: SubItemDAO) : ExhibitionItemDAO {
-        if(subItem.id != 0L && item.id != 0L){
-            item.addSubItem(subItem)
-            return exhibitionItemsRepository.save(item)
-        }
-        throw Exception("id is 0")
-    }
-
 
 
 

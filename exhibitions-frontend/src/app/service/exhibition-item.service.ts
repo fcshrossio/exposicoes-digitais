@@ -37,12 +37,12 @@ export class ExhibitionItemService {
     };
   }
 
-  addExhibitionSubItem(exhibitionItemId: Number, subitem : ExhibitionSubItem): Observable<ExhibitionItem> {
+  addExhibitionSubItem(exhibitionItemId: Number, subitem : ExhibitionSubItem): Observable<ExhibitionSubItem> {
     console.log("sending item to  " + this.exhibitionsItemsUrl + '/addsubitem/' + exhibitionItemId)
     console.log(subitem)
-    return this.http.post<ExhibitionItem>(this.exhibitionsItemsUrl + '/' + exhibitionItemId + '/addsubitem', subitem , this.httpOptions).pipe(
+    return this.http.post<ExhibitionSubItem>(this.exhibitionsItemsUrl + '/' + exhibitionItemId + '/addsubitem', subitem , this.httpOptions).pipe(
       
-      catchError(this.handleError<ExhibitionItem>('add item exhibitions'))
+      catchError(this.handleError<ExhibitionSubItem>('add item exhibitions'))
     )
   }
 
