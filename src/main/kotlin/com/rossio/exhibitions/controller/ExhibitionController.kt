@@ -132,19 +132,6 @@ class ExhibitionController(
     fun changeStatus(@PathVariable id: Long,@RequestParam value : Status) =
         exhibitionService.changeStatus(exhibitionService.getOneExhibition(id), value)
 
-
-    @Operation(summary = "Change Credits")
-    @PostMapping("/{id}/credits")
-    //@PreAuthorize("hasAnyRole('ADMIN','EDITOR')")
-    fun editCredits(@PathVariable id: Long,@RequestBody creditsDTO: CreditsDTO) : ExhibitionDTO =
-        ExhibitionDTO(exhibitionService.editExhibitionCredits(creditsDTO,id))
-
-    @Operation(summary = "Change Auxiliary Materials")
-    @PutMapping("/{id}/materials")
-    //@PreAuthorize("hasAnyRole('ADMIN','EDITOR')")
-    fun editAuxiliaryMaterials(@PathVariable id: Long,@RequestParam value : String) =
-        exhibitionService.editExhibitionAuxiliaryMaterials(value,value,value,value,exhibitionService.getOneExhibition(id))
-
     @Operation(summary = "Get All Map Marker ")
     @GetMapping("/markers")
     fun getAllMarkers() =

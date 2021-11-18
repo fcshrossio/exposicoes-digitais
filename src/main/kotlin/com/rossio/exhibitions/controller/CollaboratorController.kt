@@ -37,5 +37,6 @@ class CollaboratorController(
 
     @Operation(summary = "Get Collaborator Exhibitions")
     @GetMapping("/{id}/exhibitions")
-    fun getCollaboratorExhibitions() {}
+    fun getCollaboratorExhibitions(@PathVariable id:Long) : List<ExhibitionDTO> =
+        collaboratorService.getOneCollaborator(id).collaborationList.map { ExhibitionDTO(it) }
 }

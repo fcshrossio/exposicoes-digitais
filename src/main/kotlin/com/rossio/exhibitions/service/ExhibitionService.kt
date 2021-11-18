@@ -19,7 +19,7 @@ class ExhibitionService(
         exhibitionsRepository.findAll()
 
     fun getAllPublicExhibitions(): List<ExhibitionDAO> =
-        exhibitionsRepository.findAllByStatusIs(Status.PUBLIC)
+        exhibitionsRepository.findAllByStatusIs(Status.PUBLISHED)
 
 
     fun getOneExhibition(id : Long) : ExhibitionDAO =
@@ -41,16 +41,6 @@ class ExhibitionService(
         } else
             exhibition
 
-    fun editExhibitionCredits(credits : CreditsDTO, exhibitionId : Long) : ExhibitionDAO {
-        var exhibition : ExhibitionDAO = getOneExhibition(exhibitionId)
-        exhibition.editCredits(credits.value)
-        return exhibitionsRepository.save(exhibition)
-    }
-
-    fun editExhibitionAuxiliaryMaterials(onlineResourcesNova : String, bibliography : String, audioVisualResources : String, webPlaces : String, exhibition: ExhibitionDAO) : ExhibitionDAO {
-        exhibition.editAuxiliaryMaterials(onlineResourcesNova,bibliography,audioVisualResources,webPlaces)
-        return exhibitionsRepository.save(exhibition)
-    }
 
 
     fun removeExhibitionMarker(exhibitionId : Long, markerDAO: MarkerDAO) : ExhibitionDAO {

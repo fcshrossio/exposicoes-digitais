@@ -6,7 +6,7 @@ import com.rossio.exhibitions.model.*
 
 data class ExhibitionItemDTO(
     val id: Long,
-    val position: Long,
+    val position: Int,
     //val exhibitionId: Long,
     val title: String,
     val subItems: List<SubItemDTO>

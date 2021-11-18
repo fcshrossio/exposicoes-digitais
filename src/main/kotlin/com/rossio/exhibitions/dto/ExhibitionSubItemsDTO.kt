@@ -7,7 +7,7 @@ import com.rossio.exhibitions.model.SubItemDAO
 
 data class SubItemDTO(
     val id: Long,
-    val position: Long,
+    val position: Int,
     val itemType: String,
     val textSections: List<String>,
     val digitalResources: List<DigitalResourceDTO>

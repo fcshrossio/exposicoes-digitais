@@ -1,5 +1,6 @@
 package com.rossio.exhibitions.dto
 
+import com.rossio.exhibitions.model.EditorDAO
 import com.rossio.exhibitions.model.UserDAO
 
 data class UserDTO(
@@ -15,7 +16,12 @@ data class UserPasswordDTO (
     val password: String
 )
 
-
+data class UserSimpleDTO(
+    val id: Long,
+    val username: String
+){
+    constructor(user: UserDAO) : this(user.id,user.username)
+}
 
 data class AdminDTO(
     val id: Long,
@@ -28,9 +34,10 @@ data class AdminDTO(
 
 data class EditorDTO(
     val id: Long,
-    val username: String
+    val username: String,
+    val exhibitionList: List<ExhibitionDTO>
 ){
 
-    constructor(user: UserDAO) : this(user.id,user.username)
+    constructor(user: EditorDAO) : this(user.id,user.username,user.exhibitionsList.map { ExhibitionDTO(it)})
 }
 

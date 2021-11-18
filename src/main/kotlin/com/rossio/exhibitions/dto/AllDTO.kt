@@ -16,11 +16,12 @@ data class SavedResourcesDTO(
 
     val id : Long,
     val name: String,
-    var digitalResources : List<DigitalResourceDTO>
+    var digitalResources : List<DigitalResourceDTO>,
+    var owner : UserSimpleDTO
 ) {
-    constructor() : this(0,"", mutableListOf())
+    constructor() : this(0,"", mutableListOf(), UserSimpleDTO(0,""))
 
-    constructor(savedResources: SavedResourcesDAO) : this(savedResources.id, savedResources.name, savedResources.digitalResources.map { DigitalResourceDTO(it) })
+    constructor(savedResources: SavedResourcesDAO) : this(savedResources.id, savedResources.name, savedResources.digitalResources.map { DigitalResourceDTO(it) }, UserSimpleDTO(savedResources.owner))
 }
 
 

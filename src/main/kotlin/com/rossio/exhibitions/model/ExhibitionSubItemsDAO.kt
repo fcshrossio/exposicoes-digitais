@@ -9,7 +9,7 @@ data class SubItemDAO(
     @Id
     @GeneratedValue
     val id: Long,
-    var position: Long,
+    var position: Int,
     @ManyToOne
     var exhibitionItem : ExhibitionItemDAO,
     val itemType: String,

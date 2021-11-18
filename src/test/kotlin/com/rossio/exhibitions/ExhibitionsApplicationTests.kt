@@ -1,10 +1,7 @@
 package com.rossio.exhibitions
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.rossio.exhibitions.dto.DigitalResourceDTO
-import com.rossio.exhibitions.dto.EditorDTO
-import com.rossio.exhibitions.dto.ExhibitionDTO
-import com.rossio.exhibitions.dto.UserDTO
+import com.rossio.exhibitions.dto.*
 import com.rossio.exhibitions.enums.Status
 import com.rossio.exhibitions.model.DigitalResourceDAO
 import com.rossio.exhibitions.model.EditorDAO
@@ -36,7 +33,7 @@ class ExhibitionsApplicationTests {
         var dia = Date(0);
 
         val exhibitionDTO1 = ExhibitionDTO(
-            uuid++, editorDTO, emptyList(), "titulo", "subtitulo","","", digitalDTO,"", emptyList(), dia,
+            uuid++, UserSimpleDTO(editorDTO.id,editorDTO.username), emptyList(), "titulo", "subtitulo","","", digitalDTO,"", emptyList(), dia,
             Status.PRIVATE, mutableListOf(),
             "",
             "",
@@ -48,7 +45,7 @@ class ExhibitionsApplicationTests {
 
         val exhibitionDTO2 = ExhibitionDTO(
             uuid++,
-            editorDTO,
+            UserSimpleDTO(editorDTO.id,editorDTO.username),
             emptyList(),
             "titulo2",
             "suntitulo2",

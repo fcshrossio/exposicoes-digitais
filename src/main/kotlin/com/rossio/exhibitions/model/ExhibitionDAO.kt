@@ -26,7 +26,7 @@ data class ExhibitionDAO(
     @JoinColumn
     var cover: DigitalResourceDAO,
     var coverEditable : String,
-    @OneToMany
+    @ManyToMany
     var collaborators: MutableList<CollaboratorDAO>,
     var creationDate: Date,
     @Enumerated(EnumType.STRING)

@@ -8,7 +8,7 @@ import java.util.*
 
 data class ExhibitionDTO(
     val id: Long,
-    val editor: EditorDTO,
+    val editor: UserSimpleDTO,
     val items: List<ExhibitionItemDTO>,
     val title: String,
     val subtitle: String,
@@ -31,7 +31,7 @@ data class ExhibitionDTO(
 
     constructor(exhibition : ExhibitionDAO) : this(
         exhibition.id,
-        EditorDTO(exhibition.editor),
+        UserSimpleDTO(exhibition.editor),
         exhibition.items.map { ExhibitionItemDTO(it) },
         exhibition.title,
         exhibition.subtitle,
@@ -58,5 +58,11 @@ data class ExhibitionDetailsDTO(
     val exhibitionId: Long,
     val title: String,
     val subtitle: String
-)
+) {
 
+    constructor(exhibition: ExhibitionDAO) : this(
+        exhibition.id,
+        exhibition.title,
+        exhibition.subtitle
+    )
+}

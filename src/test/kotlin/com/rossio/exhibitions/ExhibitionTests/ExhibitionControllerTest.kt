@@ -131,7 +131,7 @@ class ExhibitionControllerTest {
 
 
         val newExhibitionDTO = ExhibitionDTO(
-            uuid++, editorDTO, emptyList(), "titulo", "subtitulo","","", digitalDTO,"", emptyList(), dia,
+            uuid++, UserSimpleDTO(editorDTO.id,editorDTO.username), emptyList(), "titulo", "subtitulo","","", digitalDTO,"", emptyList(), dia,
             Status.PRIVATE, mutableListOf(),
             "",
             "",

@@ -9,7 +9,7 @@ data class ExhibitionItemDAO(
     @Id
     @GeneratedValue
     var id: Long,
-    var position: Long,
+    var position: Int,
     var title: String,
     @ManyToOne
     var exhibition : ExhibitionDAO,

@@ -37,5 +37,6 @@ class EditorController(
 
     @Operation(summary = "Get List of All Editor Exhibitions ")
     @GetMapping("/{id}/exhibitions")
-    fun getEditorExhibitions(@PathVariable id:Long) {}
+    fun getEditorExhibitions(@PathVariable id:Long) : List<ExhibitionDTO> =
+        editorService.getOneEditor(id).exhibitionsList.map { ExhibitionDTO(it) }
 }
