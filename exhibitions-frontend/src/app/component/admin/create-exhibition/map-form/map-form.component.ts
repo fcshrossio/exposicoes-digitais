@@ -16,7 +16,7 @@ import Point from 'ol/geom/Point';
 import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
 
-import { fromLonLat, toLonLat } from 'ol/proj';
+import { fromLonLat, toLonLat, transform } from 'ol/proj';
 import {Icon, Style} from 'ol/style';
 import { toStringHDMS } from 'ol/coordinate';
 
@@ -59,10 +59,10 @@ export class MapFormComponent implements OnInit {
 
   iconStyle = new Style({
     image: new Icon({
-      anchor: [0, 0],
+      anchor: [0.5,34],
       anchorXUnits: 'fraction',
       anchorYUnits: 'pixels',
-      src: "https://www.fillmurray.com/30/30",
+      src: "../../../../../assets/icons/icon_map_point_spot.svg",
     }),
   });
 
@@ -96,7 +96,7 @@ export class MapFormComponent implements OnInit {
               geometry: new Point(fromLonLat(element.coordinates)),
               name : element.title
             })
-            //newMarker.setStyle(this.iconStyle)
+            newMarker.setStyle(this.iconStyle)
             this.markers.push(newMarker)
        }
       )
@@ -130,51 +130,19 @@ export class MapFormComponent implements OnInit {
       {
         this.map.addOverlay(this.overlay)
 
-        // this.map.on('singleclick',  (evt: any) => {
-        //   const coordinate = evt.coordinate;
-        //   const hdms = toStringHDMS(toLonLat(coordinate));
-        //   if(this.overlay){
-        //     content.innerHTML = '<p>Current coordinates are :</p><code>' + hdms +
-        //     '</code>';
-        //   this.overlay.setPosition(coordinate);
-        //   }
-  
-        // });
+
 
         this.map.on('singleclick',  (evt: any) => {
-           const coordinate = evt.coordinate;
-           const hdms = toStringHDMS(toLonLat(coordinate));
-           //console.log(toLonLat(coordinate))
-           if(coordinate.length > 0)
-           {
-            console.log(toLonLat(coordinate))
+            var lonLat = toLonLat(evt.coordinate);
+            this.addMarker(lonLat[0], lonLat[1],this.choosenSection);
+            console.log(this.vectorSource)
             if(this.exhibition)
             {
-              this.exhibition.markers[this.choosenSection].coordinates = toLonLat(coordinate)
-            }
-            
-           }
+              this.exhibition.markers[this.choosenSection].coordinates = lonLat
+            } 
           }
         );
-        var hit = false
-
-        this.map.on('click', (evt: any) => {
-          if(this.map){
-            const feature = this.map.forEachFeatureAtPixel(evt.pixel, function (feature) {
-              hit = true
-              return feature;
-            });
-            if (feature && true) {
-              const coordinate = evt.coordinate;
-              const hdms = toStringHDMS(toLonLat(coordinate));
-              if(this.overlay){
-                content.innerHTML = '<p>Current coordinates are :</p><code>' + hdms +
-                '</code>';
-              this.overlay.setPosition(coordinate);
-              }
-            }
-          }
-        });
+        
       }
 
 
@@ -192,29 +160,30 @@ export class MapFormComponent implements OnInit {
     return arrayOfString
   }
 
-  addMarker() {
-    console.log("add marker button pressed")
-    if(this.coordinates && this.coordinates.length > 0)
-    {
+  addMarker(lon: any , lat: any, markerIndex: number) {
+    console.log("add marker")
+    console.log(typeof(lon))
       
-      var newMarker2 = new Feature({
-        geometry: new Point(this.coordinates),
+      var newMarker = new Feature({
+        geometry: new Point(transform([lon,lat], 'EPSG:4326', 'EPSG:3857')),
         name : "Évora"
       })
+      newMarker.setStyle(this.iconStyle)
 
-      //newMarker2.setStyle(this.iconStyle)
-      this.vectorSource?.addFeature(newMarker2)
+      if(this.exhibition){
+        this.markers[markerIndex] = newMarker
+
+      this.vectorSource?.clear();
+
+      this.vectorSource?.addFeatures(this.markers)
+      }
+
+
+
     }
+
     
-    // var newMarker = new Feature({
-    //   geometry: new Point(fromLonLat([-7.907558, 38.571703 ])),
-    //   name : "Évora"
-    // })
-
-    // newMarker.setStyle(this.iconStyle)
-
-    // this.vectorSource?.addFeature(newMarker)
-  }
+  
   addSection() {
      if(this.exhibition && this.exhibition.markers.length < this.markerLimit){
     // // this.exhibition.items.push(new ExhibitionItem(this.exhibition.items.length+1,0,this.exhibition.items.length+1,""))
